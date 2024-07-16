@@ -1,0 +1,78 @@
+.search-section {
+  align-items: center;
+  background: url(../../../public/Imgs/carizy-bg.jpg);
+  background-position: 50%;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 40px 20px 45px;
+  position: relative;
+}
+
+section#home {
+  position: relative;
+  top: 80px;
+  left: 0;
+}
+
+section.search-section {
+  font-family: Galano;
+}
+
+h1.ad-title {
+  font-size: 2.5rem;
+  color: #fff;
+  font-weight: lighter;
+}
+
+input.search-input {
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 10px;
+  font-size: 16px;
+  outline: initial;
+  padding: 13px 27px;
+  width: 750px;
+  font-family: Galano;
+}
+
+input.search-input::placeholder {
+  color: #9a9a9a;
+}
+
+section.body {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 250px auto;
+  padding: 10px 20px;
+}
+
+div.filters-part {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  /* justify-content: center; */
+  align-items: center;
+  font-family: Galano;
+  font-size: 20px;
+}
+
+div.filters-part p {
+  font-size: 20px;
+  margin-bottom: 0;
+  margin-left: 15px;
+  margin-top: 25px;
+}
+
+div.content {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin: 15px;
+}
+
+div.list {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
+}

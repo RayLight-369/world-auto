@@ -1,0 +1,45 @@
+div.card {
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 1px 1px 6px #ccc;
+  display: grid;
+  gap: 15px;
+  max-width: 700px;
+  overflow: hidden;
+  padding: 13%;
+  place-items: center;
+  text-align: center;
+  transition: .2s ease-in-out;
+  width: 100%;
+}
+
+div.card:hover {
+  box-shadow: 1px 1px 6px #ccc;
+}
+
+div.card p.title {
+  font-family: GalanoMedium, sans-serif;
+  font-size: 26.5px;
+  text-shadow: 0 0 0 black, 0 0 0 black;
+  margin: 0;
+  line-height: 1.385em;
+}
+
+button.create {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  user-select: none;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  border-radius: 2em;
+  box-shadow: none;
+  font-size: 16px;
+  padding: 10px 35px;
+  background-color: rgb(42 107 188);
+  color: #fefefe;
+  cursor: pointer;
+}

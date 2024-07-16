@@ -1,0 +1,133 @@
+div.card {
+  border-radius: 20px;
+  box-shadow: 1px 1px 6px #ccc;
+  cursor: pointer;
+  height: fit-content;
+  max-width: 700px;
+  overflow: hidden;
+  transition: .2s ease-in-out;
+  width: 100%;
+}
+
+div.card a {
+  background-color: transparent;
+  color: #000;
+  text-decoration: none;
+  font-family: Galano;
+}
+
+div.thumbnail {
+  display: block;
+  height: auto;
+  position: relative;
+  width: 100%;
+}
+
+div.thumbnail img {
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+div.price-notch {
+  border-radius: 30px 0 0 30px;
+  bottom: 10px;
+  color: #fff;
+  display: flex;
+  min-width: 135px;
+  position: absolute;
+  right: 0;
+  transform: translateY(50%);
+  width: fit-content;
+  background-color: rgb(42 107 188);
+  flex-direction: column;
+  height: 53px;
+  justify-content: center;
+  padding: 5px 15px 5px 30px;
+  font-family: Galano;
+}
+
+p.price {
+  font-size: 23px;
+  font-weight: bolder;
+  position: relative;
+  top: 2px;
+  text-shadow: 0 0 0 white;
+}
+
+p.monthly {
+  font-size: 13px;
+  position: relative;
+  top: -2px;
+}
+
+div.infos {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 30px 15px 40px;
+}
+
+p.title {
+  font-size: 1.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+p.version {
+  font-size: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  top: 1rem;
+}
+
+div.details {
+  align-items: center;
+  display: flex;
+  font-size: 14px;
+  position: relative;
+  top: 1rem;
+}
+
+div.details p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+p.year {
+  min-width: 32px;
+}
+
+span.break {
+  color: rgb(130, 184, 250);
+  margin: 0 3%;
+}
+
+div.card-footer {
+  background-color: #fff;
+  border: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 20px;
+  margin: 12px 0;
+  padding: 0;
+  position: relative;
+  top: 1rem;
+}
+
+div.guarantee {
+  align-items: center;
+  display: flex;
+  gap: 3px;
+}
+
+div.guarantee img {
+  vertical-align: middle;
+  height: 22px;
+}

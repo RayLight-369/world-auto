@@ -1,0 +1,11 @@
+div.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+div.page-content {
+  height: 100%;
+}

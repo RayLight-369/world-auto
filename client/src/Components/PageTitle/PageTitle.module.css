@@ -1,0 +1,9 @@
+h1.page-title {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  padding: 35px;
+  font-family: Righteous;
+  color: #111;
+  font-size: 1.4rem;
+}
