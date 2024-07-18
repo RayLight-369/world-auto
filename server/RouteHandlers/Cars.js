@@ -32,7 +32,7 @@ router.post( "/", async ( req, res ) => {
       res.status( data.status ).json( { error: data.error } );
     }
 
-    res.status( data.status ).json( { msg: "Successfully added a new Car!" } );
+    res.status( data.status ).json( { data: data.data } );
 
   } catch ( e ) {
     res.status( 500 ).json( { error: e } );

@@ -42,6 +42,7 @@ const Admin = () => {
       <section id={ Styles[ "content" ] }>
         <AnimatePresence mode='wait'>
           <Outlet key={ location.pathname } />
+
         </AnimatePresence>
       </section>
     </section>
