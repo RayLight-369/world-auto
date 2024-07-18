@@ -53,14 +53,12 @@ const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen } ) => {
       <motion.div className={ Styles[ "minor-options" ] }></motion.div>
       <motion.div className={ Styles[ "major-options" ] }>
         {/* <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ exportCSV }>+ Export CSV</button> */ }
-        { isAdmin && (
-          <>
-            <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddCarPopupOpen( true ) }>+ Add Car</button>
-            <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddBrandPopupOpen( true ) }>+ Add Brand</button>
-            {/* <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddTaskPopupOpen( true ) }>+ Add Task</button> */ }
-            {/* <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ importCSV }>+ Import CSV</button> */ }
-          </>
-        ) }
+
+        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddCarPopupOpen( true ) }>+ Add Car</button>
+        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddBrandPopupOpen( true ) }>+ Add Brand</button>
+        {/* <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddTaskPopupOpen( true ) }>+ Add Task</button> */ }
+        {/* <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ importCSV }>+ Import CSV</button> */ }
+
       </motion.div>
       <motion.div className={ `${ Styles[ "optionOpenClose" ] } ${ openOptionBar ? Styles[ "opened" ] : undefined }` }
         transition={ { type: "spring", stiffness: 400, damping: 10 } }

@@ -23,13 +23,15 @@ const App = () => {
               <Route loader index path="/" element={ <Home /> } />
               <Route path="about" element={ <About /> } />
             </Route>
-            <Route path="admin" element={ <Admin /> }>
-              <Route index path="dashboard" element={ <Dashboard /> } />
-              <Route path="new-car" element={ <NewCar /> } />
-            </Route>
           </Routes>
         </AnimatePresence>
       </MotionConfig>
+      <Routes>
+        <Route path="admin" element={ <Admin /> }>
+          <Route index path="dashboard" element={ <Dashboard /> } />
+          <Route path="new-car" element={ <NewCar /> } />
+        </Route>
+      </Routes>
     </CarsProvider>
   );
 };

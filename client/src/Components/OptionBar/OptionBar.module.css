@@ -10,14 +10,14 @@ div.options-bar {
   position: fixed;
   left: calc(50% + 57px);
   transform: translateX(calc(-50% + 57px));
-  bottom: 20px;
+  bottom: 40px;
   overflow: hidden;
 }
 
 div.options-bar > div.optionOpenClose > p {
   color: #fefefe;
   transition: 140ms;
-
+  cursor: pointer;
 }
 
 div.options-bar > div.optionOpenClose {
@@ -69,4 +69,5 @@ div.major-options > button {
   /* color: #121212; */
   color: #fefefe;
   transition: 120ms;
+  cursor: pointer;
 }

@@ -1,12 +1,19 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Styles from "./Admin.module.css";
 import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, MotionConfig } from 'framer-motion';
+import OptionBar from "../../Components/OptionBar/OptionBar";
+import AddCar from '../../Components/AddCar/AddCar';
+import Modal from '../../Components/Modal/Modal';
 
 const Admin = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [ openAddCarPopup, setAddCarPopup ] = useState( false );
+  const [ openAddBrandPopup, setAddBrandPopup ] = useState( false );
+
   const links = useMemo( () => ( [
     {
       title: "Dashboard",
@@ -24,6 +31,8 @@ const Admin = () => {
     }
   }, [] );
 
+  const closePopUp = ( setState ) => setState( false );
+
   return (
     <section id={ Styles[ "admin" ] }>
       <header id={ Styles[ 'header' ] }>
@@ -40,10 +49,31 @@ const Admin = () => {
       </header>
 
       <section id={ Styles[ "content" ] }>
+        {/* <MotionConfig transition={ {
+          type: "spring",
+          damping: 14
+        } }> */}
         <AnimatePresence mode='wait'>
           <Outlet key={ location.pathname } />
-
         </AnimatePresence>
+
+        <AnimatePresence mode='wait'>
+          <OptionBar setAddBrandPopupOpen={ setAddBrandPopup } setAddCarPopupOpen={ setAddCarPopup } />
+        </AnimatePresence>
+
+        <AnimatePresence mode='wait'>
+          { openAddCarPopup && (
+            <Modal handleClose={ () => closePopUp( setAddCarPopup ) }>
+              <AddCar handleClose={ () => closePopUp( setAddCarPopup ) } />
+            </Modal>
+          ) }
+          { openAddBrandPopup && (
+            <Modal handleClose={ () => closePopUp( setAddBrandPopup ) }>
+              <AddCar handleClose={ () => closePopUp( setAddBrandPopup ) } />
+            </Modal>
+          ) }
+        </AnimatePresence>
+        {/* </MotionConfig> */ }
       </section>
     </section>
   );

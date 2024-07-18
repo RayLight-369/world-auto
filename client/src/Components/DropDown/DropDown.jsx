@@ -38,7 +38,7 @@ const DropDown = ( { array, any = false, dropDownOpen, toggleDropDown, label, ba
 
     console.log( label, `div[name=${ label }]` );
 
-    const select = document.querySelector( `div[name=${ label }]` );
+    const select = document.querySelector( `div[name='${ label }']` );
     document.onclick = e => {
       // console.log( "select: ", select, "target: ", e.target );
       // console.log()

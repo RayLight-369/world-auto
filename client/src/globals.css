@@ -62,14 +62,14 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 2px;
-  height: 2px;
+  width: 5px;
+  height: 5px;
   background: transparent;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #65db8e;
+  background: #1575a5;
   border-radius: 5px;
   min-height: 30px;
 }
