@@ -1,7 +1,9 @@
 const { insertData, getData } = require( "../Supabase" );
 
 const router = require( "express" ).Router();
+const cors = require( "cors" );
 
+router.use( cors() );
 router.get( "/", async ( req, res ) => {
   try {
 

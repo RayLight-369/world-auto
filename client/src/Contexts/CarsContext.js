@@ -16,16 +16,21 @@ const CarsProvider = ( { children } ) => {
   useEffect( () => {
 
     async function fetchData () {
+      try {
+        const res = await fetch( "https://world-auto-api.vercel.app/admin/cars" );
 
-      const res = await fetch( "https://world-auto-api.vercel.app/admin/cars" );
+        if ( res.ok ) {
+          const body = await res.json();
+          console.log( body );
+          setCars( body.data );
+        }
 
-      if ( res.ok ) {
-        const body = await res.json();
-        console.log( body );
-        setCars( body.data );
+      } catch ( e ) {
+        console.log( e );
+      } finally {
+        setCarsLoading( false );
       }
 
-      setCarsLoading( false );
     }
 
     fetchData();
