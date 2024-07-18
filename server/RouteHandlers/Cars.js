@@ -24,6 +24,7 @@ router.post( "/", async ( req, res ) => {
   try {
 
     const object = await req.body;
+    console.log( object );
 
     const data = await insertData( {
       table: "Cars",
