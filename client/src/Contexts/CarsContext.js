@@ -10,6 +10,7 @@ export const useCars = () => {
 const CarsProvider = ( { children } ) => {
 
   const [ cars, setCars ] = useState( [] );
+  const [ brands, setBrands ] = useState( [] );
   const [ carsLoading, setCarsLoading ] = useState( true );
   const [ currentCar, setCurrentCar ] = useState( null );
 
@@ -17,12 +18,19 @@ const CarsProvider = ( { children } ) => {
 
     async function fetchData () {
       try {
-        const res = await fetch( "https://world-auto-api.vercel.app/admin/cars" );
+        const carsRes = await fetch( "https://world-auto-api.vercel.app/admin/cars" );
+        const brandsRes = await fetch( "https://world-auto-api.vercel.app/admin/brands" );
 
-        if ( res.ok ) {
-          const body = await res.json();
+        if ( carsRes.ok ) {
+          const body = await carsRes.json();
           console.log( body );
           setCars( body.data );
+        }
+
+        if ( brandsRes.ok ) {
+          const body = await brandsRes.json();
+          console.log( body );
+          setBrands( body.brands );
         }
 
       } catch ( e ) {
@@ -38,7 +46,7 @@ const CarsProvider = ( { children } ) => {
   }, [] );
 
   return (
-    <CarsContext.Provider value={ { cars, setCars, carsLoading, currentCar, setCurrentCar } }>{ children }</CarsContext.Provider>
+    <CarsContext.Provider value={ { cars, setCars, carsLoading, currentCar, setCurrentCar, brands, setBrands } }>{ children }</CarsContext.Provider>
   );
 };
 

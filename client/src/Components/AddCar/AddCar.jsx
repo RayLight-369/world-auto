@@ -181,17 +181,6 @@ const AddCar = ( { handleClose } ) => {
         console.log( body.data );
 
         setCars( prev => [ body.data, ...prev ] );
-        // set_data_after_creating( session.user.email, setData, body ).then( ( { sessionData } ) => {
-        //   navigateTo( sessionData, {
-        //     teamId: currentTeam.teamID,
-        //     channelId: currentChannel.id,
-        //     setCurrentTeam,
-        //     setCurrentChannel,
-        //     setCurrentChannelTasks
-        //   } );
-        // } );
-
-
 
         handleClose();
       }

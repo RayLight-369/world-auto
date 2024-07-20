@@ -33,7 +33,6 @@ const Modal = ( { children, handleClose, customClassName } ) => {
       initial={ { opacity: 0 } }
       animate={ { opacity: 1 } }
       exit={ { opacity: 0 } }
-      onClick={ handleClose }
     >
       <motion.div
         className={ `${ styles.modal } ${ customClassName && customClassName }` }
