@@ -4,10 +4,10 @@ import { MotionConfig, motion } from 'framer-motion';
 import { useCars } from '../../Contexts/CarsContext';
 
 
-const AddBrand = ( { handleClose } ) => {
+const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
 
-  const router = useRouter();
-  const [ brandName, setBrandName ] = useState( "" );
+  const [ brandName, setBrandName ] = useState( brand?.brandName );
+  const [ Brand, setBrand ] = useState( brand );
   const [ adding, setAdding ] = useState( false );
   const { setBrands } = useCars();
 
@@ -28,6 +28,8 @@ const AddBrand = ( { handleClose } ) => {
 
     try {
 
+      setAdding( true );
+
       const res = await fetch( "https://world-auto-api.vercel.app/admin/brands", {
         method: 'POST',
         body: JSON.stringify( { brandName } ),
@@ -40,7 +42,7 @@ const AddBrand = ( { handleClose } ) => {
         const body = await res.json();
         console.log( body.data );
 
-        setBrands( prev => [ body.name, ...prev ] );
+        setBrands( prev => [ body.data, ...prev ] );
 
         handleClose();
       }
@@ -70,7 +72,7 @@ const AddBrand = ( { handleClose } ) => {
             onClick={ addBrand }
             disabled={ adding }
           >
-            { adding ? "Adding..." : "Add" }
+            { adding ? type == 'new' ? "Adding..." : "Updating..." : type == 'new' ? "Add" : "Update" }
           </motion.button>
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }

@@ -30,7 +30,7 @@ const CarsProvider = ( { children } ) => {
         if ( brandsRes.ok ) {
           const body = await brandsRes.json();
           console.log( body );
-          setBrands( body.brands );
+          setBrands( body.data );
         }
 
       } catch ( e ) {

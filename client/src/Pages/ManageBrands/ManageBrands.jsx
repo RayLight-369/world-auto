@@ -1,11 +1,11 @@
 import React from 'react';
-import Styles from "./NewCar.module.css";
+import Styles from "./ManageBrands.module.css";
 import PageTitle from '../../Components/PageTitle/PageTitle';
 
-const NewCar = () => {
+const ManageBrands = () => {
   return (
     <div className={ Styles[ "container" ] }>
-      <PageTitle className={ Styles[ "page-title" ] } title={ "Add New Car" } />
+      <PageTitle className={ Styles[ "page-title" ] } title={ "Manage Brands" } />
       <div className={ Styles[ "page-content" ] }>
 
       </div>
@@ -13,4 +13,4 @@ const NewCar = () => {
   );
 };
 
-export default NewCar;
+export default ManageBrands;

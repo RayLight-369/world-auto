@@ -32,8 +32,8 @@ div.header button.close {
   width: 40px;
   height: 40px;
   text-align: center;
-  background: #ECE5F4;
-  color: #794EA4;
+  background: #e9f1ff;
+  color: #025883;
   cursor: pointer;
   font-size: 16px;
 }
@@ -60,7 +60,7 @@ div.inputs input {
 
 div.inputs input:focus {
   transform: scale(1.06);
-  border-bottom-color: #9f7dc2;
+  border-bottom-color: #025883;
 }
 
 div.inputs input::placeholder {
@@ -86,12 +86,12 @@ div.buttons button {
 }
 
 div.buttons button.add-button {
-  background: #430283;
+  background: #025883;
   color: white;
 }
 
 div.buttons button.cancel-button {
-  border: 1.2px solid #430283;
-  color: #430283;
+  border: 1.2px solid #025883;
+  color: #025883;
   background: none;
 }

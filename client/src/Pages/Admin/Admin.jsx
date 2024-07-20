@@ -5,6 +5,8 @@ import { AnimatePresence, MotionConfig } from 'framer-motion';
 import OptionBar from "../../Components/OptionBar/OptionBar";
 import AddCar from '../../Components/AddCar/AddCar';
 import Modal from '../../Components/Modal/Modal';
+import AddBrand from '../../Components/AddBrand/AddBrand';
+import { AdminLinks } from '../../Constants';
 
 const Admin = () => {
 
@@ -14,16 +16,16 @@ const Admin = () => {
   const [ openAddCarPopup, setAddCarPopup ] = useState( false );
   const [ openAddBrandPopup, setAddBrandPopup ] = useState( false );
 
-  const links = useMemo( () => ( [
-    {
-      title: "Dashboard",
-      link: "/admin/dashboard"
-    },
-    {
-      title: "Add New Car",
-      link: "/admin/new-car"
-    }
-  ] ), [] );
+  // const links = useMemo( () => ( [
+  //   {
+  //     title: "Dashboard",
+  //     link: "/admin/dashboard"
+  //   },
+  //   {
+  //     title: "Add New Car",
+  //     link: "/admin/new-car"
+  //   }
+  // ] ), [] );
 
   useEffect( () => {
     if ( [ "/admin", "/admin/", "admin" ].includes( location.pathname ) ) {
@@ -40,10 +42,10 @@ const Admin = () => {
           <img src="/Imgs/worldauto.jpg" alt="" />
         </div>
         <nav id={ Styles[ 'nav' ] }>
-          { links.map( ( route => (
+          { AdminLinks.map( ( route => (
             <NavLink className={ ( { isActive } ) =>
               isActive ? `${ Styles.active }` : undefined
-            } to={ route.link }>{ route.title }</NavLink>
+            } to={ route.path }>{ route.name }</NavLink>
           ) ) ) }
         </nav>
       </header>
@@ -69,7 +71,7 @@ const Admin = () => {
           ) }
           { openAddBrandPopup && (
             <Modal handleClose={ () => closePopUp( setAddBrandPopup ) }>
-              <AddCar handleClose={ () => closePopUp( setAddBrandPopup ) } />
+              <AddBrand handleClose={ () => closePopUp( setAddBrandPopup ) } />
             </Modal>
           ) }
         </AnimatePresence>

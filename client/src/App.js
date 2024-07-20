@@ -5,8 +5,9 @@ import About from "./Pages/About/About";
 import { AnimatePresence, MotionConfig } from "framer-motion";
 import Admin from "./Pages/Admin/Admin";
 import Dashboard from "./Pages/Dashboard/Dashboard";
-import NewCar from "./Pages/NewCar/NewCar";
 import CarsProvider from "./Contexts/CarsContext";
+import ManageCars from "./Pages/ManageCars/ManageCars";
+import ManageBrands from "./Pages/ManageBrands/ManageBrands";
 
 const App = () => {
   const location = useLocation();
@@ -29,7 +30,8 @@ const App = () => {
       <Routes>
         <Route path="admin" element={ <Admin /> }>
           <Route index path="dashboard" element={ <Dashboard /> } />
-          <Route path="new-car" element={ <NewCar /> } />
+          <Route path="cars" element={ <ManageCars /> } />
+          <Route path="brands" element={ <ManageBrands /> } />
         </Route>
       </Routes>
     </CarsProvider>

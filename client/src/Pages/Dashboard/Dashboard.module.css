@@ -8,4 +8,62 @@ div.container {
 
 div.page-content {
   height: 100%;
+  padding: 5px 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+div.details-container {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+div.details-container a {
+  text-decoration: none;
+}
+
+div.container {
+  padding: 17px 19px;
+  border: 1px solid #bfbfbf;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: 250ms;
+}
+
+div.details-container div:hover {
+  box-shadow: 0 0 10px #00000025;
+  transform: scale(1.02);
+}
+
+p.title {
+  font-size: 1.4em;
+  color: #111;
+  font-weight: bold;
+}
+
+div.details-container div p.desc {
+  font-size: .9rem;
+  color: #666;
+  /* font-family: Quicksand; */
+}
+
+div.recent-updates-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  /* background: #000; */
+  height: calc(100% - 60px);
+  border-radius: 8px;
+  gap: 25px;
+}
+
+div.recent-updates-container > div {
+  height: calc(100%);
+  font-size: 90%;
 }

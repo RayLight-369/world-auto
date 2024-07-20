@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styles from "./AddCar.module.css";
 import { MotionConfig, motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -6,10 +6,10 @@ import DropDown from '../DropDown/DropDown';
 import { useCars } from '../../Contexts/CarsContext';
 
 
-const AddCar = ( { handleClose } ) => {
+const AddCar = ( { handleClose, type = "new" } ) => {
 
-  const navigate = useNavigate();
-  const { setCars } = useCars();
+  // const navigate = useNavigate();
+  const { setCars, brands } = useCars();
 
   const [ adding, setAdding ] = useState( false );
   const [ carTitle, setCarTitle ] = useState( "" );
@@ -32,12 +32,17 @@ const AddCar = ( { handleClose } ) => {
   const [ fuelDropdown, toggleFuelDropdown ] = useState( false );
   const [ brandDropdown, toggleBrandDropdown ] = useState( false );
 
-  <div className={ styles[ "price-per-day" ] }>
-    <label htmlFor="price-per-day">Price Per Day:</label>
-    <input onChange={ ( e ) => {
-      setPricePerDay( e.target.value );
-    } } value={ pricePerDay } type="number" min={ 0 } name="price-per-day" id="price-per-day" className={ styles[ 'price-per-day-input' ] } />
-  </div>;
+  // <div className={ styles[ "price-per-day" ] }>
+  //   <label htmlFor="price-per-day">Price Per Day:</label>
+  //   <input onChange={ ( e ) => {
+  //     setPricePerDay( e.target.value );
+  //   } } value={ pricePerDay } type="number" min={ 0 } name="price-per-day" id="price-per-day" className={ styles[ 'price-per-day-input' ] } />
+  // </div>;
+
+
+  useEffect( () => {
+    console.log( brands?.map( ( brand, i ) => brand.brandName ) );
+  }, [ brands ] );
 
   const data = useMemo( () => [
     {
@@ -209,7 +214,7 @@ const AddCar = ( { handleClose } ) => {
         <div className={ styles[ "infos" ] }>
 
           <DropDown key={ "fuelType" } setState={ setFuelType } array={ [ "Diesel", "Petrol", "CNG" ] } label='Fuel Type' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
-          <DropDown key={ "brand" } setState={ setBrand } array={ [ "Honda", "Toyota", "Suzuki" ] } label='Brand' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
+          <DropDown key={ "brand" } setState={ setBrand } array={ [] } label='Brand' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
 
           { data.map( ( value, index ) => (
 

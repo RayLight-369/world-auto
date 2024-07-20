@@ -2,8 +2,9 @@ const { insertData } = require( "../Supabase" );
 const CarRouter = require( "./Cars" );
 const BrandsRouter = require( "./Brands" );
 const router = require( "express" ).Router();
+const cors = require( "cors" );
 
-
+router.use( cors() );
 router.use( "/cars", CarRouter );
 router.use( "/brands", BrandsRouter );
 
