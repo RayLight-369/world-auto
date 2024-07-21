@@ -50,7 +50,7 @@ router.put( "/", async ( req, res ) => {
     const object = await req.body;
     console.log( object );
 
-    const data = await updateData( {
+    const Data = await updateData( {
       table: "Cars",
       where: {
         id: object.id
@@ -58,13 +58,14 @@ router.put( "/", async ( req, res ) => {
       object
     } );
 
-    if ( data.error ) {
-      res.status( data.status ).json( { error: data.error } );
+    if ( Data.error ) {
+      res.status( Data.status ).json( { error: Data.data } );
     }
 
-    res.status( data.status ).json( { data: data.data } );
+    res.status( Data.status ).json( { data: Data.data } );
 
   } catch ( e ) {
+    console.log( e );
     res.status( 500 ).json( { error: e } );
   }
 

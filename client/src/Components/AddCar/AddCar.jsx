@@ -213,12 +213,16 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       title: carTitle, overview: carOverview, due_date, brand, fuel_type: fuelType, accessories, certificate, color, gearbox, emission, energy, mileage, guarantee, seating_capacity: seatingCapacity, model_year: modelYear, price_per_day: pricePerDay, price_per_month: pricePerMonth
     };
 
+    if ( type == "edit" ) {
+      ReqData.id = car.id;
+    }
+
 
     if ( !carTitle.trim().length ) return;
 
     try {
 
-      const res = await fetch( "https://world-auto-api.vercel.app/admin/cars", {
+      const res = await fetch( "http://localhost:8030/admin/cars", {
         method: 'PUT',
         body: JSON.stringify( ReqData ),
         headers: {
@@ -257,7 +261,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
         <div className={ styles[ "infos" ] }>
 
-          <DropDown key={ "fuelType" } setState={ setFuelType } array={ [ "Diesel", "Petrol", "CNG" ] } label='Fuel Type' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
+          <DropDown key={ "fuelType" } setState={ setFuelType } selected={ fuelType } array={ [ "Diesel", "Petrol", "CNG" ] } label='Fuel Type' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
           <DropDown key={ "brand" } setState={ setBrand } selected={ brand } array={ brands?.map( ( brand ) => brand.brandName ) } label='Brand' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
 
           { data.map( ( value, index ) => (

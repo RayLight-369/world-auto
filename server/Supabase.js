@@ -96,7 +96,7 @@ const updateData = async ( {
       .select();
 
 
-    return Data.data;
+    return { data: Data.data, status: Data.status, error: Data.error };
 
   } catch ( error ) {
 
