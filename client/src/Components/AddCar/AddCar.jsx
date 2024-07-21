@@ -12,22 +12,22 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
   const { setCars, brands } = useCars();
 
   const [ adding, setAdding ] = useState( false );
-  const [ carTitle, setCarTitle ] = useState( "" );
-  const [ carOverview, setCarOverview ] = useState( "" );
-  const [ brand, setBrand ] = useState( "" );
-  const [ fuelType, setFuelType ] = useState( "" );
-  const [ pricePerDay, setPricePerDay ] = useState( 0 );
-  const [ pricePerMonth, setPricePerMonth ] = useState( 0 );
-  const [ mileage, setMilage ] = useState( "" );
-  const [ energy, setEnergy ] = useState( "" );
-  const [ guarantee, setGuarantee ] = useState( "" );
-  const [ color, setColor ] = useState( "" );
-  const [ certificate, setCertificate ] = useState( "" );
-  const [ emission, setEmission ] = useState( "" );
-  const [ modelYear, setModelYear ] = useState( "" );
-  const [ seatingCapacity, setSeatingCapacity ] = useState( "" );
-  const [ gearbox, setGearbox ] = useState( "" );
-  const [ accessories, setAccessories ] = useState( [] );
+  const [ carTitle, setCarTitle ] = useState( car?.title || "" );
+  const [ carOverview, setCarOverview ] = useState( car?.overview || "" );
+  const [ brand, setBrand ] = useState( car?.brand || "" );
+  const [ fuelType, setFuelType ] = useState( car?.fuel_type || "" );
+  const [ pricePerDay, setPricePerDay ] = useState( car?.price_per_day || 0 );
+  const [ pricePerMonth, setPricePerMonth ] = useState( car?.price_per_month || 0 );
+  const [ mileage, setMilage ] = useState( car?.milage || "" );
+  const [ energy, setEnergy ] = useState( car?.energy || "" );
+  const [ guarantee, setGuarantee ] = useState( car?.guarantee || "" );
+  const [ color, setColor ] = useState( car?.color || "" );
+  const [ certificate, setCertificate ] = useState( car?.certificate || "" );
+  const [ emission, setEmission ] = useState( car?.emission || "" );
+  const [ modelYear, setModelYear ] = useState( car?.modelYear || "" );
+  const [ seatingCapacity, setSeatingCapacity ] = useState( car?.seating_capacity || "" );
+  const [ gearbox, setGearbox ] = useState( car?.gearbox || "" );
+  const [ accessories, setAccessories ] = useState( car?.accessories || [] );
   const access = [ "Air Conditioner", "Power Door Locks", "AntiLock Braking System", "Brake Assist", "Power Steering", "Driver Airbag", "Passenger Airbag", "Power Windows", "CD Player", "Central Locking", "Crash Sensor", "Leather Seats" ];
   const [ fuelDropdown, toggleFuelDropdown ] = useState( false );
   const [ brandDropdown, toggleBrandDropdown ] = useState( false );
@@ -198,6 +198,49 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
   }
 
+  const updateCar = async () => {
+
+    setAdding( true );
+
+    const dateParts = dateInput.split( "-" );
+
+    [ dateParts[ 0 ], dateParts[ 2 ] ] = [ dateParts[ 2 ], dateParts[ 0 ] ];
+
+    const due_date = dateParts.join( "-" );
+
+    const ReqData = {
+      title: carTitle, overview: carOverview, due_date, brand, fuel_type: fuelType, accessories, certificate, color, gearbox, emission, energy, mileage, guarantee, seating_capacity: seatingCapacity, model_year: modelYear, price_per_day: pricePerDay, price_per_month: pricePerMonth
+    };
+
+
+    if ( !carTitle.trim().length ) return;
+
+    try {
+
+      const res = await fetch( "https://world-auto-api.vercel.app/admin/cars", {
+        method: 'PUT',
+        body: JSON.stringify( ReqData ),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      } );
+
+      if ( res.ok ) {
+        const body = await res.json();
+        console.log( body.data );
+
+        setCars( prev => [ body.data[ 0 ], ...prev ] );
+
+        handleClose();
+      }
+
+    } catch ( e ) {
+      console.log( e );
+    } finally {
+      setAdding( false );
+    }
+  };
+
   return (
     <MotionConfig transition={ { type: "spring", damping: 7 } } >
       <div className={ styles[ "add-car" ] }>
@@ -214,7 +257,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
         <div className={ styles[ "infos" ] }>
 
           <DropDown key={ "fuelType" } setState={ setFuelType } array={ [ "Diesel", "Petrol", "CNG" ] } label='Fuel Type' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
-          <DropDown key={ "brand" } setState={ setBrand } array={ brands?.map( ( brand ) => brand.brandName ) } label='Brand' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
+          <DropDown key={ "brand" } setState={ setBrand } selected={ brand } array={ brands?.map( ( brand ) => brand.brandName ) } label='Brand' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
 
           { data.map( ( value, index ) => (
 
@@ -232,10 +275,10 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }
             className={ styles[ "add-button" ] }
-            onClick={ addCar }
+            onClick={ type == "edit" ? updateCar : addCar }
             disabled={ adding }
           >
-            { adding ? "Adding..." : "Add" }
+            { adding ? type == 'new' ? "Adding..." : "Updating..." : type == 'new' ? "Add" : "Update" }
           </motion.button>
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }

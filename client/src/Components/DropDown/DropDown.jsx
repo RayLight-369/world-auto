@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import styles from "./DropDown.module.css";
 
 
-const DropDown = ( { array, any = false, dropDownOpen, toggleDropDown, label, backWorkArray, setState } ) => {
+const DropDown = ( { array, any = false, dropDownOpen, toggleDropDown, label, backWorkArray, setState, selected } ) => {
 
   // const ref = useRef();
   if ( any && !array.includes( "Any" ) ) {
@@ -11,7 +11,7 @@ const DropDown = ( { array, any = false, dropDownOpen, toggleDropDown, label, ba
     backWorkArray.unshift( 1 );
   };
 
-  const [ selected, setSelected ] = useState( "Any" );
+  const [ Selected, setSelected ] = useState( selected || "Any" );
 
   const variants = {
     open: {
@@ -61,7 +61,7 @@ const DropDown = ( { array, any = false, dropDownOpen, toggleDropDown, label, ba
       {/* <div className={ styles[ 'content' ] }> */ }
       <div className={ styles[ 'parent' ] }>
         <div className={ styles[ 'select' ] } id={ label } >
-          <p className={ styles[ "default-item" ] }>{ selected }</p>
+          <p className={ styles[ "default-item" ] }>{ Selected }</p>
         </div>
 
         <AnimatePresence mode='wait'>
@@ -69,7 +69,7 @@ const DropDown = ( { array, any = false, dropDownOpen, toggleDropDown, label, ba
             <motion.div className={ styles[ "other-items" ] } variants={ variants } transition={ { duration: .15 } } animate="open" initial="close" exit="close" >
               { array.map( ( item, i ) => (
                 <>
-                  { item != selected && (
+                  { item != Selected && (
                     <button type='button' key={ i } onClick={ ( e ) => {
                       e.stopPropagation();
 
