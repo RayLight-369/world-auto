@@ -91,7 +91,7 @@ div.recent-updates-container > div {
     > div {
       border-radius: 8px;
       border: 1px solid #ccc;
-      padding: 12px 14px;
+      padding: 10px 12px;
       display: flex;
       justify-content: space-between;
       /* position: relative; */
@@ -138,15 +138,16 @@ div.recent-updates-container > div {
         width: 100%;
         transition: 200ms;
 
-        p.car-title {
-          font-size: 1.1em;
+        p.car-title,
+        p.brand-title {
+          font-size: .98em;
           font-weight: bold;
           color: #333;
           font-family: Quicksand;
         }
 
         p.car-brand {
-          font-size: .9em;
+          font-size: .88em;
           color: #2b2b2b;
           font-family: Quicksand;
         }

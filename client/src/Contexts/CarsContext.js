@@ -23,13 +23,13 @@ const CarsProvider = ( { children } ) => {
 
         if ( carsRes.ok ) {
           const body = await carsRes.json();
-          console.log( body );
+          // console.log( body );
           setCars( body.data );
         }
 
         if ( brandsRes.ok ) {
           const body = await brandsRes.json();
-          console.log( body );
+          // console.log( body );
           setBrands( body.data );
         }
 

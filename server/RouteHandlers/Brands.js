@@ -50,16 +50,16 @@ router.put( "/", async ( req, res ) => {
     const object = await req.body;
     console.log( object );
 
-    const data = await updateData( {
+    const Data = await updateData( {
       table: "Brands",
       object
     } );
 
-    if ( data.error ) {
-      res.status( data.status ).json( { error: data.error } );
+    if ( Data.error ) {
+      res.status( Data.status ).json( { error: Data.error } );
     }
 
-    res.status( data.status ).json( { data: data.data } );
+    res.status( Data.status ).json( { data: Data.data } );
 
   } catch ( e ) {
     res.status( 500 ).json( { error: e } );

@@ -188,7 +188,15 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
         const body = await res.json();
         console.log( body.data );
 
-        setCars( prev => [ body.data[ 0 ], ...prev ] );
+        if ( type === "edit" ) {
+          setCars( prevCars =>
+            prevCars.map( prevCar =>
+              prevCar.id === body.data[ 0 ].id ? body.data[ 0 ] : prevCar
+            )
+          );
+        } else {
+          setCars( prev => [ body.data[ 0 ], ...prev ] );
+        }
 
         handleClose();
       }

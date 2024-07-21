@@ -33,7 +33,7 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
 
     const ReqData = { brandName, date_uploaded: dateInput };
 
-    if ( brand ) ReqData.id = brand.id;
+    if ( type === "edit" ) ReqData.id = brand.id;
 
     try {
 
