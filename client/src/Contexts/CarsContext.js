@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
-const CarsContext = createContext( [] );
+const CarsContext = createContext();
 
 export const useCars = () => {
   return useContext( CarsContext );

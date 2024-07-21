@@ -12,6 +12,7 @@ div.page-content {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  overflow: hidden;
 }
 
 div.details-container {
@@ -32,6 +33,7 @@ div.container {
   flex-direction: column;
   gap: 4px;
   transition: 250ms;
+  /* overflow: hidden; */
 }
 
 div.details-container div:hover {
@@ -61,9 +63,56 @@ div.recent-updates-container {
   height: calc(100% - 60px);
   border-radius: 8px;
   gap: 25px;
+  overflow: hidden;
 }
 
 div.recent-updates-container > div {
   height: calc(100%);
   font-size: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+
+  > div.list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    > div {
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 12px 14px;
+
+      > div.content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        p.car-title {
+          font-size: 1.1em;
+          font-weight: bold;
+          color: #333;
+          font-family: Quicksand;
+        }
+
+        p.car-brand {
+          font-size: .9em;
+          color: #2b2b2b;
+          font-family: Quicksand;
+        }
+
+        p.date {
+          font-size: .87em;
+          color: #444;
+          font-family: Quicksand;
+        }
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ddd;
 }

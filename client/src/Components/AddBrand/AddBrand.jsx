@@ -11,6 +11,11 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
   const [ adding, setAdding ] = useState( false );
   const { setBrands } = useCars();
 
+  const currentDate = new Date();
+  const [ dateInput, setDateInput ] = useState( `${ currentDate.getFullYear() }-${ currentDate.getMonth() + 1 >= 10 ? currentDate.getMonth() + 1 : "0" + ( currentDate.getMonth() + 1 ) }-${ currentDate.getDate() > 9 ? currentDate.getDate() : "0" + currentDate.getDate() }` );
+
+
+
   const buttonWhileHovering = ( scale = 1.1, duration = .1 ) => ( {
     scale,
     transition: {
@@ -32,7 +37,7 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
 
       const res = await fetch( "https://world-auto-api.vercel.app/admin/brands", {
         method: 'POST',
-        body: JSON.stringify( { brandName } ),
+        body: JSON.stringify( { brandName, date_uploaded: dateInput } ),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -42,7 +47,7 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
         const body = await res.json();
         console.log( body.data );
 
-        setBrands( prev => [ body.data, ...prev ] );
+        setBrands( prev => [ body.data[ 0 ], ...prev ] );
 
         handleClose();
       }

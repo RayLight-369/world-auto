@@ -40,9 +40,9 @@ const AddCar = ( { handleClose, type = "new" } ) => {
   // </div>;
 
 
-  useEffect( () => {
-    console.log( brands?.map( ( brand, i ) => brand.brandName ) );
-  }, [ brands ] );
+  // useEffect( () => {
+  //   console.log( brands?.map( ( brand, i ) => brand.brandName ) );
+  // }, [ brands ] );
 
   const data = useMemo( () => [
     {
@@ -185,7 +185,7 @@ const AddCar = ( { handleClose, type = "new" } ) => {
         const body = await res.json();
         console.log( body.data );
 
-        setCars( prev => [ body.data, ...prev ] );
+        setCars( prev => [ body.data[ 0 ], ...prev ] );
 
         handleClose();
       }
@@ -214,7 +214,7 @@ const AddCar = ( { handleClose, type = "new" } ) => {
         <div className={ styles[ "infos" ] }>
 
           <DropDown key={ "fuelType" } setState={ setFuelType } array={ [ "Diesel", "Petrol", "CNG" ] } label='Fuel Type' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
-          <DropDown key={ "brand" } setState={ setBrand } array={ [] } label='Brand' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
+          <DropDown key={ "brand" } setState={ setBrand } array={ brands?.map( ( brand ) => brand.brandName ) } label='Brand' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
 
           { data.map( ( value, index ) => (
 
