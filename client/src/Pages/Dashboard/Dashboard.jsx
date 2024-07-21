@@ -38,14 +38,18 @@ const Dashboard = () => {
               { !carsLoading && (
                 <>
                   {
-                    cars.length ? cars.map( ( car, i ) => (
-                      <div className={ Styles[ "car" ] } key={ i }>
+                    cars.length ? cars.map( ( car ) => (
+                      <div className={ Styles[ "car" ] } key={ car.id }>
                         <div className={ Styles[ "content" ] }>
                           <div className={ Styles[ "brand-title" ] }>
                             <p className={ Styles[ "car-title" ] }>{ car.title }</p>
                             <p className={ Styles[ "car-brand" ] }>{ car.brand }</p>
                           </div>
                           <p className={ Styles[ "date" ] }>{ car.due_date }</p>
+                        </div>
+                        <div className={ Styles[ "edit-del" ] }>
+                          <button className={ Styles[ 'edit-btn' ] }>&#9998;</button>
+                          <button>&#128465;</button>
                         </div>
                       </div>
                     ) ) : (
@@ -57,7 +61,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className={ `${ Styles[ "recent-brands" ] } ${ Styles[ "container" ] }` }>
-            <p className={ Styles[ "title" ] }>Recently Added Cars</p>
+            <p className={ Styles[ "title" ] }>Recently Added Brands</p>
             <div className={ Styles[ "list" ] }>
               { carsLoading && (
                 <p className={ Styles[ "no-recent-note" ] }>Loading...</p>
@@ -65,8 +69,8 @@ const Dashboard = () => {
 
               { !carsLoading && (
                 <>
-                  { brands.length ? brands.map( ( brand, i ) => (
-                    <div className={ Styles[ "brand" ] } key={ i }>
+                  { brands.length ? brands.map( ( brand ) => (
+                    <div className={ Styles[ "brand" ] } key={ brand.id }>
                       <div className={ Styles[ "content" ] }>
                         <p className={ Styles[ "brand-title" ] }>{ brand.brandName }</p>
                         <p className={ Styles[ "date" ] }>{ brand.date_uploaded }</p>

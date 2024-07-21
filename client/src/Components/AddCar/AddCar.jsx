@@ -6,7 +6,7 @@ import DropDown from '../DropDown/DropDown';
 import { useCars } from '../../Contexts/CarsContext';
 
 
-const AddCar = ( { handleClose, type = "new" } ) => {
+const AddCar = ( { handleClose, type = "new", car } ) => {
 
   // const navigate = useNavigate();
   const { setCars, brands } = useCars();

@@ -42,7 +42,7 @@ div.details-container div:hover {
 }
 
 p.title {
-  font-size: 1.4em;
+  font-size: 1.3em;
   color: #111;
   font-weight: bold;
 }
@@ -92,11 +92,46 @@ div.recent-updates-container > div {
       border-radius: 8px;
       border: 1px solid #ccc;
       padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      /* position: relative; */
+
+      > div.edit-del {
+        /* position: relative;
+        right: 10px; */
+        display: flex;
+        opacity: 0;
+        margin-left: 30px;
+        gap: 6px;
+        align-items: center;
+        transition: 200ms;
+
+        > button {
+          width: 30px;
+          height: 30px;
+          font-size: large;
+          border-radius: 50%;
+          border: none;
+          outline: none;
+          cursor: pointer;
+        }
+
+        > .edit-btn {
+          background: #025883;
+          color: white;
+        }
+
+        /* > .del-btn{
+          background: #025883;
+        } */
+      }
 
       > div.content {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: 100%;
+        transition: 200ms;
 
         p.car-title {
           font-size: 1.1em;
@@ -115,7 +150,12 @@ div.recent-updates-container > div {
           font-size: .87em;
           color: #444;
           font-family: Quicksand;
+          transition: 200ms;
         }
+      }
+
+      &:hover .edit-del {
+        opacity: 1;
       }
     }
   }
