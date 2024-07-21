@@ -48,10 +48,12 @@ router.put( "/", async ( req, res ) => {
   try {
 
     const object = await req.body;
-    console.log( object );
 
     const Data = await updateData( {
       table: "Brands",
+      where: {
+        id: object.id
+      },
       object
     } );
 
