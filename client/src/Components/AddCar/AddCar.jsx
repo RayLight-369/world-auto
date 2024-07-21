@@ -175,7 +175,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     try {
 
       const res = await fetch( "https://world-auto-api.vercel.app/admin/cars", {
-        method: 'POST',
+        method: type == "edit" ? "PUT" : 'POST',
         body: JSON.stringify( ReqData ),
         headers: {
           'Content-Type': 'application/json'
@@ -198,53 +198,6 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     }
 
   }
-
-  const updateCar = async () => {
-
-    setAdding( true );
-
-    const dateParts = dateInput.split( "-" );
-
-    [ dateParts[ 0 ], dateParts[ 2 ] ] = [ dateParts[ 2 ], dateParts[ 0 ] ];
-
-    const due_date = dateParts.join( "-" );
-
-    const ReqData = {
-      title: carTitle, overview: carOverview, due_date, brand, fuel_type: fuelType, accessories, certificate, color, gearbox, emission, energy, mileage, guarantee, seating_capacity: seatingCapacity, model_year: modelYear, price_per_day: pricePerDay, price_per_month: pricePerMonth
-    };
-
-    if ( type == "edit" ) {
-      ReqData.id = car.id;
-    }
-
-
-    if ( !carTitle.trim().length ) return;
-
-    try {
-
-      const res = await fetch( "http://localhost:8030/admin/cars", {
-        method: 'PUT',
-        body: JSON.stringify( ReqData ),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      } );
-
-      if ( res.ok ) {
-        const body = await res.json();
-        console.log( body.data );
-
-        setCars( prev => [ body.data[ 0 ], ...prev ] );
-
-        handleClose();
-      }
-
-    } catch ( e ) {
-      console.log( e );
-    } finally {
-      setAdding( false );
-    }
-  };
 
   return (
     <MotionConfig transition={ { type: "spring", damping: 7 } } >
@@ -280,7 +233,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }
             className={ styles[ "add-button" ] }
-            onClick={ type == "edit" ? updateCar : addCar }
+            onClick={ addCar }
             disabled={ adding }
           >
             { adding ? type == 'new' ? "Adding..." : "Updating..." : type == 'new' ? "Add" : "Update" }

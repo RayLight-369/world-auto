@@ -31,13 +31,17 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
     // navigateTo( session );
     if ( !brandName.trim().length ) return;
 
+    const ReqData = { brandName, date_uploaded: dateInput };
+
+    if ( brand ) ReqData.id = brand.id;
+
     try {
 
       setAdding( true );
 
       const res = await fetch( "https://world-auto-api.vercel.app/admin/brands", {
         method: type == "edit" ? "PUT" : 'POST',
-        body: JSON.stringify( { brandName, date_uploaded: dateInput } ),
+        body: JSON.stringify( ReqData ),
         headers: {
           'Content-Type': 'application/json'
         }
