@@ -59,7 +59,7 @@ router.put( "/", async ( req, res ) => {
     } );
 
     if ( Data.error ) {
-      res.status( Data.status ).json( { error: Data.data } );
+      res.status( Data.status ).json( { error: Data.error } );
     }
 
     res.status( Data.status ).json( { data: Data.data } );

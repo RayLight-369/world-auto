@@ -172,6 +172,8 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
     if ( !carTitle.trim().length ) return;
 
+    if ( type === "edit" ) ReqData.id = car.id;
+
     try {
 
       const res = await fetch( "https://world-auto-api.vercel.app/admin/cars", {
