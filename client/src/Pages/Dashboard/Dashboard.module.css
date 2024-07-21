@@ -101,19 +101,24 @@ div.recent-updates-container > div {
         right: 10px; */
         display: flex;
         opacity: 0;
-        margin-left: 30px;
         gap: 6px;
         align-items: center;
         transition: 200ms;
 
         > button {
-          width: 30px;
-          height: 30px;
-          font-size: large;
+          width: 27px;
+          height: 27px;
+          font-size: 1.2em;
           border-radius: 50%;
           border: none;
           outline: none;
           cursor: pointer;
+          transition: 150ms;
+
+          &:not(.edit-btn):hover {
+            background: red;
+            color: white;
+          }
         }
 
         > .edit-btn {
@@ -151,11 +156,15 @@ div.recent-updates-container > div {
           color: #444;
           font-family: Quicksand;
           transition: 200ms;
+          position: relative;
+          /* left: 50px; */
+          transition: 100ms;
         }
       }
 
       &:hover .edit-del {
         opacity: 1;
+        margin-left: 30px;
       }
     }
   }

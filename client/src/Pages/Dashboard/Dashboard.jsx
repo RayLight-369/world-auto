@@ -6,11 +6,13 @@ import { useCars } from "../../Contexts/CarsContext";
 import { AnimatePresence } from 'framer-motion';
 import Modal from '../../Components/Modal/Modal';
 import AddCar from '../../Components/AddCar/AddCar';
+import AddBrand from '../../Components/AddBrand/AddBrand';
 
 const Dashboard = () => {
 
   const { cars, brands, carsLoading } = useCars();
   const [ carToBeEdited, setCarToBeEdited ] = useState( null );
+  const [ brandToBeEdited, setBrandToBeEdited ] = useState( null );
 
   return (
     <>
@@ -80,6 +82,10 @@ const Dashboard = () => {
                           <p className={ Styles[ "brand-title" ] }>{ brand.brandName }</p>
                           <p className={ Styles[ "date" ] }>{ brand.date_uploaded }</p>
                         </div>
+                        <div className={ Styles[ "edit-del" ] }>
+                          <button className={ Styles[ 'edit-btn' ] } onClick={ () => setBrandToBeEdited( brand ) }>&#9998;</button>
+                          <button>&#128465;</button>
+                        </div>
                       </div>
                     ) ) : (
                       <p className={ Styles[ 'no-recent-note' ] }>No Brands Added!</p>
@@ -95,6 +101,11 @@ const Dashboard = () => {
         { carToBeEdited && (
           <Modal>
             <AddCar handleClose={ () => setCarToBeEdited( null ) } car={ carToBeEdited } type={ "edit" } />
+          </Modal>
+        ) }
+        { brandToBeEdited && (
+          <Modal>
+            <AddBrand handleClose={ () => setBrandToBeEdited( null ) } brand={ brandToBeEdited } type={ "edit" } />
           </Modal>
         ) }
       </AnimatePresence>

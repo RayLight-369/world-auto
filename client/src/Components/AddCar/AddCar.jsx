@@ -28,9 +28,10 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
   const [ seatingCapacity, setSeatingCapacity ] = useState( car?.seating_capacity || "" );
   const [ gearbox, setGearbox ] = useState( car?.gearbox || "" );
   const [ accessories, setAccessories ] = useState( car?.accessories || [] );
-  const access = [ "Air Conditioner", "Power Door Locks", "AntiLock Braking System", "Brake Assist", "Power Steering", "Driver Airbag", "Passenger Airbag", "Power Windows", "CD Player", "Central Locking", "Crash Sensor", "Leather Seats" ];
   const [ fuelDropdown, toggleFuelDropdown ] = useState( false );
   const [ brandDropdown, toggleBrandDropdown ] = useState( false );
+
+  const access = [ "Air Conditioner", "Power Door Locks", "AntiLock Braking System", "Brake Assist", "Power Steering", "Driver Airbag", "Passenger Airbag", "Power Windows", "CD Player", "Central Locking", "Crash Sensor", "Leather Seats" ];
 
   // <div className={ styles[ "price-per-day" ] }>
   //   <label htmlFor="price-per-day">Price Per Day:</label>
@@ -245,7 +246,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     <MotionConfig transition={ { type: "spring", damping: 7 } } >
       <div className={ styles[ "add-car" ] }>
         <div className={ styles[ "header" ] }>
-          <p className={ styles[ "title" ] }>Add New Car</p>
+          <p className={ styles[ "title" ] }>{ type === "edit" ? "Edit Your Car" : "Add New Car" }</p>
           <motion.button type='button' whileHover={ buttonWhileHovering( 1.2, .2 ) } className={ styles[ 'close' ] } onClick={ handleClose }>✖</motion.button>
         </div>
 

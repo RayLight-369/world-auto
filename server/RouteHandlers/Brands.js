@@ -1,4 +1,4 @@
-const { insertData, getData } = require( "../Supabase" );
+const { insertData, getData, updateData } = require( "../Supabase" );
 
 const router = require( "express" ).Router();
 const cors = require( "cors" );
@@ -27,6 +27,30 @@ router.post( "/", async ( req, res ) => {
     console.log( object );
 
     const data = await insertData( {
+      table: "Brands",
+      object
+    } );
+
+    if ( data.error ) {
+      res.status( data.status ).json( { error: data.error } );
+    }
+
+    res.status( data.status ).json( { data: data.data } );
+
+  } catch ( e ) {
+    res.status( 500 ).json( { error: e } );
+  }
+
+} );
+
+router.put( "/", async ( req, res ) => {
+
+  try {
+
+    const object = await req.body;
+    console.log( object );
+
+    const data = await updateData( {
       table: "Brands",
       object
     } );

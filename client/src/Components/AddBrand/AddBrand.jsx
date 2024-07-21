@@ -36,7 +36,7 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
       setAdding( true );
 
       const res = await fetch( "https://world-auto-api.vercel.app/admin/brands", {
-        method: 'POST',
+        method: type == "edit" ? "PUT" : 'POST',
         body: JSON.stringify( { brandName, date_uploaded: dateInput } ),
         headers: {
           'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
     <MotionConfig transition={ { type: "spring", damping: 7 } } >
       <div className={ styles[ "add-brand" ] }>
         <div className={ styles[ "header" ] }>
-          <p className={ styles[ "title" ] }>Add New Brand</p>
+          <p className={ styles[ "title" ] }>{ type === "edit" ? "Edit Your Brand" : "Add New Brand" }</p>
           <motion.button type='button' whileHover={ buttonWhileHovering( 1.2, .2 ) } className={ styles[ 'close' ] } onClick={ handleClose }>✖</motion.button>
         </div>
         <div className={ styles[ "inputs" ] }>
