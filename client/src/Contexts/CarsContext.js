@@ -35,6 +35,7 @@ const CarsProvider = ( { children } ) => {
         console.error( "Fetch error:", e.message );
         if ( cycles < 5 ) {
           setCycles( prev => prev + 1 );
+          setCarsLoading( true );
           fetchData();
         }
       } finally {
