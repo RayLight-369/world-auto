@@ -15,35 +15,31 @@ const CarsProvider = ( { children } ) => {
   const [ currentCar, setCurrentCar ] = useState( null );
 
   useEffect( () => {
-
     async function fetchData () {
       try {
         const carsRes = await fetch( "https://world-auto-api.vercel.app/admin/cars" );
+        if ( !carsRes.ok ) {
+          throw new Error( `Failed to fetch cars: ${ carsRes.status } ${ carsRes.statusText }` );
+        }
+        const carsData = await carsRes.json();
+        setCars( carsData.data );
+
         const brandsRes = await fetch( "https://world-auto-api.vercel.app/admin/brands" );
-
-        if ( carsRes.ok ) {
-          const body = await carsRes.json();
-          // console.log( body );
-          setCars( body.data );
+        if ( !brandsRes.ok ) {
+          throw new Error( `Failed to fetch brands: ${ brandsRes.status } ${ brandsRes.statusText }` );
         }
-
-        if ( brandsRes.ok ) {
-          const body = await brandsRes.json();
-          // console.log( body );
-          setBrands( body.data );
-        }
-
+        const brandsData = await brandsRes.json();
+        setBrands( brandsData.data );
       } catch ( e ) {
-        console.log( e );
+        console.error( "Fetch error:", e.message );
       } finally {
         setCarsLoading( false );
       }
-
     }
 
     fetchData();
-
   }, [] );
+
 
   return (
     <CarsContext.Provider value={ { cars, setCars, carsLoading, currentCar, setCurrentCar, brands, setBrands } }>{ children }</CarsContext.Provider>
