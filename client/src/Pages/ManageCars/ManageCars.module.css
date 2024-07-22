@@ -49,7 +49,7 @@ div.page-container {
       p {
         /* background: #000; */
         position: relative;
-        left: 30px;
+        left: 10px;
         width: calc(31%);
         overflow: hidden;
         text-overflow: ellipsis;
@@ -60,14 +60,45 @@ div.page-container {
 
       p.brand-title {
         position: absolute;
-        left: calc(40%);
-        width: calc(40% - 40px);
+        left: calc(35%);
+        width: calc(26% - 5px);
       }
 
       p.date {
         position: absolute;
+        left: calc(62%);
+        width: calc(16%);
+      }
+
+      p.actions {
+        position: absolute;
         left: calc(80%);
-        width: calc(20% - 10px);
+        width: calc(18%);
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+
+        span {
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          /* padding: 5px; */
+
+          &.edit {
+            background: #025883;
+            text-align: center;
+            color: white;
+          }
+
+          &.del:hover {
+            background: red;
+            color: white;
+          }
+        }
       }
     }
 

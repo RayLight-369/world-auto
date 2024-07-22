@@ -33,6 +33,7 @@ const ManageCars = () => {
 
                 <p className={ Styles[ "brand-title" ] }>Name</p>
                 <p className={ Styles[ "date" ] }>Date</p>
+                <p className={ Styles[ "actions" ] }>Actions</p>
 
               </div>
               { brands?.length && brands.map( brand => (
