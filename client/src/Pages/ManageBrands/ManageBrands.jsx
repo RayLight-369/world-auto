@@ -8,6 +8,7 @@ import { useCars } from '../../Contexts/CarsContext';
 
 const ManageCars = () => {
 
+  const [ brandToBeEdited, setBrandToBeEdited ] = useState( null );
   const [ AddBrandPopupOpen, setAddBrandPopupOpen ] = useState( false );
   const { brands } = useCars();
 
@@ -40,6 +41,10 @@ const ManageCars = () => {
                 <div className={ `${ Styles[ "row" ] }` }>
                   <p className={ Styles[ "brand-title" ] }>{ brand.brandName }</p>
                   <p className={ Styles[ "date" ] }>{ brand.date_uploaded }</p>
+                  <p className={ Styles[ "actions" ] }>
+                    <span className={ Styles[ "edit" ] } onClick={ () => setBrandToBeEdited( brand ) }>&#9998;</span>
+                    <span className={ Styles[ "del" ] }>&#128465;</span>
+                  </p>
                 </div>
               ) ) }
             </div>
@@ -50,6 +55,11 @@ const ManageCars = () => {
         { AddBrandPopupOpen && (
           <Modal handleClose={ () => closePopUp( setAddBrandPopupOpen ) }>
             <AddBrand handleClose={ () => closePopUp( setAddBrandPopupOpen ) } />
+          </Modal>
+        ) }
+        { brandToBeEdited && (
+          <Modal handleClose={ () => setBrandToBeEdited( null ) }>
+            <AddBrand handleClose={ () => setBrandToBeEdited( null ) } type='edit' brand={ brandToBeEdited } />
           </Modal>
         ) }
       </AnimatePresence>
