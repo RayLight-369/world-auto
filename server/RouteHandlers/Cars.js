@@ -3,7 +3,10 @@ const { insertData, getData, updateData } = require( "../Supabase" );
 const router = require( "express" ).Router();
 const cors = require( "cors" );
 
-router.use( cors() );
+router.use( cors( {
+  origin: "https://world-auto.vercel.app"
+} ) );
+
 router.get( "/", async ( req, res ) => {
   try {
 

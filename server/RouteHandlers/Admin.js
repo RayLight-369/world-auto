@@ -4,7 +4,10 @@ const BrandsRouter = require( "./Brands" );
 const router = require( "express" ).Router();
 const cors = require( "cors" );
 
-router.use( cors() );
+router.use( cors( {
+  origin: "https://world-auto.vercel.app"
+} ) );
+
 router.use( "/cars", CarRouter );
 router.use( "/brands", BrandsRouter );
 
