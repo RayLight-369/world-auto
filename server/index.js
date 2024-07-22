@@ -12,7 +12,7 @@ const cors = require( "cors" );
 const AdminRouter = require( "./RouteHandlers/Admin" );
 
 
-router.use( cors( {
+app.use( cors( {
   origin: "https://world-auto.vercel.app"
 } ) );
 
