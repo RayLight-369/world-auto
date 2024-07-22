@@ -13,6 +13,7 @@ const CarsProvider = ( { children } ) => {
   const [ brands, setBrands ] = useState( [] );
   const [ carsLoading, setCarsLoading ] = useState( true );
   const [ currentCar, setCurrentCar ] = useState( null );
+  const [ cycles, setCycles ] = useState( 0 );
 
   useEffect( () => {
     async function fetchData () {
@@ -32,6 +33,10 @@ const CarsProvider = ( { children } ) => {
         setBrands( brandsData.data );
       } catch ( e ) {
         console.error( "Fetch error:", e.message );
+        if ( cycles < 5 ) {
+          setCycles( prev => prev + 1 );
+          fetchData();
+        }
       } finally {
         setCarsLoading( false );
       }
