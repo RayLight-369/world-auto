@@ -49,6 +49,8 @@ router.put( "/", async ( req, res ) => {
 
     const object = await req.body;
 
+    console.log( "object: ", object );
+
     const Data = await updateData( {
       table: "Brands",
       where: {

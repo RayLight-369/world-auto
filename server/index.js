@@ -13,6 +13,14 @@ const AdminRouter = require( "./RouteHandlers/Admin" );
 
 
 app.use( cors() );
+
+app.use( ( req, res, next ) => {
+
+  res.setHeader( "Access-Control-Allow-Origin", "*" );
+  next();
+
+} );
+
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended: true } ) );
 app.use( cookieParser() );

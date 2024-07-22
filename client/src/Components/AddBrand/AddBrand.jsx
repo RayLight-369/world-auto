@@ -6,13 +6,13 @@ import { useCars } from '../../Contexts/CarsContext';
 
 const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
 
-  const [ brandName, setBrandName ] = useState( brand?.brandName );
-  const [ Brand, setBrand ] = useState( brand );
+  const [ brandName, setBrandName ] = useState( brand?.brandName || "" );
+  // const [ Brand, setBrand ] = useState( brand );
   const [ adding, setAdding ] = useState( false );
   const { setBrands } = useCars();
 
   const currentDate = new Date();
-  const [ dateInput, setDateInput ] = useState( `${ currentDate.getFullYear() }-${ currentDate.getMonth() + 1 >= 10 ? currentDate.getMonth() + 1 : "0" + ( currentDate.getMonth() + 1 ) }-${ currentDate.getDate() > 9 ? currentDate.getDate() : "0" + currentDate.getDate() }` );
+  const [ dateInput ] = useState( `${ currentDate.getFullYear() }-${ currentDate.getMonth() + 1 >= 10 ? currentDate.getMonth() + 1 : "0" + ( currentDate.getMonth() + 1 ) }-${ currentDate.getDate() > 9 ? currentDate.getDate() : "0" + currentDate.getDate() }` );
 
 
 
@@ -51,7 +51,15 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
         const body = await res.json();
         console.log( body.data );
 
-        setBrands( prev => [ body.data[ 0 ], ...prev ] );
+        if ( type === "edit" ) {
+          setBrands( prevBrands =>
+            prevBrands.map( prevBrand =>
+              prevBrand.id === body.data[ 0 ].id ? body.data[ 0 ] : prevBrand
+            )
+          );
+        } else {
+          setBrands( prev => [ body.data[ 0 ], ...prev ] );
+        }
 
         handleClose();
       }
