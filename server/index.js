@@ -12,17 +12,30 @@ const cors = require( "cors" );
 const AdminRouter = require( "./RouteHandlers/Admin" );
 
 
-app.use( cors( {
-  origin: "https://world-auto.vercel.app"
-} ) );
+// app.use( ( req, res, next ) => {
+//   const corsWhitelist = [
+//     'https://domain1.example',
+//     'https://domain2.example',
+//     'https://domain3.example'
+//   ];
+//   if ( corsWhitelist.indexOf( req.headers.origin ) !== -1 ) {
+//     res.header( 'Access-Control-Allow-Origin', req.headers.origin );
+//     res.header( 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept' );
+//   }
+//   res.head
+
+//   next();
+// } );
 
 
-app.use( ( req, res, next ) => {
+// app.use( ( req, res, next ) => {
 
-  res.setHeader( "Access-Control-Allow-Origin", "*" );
-  next();
+//   res.setHeader( "Access-Control-Allow-Origin", "*" );
+//   next();
 
-} );
+// } );
+
+app.use( cors() );
 
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended: true } ) );
@@ -30,7 +43,7 @@ app.use( cookieParser() );
 
 app.use( "/admin", AdminRouter );
 
-app.get( "/", ( req, res ) => res.send( "Hello, world!" ) );
+app.get( "/", ( _, res ) => res.send( "Hello, world!" ) );
 
 
 
