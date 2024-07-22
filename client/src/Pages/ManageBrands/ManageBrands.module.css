@@ -35,8 +35,8 @@ div.page-container {
     border: 1px solid #ddd;
 
     div.row {
+      display: flex !important;
       align-items: center;
-      display: flex;
       position: relative;
       padding: 8px 35px;
       background: #fff;
