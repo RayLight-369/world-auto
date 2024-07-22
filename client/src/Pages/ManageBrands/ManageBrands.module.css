@@ -68,7 +68,7 @@ div.page-container {
         position: absolute;
         left: 80%;
         width: calc(18%);
-        display: flex;
+        display: flex !important;
         justify-content: center;
         gap: 5px;
 
@@ -76,10 +76,11 @@ div.page-container {
           width: 22px;
           height: 22px;
           border-radius: 50%;
-          display: flex;
-          align-items: center;
+          display: flex !important;
+          align-items: center !important;
           justify-content: center;
           cursor: pointer;
+          text-align: center;
           /* padding: 5px; */
 
           &.edit {

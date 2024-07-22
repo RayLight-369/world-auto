@@ -27,6 +27,7 @@ app.use( ( req, res, next ) => {
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended: true } ) );
 app.use( cookieParser() );
+
 app.use( "/admin", AdminRouter );
 
 app.get( "/", ( req, res ) => res.send( "Hello, world!" ) );
