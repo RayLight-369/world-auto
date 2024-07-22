@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from "./AddBrand.module.css";
 import { MotionConfig, motion } from 'framer-motion';
 import { useCars } from '../../Contexts/CarsContext';
+import { API } from '../../Constants';
 
 
 const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
@@ -39,7 +40,7 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
 
       setAdding( true );
 
-      const res = await fetch( "https://world-auto-api.vercel.app/admin/brands", {
+      const res = await fetch( type == "edit" ? API.EDIT_BRAND : API.NEW_BRAND, {
         method: type == "edit" ? "PUT" : 'POST',
         body: JSON.stringify( ReqData ),
         headers: {

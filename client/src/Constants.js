@@ -27,3 +27,12 @@ export const AdminLinks = [
     path: "/admin/brands"
   },
 ];
+
+export const API = {
+  GET_CARS: `https://world-auto-api.vercel.app/admin/cars`,
+  NEW_CAR: `https://world-auto-api.vercel.app/admin/cars/new`,
+  EDIT_CAR: `https://world-auto-api.vercel.app/admin/cars/edit`,
+  GET_BRANDS: `https://world-auto-api.vercel.app/admin/brands`,
+  NEW_BRAND: `https://world-auto-api.vercel.app/admin/brands/new`,
+  EDIT_BRAND: `https://world-auto-api.vercel.app/admin/brands/edit`,
+};

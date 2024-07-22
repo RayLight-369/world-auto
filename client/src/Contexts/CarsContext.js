@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { API } from '../Constants';
 
 const CarsContext = createContext();
 
@@ -18,14 +19,14 @@ const CarsProvider = ( { children } ) => {
   useEffect( () => {
     async function fetchData () {
       try {
-        const carsRes = await fetch( "https://world-auto-api.vercel.app/admin/cars" );
+        const carsRes = await fetch( API.GET_CARS );
         if ( !carsRes.ok ) {
           throw new Error( `Failed to fetch cars: ${ carsRes.status } ${ carsRes.statusText }` );
         }
         const carsData = await carsRes.json();
         setCars( carsData.data );
 
-        const brandsRes = await fetch( "https://world-auto-api.vercel.app/admin/brands" );
+        const brandsRes = await fetch( API.GET_BRANDS );
         if ( !brandsRes.ok ) {
           throw new Error( `Failed to fetch brands: ${ brandsRes.status } ${ brandsRes.statusText }` );
         }

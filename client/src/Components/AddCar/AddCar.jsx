@@ -4,6 +4,7 @@ import { MotionConfig, motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import DropDown from '../DropDown/DropDown';
 import { useCars } from '../../Contexts/CarsContext';
+import { API } from '../../Constants';
 
 
 const AddCar = ( { handleClose, type = "new", car } ) => {
@@ -176,7 +177,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
     try {
 
-      const res = await fetch( "https://world-auto-api.vercel.app/admin/cars", {
+      const res = await fetch( type == "edit" ? API.EDIT_CAR : API.NEW_CAR, {
         method: type == "edit" ? "PUT" : 'POST',
         body: JSON.stringify( ReqData ),
         headers: {
