@@ -8,7 +8,7 @@ const cookieParser = require( "cookie-parser" );
 const { log } = console;
 const cors = require( "cors" );
 
-const { insertData, getData, updateData } = require( "../Supabase" );
+const { insertData, getData, updateData } = require( "./Supabase" );
 
 
 
@@ -55,14 +55,18 @@ app.get( "/", ( _, res ) => res.send( "Hello, world!" ) );
 app.get( "/admin/cars", async ( req, res ) => {
   try {
 
-    const { data } = await getData( {
+    const { data, error } = await getData( {
       table: "Cars"
     } );
 
     if ( data ) res.status( 200 ).json( { data } );
-    res.status( 404 ).json( { error: "No Cars Found!" } );
+    else {
+      console.log( error );
+      res.status( 404 ).json( { error: "No Cars Found!" } );
+    }
 
   } catch ( e ) {
+    console.log( e );
     res.status( 500 ).json( { error: e } );
   }
 } );
@@ -80,12 +84,14 @@ app.post( "/admin/cars/new", async ( req, res ) => {
     } );
 
     if ( data.error ) {
-      res.status( data.status ).json( { error: data.error } );
-    }
 
-    res.status( data.status ).json( { data: data.data } );
+      console.log( data.error );
+      res.status( data.status ).json( { error: data.error } );
+
+    } else res.status( data.status ).json( { data: data.data } );
 
   } catch ( e ) {
+    console.log( e );
     res.status( 500 ).json( { error: e } );
   }
 
@@ -107,10 +113,11 @@ app.put( "/admin/cars/edit", async ( req, res ) => {
     } );
 
     if ( Data.error ) {
-      res.status( Data.status ).json( { error: Data.error } );
-    }
 
-    res.status( Data.status ).json( { data: Data.data } );
+      console.log( Data.error );
+      res.status( Data.status ).json( { error: Data.error } );
+
+    } else res.status( Data.status ).json( { data: Data.data } );
 
   } catch ( e ) {
     console.log( e );
@@ -122,14 +129,18 @@ app.put( "/admin/cars/edit", async ( req, res ) => {
 app.get( "/admin/brands", async ( req, res ) => {
   try {
 
-    const { data } = await getData( {
+    const { data, error } = await getData( {
       table: "Brands"
     } );
 
     if ( data ) res.status( 200 ).json( { data } );
-    res.status( 404 ).json( { error: "No Cars Found!" } );
+    else {
+      console.log( error );
+      res.status( 404 ).json( { error: "No Cars Found!" } );
+    }
 
   } catch ( e ) {
+    console.log( e );
     res.status( 500 ).json( { error: e } );
   }
 } );
@@ -147,12 +158,12 @@ app.post( "/admin/brands/new", async ( req, res ) => {
     } );
 
     if ( data.error ) {
+      console.log( data.error );
       res.status( data.status ).json( { error: data.error } );
-    }
-
-    res.status( data.status ).json( { data: data.data } );
+    } else res.status( data.status ).json( { data: data.data } );
 
   } catch ( e ) {
+    console.log( e );
     res.status( 500 ).json( { error: e } );
   }
 
@@ -175,12 +186,12 @@ app.put( "/admin/brands/edit", async ( req, res ) => {
     } );
 
     if ( Data.error ) {
+      console.log( Data.error );
       res.status( Data.status ).json( { error: Data.error } );
-    }
-
-    res.status( Data.status ).json( { data: Data.data } );
+    } else res.status( Data.status ).json( { data: Data.data } );
 
   } catch ( e ) {
+    console.log( e );
     res.status( 500 ).json( { error: e } );
   }
 
