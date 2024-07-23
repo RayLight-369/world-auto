@@ -12,7 +12,7 @@ const { insertData, getData, updateData } = require( "./Supabase" );
 
 
 
-const AdminRouter = require( "./RouteHandlers/Admin" );
+// const AdminRouter = require( "./RouteHandlers/Admin" );
 
 
 // app.use( ( req, res, next ) => {
