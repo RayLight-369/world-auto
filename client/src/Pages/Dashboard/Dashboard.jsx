@@ -14,6 +14,7 @@ const Dashboard = () => {
   const [ carToBeEdited, setCarToBeEdited ] = useState( null );
   const [ brandToBeEdited, setBrandToBeEdited ] = useState( null );
   const [ brandToBeDeleted, setBrandToBeDeleted ] = useState( null );
+  const [ carToBeDeleted, setCarToBeDeleted ] = useState( null );
 
   return (
     <>
@@ -57,7 +58,7 @@ const Dashboard = () => {
                           </div>
                           <div className={ Styles[ "edit-del" ] }>
                             <button className={ Styles[ 'edit-btn' ] } onClick={ () => setCarToBeEdited( car ) }>&#9998;</button>
-                            <button>&#128465;</button>
+                            <button onClick={ () => setCarToBeDeleted( car ) }>&#128465;</button>
                           </div>
                         </div>
                       ) ) : (
@@ -102,6 +103,11 @@ const Dashboard = () => {
         { carToBeEdited && (
           <Modal>
             <AddCar handleClose={ () => setCarToBeEdited( null ) } car={ carToBeEdited } type={ "edit" } />
+          </Modal>
+        ) }
+        { carToBeDeleted && (
+          <Modal>
+            <AddCar handleClose={ () => setCarToBeDeleted( null ) } car={ carToBeDeleted } type={ "del" } />
           </Modal>
         ) }
         { brandToBeEdited && (

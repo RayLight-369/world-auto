@@ -173,12 +173,12 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
     if ( !carTitle.trim().length ) return;
 
-    if ( type === "edit" ) ReqData.id = car.id;
+    if ( type === "edit" || type == "del" ) ReqData.id = car.id;
 
     try {
 
-      const res = await fetch( type == "edit" ? API.EDIT_CAR : API.NEW_CAR, {
-        method: type == "edit" ? "PUT" : 'POST',
+      const res = await fetch( type == "edit" ? API.EDIT_CAR : type != "del" ? API.NEW_CAR : API.DEL_CAR, {
+        method: type == "edit" ? "PUT" : type != "del" ? 'POST' : "DELETE",
         body: JSON.stringify( ReqData ),
         headers: {
           'Content-Type': 'application/json'
@@ -193,6 +193,12 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
           setCars( prevCars =>
             prevCars.map( prevCar =>
               prevCar.id === body.data[ 0 ].id ? body.data[ 0 ] : prevCar
+            )
+          );
+        } else if ( type == "del" ) {
+          setCars( prevCars =>
+            prevCars.filter( prevCar =>
+              prevCar.id != ReqData.id
             )
           );
         } else {
@@ -217,29 +223,34 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
           <p className={ styles[ "title" ] }>{ type === "edit" ? "Edit Your Car" : "Add New Car" }</p>
           <motion.button type='button' whileHover={ buttonWhileHovering( 1.2, .2 ) } className={ styles[ 'close' ] } onClick={ handleClose }>✖</motion.button>
         </div>
+        {
+          type != "del" && (
+            <>
+              <div className={ styles[ "inputs" ] }>
+                <input type="text" placeholder='Car Title' className={ styles[ "name" ] } value={ carTitle } onChange={ e => setCarTitle( e.target.value ) } />
+                <textarea placeholder='Car Overview' className={ styles[ "description" ] } value={ carOverview } onChange={ e => setCarOverview( e.target.value ) } />
+              </div>
 
-        <div className={ styles[ "inputs" ] }>
-          <input type="text" placeholder='Car Title' className={ styles[ "name" ] } value={ carTitle } onChange={ e => setCarTitle( e.target.value ) } />
-          <textarea placeholder='Car Overview' className={ styles[ "description" ] } value={ carOverview } onChange={ e => setCarOverview( e.target.value ) } />
-        </div>
+              <div className={ styles[ "infos" ] }>
 
-        <div className={ styles[ "infos" ] }>
+                <DropDown key={ "fuelType" } setState={ setFuelType } selected={ fuelType } array={ [ "Diesel", "Petrol", "CNG" ] } label='Fuel Type' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
+                <DropDown key={ "brand" } setState={ setBrand } selected={ brand } array={ brands?.map( ( brand ) => brand.brandName ) } backWorkArray={ brands?.map( brand => brand.id ) } label='Brand' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
 
-          <DropDown key={ "fuelType" } setState={ setFuelType } selected={ fuelType } array={ [ "Diesel", "Petrol", "CNG" ] } label='Fuel Type' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
-          <DropDown key={ "brand" } setState={ setBrand } selected={ brand } array={ brands?.map( ( brand ) => brand.brandName ) } backWorkArray={ brands?.map( brand => brand.id ) } label='Brand' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
+                { data.map( ( value, index ) => (
 
-          { data.map( ( value, index ) => (
+                  <div className={ styles[ value.class ] } key={ index }>
+                    <label htmlFor={ value.class }>{ value.element }:</label>
+                    <input onChange={ ( e ) => {
+                      value.setState( e.target.value );
+                    } } value={ value.value } type={ value.type } name={ value.class } id={ value.class } className={ styles[ value.inputClass ] } />
+                  </div>
 
-            <div className={ styles[ value.class ] } key={ index }>
-              <label htmlFor={ value.class }>{ value.element }:</label>
-              <input onChange={ ( e ) => {
-                value.setState( e.target.value );
-              } } value={ value.value } type={ value.type } name={ value.class } id={ value.class } className={ styles[ value.inputClass ] } />
-            </div>
+                ) ) }
 
-          ) ) }
-
-        </div>
+              </div>
+            </>
+          )
+        }
         <div className={ styles[ "buttons" ] }>
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }
@@ -247,7 +258,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
             onClick={ addCar }
             disabled={ adding }
           >
-            { adding ? type == 'new' ? "Adding..." : "Updating..." : type == 'new' ? "Add" : "Update" }
+            { adding ? type == 'new' ? "Adding..." : type == "edit" ? "Updating..." : "Deleting..." : type == 'new' ? "Add" : type == "edit" ? "Update" : "Delete" }
           </motion.button>
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }
