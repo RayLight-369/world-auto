@@ -126,6 +126,34 @@ app.put( "/admin/cars/edit", async ( req, res ) => {
 
 } );
 
+app.put( "/admin/cars/delete", async ( req, res ) => {
+
+  try {
+
+    const object = await req.body;
+    console.log( object );
+
+    const Data = await deleteData( {
+      table: "Cars",
+      where: {
+        id: object.id
+      }
+    } );
+
+    if ( Data.error ) {
+
+      console.log( Data.error );
+      res.status( Data.status ).json( { error: Data.error } );
+
+    } else res.status( 200 ).json( { data: Data.data || [ object ] } );
+
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).json( { error: e } );
+  }
+
+} );
+
 app.get( "/admin/brands", async ( req, res ) => {
   try {
 

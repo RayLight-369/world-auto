@@ -10,6 +10,7 @@ const ManageCars = () => {
 
   const [ addCarPopupOpen, setAddCarPopupOpen ] = useState( false );
   const [ carToBeEdited, setCarToBeEdited ] = useState( null );
+  const [ carToBeDeleted, setCarToBeDeleted ] = useState( null );
 
   const { cars, brands } = useCars();
 
@@ -44,7 +45,7 @@ const ManageCars = () => {
                   <p className={ Styles[ "date" ] }>{ car.due_date }</p>
                   <p className={ Styles[ "actions" ] }>
                     <span className={ Styles[ "edit" ] } onClick={ () => setCarToBeEdited( car ) }>&#9998;</span>
-                    <span className={ Styles[ "del" ] }>&#128465;</span>
+                    <span className={ Styles[ "del" ] } onClick={ () => setCarToBeDeleted( car ) }>&#128465;</span>
                   </p>
                 </div>
               ) ) }
@@ -61,6 +62,11 @@ const ManageCars = () => {
         { carToBeEdited && (
           <Modal handleClose={ () => setCarToBeEdited( null ) }>
             <AddCar handleClose={ () => setCarToBeEdited( null ) } car={ carToBeEdited } type='edit' />
+          </Modal>
+        ) }
+        { carToBeDeleted && (
+          <Modal handleClose={ () => setCarToBeDeleted( null ) }>
+            <AddCar handleClose={ () => setCarToBeDeleted( null ) } car={ carToBeEdited } type='del' />
           </Modal>
         ) }
       </AnimatePresence>
