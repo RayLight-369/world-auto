@@ -193,12 +193,12 @@ const deleteData = async ( {
   where,
 } ) => {
   try {
-    const { data, error, statusText } = await supabase
+    const { data, error, statusText, status } = await supabase
       .from( table )
       .delete()
       .match( where );
 
-    return { data, error, statusText };
+    return { data, error, statusText, status };
   } catch ( e ) {
     console.log( e );
   }

@@ -10,7 +10,7 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
   const [ brandName, setBrandName ] = useState( brand?.brandName || "" );
   // const [ Brand, setBrand ] = useState( brand );
   const [ adding, setAdding ] = useState( false );
-  const { setBrands } = useCars();
+  const { setBrands, setCars } = useCars();
 
   const currentDate = new Date();
   const [ dateInput ] = useState( `${ currentDate.getFullYear() }-${ currentDate.getMonth() + 1 >= 10 ? currentDate.getMonth() + 1 : "0" + ( currentDate.getMonth() + 1 ) }-${ currentDate.getDate() > 9 ? currentDate.getDate() : "0" + currentDate.getDate() }` );
@@ -30,19 +30,19 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
 
   async function addBrand () {
     // navigateTo( session );
-    if ( !brandName.trim().length ) return;
+    if ( !brandName.trim().length && type != "del" ) return;
 
     const ReqData = { brandName, date_uploaded: dateInput };
 
-    if ( type === "edit" ) ReqData.id = brand.id;
+    if ( type === "edit" || type == "del" ) ReqData.id = brand.id;
 
     try {
 
       setAdding( true );
 
-      const res = await fetch( type == "edit" ? API.EDIT_BRAND : API.NEW_BRAND, {
-        method: type == "edit" ? "PUT" : 'POST',
-        body: JSON.stringify( ReqData ),
+      const res = await fetch( type == "edit" ? API.EDIT_BRAND : type != "del" ? API.NEW_BRAND : API.DEL_BRAND, {
+        method: type == "edit" ? "PUT" : type != "del" ? 'POST' : "DELETE",
+        body: JSON.stringify( { ReqData } ),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -56,6 +56,19 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
           setBrands( prevBrands =>
             prevBrands.map( prevBrand =>
               prevBrand.id === body.data[ 0 ].id ? body.data[ 0 ] : prevBrand
+            )
+          );
+
+          setCars( prevCars =>
+            prevCars.map( prevCar => {
+              if ( prevCar.brand == body.data[ 0 ].id ) prevCar.brand = body.data[ 0 ].id;
+              return prevCar;
+            } )
+          );
+        } else if ( type === "del" ) {
+          setBrands( prev =>
+            prev.filter( prevBrand =>
+              prevBrand.id != body.data[ 0 ].id
             )
           );
         } else {
@@ -90,7 +103,7 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
             onClick={ addBrand }
             disabled={ adding }
           >
-            { adding ? type == 'new' ? "Adding..." : "Updating..." : type == 'new' ? "Add" : "Update" }
+            { adding ? type == 'new' ? "Adding..." : type != "edit" ? "Updating..." : "Deleting" : type == 'new' ? "Add" : type != "edit" ? "Update" : "Delete" }
           </motion.button>
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }

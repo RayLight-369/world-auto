@@ -15,7 +15,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
   const [ adding, setAdding ] = useState( false );
   const [ carTitle, setCarTitle ] = useState( car?.title || "" );
   const [ carOverview, setCarOverview ] = useState( car?.overview || "" );
-  const [ brand, setBrand ] = useState( car?.brand || "" );
+  const [ brand, setBrand ] = useState( car?.brand || undefined );
   const [ fuelType, setFuelType ] = useState( car?.fuel_type || "" );
   const [ pricePerDay, setPricePerDay ] = useState( car?.price_per_day || 0 );
   const [ pricePerMonth, setPricePerMonth ] = useState( car?.price_per_month || 0 );
@@ -226,7 +226,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
         <div className={ styles[ "infos" ] }>
 
           <DropDown key={ "fuelType" } setState={ setFuelType } selected={ fuelType } array={ [ "Diesel", "Petrol", "CNG" ] } label='Fuel Type' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
-          <DropDown key={ "brand" } setState={ setBrand } selected={ brand } array={ brands?.map( ( brand ) => brand.brandName ) } label='Brand' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
+          <DropDown key={ "brand" } setState={ setBrand } selected={ brand } array={ brands?.map( ( brand ) => brand.brandName ) } backWorkArray={ brands?.map( brand => brand.id ) } label='Brand' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
 
           { data.map( ( value, index ) => (
 

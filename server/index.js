@@ -8,7 +8,7 @@ const cookieParser = require( "cookie-parser" );
 const { log } = console;
 const cors = require( "cors" );
 
-const { insertData, getData, updateData } = require( "./Supabase" );
+const { insertData, getData, updateData, deleteData } = require( "./Supabase" );
 
 
 
@@ -183,6 +183,33 @@ app.put( "/admin/brands/edit", async ( req, res ) => {
         id: object.id
       },
       object
+    } );
+
+    if ( Data.error ) {
+      console.log( Data.error );
+      res.status( Data.status ).json( { error: Data.error } );
+    } else res.status( Data.status ).json( { data: Data.data } );
+
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).json( { error: e } );
+  }
+
+} );
+
+app.delete( "/admin/brands/delete", async ( req, res ) => {
+
+  try {
+
+    const object = await req.body;
+
+    console.log( "object: ", object );
+
+    const Data = await deleteData( {
+      table: "Brands",
+      where: {
+        id: object.id
+      }
     } );
 
     if ( Data.error ) {

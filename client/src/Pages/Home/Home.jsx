@@ -36,17 +36,7 @@ const Home = () => {
         </div>
         <div className={ Styles[ "content" ] }>
           <div className={ Styles[ "list" ] }>
-            <Card />
-            <Card />
-            <CreateAlert />
-            <Card />
-            <Card />
-            <CreateAlert />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+
           </div>
         </div>
       </motion.section>

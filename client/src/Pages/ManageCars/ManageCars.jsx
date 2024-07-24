@@ -11,7 +11,7 @@ const ManageCars = () => {
   const [ addCarPopupOpen, setAddCarPopupOpen ] = useState( false );
   const [ carToBeEdited, setCarToBeEdited ] = useState( null );
 
-  const { cars } = useCars();
+  const { cars, brands } = useCars();
 
   useEffect( () => {
     console.log( cars );
@@ -40,7 +40,7 @@ const ManageCars = () => {
               { cars?.length && cars.map( car => (
                 <div className={ `${ Styles[ "row" ] }` }>
                   <p className={ Styles[ "car-title" ] }>{ car.title }</p>
-                  <p className={ Styles[ "brand-title" ] }>{ car.brand }</p>
+                  <p className={ Styles[ "brand-title" ] }>{ brands?.find( brand => brand.id == car.brand ).brandName }</p>
                   <p className={ Styles[ "date" ] }>{ car.due_date }</p>
                   <p className={ Styles[ "actions" ] }>
                     <span className={ Styles[ "edit" ] } onClick={ () => setCarToBeEdited( car ) }>&#9998;</span>

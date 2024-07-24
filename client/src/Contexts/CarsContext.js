@@ -47,7 +47,6 @@ const CarsProvider = ( { children } ) => {
     fetchData();
   }, [] );
 
-
   return (
     <CarsContext.Provider value={ { cars, setCars, carsLoading, currentCar, setCurrentCar, brands, setBrands } }>{ children }</CarsContext.Provider>
   );

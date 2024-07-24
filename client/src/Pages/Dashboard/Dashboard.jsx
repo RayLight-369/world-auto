@@ -13,6 +13,7 @@ const Dashboard = () => {
   const { cars, brands, carsLoading } = useCars();
   const [ carToBeEdited, setCarToBeEdited ] = useState( null );
   const [ brandToBeEdited, setBrandToBeEdited ] = useState( null );
+  const [ brandToBeDeleted, setBrandToBeDeleted ] = useState( null );
 
   return (
     <>
@@ -50,7 +51,7 @@ const Dashboard = () => {
                           <div className={ Styles[ "content" ] }>
                             <div className={ Styles[ "brand-title" ] }>
                               <p className={ Styles[ "car-title" ] }>{ car.title }</p>
-                              <p className={ Styles[ "car-brand" ] }>{ car.brand }</p>
+                              <p className={ Styles[ "car-brand" ] }>{ brands?.find( brand => brand.id == car.brand ).brandName }</p>
                             </div>
                             <p className={ Styles[ "date" ] }>{ car.due_date }</p>
                           </div>
@@ -84,7 +85,7 @@ const Dashboard = () => {
                         </div>
                         <div className={ Styles[ "edit-del" ] }>
                           <button className={ Styles[ 'edit-btn' ] } onClick={ () => setBrandToBeEdited( brand ) }>&#9998;</button>
-                          <button>&#128465;</button>
+                          <button onClick={ () => setBrandToBeDeleted( brand ) }>&#128465;</button>
                         </div>
                       </div>
                     ) ) : (
