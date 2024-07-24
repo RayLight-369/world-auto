@@ -109,6 +109,11 @@ const Dashboard = () => {
             <AddBrand handleClose={ () => setBrandToBeEdited( null ) } brand={ brandToBeEdited } type={ "edit" } />
           </Modal>
         ) }
+        { brandToBeDeleted && (
+          <Modal>
+            <AddBrand handleClose={ () => setBrandToBeDeleted( null ) } brand={ brandToBeDeleted } type={ "del" } />
+          </Modal>
+        ) }
       </AnimatePresence>
     </>
   );

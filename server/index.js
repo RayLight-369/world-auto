@@ -212,10 +212,12 @@ app.delete( "/admin/brands/delete", async ( req, res ) => {
       }
     } );
 
+    console.log( "object: ", Data );
+
     if ( Data.error ) {
       console.log( Data.error );
       res.status( Data.status ).json( { error: Data.error } );
-    } else res.status( Data.status ).json( { data: Data.data } );
+    } else res.status( 200 ).json( { data: Data.data || [ object ] } );
 
   } catch ( e ) {
     console.log( e );

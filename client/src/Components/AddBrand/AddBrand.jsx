@@ -42,7 +42,7 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
 
       const res = await fetch( type == "edit" ? API.EDIT_BRAND : type != "del" ? API.NEW_BRAND : API.DEL_BRAND, {
         method: type == "edit" ? "PUT" : type != "del" ? 'POST' : "DELETE",
-        body: JSON.stringify( { ReqData } ),
+        body: JSON.stringify( ReqData ),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -68,7 +68,7 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
         } else if ( type === "del" ) {
           setBrands( prev =>
             prev.filter( prevBrand =>
-              prevBrand.id != body.data[ 0 ].id
+              prevBrand.id != ReqData.id
             )
           );
         } else {
@@ -90,12 +90,16 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
     <MotionConfig transition={ { type: "spring", damping: 7 } } >
       <div className={ styles[ "add-brand" ] }>
         <div className={ styles[ "header" ] }>
-          <p className={ styles[ "title" ] }>{ type === "edit" ? "Edit Your Brand" : "Add New Brand" }</p>
+          <p className={ styles[ "title" ] }>{ type === "edit" ? "Edit Your Brand" : type != "del" ? "Add New Brand" : "Are You Sure?" }</p>
           <motion.button type='button' whileHover={ buttonWhileHovering( 1.2, .2 ) } className={ styles[ 'close' ] } onClick={ handleClose }>✖</motion.button>
         </div>
-        <div className={ styles[ "inputs" ] }>
-          <input type="text" placeholder='Brand Name' className={ styles[ "name" ] } value={ brandName } onChange={ e => setBrandName( e.target.value ) } />
-        </div>
+        {
+          type != "del" && (
+            <div className={ styles[ "inputs" ] }>
+              <input type="text" placeholder='Brand Name' className={ styles[ "name" ] } value={ brandName } onChange={ e => setBrandName( e.target.value ) } />
+            </div>
+          )
+        }
         <div className={ styles[ "buttons" ] }>
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }
@@ -103,7 +107,7 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
             onClick={ addBrand }
             disabled={ adding }
           >
-            { adding ? type == 'new' ? "Adding..." : type != "edit" ? "Updating..." : "Deleting" : type == 'new' ? "Add" : type != "edit" ? "Update" : "Delete" }
+            { adding ? type == 'new' ? "Adding..." : type == "edit" ? "Updating..." : "Deleting" : type == 'new' ? "Add" : type == "edit" ? "Update" : "Delete" }
           </motion.button>
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }
