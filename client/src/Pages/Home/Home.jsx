@@ -3,8 +3,11 @@ import Styles from "./Home.module.css";
 import Card from '../../Components/Card/Card';
 import CreateAlert from '../../Components/CreateAlert/CreateAlert';
 import { motion } from "framer-motion";
+import { useCars } from '../../Contexts/CarsContext';
 
 const Home = () => {
+
+  const { cars } = useCars();
 
   const variants = {
     hidden: {
@@ -36,7 +39,9 @@ const Home = () => {
         </div>
         <div className={ Styles[ "content" ] }>
           <div className={ Styles[ "list" ] }>
-
+            { cars.length && cars.map( ( car, i ) => (
+              <Card key={ car.id } fuel={ car.fuel_type } ppd={ car.price_per_day } ppm={ car.price_per_month } distance={ car.mileage } guarantee={ car.guarantee } overview={ car.overview } title={ car.title } year={ car.model_year } manual={ !!car?.manual } />
+            ) ) }
           </div>
         </div>
       </motion.section>
