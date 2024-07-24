@@ -10,6 +10,7 @@ const ManageCars = () => {
 
   const [ brandToBeEdited, setBrandToBeEdited ] = useState( null );
   const [ AddBrandPopupOpen, setAddBrandPopupOpen ] = useState( false );
+  const [ brandToBeDeleted, setBrandToBeDeleted ] = useState( null );
   const { brands } = useCars();
 
   useEffect( () => {
@@ -43,7 +44,7 @@ const ManageCars = () => {
                   <p className={ Styles[ "date" ] }>{ brand.date_uploaded }</p>
                   <p className={ Styles[ "actions" ] }>
                     <span className={ Styles[ "edit" ] } onClick={ () => setBrandToBeEdited( brand ) }>&#9998;</span>
-                    <span className={ Styles[ "del" ] }>&#128465;</span>
+                    <span className={ Styles[ "del" ] } onClick={ () => setBrandToBeDeleted( brand ) }>&#128465;</span>
                   </p>
                 </div>
               ) ) }
@@ -62,9 +63,14 @@ const ManageCars = () => {
             <AddBrand handleClose={ () => setBrandToBeEdited( null ) } type='edit' brand={ brandToBeEdited } />
           </Modal>
         ) }
+        { brandToBeDeleted && (
+          <Modal>
+            <AddBrand handleClose={ () => setBrandToBeDeleted( null ) } brand={ brandToBeDeleted } type={ "del" } />
+          </Modal>
+        ) }
       </AnimatePresence>
     </>
   );
 };
 
-export default ManageCars;
+export default ManageCars;;
