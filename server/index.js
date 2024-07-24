@@ -52,12 +52,15 @@ app.get( "/", ( _, res ) => res.send( "Hello, world!" ) );
 //   origin: "https://world-auto.vercel.app"
 // } ) );
 
-app.get( "/admin/cars", async ( req, res ) => {
+app.get( [ "/admin/cars", "/admin/cars/:id" ], async ( req, res ) => {
   try {
 
-    const { data, error } = await getData( {
-      table: "Cars"
-    } );
+    const id = req?.params?.id;
+    const query = { table: "Cars" };
+
+    if ( id ) query.where = { id };
+
+    const { data, error } = await getData( query );
 
     if ( data ) res.status( 200 ).json( { data } );
     else {

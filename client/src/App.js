@@ -8,6 +8,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import CarsProvider from "./Contexts/CarsContext";
 import ManageCars from "./Pages/ManageCars/ManageCars";
 import ManageBrands from "./Pages/ManageBrands/ManageBrands";
+import CarDetails from "./Pages/CarDetails/CarDetails";
 
 const App = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/" element={ <Header /> }>
               <Route loader index path="/" element={ <Home /> } />
               <Route path="about" element={ <About /> } />
+              <Route path="car/:id" element={ <CarDetails /> } />
             </Route>
           </Routes>
         </AnimatePresence>
