@@ -7,36 +7,14 @@ const bodyParser = require( "body-parser" );
 const cookieParser = require( "cookie-parser" );
 const { log } = console;
 const cors = require( "cors" );
+const bcrypt = require( "bcrypt" );
+
+// const ENV = require( "./env.json" );
+
 
 const { insertData, getData, updateData, deleteData } = require( "./Supabase" );
 
 
-
-// const AdminRouter = require( "./RouteHandlers/Admin" );
-
-
-// app.use( ( req, res, next ) => {
-//   const corsWhitelist = [
-//     'https://domain1.example',
-//     'https://domain2.example',
-//     'https://domain3.example'
-//   ];
-//   if ( corsWhitelist.indexOf( req.headers.origin ) !== -1 ) {
-//     res.header( 'Access-Control-Allow-Origin', req.headers.origin );
-//     res.header( 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept' );
-//   }
-//   res.head
-
-//   next();
-// } );
-
-
-// app.use( ( req, res, next ) => {
-
-//   res.setHeader( "Access-Control-Allow-Origin", "*" );
-//   next();
-
-// } );
 
 app.use( cors() );
 
@@ -52,10 +30,68 @@ app.get( "/", ( _, res ) => res.send( "Hello, world!" ) );
 //   origin: "https://world-auto.vercel.app"
 // } ) );
 
+app.post( "/admin", async ( req, res ) => {
+
+  try {
+
+    const data = req.body;
+    const user = data.user;
+
+    const Data = await getData( {
+      table: "admin",
+      where: {
+        user
+      }
+    } );
+
+    if ( !( Data && Data.data && Data.data.length ) ) {
+      res.status( 404 ).json( { error: Data.error || "No User" } );
+    }
+
+    if ( data?.pass && data?.change ) {
+
+      const result = await bcrypt.compare( data.pass, Data.data[ 0 ].pass );
+      console.log( result );
+
+      if ( result ) {
+
+        const Hash = await bcrypt.hash( data.pass, 10 );
+
+        await updateData( {
+          table: "admin",
+          where: {
+            user: user
+          },
+          object: {
+            pass: Hash
+          }
+        } );
+
+      }
+
+    } else if ( !data?.change ) {
+
+      const result = await bcrypt.compare( data.pass, Data.data[ 0 ].pass );
+
+      if ( result ) {
+        res.status( 200 ).json( { success: true } );
+      } else {
+        res.status( 401 ).json( { success: false } );
+      }
+
+    }
+
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).send( "Error: " + e );
+  }
+
+} );
+
 app.get( [ "/admin/cars", "/admin/cars/:id" ], async ( req, res ) => {
   try {
 
-    const id = req?.params?.id;
+    const id = req.params?.id;
     const query = { table: "Cars" };
 
     if ( id ) query.where = { id };
@@ -73,6 +109,8 @@ app.get( [ "/admin/cars", "/admin/cars/:id" ], async ( req, res ) => {
     res.status( 500 ).json( { error: e } );
   }
 } );
+
+
 
 app.post( "/admin/cars/new", async ( req, res ) => {
 

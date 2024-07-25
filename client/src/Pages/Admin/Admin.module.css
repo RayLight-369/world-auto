@@ -1,11 +1,11 @@
 section#admin {
   display: flex;
-  gap: 15px;
+  gap: 8px;
   align-items: center;
   background: #c7d2e2;
   width: 100vw;
   height: 100vh;
-  padding: 15px;
+  padding: 8px;
 }
 
 header#header {

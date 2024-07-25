@@ -3,7 +3,7 @@ div.container {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
 }
 
 div.page-content {
@@ -11,14 +11,14 @@ div.page-content {
   padding: 5px 35px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
   overflow: hidden;
 }
 
 div.details-container {
   display: flex;
   flex-direction: row;
-  gap: 25px;
+  gap: 20px;
 }
 
 div.details-container a {
@@ -26,7 +26,7 @@ div.details-container a {
 }
 
 div.container {
-  padding: 17px 19px;
+  padding: 16px 18px;
   border: 1px solid #bfbfbf;
   border-radius: 8px;
   display: flex;

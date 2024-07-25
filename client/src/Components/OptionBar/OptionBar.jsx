@@ -12,13 +12,14 @@ const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen } ) => {
   const optionBarVariants = {
     initial: {
       // transform: "translateX(calc(-50% + 57px)) scaleX(.1)",
+      // transform: "translateX(calc(-50% + 57px))",
+      // x: "calc(-50% + 57px)",
       width: "2.3rem",
       transition: {
         duration: .2,
       }
     },
     animate: {
-      // transform: "translateX(calc(-50% + 57px)) scaleX(1)",
       width: "55%",
       transition: {
         duration: .5,
@@ -39,12 +40,12 @@ const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen } ) => {
       bounce: .3
     } }
       // drag
-      // dragTransition={ { bounceStiffness: 600, bounceDamping: 10, min: 0, max: 0, } }
+      // dragTransition={ { bounceStiffness: 600, bounceDamping: 10, min: -0, max: 0, } }
       // dragConstraints={ {
-      //   top: -150,
+      //   top: -100,
       //   left: -150,
-      //   right: 150,
-      //   bottom: 150,
+      //   right: 0,
+      //   bottom: 100,
       // } }
       onClick={ () => {
         OpenOptionBar();

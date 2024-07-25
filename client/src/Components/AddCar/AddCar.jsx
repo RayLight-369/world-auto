@@ -48,7 +48,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
   const data = useMemo( () => [
     {
-      element: "Price / Day",
+      element: "Price / Day (USD)",
       class: "price-per-day",
       inputClass: "price-per-day-input",
       setState: setPricePerDay,
@@ -56,7 +56,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       type: "number"
     },
     {
-      element: "Price / Month",
+      element: "Price / Month (USD)",
       class: "price-per-month",
       inputClass: "price-per-month-input",
       setState: setPricePerMonth,
