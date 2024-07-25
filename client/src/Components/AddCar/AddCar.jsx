@@ -177,8 +177,8 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
     try {
 
-      const res = await fetch( type == "edit" ? API.EDIT_CAR : type != "del" ? API.NEW_CAR : API.DEL_CAR, {
-        method: type == "edit" ? "PUT" : type != "del" ? 'POST' : "DELETE",
+      const res = await fetch( type == "edit" ? API.EDIT_CAR : type == "new" ? API.NEW_CAR : API.DEL_CAR, {
+        method: type == "edit" ? "PUT" : type == "new" ? 'POST' : "DELETE",
         body: JSON.stringify( ReqData ),
         headers: {
           'Content-Type': 'application/json'
@@ -220,7 +220,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     <MotionConfig transition={ { type: "spring", damping: 7 } } >
       <div className={ styles[ "add-car" ] }>
         <div className={ styles[ "header" ] }>
-          <p className={ styles[ "title" ] }>{ type === "edit" ? "Edit Your Car" : "Add New Car" }</p>
+          <p className={ styles[ "title" ] }>{ type === "edit" ? "Edit Your Car" : type == "new" ? "Add New Car" : "Are You Sure?" }</p>
           <motion.button type='button' whileHover={ buttonWhileHovering( 1.2, .2 ) } className={ styles[ 'close' ] } onClick={ handleClose }>✖</motion.button>
         </div>
         {

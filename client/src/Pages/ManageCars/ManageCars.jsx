@@ -41,7 +41,7 @@ const ManageCars = () => {
               { cars?.length && cars.map( car => (
                 <div className={ `${ Styles[ "row" ] }` }>
                   <p className={ Styles[ "car-title" ] }>{ car.title }</p>
-                  <p className={ Styles[ "brand-title" ] }>{ brands?.find( brand => brand.id == car.brand ).brandName }</p>
+                  <p className={ Styles[ "brand-title" ] }>{ brands?.find( brand => brand.id == car.brand )?.brandName }</p>
                   <p className={ Styles[ "date" ] }>{ car.due_date }</p>
                   <p className={ Styles[ "actions" ] }>
                     <span className={ Styles[ "edit" ] } onClick={ () => setCarToBeEdited( car ) }>&#9998;</span>
@@ -66,7 +66,7 @@ const ManageCars = () => {
         ) }
         { carToBeDeleted && (
           <Modal handleClose={ () => setCarToBeDeleted( null ) }>
-            <AddCar handleClose={ () => setCarToBeDeleted( null ) } car={ carToBeEdited } type='del' />
+            <AddCar handleClose={ () => setCarToBeDeleted( null ) } car={ carToBeDeleted } type='del' />
           </Modal>
         ) }
       </AnimatePresence>

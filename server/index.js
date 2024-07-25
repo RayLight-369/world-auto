@@ -129,7 +129,7 @@ app.put( "/admin/cars/edit", async ( req, res ) => {
 
 } );
 
-app.put( "/admin/cars/delete", async ( req, res ) => {
+app.delete( "/admin/cars/delete", async ( req, res ) => {
 
   try {
 
