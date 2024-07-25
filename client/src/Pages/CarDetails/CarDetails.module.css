@@ -1,0 +1,67 @@
+.card {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 2em;
+  margin: 0;
+}
+
+.overview {
+  font-size: 1.2em;
+  color: #666;
+}
+
+.details {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.detailItem {
+  flex: 1 1 45%;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.value {
+  font-weight: normal;
+}
+
+.accessories {
+  margin-top: 20px;
+}
+
+.accessoriesTitle {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.accessoriesList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.accessoryItem {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px;
+}

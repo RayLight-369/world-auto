@@ -30,6 +30,7 @@ export const AdminLinks = [
 
 export const API = {
   GET_CARS: `https://world-auto-api.vercel.app/admin/cars`,
+  GET_CAR: ( id ) => `https://world-auto-api.vercel.app/admin/cars/${ id }`,
   NEW_CAR: `https://world-auto-api.vercel.app/admin/cars/new`,
   EDIT_CAR: `https://world-auto-api.vercel.app/admin/cars/edit`,
   DEL_CAR: `https://world-auto-api.vercel.app/admin/cars/delete`,

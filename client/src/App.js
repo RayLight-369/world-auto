@@ -22,9 +22,9 @@ const App = () => {
         <AnimatePresence mode="wait">
           <Routes location={ location } key={ location.pathname }>
             <Route path="/" element={ <Header /> }>
-              <Route loader index path="/" element={ <Home /> } />
+              <Route index path="/" element={ <Home /> } />
               <Route path="about" element={ <About /> } />
-              <Route path="car/:id" element={ <CarDetails /> } />
+              <Route path="/car/:id" element={ <CarDetails /> } />
             </Route>
           </Routes>
         </AnimatePresence>

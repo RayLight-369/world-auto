@@ -1,22 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './CarDetails.module.css';
-import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { API } from '../../Constants';
 
-
 const CarDetails = () => {
-
-  const [ params ] = useSearchParams();
+  const { id } = useParams();
+  const [ car, setCar ] = useState( null );
 
   useEffect( () => {
-    ( async () => {
+    console.log( id );
+    const fetchCar = async () => {
+      const res = await fetch( API.GET_CAR( id ) );
+      if ( res.ok ) {
+        const body = await res.json();
+        console.log( body?.data );
+        setCar( body.data[ 0 ] );
+      } else {
+        console.error( 'Failed to fetch car data' );
+      }
+    };
 
-      const id = params.get( "id" );
-      const res = await fetch( API.GET_CAR );
+    fetchCar();
+  }, [ id ] );
 
-
-    } )();
-  }, [ params ] );
+  if ( !car ) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={ styles.card }>
@@ -78,13 +87,13 @@ const CarDetails = () => {
           <span className={ styles.value }>{ car.gearbox }</span>
         </div>
         <div className={ styles.detailItem }>
-          <span className={ styles.label }>Due Date:</span>
+          <span className={ styles.label }>Uploaded Date:</span>
           <span className={ styles.value }>{ car.due_date }</span>
         </div>
         <div className={ styles.accessories }>
           <h2 className={ styles.accessoriesTitle }>Accessories:</h2>
           <ul className={ styles.accessoriesList }>
-            { car.accessories.map( ( acc, index ) => (
+            { car?.accessories?.map( ( acc, index ) => (
               <li key={ index } className={ styles.accessoryItem }>{ acc }</li>
             ) ) }
           </ul>
