@@ -1,11 +1,74 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from './CarDetails.module.css';
 import { useParams } from "react-router-dom";
 import { API } from '../../Constants';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation, Autoplay, Keyboard, Mousewheel, Scrollbar } from "swiper/modules";
+import { useCars } from '../../Contexts/CarsContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faSnowflake,      // Air Conditioner
+  faLock,           // Power Door Locks
+  faCar,            // AntiLock Braking System
+  faLifeRing,       // Brake Assist
+  faCog,            // Power Steering
+  faUser,           // Driver Airbag
+  faUserFriends,    // Passenger Airbag
+  faWindowRestore,  // Power Windows
+  faCompactDisc,    // CD Player
+  faLockOpen,       // Central Locking
+  faCarCrash,       // Crash Sensor
+  faCouch,
+  faCamera          // Rear View Camera
+} from '@fortawesome/free-solid-svg-icons';
+
+import { faBluetooth } from "@fortawesome/free-brands-svg-icons";
+
+import "swiper/css";
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
+
+
 
 const CarDetails = () => {
   const { id } = useParams();
   const [ car, setCar ] = useState( null );
+  const { brands } = useCars();
+  const [ properties, setProperties ] = useState( {} );
+  const PROPERTIES = useMemo( () => ( {
+    "brand": "Brand",
+    "certificate": "Certificate",
+    "color": "Color",
+    "due_date": "Uploaded Date",
+    "emission": "Emission",
+    "energy": "Energy",
+    "fuel_type": "Fuel Type",
+    "gearbox": "Gearbox",
+    "guarantee": "Guarantee",
+    "mileage": "Mileage",
+    "model_year": "Model Year",
+    "price_per_day": "Price Per Day",
+    "price_per_month": "Price Per Month",
+    "seating_capacity": "Seating Capacity"
+  } ), [] );
+
+  const ICONS_FOR_ACCESSORIES = useMemo( () => ( {
+    "Air Conditioner": faSnowflake,
+    "Power Door Locks": faLock,
+    "AntiLock Braking System": faCar,
+    "Brake Assist": faLifeRing,
+    "Power Steering": faCog,
+    "Driver Airbag": faUser,
+    "Passenger Airbag": faUserFriends,
+    "Power Windows": faWindowRestore,
+    "CD Player": faCompactDisc,
+    "Central Locking": faLockOpen,
+    "Crash Sensor": faCarCrash,
+    "Leather Seats": faCouch,
+    "Bluetooth": faBluetooth,
+    "Rear View Camera": faCamera
+  } ), [] );
 
   useEffect( () => {
     console.log( id );
@@ -13,8 +76,16 @@ const CarDetails = () => {
       const res = await fetch( API.GET_CAR( id ) );
       if ( res.ok ) {
         const body = await res.json();
-        console.log( body?.data );
+        console.log( body?.data[ 0 ] );
+
+        if ( body?.data?.length ) body.data[ 0 ].brand = brands.find( brand => brand.id == body.data[ 0 ].brand )?.brandName;
+
+        const { title, overview, id, accessories, ...rest } = body.data[ 0 ];
+
+        setProperties( rest );
+
         setCar( body.data[ 0 ] );
+
       } else {
         console.error( 'Failed to fetch car data' );
       }
@@ -28,85 +99,57 @@ const CarDetails = () => {
   }
 
   return (
-    <div className={ styles.container }>
-      <div className={ styles.card }>
-        <div className={ styles.header }>
-          <h1 className={ styles.title }>{ car.title }</h1>
-          <p className={ styles.overview }>{ car.overview }</p>
+    <section id={ styles[ 'car-details' ] }>
+      <div className={ styles[ "img-carousal" ] }>
+        {/* <Swiper
+          modules={ [ Navigation, Pagination, Scrollbar, Keyboard, Mousewheel, Autoplay ] }
+          navigation
+          pagination={ { clickable: true, type: "fraction" } }
+          scrollbar={ { draggable: true } }
+          autoplay={ { delay: 3000 } }
+          spaceBetween={ 50 }
+          slidesPerView={ 3 }
+        >
+          <SwiperSlide>1</SwiperSlide>
+          <SwiperSlide>2</SwiperSlide>
+          <SwiperSlide>3</SwiperSlide>
+          <SwiperSlide>4</SwiperSlide>
+          <SwiperSlide>5</SwiperSlide>
+          <SwiperSlide>6</SwiperSlide>
+        </Swiper> */}
+      </div>
+      <div className={ styles[ "content" ] }>
+        <div className={ styles[ "title-price" ] }>
+          <h1>{ car.title }</h1>
+          <h1>{ car.price_per_day } USD / Day</h1>
         </div>
-        <div className={ styles.mainContent }>
-          <div className={ styles.imageSection }>
-            <img src={ car.image } alt={ car.title } className={ styles.carImage } />
-          </div>
-          <div className={ styles.detailsSection }>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Brand:</span>
-              <span className={ styles.value }>{ car.brand }</span>
-            </div>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Fuel Type:</span>
-              <span className={ styles.value }>{ car.fuel_type }</span>
-            </div>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Price Per Day:</span>
-              <span className={ styles.value }>${ car.price_per_day }</span>
-            </div>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Price Per Month:</span>
-              <span className={ styles.value }>${ car.price_per_month }</span>
-            </div>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Mileage:</span>
-              <span className={ styles.value }>{ car.mileage } km</span>
-            </div>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Energy:</span>
-              <span className={ styles.value }>{ car.energy }</span>
-            </div>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Guarantee:</span>
-              <span className={ styles.value }>{ car.guarantee }</span>
-            </div>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Color:</span>
-              <span className={ styles.value }>{ car.color }</span>
-            </div>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Certificate:</span>
-              <span className={ styles.value }>{ car.certificate }</span>
-            </div>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Emission:</span>
-              <span className={ styles.value }>{ car.emission }</span>
-            </div>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Model Year:</span>
-              <span className={ styles.value }>{ car.model_year }</span>
-            </div>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Seating Capacity:</span>
-              <span className={ styles.value }>{ car.seating_capacity }</span>
-            </div>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Gearbox:</span>
-              <span className={ styles.value }>{ car.gearbox }</span>
-            </div>
-            <div className={ styles.detailItem }>
-              <span className={ styles.label }>Due Date:</span>
-              <span className={ styles.value }>{ car.due_date }</span>
-            </div>
-          </div>
-        </div>
-        <div className={ styles.accessoriesSection }>
-          <h2 className={ styles.accessoriesTitle }>Accessories:</h2>
-          <ul className={ styles.accessoriesList }>
-            { car?.accessories?.map( ( acc, index ) => (
-              <li key={ index } className={ styles.accessoryItem }>{ acc }</li>
+        <div className={ styles[ "parent" ] }>
+          <h1 className={ styles[ 'title' ] }>Details</h1>
+          <div className={ styles[ "details" ] }>
+            { Object.entries( properties ).map( ( [ key, val ] ) => (
+              <div className={ styles[ "property" ] } key={ key }>
+                <p className={ styles[ "key" ] }>{ PROPERTIES[ key ] }</p>
+                <p className={ styles[ "value" ] }>{ val }</p>
+              </div>
             ) ) }
-          </ul>
+          </div>
+        </div>
+        <div className={ styles[ "parent" ] }>
+          <h1 className={ styles[ 'title' ] }>Accessories / Features Available</h1>
+          <div className={ styles[ "accessories" ] }>
+            { car?.accessories.map( ( val, i ) => (
+              <div className={ styles[ "accessory" ] } key={ i }>
+                <FontAwesomeIcon icon={ ICONS_FOR_ACCESSORIES[ val ] } />
+                <p className={ styles[ "value" ] }>
+                  { val }
+                </p>
+              </div>
+            ) ) }
+          </div>
         </div>
       </div>
-    </div>
+
+    </section>
   );
 };
 

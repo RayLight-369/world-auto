@@ -40,7 +40,7 @@ const Home = () => {
         <div className={ Styles[ "content" ] }>
           <div className={ Styles[ "list" ] }>
             { cars.length && cars.map( ( car, i ) => (
-              <Card key={ car.id } fuel={ car.fuel_type } ppd={ car.price_per_day } ppm={ car.price_per_month } distance={ car.mileage } guarantee={ car.guarantee } overview={ car.overview } title={ car.title } year={ car.model_year } manual={ !!car?.manual } />
+              <Card key={ car.id } id={ car.id } fuel={ car.fuel_type } ppd={ car.price_per_day } ppm={ car.price_per_month } distance={ car.mileage } guarantee={ car.guarantee } overview={ car.overview } title={ car.title } year={ car.model_year } manual={ !!car?.manual } />
             ) ) }
           </div>
         </div>

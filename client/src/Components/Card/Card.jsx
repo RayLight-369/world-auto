@@ -1,12 +1,13 @@
 import React, { memo } from 'react';
 import Styles from "./Card.module.css";
+import { Link } from 'react-router-dom';
 
 export const BreakSpan = memo( () => <span className={ Styles[ 'break' ] }>|</span> );
 
-const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guarantee } ) => {
+const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guarantee, id } ) => {
   return (
     <div className={ Styles[ "card" ] }>
-      <a href="">
+      <Link to={ `/car/${ id }` }>
         <div className={ Styles[ "thumbnail" ] }>
           <img src="/Imgs/ad.jpg" alt="" />
           <div className={ Styles[ "price-notch" ] }>
@@ -34,7 +35,7 @@ const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guaran
             </div>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 };

@@ -53,12 +53,18 @@
 
 /* ::placeholder {
   font-size: 0.9em;
-} */
+
+  } */
+
+:root {
+  --primary-blue: #024BA5;
+}
 
 body {
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
+
 }
 
 ::-webkit-scrollbar {
