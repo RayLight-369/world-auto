@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import DropDown from '../DropDown/DropDown';
 import { useCars } from '../../Contexts/CarsContext';
 import { API } from '../../Constants';
+import { BreakSpan } from '../Card/Card';
 
 
 const AddCar = ( { handleClose, type = "new", car } ) => {
@@ -32,7 +33,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
   const [ fuelDropdown, toggleFuelDropdown ] = useState( false );
   const [ brandDropdown, toggleBrandDropdown ] = useState( false );
 
-  const access = [ "Air Conditioner", "Power Door Locks", "AntiLock Braking System", "Brake Assist", "Power Steering", "Driver Airbag", "Passenger Airbag", "Power Windows", "CD Player", "Central Locking", "Crash Sensor", "Leather Seats" ];
+  const Accessories = useMemo( () => [ "Air Conditioner", "Power Door Locks", "AntiLock Braking System", "Brake Assist", "Power Steering", "Driver Airbag", "Passenger Airbag", "Power Windows", "CD Player", "Central Locking", "Crash Sensor", "Leather Seats", "Bluetooth", "Rear View Camera" ], [] );
 
   // <div className={ styles[ "price-per-day" ] }>
   //   <label htmlFor="price-per-day">Price Per Day:</label>
@@ -171,7 +172,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     };
 
 
-    if ( !carTitle.trim().length ) return;
+    if ( !carTitle.trim().length ) return setAdding( false );
 
     if ( type === "edit" || type == "del" ) ReqData.id = car.id;
 
@@ -216,6 +217,12 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
   }
 
+  useEffect( () => {
+
+    console.log( accessories );
+
+  }, [ accessories ] );
+
   return (
     <MotionConfig transition={ { type: "spring", damping: 7 } } >
       <div className={ styles[ "add-car" ] }>
@@ -246,6 +253,30 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
                   </div>
 
                 ) ) }
+
+                <div className={ styles[ "accessories" ] }>
+                  <label htmlFor="accessories">Accessories:</label>
+                  <div className={ styles[ "content" ] }>
+                    { Accessories.map( ( a, i ) => (
+                      <div className={ styles[ "accessory" ] }>
+                        <label htmlFor={ a.split( " " )[ 0 ] }>{ a }</label>
+                        <input type="checkbox" name={ a.split( " " )[ 0 ] } id={ a.split( " " )[ 0 ] } checked={ accessories.includes( a ) } onChange={ e => {
+                          if ( e.target.checked ) {
+                            setAccessories( prev => [ ...prev, a ] );
+                          } else {
+                            setAccessories( prev => {
+                              if ( prev.includes( a ) ) {
+                                return prev.filter( p => p !== a );
+                              }
+                            } );
+                          }
+
+                        } } />
+                        {/* <BreakSpan /> */ }
+                      </div>
+                    ) ) }
+                  </div>
+                </div>
 
               </div>
             </>

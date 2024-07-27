@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import Styles from "./Card.module.css";
 
-const BreakSpan = memo( () => <span className={ Styles[ 'break' ] }>|</span> );
+export const BreakSpan = memo( () => <span className={ Styles[ 'break' ] }>|</span> );
 
 const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guarantee } ) => {
   return (

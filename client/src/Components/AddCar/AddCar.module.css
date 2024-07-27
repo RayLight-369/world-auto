@@ -129,13 +129,13 @@ div.infos > div {
   align-items: center;
 }
 
-div.infos > div > label {
+div.infos > div label {
   font-size: .84rem;
   font-family: AbeeZee;
   color: #161616;
 }
 
-div.infos > div > input {
+div.infos > div input {
   font-family: AbeeZee;
   border: none;
   outline: none;
@@ -146,4 +146,31 @@ div.infos > div > input {
   font-size: .805rem;
   color: #025883;
   padding: 0 14px;
+}
+
+div.accessories {
+  /* display: flex; */
+  flex-direction: column;
+  align-items: flex-start !important;
+  position: relative;
+  top: 20px;
+
+  > label {
+    font-size: 1rem !important;
+    font-weight: bold;
+  }
+
+}
+
+div.content {
+  /* background: #666; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: calc(60vw - 50px);
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
 }
