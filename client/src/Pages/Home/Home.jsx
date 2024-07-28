@@ -36,6 +36,9 @@ const Home = () => {
       <motion.section className={ Styles[ "body" ] } variants={ variants }>
         <div className={ Styles[ "filters-part" ] }>
           <p>Filter your Search Criteria</p>
+          <div className={ Styles[ "filters-container" ] }>
+
+          </div>
         </div>
         <div className={ Styles[ "content" ] }>
           <div className={ Styles[ "list" ] }>

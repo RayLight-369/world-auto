@@ -63,17 +63,28 @@ div.content {
       display: grid;
       width: 100%;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px 150px;
+      gap: 10px 150px;
+      padding: 4px 10px;
+      box-shadow: 0 0 10px #00000015;
 
       div.property {
         display: flex;
+        align-items: center;
         justify-content: space-between;
         position: relative;
+        padding: 7px 12px;
+        /* border: 1px solid #a9e0fc; */
+        /* border-radius: 8px; */
+
+        &:not(:last-child) {
+          border-bottom: 1px solid #ddd;
+        }
 
         p {
           font-size: .97em;
           color: #111;
           font-weight: bold;
+          white-space: nowrap;
         }
 
         p.value {
@@ -88,25 +99,40 @@ div.content {
     div.accessories {
       display: grid;
       width: 100%;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      grid-template-columns: repeat(5, minmax(220px, 1fr));
+
       /* justify-items: center; */
-      gap: 30px 150px;
+      gap: 30px;
     }
 
     div.accessory {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      /* flex-direction: column; */
+      /* justify-content: center; */
+      align-items: center;
       padding: 20px 24px;
       border-radius: 8px;
       /* background-color: #eee; */
       box-shadow: 0 0 10px #00000025;
       align-items: center;
-      gap: 10px;
+      gap: 20px;
       position: relative;
+      transition: 150ms;
+      cursor: default;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+
+      .a-icon {
+        font-size: 1.5em;
+      }
 
       p {
         color: #1e1e1e;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       p.value {
@@ -120,9 +146,11 @@ div.content {
 }
 
 .img-carousal {
-  height: 300px;
+  height: 350px;
   overflow: hidden;
+  background: #111;
   color: white !important;
+  border-radius: 10px;
 }
 
 img.img {
@@ -131,4 +159,5 @@ img.img {
   max-height: 300px;
   height: auto;
   width: auto;
+  border-radius: 8px;
 }
