@@ -33,7 +33,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
   const [ fuelDropdown, toggleFuelDropdown ] = useState( false );
   const [ brandDropdown, toggleBrandDropdown ] = useState( false );
 
-  const Accessories = useMemo( () => [ "Air Conditioner", "Power Door Locks", "AntiLock Braking System", "Brake Assist", "Power Steering", "Driver Airbag", "Passenger Airbag", "Power Windows", "CD Player", "Central Locking", "Crash Sensor", "Leather Seats", "Bluetooth", "Rear View Camera" ], [] );
+  const Accessories = useMemo( () => [ "Air Conditioner", "Power Door Locks", "AntiLock Braking System", "Brake Assist", "Power Steering", "Driver Airbag", "Passenger Airbag", "Power Windows", "CD Player", "Central Locking", "Crash Sensor", "Leather Seats", "Bluetooth", "Rear View Camera", "Automatic" ], [] );
 
   // <div className={ styles[ "price-per-day" ] }>
   //   <label htmlFor="price-per-day">Price Per Day:</label>

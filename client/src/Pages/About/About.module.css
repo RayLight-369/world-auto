@@ -7,7 +7,7 @@ section#about {
 div.banner {
   width: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
-    url(http://localhost:3000/static/media/about-bg.292d7864425b58905097.jpg);
+    url(../../../public/Imgs/about-bg.jpg);
   padding: 60px 15px;
   background-position: center;
   display: flex;

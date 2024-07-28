@@ -4,7 +4,10 @@ section#car-details {
   height: 100%;
   position: relative;
   top: 80px;
-  padding: 10px 40px;
+  padding: 10px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
 }
 
 div.content {
@@ -32,16 +35,34 @@ div.content {
     }
   }
 
+  div.overview {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+    top: -25px;
+
+    h1 {
+      color: var(--primary-blue);
+    }
+  }
+
   div.parent {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 35px;
+    position: relative;
+    top: -20px;
+
+    h1 {
+      color: var(--primary-blue);
+    }
 
     div.details {
       display: grid;
       width: 100%;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px 150px;
 
       div.property {
@@ -49,8 +70,17 @@ div.content {
         justify-content: space-between;
         position: relative;
 
-        p.key {
+        p {
+          font-size: .97em;
+          color: #111;
           font-weight: bold;
+        }
+
+        p.value {
+          padding: 3.5px 10px;
+          border-radius: 3px;
+          background: var(--bg-light-blue);
+          color: var(--primary-blue);
         }
       }
     }
@@ -59,7 +89,7 @@ div.content {
       display: grid;
       width: 100%;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      justify-items: center;
+      /* justify-items: center; */
       gap: 30px 150px;
     }
 
@@ -75,6 +105,10 @@ div.content {
       gap: 10px;
       position: relative;
 
+      p {
+        color: #1e1e1e;
+      }
+
       p.value {
         font-weight: bold;
         font-size: 1em;
@@ -83,4 +117,18 @@ div.content {
 
   }
 
+}
+
+.img-carousal {
+  height: 300px;
+  overflow: hidden;
+  color: white !important;
+}
+
+img.img {
+  /* object-fit: contain; */
+  max-width: 100%;
+  max-height: 300px;
+  height: auto;
+  width: auto;
 }

@@ -3,7 +3,7 @@ import styles from './CarDetails.module.css';
 import { useParams } from "react-router-dom";
 import { API } from '../../Constants';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation, Autoplay, Keyboard, Mousewheel, Scrollbar } from "swiper/modules";
+import { Pagination, Navigation, Autoplay, Keyboard, Mousewheel, Scrollbar, Zoom } from "swiper/modules";
 import { useCars } from '../../Contexts/CarsContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -19,7 +19,8 @@ import {
   faLockOpen,       // Central Locking
   faCarCrash,       // Crash Sensor
   faCouch,
-  faCamera          // Rear View Camera
+  faCamera,          // Rear View Camera
+  faAutomobile
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faBluetooth } from "@fortawesome/free-brands-svg-icons";
@@ -28,6 +29,7 @@ import "swiper/css";
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
+import 'swiper/css/zoom';
 
 
 
@@ -67,7 +69,8 @@ const CarDetails = () => {
     "Crash Sensor": faCarCrash,
     "Leather Seats": faCouch,
     "Bluetooth": faBluetooth,
-    "Rear View Camera": faCamera
+    "Rear View Camera": faCamera,
+    "Automatic": faAutomobile
   } ), [] );
 
   useEffect( () => {
@@ -80,7 +83,7 @@ const CarDetails = () => {
 
         if ( body?.data?.length ) body.data[ 0 ].brand = brands.find( brand => brand.id == body.data[ 0 ].brand )?.brandName;
 
-        const { title, overview, id, accessories, ...rest } = body.data[ 0 ];
+        const { title, price_per_day, overview, id, accessories, ...rest } = body.data[ 0 ];
 
         setProperties( rest );
 
@@ -91,37 +94,45 @@ const CarDetails = () => {
       }
     };
 
-    fetchCar();
-  }, [ id ] );
+    if ( brands.length ) {
+      fetchCar();
+    }
 
-  if ( !car ) {
+  }, [ id, brands ] );
+
+  if ( !car || !brands.length ) {
     return <div>Loading...</div>;
   }
 
   return (
     <section id={ styles[ 'car-details' ] }>
       <div className={ styles[ "img-carousal" ] }>
-        {/* <Swiper
-          modules={ [ Navigation, Pagination, Scrollbar, Keyboard, Mousewheel, Autoplay ] }
+        <Swiper
+          modules={ [ Navigation, Zoom, Pagination, Scrollbar, Keyboard, Mousewheel, Autoplay ] }
           navigation
+          zoom
           pagination={ { clickable: true, type: "fraction" } }
           scrollbar={ { draggable: true } }
-          autoplay={ { delay: 3000 } }
-          spaceBetween={ 50 }
-          slidesPerView={ 3 }
+          autoplay={ { delay: 3000, pauseOnMouseEnter: true, disableOnInteraction: false } }
+          spaceBetween={ 25 }
+          slidesPerView={ 1 }
+          className={ styles[ 'img-carousal' ] }
         >
-          <SwiperSlide>1</SwiperSlide>
-          <SwiperSlide>2</SwiperSlide>
-          <SwiperSlide>3</SwiperSlide>
-          <SwiperSlide>4</SwiperSlide>
-          <SwiperSlide>5</SwiperSlide>
-          <SwiperSlide>6</SwiperSlide>
-        </Swiper> */}
+          { [ "https://images.axios.com/5peu2TwvaEoYR4Z11TH1tcljN0M=/266x0:1706x1080/1600x1200/2019/12/13/1576253700586.jpg", "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&height=900&width=1600&fit=bounds", "https://hips.hearstapps.com/hmg-prod/images/pop-index-2020-chevrolet-corvette-c8-102-1571146873.jpg?crop=1.00xw:0.502xh;0,0.370xh&resize=1200:*", "https://www.wjhl.com/wp-content/uploads/sites/98/2021/09/Chevy-Corvette.jpg?w=1280" ].map( ( i, k ) => (
+            <SwiperSlide zoom>
+              <img className={ styles[ 'img' ] } src={ i } alt="" key={ k } />
+            </SwiperSlide>
+          ) ) }
+        </Swiper>
       </div>
       <div className={ styles[ "content" ] }>
         <div className={ styles[ "title-price" ] }>
           <h1>{ car.title }</h1>
           <h1>{ car.price_per_day } USD / Day</h1>
+        </div>
+        <div className={ styles[ "overview" ] }>
+          <h1 className={ styles[ 'title' ] }>Overview</h1>
+          <p className={ styles[ "content" ] }>{ car.overview }</p>
         </div>
         <div className={ styles[ "parent" ] }>
           <h1 className={ styles[ 'title' ] }>Details</h1>
@@ -129,7 +140,7 @@ const CarDetails = () => {
             { Object.entries( properties ).map( ( [ key, val ] ) => (
               <div className={ styles[ "property" ] } key={ key }>
                 <p className={ styles[ "key" ] }>{ PROPERTIES[ key ] }</p>
-                <p className={ styles[ "value" ] }>{ val }</p>
+                <p className={ styles[ "value" ] }>{ val } { key.includes( "price" ) && "USD" } </p>
               </div>
             ) ) }
           </div>

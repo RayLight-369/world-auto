@@ -58,6 +58,9 @@
 
 :root {
   --primary-blue: #024BA5;
+  --soft-blue: #025883;
+  --bg-blue: #e9f1ff;
+  --bg-light-blue: #eff5ff;
 }
 
 body {
