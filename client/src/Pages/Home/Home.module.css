@@ -60,7 +60,7 @@ div.filters-part {
     display: flex;
     height: calc(100vh - 25px);
     overflow-y: auto;
-    padding-right: 7px;
+    padding: 0 7px;
     position: sticky;
     top: 25px;
     flex-direction: column;
@@ -85,7 +85,11 @@ div.brand-filter {
     max-height: 180px;
   }
 
-  > p.title {
+  &.open > div.title > p.indicator {
+    transform: rotateZ(90deg);
+  }
+
+  > div.title {
     align-items: center;
     border-bottom: 1px solid #f5f5f5;
     cursor: pointer;
@@ -95,6 +99,11 @@ div.brand-filter {
     height: 50px;
     justify-content: space-between;
     text-transform: uppercase;
+
+    p.indicator {
+      font-size: 1.2em;
+      transition: 150ms;
+    }
   }
 
   > div.brands-container {

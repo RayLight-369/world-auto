@@ -39,7 +39,10 @@ const Home = () => {
           <p>Filter your Search Criteria</p>
           <div className={ Styles[ "filters-container" ] }>
             <div className={ `${ Styles[ "brand-filter" ] } ${ brandFilterOpen && Styles[ "open" ] }` } onClick={ () => setBrandFilterOpen( prev => !prev ) }>
-              <p className={ Styles[ "title" ] }>BRAND</p>
+              <div className={ Styles[ "title" ] }>
+                <p className={ Styles[ "name" ] }>BRAND</p>
+                <p className={ Styles[ "indicator" ] }>{ ">" }</p>
+              </div>
               <div className={ `${ Styles[ "brands-container" ] } ${ brandFilterOpen && Styles[ "open" ] }` }>
                 { brands?.map( ( b, i ) => (
                   <div className={ Styles[ "brand" ] } key={ i } onClick={ e => e.stopPropagation() }>
