@@ -89,7 +89,7 @@ const About = () => {
         </p>
       </motion.div>
       <motion.div className={ Styles[ "reviews" ] } variants={ variants }>
-        <h1>Reviews</h1>
+        <h1>Reviews From Google</h1>
         <div className={ Styles[ "reviews-container" ] }>
           { reviews.map( ( review, i ) => (
             <a href={ review.link }>
