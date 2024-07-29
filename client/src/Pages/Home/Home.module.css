@@ -52,16 +52,75 @@ div.filters-part {
   flex-direction: column;
   gap: 25px;
   /* justify-content: center; */
-  align-items: center;
+  /* align-items: center; */
   font-family: Galano;
   font-size: 20px;
+
+  div.filters-container {
+    display: flex;
+    height: calc(100vh - 25px);
+    overflow-y: auto;
+    padding-right: 7px;
+    position: sticky;
+    top: 25px;
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
-div.filters-part p {
+div.filters-part > p {
   font-size: 20px;
   margin-bottom: 0;
   margin-left: 15px;
   margin-top: 25px;
+}
+
+div.brand-filter {
+  /* background: #888; */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &.open > .brands-container {
+    max-height: 180px;
+  }
+
+  > p.title {
+    align-items: center;
+    border-bottom: 1px solid #f5f5f5;
+    cursor: pointer;
+    display: flex;
+    font-family: Galano, sans-serif;
+    font-size: 15px;
+    height: 50px;
+    justify-content: space-between;
+    text-transform: uppercase;
+  }
+
+  > div.brands-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 0;
+    overflow: auto;
+    transition: .2s ease-in-out;
+
+    > div {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      justify-content: space-between;
+
+      p.brand-name {
+        font-size: .75em;
+        width: 100%;
+      }
+
+      input {
+        accent-color: var(--soft-blue);
+      }
+    }
+  }
 }
 
 div.content {

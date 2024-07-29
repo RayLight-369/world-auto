@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Styles from "./Home.module.css";
 import Card from '../../Components/Card/Card';
 import CreateAlert from '../../Components/CreateAlert/CreateAlert';
@@ -7,7 +7,8 @@ import { useCars } from '../../Contexts/CarsContext';
 
 const Home = () => {
 
-  const { cars } = useCars();
+  const { cars, brands } = useCars();
+  const [ brandFilterOpen, setBrandFilterOpen ] = useState( false );
 
   const variants = {
     hidden: {
@@ -37,10 +38,21 @@ const Home = () => {
         <div className={ Styles[ "filters-part" ] }>
           <p>Filter your Search Criteria</p>
           <div className={ Styles[ "filters-container" ] }>
-
+            <div className={ `${ Styles[ "brand-filter" ] } ${ brandFilterOpen && Styles[ "open" ] }` } onClick={ () => setBrandFilterOpen( prev => !prev ) }>
+              <p className={ Styles[ "title" ] }>BRAND</p>
+              <div className={ `${ Styles[ "brands-container" ] } ${ brandFilterOpen && Styles[ "open" ] }` }>
+                { brands?.map( ( b, i ) => (
+                  <div className={ Styles[ "brand" ] } key={ i } onClick={ e => e.stopPropagation() }>
+                    <p className={ Styles[ "brand-name" ] }>{ b.brandName }</p>
+                    <input type="checkbox" />
+                  </div>
+                ) ) }
+              </div>
+            </div>
           </div>
         </div>
         <div className={ Styles[ "content" ] }>
+          <p className={ Styles[ "results" ] }>{ cars?.length } Cars match your search</p>
           <div className={ Styles[ "list" ] }>
             { cars.length && cars.map( ( car, i ) => (
               <Card key={ car.id } id={ car.id } fuel={ car.fuel_type } ppd={ car.price_per_day } ppm={ car.price_per_month } distance={ car.mileage } guarantee={ car.guarantee } overview={ car.overview } title={ car.title } year={ car.model_year } manual={ car?.accessories.includes( "Automatic" ) } />

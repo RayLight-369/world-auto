@@ -19,7 +19,7 @@ const Header = () => {
             ) ) }
           </div>
           <div className={ Styles[ "user-info" ] }>
-            <NavLink to={ "/" } className={ Styles[ "tel" ] }>01 86 95 04 14</NavLink>
+            <NavLink to={ "tel:+33186950414" } className={ Styles[ "tel" ] }>01 86 95 04 14</NavLink>
             <NavLink to={ "/" } id={ Styles[ 'reg-btn' ] } className={ Styles[ "register" ] }>Sign up</NavLink>
           </div>
         </nav>
