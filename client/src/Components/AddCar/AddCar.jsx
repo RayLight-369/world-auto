@@ -70,7 +70,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       inputClass: "mileage-input",
       setState: setMilage,
       value: mileage,
-      type: "text"
+      type: "number"
     },
     {
       element: "Energy",

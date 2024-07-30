@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import Styles from "./Home.module.css";
 import Card from '../../Components/Card/Card';
 import CreateAlert from '../../Components/CreateAlert/CreateAlert';
@@ -8,7 +8,34 @@ import { useCars } from '../../Contexts/CarsContext';
 const Home = () => {
 
   const { cars, brands } = useCars();
+  const [ Cars, setCars ] = useState( cars );
   const [ brandFilterOpen, setBrandFilterOpen ] = useState( false );
+
+  const [ filtersState, filterDistpatch ] = useReducer( ( state, action ) => {
+    switch ( action.type ) {
+      case "brand": case "brands": {
+
+        const Brands = state.Brands;
+
+        if ( action.action == "add" && !Brands.includes( action.brand ) ) {
+
+          Brands.push( action.brand );
+
+        } else if ( action.action == "remove" && Brands.includes( action.brand ) ) {
+
+          const index = Brands.indexOf( action.brand );
+
+          Brands.splice( index, 1 );
+
+        }
+
+        return ( { ...state, Brands } );
+
+      }
+    }
+  }, {
+    Brands: [],
+  } );
 
   const variants = {
     hidden: {
@@ -24,6 +51,22 @@ const Home = () => {
       y: 5
     }
   };
+
+
+  useEffect( () => {
+    console.log( filtersState );
+    const { Brands } = filtersState;
+
+    console.log( "Brands: ", Brands );
+    console.log( "Cars: ", Cars );
+    console.log( "cars: ", cars );
+
+    if ( Brands.length > 0 )
+      setCars( cars.filter( car => Brands.includes( car.brand ) ) );
+    else
+      setCars( cars );
+
+  }, [ filtersState ] );
 
   return (
     <motion.section id={ Styles[ "home" ] } variants={ variants } initial="hidden" animate="animate" exit="exit">
@@ -47,7 +90,21 @@ const Home = () => {
                 { brands?.map( ( b, i ) => (
                   <div className={ Styles[ "brand" ] } key={ i } onClick={ e => e.stopPropagation() }>
                     <p className={ Styles[ "brand-name" ] }>{ b.brandName }</p>
-                    <input type="checkbox" />
+                    <input type="checkbox" onChange={ e => {
+                      if ( e.target.checked ) {
+                        filterDistpatch( {
+                          type: "brand",
+                          action: "add",
+                          brand: b.id
+                        } );
+                      } else {
+                        filterDistpatch( {
+                          type: "brand",
+                          action: "remove",
+                          brand: b.id
+                        } );
+                      }
+                    } } />
                   </div>
                 ) ) }
               </div>
@@ -55,9 +112,9 @@ const Home = () => {
           </div>
         </div>
         <div className={ Styles[ "content" ] }>
-          <p className={ Styles[ "results" ] }>{ cars?.length } Cars match your search</p>
+          <p className={ Styles[ "results" ] }>{ Cars?.length } Cars match your search</p>
           <div className={ Styles[ "list" ] }>
-            { cars.length && cars.map( ( car, i ) => (
+            { Cars.length && Cars.map( ( car, i ) => (
               <Card key={ car.id } id={ car.id } fuel={ car.fuel_type } ppd={ car.price_per_day } ppm={ car.price_per_month } distance={ car.mileage } guarantee={ car.guarantee } overview={ car.overview } title={ car.title } year={ car.model_year } manual={ car?.accessories.includes( "Automatic" ) } />
             ) ) }
           </div>
