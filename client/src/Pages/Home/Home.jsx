@@ -11,6 +11,12 @@ const Home = () => {
   const [ Cars, setCars ] = useState( cars );
   const [ brandFilterOpen, setBrandFilterOpen ] = useState( false );
 
+  useEffect( () => {
+
+    if ( cars.length && !Cars?.length ) setCars( cars );
+
+  }, [ cars ] );
+
   const [ filtersState, filterDistpatch ] = useReducer( ( state, action ) => {
     switch ( action.type ) {
       case "brand": case "brands": {
@@ -68,6 +74,7 @@ const Home = () => {
 
 
   }, [ filtersState ] );
+
 
   return (
     <motion.section id={ Styles[ "home" ] } variants={ variants } initial="hidden" animate="animate" exit="exit">
