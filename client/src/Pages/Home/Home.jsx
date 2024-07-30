@@ -10,6 +10,7 @@ const Home = () => {
   const { cars, brands } = useCars();
   const [ Cars, setCars ] = useState( cars );
   const [ brandFilterOpen, setBrandFilterOpen ] = useState( false );
+  const [ priceFilterOpen, setPriceFilterOpen ] = useState( false );
 
   useEffect( () => {
 
@@ -95,6 +96,28 @@ const Home = () => {
                 <p className={ Styles[ "indicator" ] }>{ ">" }</p>
               </div>
               <div className={ `${ Styles[ "brands-container" ] } ${ brandFilterOpen && Styles[ "open" ] }` }>
+                { brands?.map( ( b, i ) => (
+                  <div className={ Styles[ "brand" ] } key={ i } onClick={ e => e.stopPropagation() }>
+                    <p className={ Styles[ "brand-name" ] }>{ b.brandName }</p>
+                    <input type="checkbox" onChange={ e => {
+                      if ( e.target.checked ) {
+                        filterDistpatch( {
+                          type: "brand",
+                          action: "add",
+                          brand: b.id
+                        } );
+                      } else {
+                        filterDistpatch( {
+                          type: "brand",
+                          action: "remove",
+                          brand: b.id
+                        } );
+                      }
+                    } } />
+                  </div>
+                ) ) }
+              </div>
+              <div className={ `${ Styles[ "prices-container" ] } ${ priceFilterOpen && Styles[ "open" ] }` }>
                 { brands?.map( ( b, i ) => (
                   <div className={ Styles[ "brand" ] } key={ i } onClick={ e => e.stopPropagation() }>
                     <p className={ Styles[ "brand-name" ] }>{ b.brandName }</p>
