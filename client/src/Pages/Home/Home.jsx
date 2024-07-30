@@ -66,7 +66,8 @@ const Home = () => {
     else
       setCars( cars );
 
-  }, [ filtersState ] );
+
+  }, [ filtersState, cars ] );
 
   return (
     <motion.section id={ Styles[ "home" ] } variants={ variants } initial="hidden" animate="animate" exit="exit">
