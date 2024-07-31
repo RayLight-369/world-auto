@@ -128,6 +128,8 @@ const Home = () => {
               <div className={ `${ Styles[ "some-container" ] } ${ priceFilterOpen && Styles[ "open" ] }` }>
                 <div className={ Styles[ "prices" ] } >
                   <input type="number" name="starting" className={ Styles[ 'starting-price' ] } />
+                  <p className={ Styles[ "to" ] }>to</p>
+                  <input type="number" name="ending" className={ Styles[ 'ending-price' ] } />
                 </div>
               </div>
             </div>

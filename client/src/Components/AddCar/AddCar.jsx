@@ -6,13 +6,15 @@ import DropDown from '../DropDown/DropDown';
 import { useCars } from '../../Contexts/CarsContext';
 import { API } from '../../Constants';
 import { BreakSpan } from '../Card/Card';
+import { v4 as uid } from "uuid";
+import { uploadFile, updateData, deleteFile } from "../../Supabase";
 
 
 const AddCar = ( { handleClose, type = "new", car } ) => {
 
   // const navigate = useNavigate();
   const { setCars, brands } = useCars();
-
+  const [ carID, setCarID ] = useState( car?.id || 0 );
   const [ adding, setAdding ] = useState( false );
   const [ carTitle, setCarTitle ] = useState( car?.title || "" );
   const [ carOverview, setCarOverview ] = useState( car?.overview || "" );
@@ -32,6 +34,10 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
   const [ accessories, setAccessories ] = useState( car?.accessories || [] );
   const [ fuelDropdown, toggleFuelDropdown ] = useState( false );
   const [ brandDropdown, toggleBrandDropdown ] = useState( false );
+
+  const [ images, setImages ] = useState( car?.images || [] );
+  const [ imagesData, setImagesData ] = useState( {} );
+  const [ imagesDone, setImagesDone ] = useState( false );
 
   const Accessories = useMemo( () => [ "Air Conditioner", "Power Door Locks", "AntiLock Braking System", "Brake Assist", "Power Steering", "Driver Airbag", "Passenger Airbag", "Power Windows", "CD Player", "Central Locking", "Crash Sensor", "Leather Seats", "Bluetooth", "Rear View Camera", "Automatic" ], [] );
 
@@ -146,6 +152,165 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
   const [ dateInput, setDateInput ] = useState( `${ currentDate.getFullYear() }-${ currentDate.getMonth() + 1 >= 10 ? currentDate.getMonth() + 1 : "0" + ( currentDate.getMonth() + 1 ) }-${ currentDate.getDate() > 9 ? currentDate.getDate() : "0" + currentDate.getDate() }` );
 
 
+  useEffect( () => {
+
+    let IMG_OBJECT =
+      type == "edit"
+        ? [ ...car?.images ]?.reduce( ( p, c ) => {
+          p[ c ] = c;
+          return p;
+        }, {} )
+        : {};
+
+    console.log( "car.imgs from line 165: ", car?.images );
+    setImagesData( IMG_OBJECT );
+
+  }, [] );
+
+  useEffect( () => console.log( "img obj:  ", imagesData ), [ imagesData ] );
+
+  useEffect( () => {
+
+    if ( type == "edit" ) {
+      setImagesData( {
+        ...[ ...car?.images || images ]?.reduce( ( p, c ) => {
+          p[ c ] = c;
+          return p;
+        }, {} ),
+      } );
+    }
+    console.log( car );
+
+  }, [ car ] );
+
+  function deleteEntry ( obj, indexToDelete ) {
+    const keys = Object.keys( obj );
+
+    if ( indexToDelete < 0 || indexToDelete >= keys.length ) {
+      return obj; // Index out of range, return the original object
+    }
+
+    const updatedObj = { ...obj };
+    const keyToDelete = keys[ indexToDelete ];
+    delete updatedObj[ keyToDelete ];
+
+    return updatedObj;
+  }
+
+  const handleFileChange = ( e ) => {
+    let files = e.target.files;
+
+    for ( let file of files ) {
+      setImagesData( ( prev ) => ( {
+        ...prev,
+        [ URL.createObjectURL( file ) ]: file,
+      } ) );
+    }
+  };
+
+  const handleDelete = ( e, key ) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let updatedImages = deleteEntry( imagesData, key );
+
+    setImagesData( { ...updatedImages } );
+  };
+
+
+  const SetImages = async ( images_, Car ) => {
+
+    let imageArray = [];
+
+    for ( let image in images_ ) {
+
+      let fileId = uid();
+      let extension = images_[ image ].type.replace( "image/", "" ).toLowerCase();
+
+      imageArray.push(
+        `${ process.env.REACT_APP_SUPABASE_URL }/storage/v1/object/public/images/users/${ Car.id }/${ fileId }.${ extension }`
+      );
+
+      await uploadFile(
+        Car.id,
+        fileId + "." + extension,
+        images_[ image ]
+      );
+    };
+
+    let _images = images;
+    _images = [ ...imageArray ];
+
+    setImages( prev => ( [ ...prev, ...imageArray ] ) );
+    setImagesDone( true );
+
+    const ReqData = {
+      images
+    };
+
+    try {
+
+      // const res = await fetch( API.EDIT_CAR, {
+      //   method: "PUT",
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   },
+      //   body: JSON.stringify( ReqData )
+      // } );
+
+      console.log( "casasasar: ", car );
+      console.log( "i: ", imageArray );
+      console.log( "r: ", ReqData );
+
+    } catch ( e ) {
+      console.log( e );
+    }
+  };
+
+
+
+  // const getMissingImages = ( imagesArray, obj ) => {
+  //   const objKeysSet = new Set( Object.keys( obj ) );
+  //   return imagesArray.filter( ( image ) => !objKeysSet.has( image ) );
+  // };
+
+  // const SetImages = async ( images_ ) => {
+  //   const imageArray = [];
+  //   const deletedImages = getMissingImages( images, images_ );
+
+  //   for ( let image in images ) {
+  //     if ( typeof images[ image ] !== "string" ) {
+  //       const fileId = uuidv4();
+  //       const extension = images[ image ].type.replace( "image/", "" ).toLowerCase();
+
+  //       imageArray.push(
+  //         `https://lmxqvapkmczkpcfheiun.supabase.co/storage/v1/object/public/images/users/${ postID }/${ fileId }.${ extension }`
+  //       );
+  //       await uploadFile(
+  //         session?.user.id,
+  //         postID,
+  //         `${ fileId }.${ extension }`,
+  //         images[ image ]
+  //       );
+  //     } else {
+  //       imageArray.push( image );
+  //     }
+  //   }
+
+  //   if ( deletedImages.length ) {
+  //     for ( const image of deletedImages ) {
+  //       const url = image.split( "/" );
+  //       const fileID = url[ url.length - 1 ];
+  //       await deleteFile( `users/${ session?.user.id }/${ postID }/${ fileID }` );
+  //     }
+  //   }
+
+  //   let _post = post;
+  //   _post.images = imageArray;
+
+  //   setPost( ( prev ) => ( { ...prev, images: [ ...imageArray ] } ) );
+  // };
+
   const buttonWhileHovering = ( scale = 1.1, duration = .1 ) => ( {
     scale,
     transition: {
@@ -153,11 +318,74 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     }
   } );
 
+  useEffect( () => {
+    if ( images.length && imagesDone ) {
+      ( async () => {
+
+        await updateData( {
+          table: "Cars",
+          where: {
+            id: carID
+          },
+          object: {
+            images
+          }
+        } ).then( console.log );
+
+      } )();
+    }
+  }, [ images, imagesDone ] );
+
+
+  const getMissingImages = ( imagesArray, obj ) => {
+    const objKeysSet = new Set( Object.keys( obj ) );
+    return imagesArray.filter( ( image ) => !objKeysSet.has( image ) );
+  };
+
+  const SetImages_Edit = async ( images_, car ) => {
+    setImagesDone( false );
+    const imageArray = [];
+    const deletedImages = getMissingImages( car.images, images_ );
+
+    for ( let image in images_ ) {
+      if ( typeof images_[ image ] !== "string" ) {
+        const fileId = uid();
+        const extension = images_[ image ].type.replace( "image/", "" ).toLowerCase();
+
+        imageArray.push(
+          `${ process.env.REACT_APP_SUPABASE_URL }/storage/v1/object/public/images/users/${ car.id }/${ fileId }.${ extension }`
+        );
+        await uploadFile(
+          car.id,
+          `${ fileId }.${ extension }`,
+          images_[ image ]
+        );
+      } else {
+        imageArray.push( image );
+      }
+    }
+
+    if ( deletedImages.length ) {
+      for ( const image of deletedImages ) {
+        const url = image.split( "/" );
+        const fileID = url[ url.length - 1 ];
+        await deleteFile( `users/${ car.id }/${ fileID }` );
+      }
+    }
+
+    let _car = car;
+    _car.images = imageArray;
+
+    setImages( ( prev ) => ( [ ...imageArray ] ) );
+    setImagesDone( true );
+
+  };
+
   // const inputWhileFocused = {
   //   scale: 1.06,
   // };
 
-  async function addCar () {
+  async function addCar ( images_ ) {
 
     setAdding( true );
 
@@ -168,7 +396,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     const due_date = dateParts.join( "-" );
 
     const ReqData = {
-      title: carTitle, overview: carOverview, due_date, brand, fuel_type: fuelType, accessories, certificate, color, gearbox, emission, energy, mileage, guarantee, seating_capacity: seatingCapacity, model_year: modelYear, price_per_day: pricePerDay, price_per_month: pricePerMonth
+      title: carTitle, overview: carOverview, due_date, brand, fuel_type: fuelType, images, accessories, certificate, color, gearbox, emission, energy, mileage, guarantee, seating_capacity: seatingCapacity, model_year: modelYear, price_per_day: pricePerDay, price_per_month: pricePerMonth
     };
 
 
@@ -188,12 +416,21 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
       if ( res.ok ) {
         const body = await res.json();
+        const car = body.data[ 0 ];
+
+        setCarID( car.id );
+
+        if ( type == "new" )
+          await SetImages( images_, car );
+        else if ( type == "edit" )
+          await SetImages_Edit( images_, car );
+
         console.log( body.data );
 
         if ( type === "edit" ) {
           setCars( prevCars =>
             prevCars.map( prevCar =>
-              prevCar.id === body.data[ 0 ].id ? body.data[ 0 ] : prevCar
+              prevCar.id === car.id ? car : prevCar
             )
           );
         } else if ( type == "del" ) {
@@ -203,7 +440,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
             )
           );
         } else {
-          setCars( prev => [ body.data[ 0 ], ...prev ] );
+          setCars( prev => [ car, ...prev ] );
         }
 
         handleClose();
@@ -222,6 +459,13 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     console.log( accessories );
 
   }, [ accessories ] );
+
+  useEffect( () => {
+
+    console.log( "updated img data: ", imagesData );
+    console.log( "updated images: ", images );
+
+  }, [ imagesData ] );
 
   return (
     <MotionConfig transition={ { type: "spring", damping: 7 } } >
@@ -278,6 +522,47 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
                   </div>
                 </div>
 
+                <div className={ styles[ "images" ] }>
+                  <p>Images: </p>
+                  <label htmlFor={ "file" } className={ styles[ "image-label" ] }>
+                    Select Images
+                  </label>
+                  <input
+                    type="file"
+                    onChange={ handleFileChange }
+                    multiple
+                    name="file"
+                    id={ "file" }
+                    min={ 1 }
+                    max={ 9 }
+                    accept="image/*"
+                    style={ { display: "none" } }
+                  />
+
+                  {/* </div> */ }
+
+                  <div className={ styles[ "img-container" ] }>
+                    { Object.keys( imagesData ).map( ( img, key ) => (
+                      <div className={ styles[ "img-box" ] } key={ img }>
+                        <img
+                          src={ img }
+                          width={ 200 }
+                          height={ 200 }
+                          alt="ad image"
+                          className={ styles[ "img" ] }
+                        />
+
+                        <button
+                          className={ styles[ "delete-img" ] }
+                          onClick={ ( e ) => handleDelete( e, key ) }
+                        >
+                          x
+                        </button>
+                      </div>
+                    ) ) }
+                  </div>
+                </div>
+
               </div>
             </>
           )
@@ -286,7 +571,9 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }
             className={ styles[ "add-button" ] }
-            onClick={ addCar }
+            onClick={ e => {
+              addCar( imagesData );
+            } }
             disabled={ adding }
           >
             { adding ? type == 'new' ? "Adding..." : type == "edit" ? "Updating..." : "Deleting..." : type == 'new' ? "Add" : type == "edit" ? "Update" : "Delete" }
