@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 
 export const BreakSpan = memo( () => <span className={ Styles[ 'break' ] }>|</span> );
 
-const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guarantee, id } ) => {
+const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guarantee, id, img } ) => {
   return (
     <div className={ Styles[ "card" ] }>
       <Link to={ `/car/${ id }` }>
         <div className={ Styles[ "thumbnail" ] }>
-          <img src="/Imgs/ad.jpg" alt="" />
+          <img src={ img } alt="" />
           <div className={ Styles[ "price-notch" ] }>
             <p className={ Styles[ "price" ] }>{ ppd } USD</p>
             <p className={ Styles[ "monthly" ] }>That's { ppm } USD/month</p>
