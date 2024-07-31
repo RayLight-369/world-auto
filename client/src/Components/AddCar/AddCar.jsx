@@ -465,7 +465,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     console.log( "updated img data: ", imagesData );
     console.log( "updated images: ", images );
 
-  }, [ imagesData ] );
+  }, [ imagesData, images ] );
 
   return (
     <MotionConfig transition={ { type: "spring", damping: 7 } } >
