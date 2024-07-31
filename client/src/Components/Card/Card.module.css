@@ -24,7 +24,7 @@ div.thumbnail {
 }
 
 div.thumbnail img {
-  height: auto;
+  height: 190px;
   object-fit: cover;
   width: 100%;
 }
