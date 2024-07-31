@@ -4,7 +4,7 @@ import Card from '../../Components/Card/Card';
 import CreateAlert from '../../Components/CreateAlert/CreateAlert';
 import { motion } from "framer-motion";
 import { useCars } from '../../Contexts/CarsContext';
-
+import PriceBox from "../../Components/PriceBox/PriceBox";
 const Home = () => {
 
   const { cars, brands } = useCars();
@@ -15,6 +15,8 @@ const Home = () => {
   useEffect( () => {
 
     if ( cars.length && !Cars?.length ) setCars( cars );
+
+    console.log( cars );
 
   }, [ cars ] );
 
@@ -90,12 +92,12 @@ const Home = () => {
         <div className={ Styles[ "filters-part" ] }>
           <p>Filter your Search Criteria</p>
           <div className={ Styles[ "filters-container" ] }>
-            <div className={ `${ Styles[ "brand-filter" ] } ${ brandFilterOpen && Styles[ "open" ] }` } onClick={ () => setBrandFilterOpen( prev => !prev ) }>
+            <div className={ `${ Styles[ "some-filter" ] } ${ brandFilterOpen && Styles[ "open" ] }` } onClick={ () => setBrandFilterOpen( prev => !prev ) }>
               <div className={ Styles[ "title" ] }>
                 <p className={ Styles[ "name" ] }>BRAND</p>
                 <p className={ Styles[ "indicator" ] }>{ ">" }</p>
               </div>
-              <div className={ `${ Styles[ "brands-container" ] } ${ brandFilterOpen && Styles[ "open" ] }` }>
+              <div className={ `${ Styles[ "some-container" ] } ${ brandFilterOpen && Styles[ "open" ] }` }>
                 { brands?.map( ( b, i ) => (
                   <div className={ Styles[ "brand" ] } key={ i } onClick={ e => e.stopPropagation() }>
                     <p className={ Styles[ "brand-name" ] }>{ b.brandName }</p>
@@ -117,27 +119,16 @@ const Home = () => {
                   </div>
                 ) ) }
               </div>
-              <div className={ `${ Styles[ "prices-container" ] } ${ priceFilterOpen && Styles[ "open" ] }` }>
-                { brands?.map( ( b, i ) => (
-                  <div className={ Styles[ "brand" ] } key={ i } onClick={ e => e.stopPropagation() }>
-                    <p className={ Styles[ "brand-name" ] }>{ b.brandName }</p>
-                    <input type="checkbox" onChange={ e => {
-                      if ( e.target.checked ) {
-                        filterDistpatch( {
-                          type: "brand",
-                          action: "add",
-                          brand: b.id
-                        } );
-                      } else {
-                        filterDistpatch( {
-                          type: "brand",
-                          action: "remove",
-                          brand: b.id
-                        } );
-                      }
-                    } } />
-                  </div>
-                ) ) }
+            </div>
+            <div className={ `${ Styles[ "some-filter" ] } ${ priceFilterOpen && Styles[ "open" ] }` } onClick={ () => setPriceFilterOpen( prev => !prev ) }>
+              <div className={ Styles[ "title" ] }>
+                <p className={ Styles[ "name" ] }>PRICE</p>
+                <p className={ Styles[ "indicator" ] }>{ ">" }</p>
+              </div>
+              <div className={ `${ Styles[ "some-container" ] } ${ priceFilterOpen && Styles[ "open" ] }` }>
+                <div className={ Styles[ "prices" ] } >
+                  <input type="number" name="starting" className={ Styles[ 'starting-price' ] } />
+                </div>
               </div>
             </div>
           </div>
