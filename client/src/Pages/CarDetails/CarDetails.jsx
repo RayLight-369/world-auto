@@ -120,7 +120,7 @@ const CarDetails = () => {
           // slidesPerView={ 1 }
           className={ styles[ 'img-carousal' ] }
         >
-          { [ "https://images.axios.com/5peu2TwvaEoYR4Z11TH1tcljN0M=/266x0:1706x1080/1600x1200/2019/12/13/1576253700586.jpg", "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&height=900&width=1600&fit=bounds", "https://hips.hearstapps.com/hmg-prod/images/pop-index-2020-chevrolet-corvette-c8-102-1571146873.jpg?crop=1.00xw:0.502xh;0,0.370xh&resize=1200:*", "https://www.wjhl.com/wp-content/uploads/sites/98/2021/09/Chevy-Corvette.jpg?w=1280" ].map( ( i, k ) => (
+          { car?.images.map( ( i, k ) => (
             <SwiperSlide zoom>
               <img className={ styles[ 'img' ] } src={ i } alt="" key={ k } />
             </SwiperSlide>
