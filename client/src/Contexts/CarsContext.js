@@ -34,11 +34,11 @@ const CarsProvider = ( { children } ) => {
         setBrands( brandsData.data );
       } catch ( e ) {
         console.error( "Fetch error:", e.message );
-        if ( cycles < 5 ) {
-          setCycles( prev => prev + 1 );
-          setCarsLoading( true );
-          fetchData();
-        }
+        // if ( cycles < 5 ) {
+        //   setCycles( prev => prev + 1 );
+        //   setCarsLoading( true );
+        //   fetchData();
+        // }
       } finally {
         setCarsLoading( false );
       }
