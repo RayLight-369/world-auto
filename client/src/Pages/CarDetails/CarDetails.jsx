@@ -83,7 +83,7 @@ const CarDetails = () => {
 
         if ( body?.data?.length ) body.data[ 0 ].brand = brands.find( brand => brand.id == body.data[ 0 ].brand )?.brandName;
 
-        const { title, price_per_day, overview, id, accessories, ...rest } = body.data[ 0 ];
+        const { title, price_per_day, overview, id, accessories, images, ...rest } = body.data[ 0 ];
 
         setProperties( rest );
 
