@@ -154,3 +154,33 @@ div.reviews {
     top: 10px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  div.img {
+    display: none;
+  }
+
+  div.info {
+    display: flex;
+    flex-direction: column;
+
+    p {
+      text-align: justify;
+    }
+  }
+
+  .reviews {
+
+    width: calc(100% - 50px) !important;
+    padding: 2px 10px !important;
+
+    h1 {
+      font-size: 1.6em !important;
+      text-align: center;
+    }
+  }
+
+  .review {
+    width: 80vw !important;
+  }
+}
