@@ -95,3 +95,9 @@ div.buttons button.cancel-button {
   color: #025883;
   background: none;
 }
+
+@media screen and (max-width: 768px) {
+  div.add-brand {
+    width: 90vw !important;
+  }
+}
