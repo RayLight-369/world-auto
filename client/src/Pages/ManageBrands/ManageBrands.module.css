@@ -131,3 +131,73 @@ div.page-container {
 
   }
 }
+
+@media screen and (max-width: 768px) {
+  div.page-content {
+    padding: 5px 15px;
+  }
+
+  div.container {
+    padding: 16px 18px !important;
+  }
+
+  div.row {
+    padding: 5px !important;
+
+    p {
+      /* background: #000; */
+      position: relative;
+      left: 10px;
+      width: calc(25%) !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: .67em;
+      font-family: Abeezee;
+      color: #333;
+    }
+
+    p.date {
+      position: absolute;
+      left: calc(32%) !important;
+      width: calc(40% - 5px) !important;
+      font-family: Galano !important;
+      font-size: .78em !important;
+    }
+
+    p.actions {
+      position: absolute;
+      left: 80%;
+      width: calc(18%);
+      display: flex !important;
+      justify-content: center;
+      gap: 2px !important;
+
+      span {
+        width: 19px !important;
+        height: 19px !important;
+        border-radius: 50%;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center;
+        cursor: pointer;
+        text-align: center;
+        /* padding: 5px; */
+
+        &.edit {
+          background: #025883;
+          text-align: center;
+          color: white;
+        }
+
+        &.del:hover {
+          background: red;
+          color: white;
+        }
+      }
+    }
+  }
+
+  div.header {
+    font-size: 1.02em !important;
+  }
+}

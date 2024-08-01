@@ -170,7 +170,7 @@ div.page-container {
     p.date {
       position: absolute;
       font-family: Galano !important;
-      font-size: .73em !important;
+      font-size: .75em !important;
       white-space: nowrap;
       left: calc(52%) !important;
       width: calc(28%) !important;
