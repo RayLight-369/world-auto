@@ -7,3 +7,9 @@ h1.page-title {
   color: #111;
   font-size: 1.4rem;
 }
+
+@media screen and (max-width: 768px) {
+  h1.page-title {
+    padding: 0 10px !important;
+  }
+}

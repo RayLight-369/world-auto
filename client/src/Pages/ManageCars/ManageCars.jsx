@@ -11,8 +11,17 @@ const ManageCars = () => {
   const [ addCarPopupOpen, setAddCarPopupOpen ] = useState( false );
   const [ carToBeEdited, setCarToBeEdited ] = useState( null );
   const [ carToBeDeleted, setCarToBeDeleted ] = useState( null );
-
   const { cars, brands } = useCars();
+  const [ isMobile, setIsMobile ] = useState( false );
+
+  useEffect( () => {
+
+    const Resize = () => setIsMobile( window.innerWidth <= 768 );
+    Resize();
+
+    window.addEventListener( 'resize', Resize );
+
+  }, [] );
 
   useEffect( () => {
     console.log( cars );

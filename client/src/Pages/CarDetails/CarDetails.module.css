@@ -161,3 +161,72 @@ img.img {
   width: auto;
   border-radius: 8px;
 }
+
+@media screen and (max-width: 768px) {
+
+  section#car-details {
+    /* background: #000; */
+    width: 100vw;
+    height: 100%;
+    position: relative;
+    top: 80px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+
+  :is(.parent, .overview) {
+    h1 {
+      text-align: center !important;
+    }
+
+    > p {
+      text-align: center !important;
+    }
+  }
+
+  .title-price {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: -20px;
+    width: 100%;
+    align-items: center;
+    gap: 20px;
+
+    h1 {
+      font-family: Poppins;
+      color: #0a0a0a;
+      font-size: 1.2em !important;
+      width: 100% !important;
+      /* background: #000; */
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:nth-child(2) {
+        color: #333 !important;
+        font-size: .9em !important;
+        position: relative;
+        top: 20px;
+
+        &::before {
+          content: "Price: ";
+          position: relative;
+          left: 0;
+          width: fit-content;
+          height: auto;
+          color: var(--primary-blue);
+          font-size: 1.3em;
+          font-weight: 0;
+          font-family: Galano;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  .img-carousal {
+    width: 90vw !important;
+  }
+}

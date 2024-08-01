@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Styles from "./Header.module.css";
 import { Outlet, NavLink } from "react-router-dom";
 import { NavLinks } from '../../Constants';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faBarsStaggered } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
+
+  const [ toggleDropdown, setToggleDropdown ] = useState( false );
+  const [ icon, setIcon ] = useState( faBars );
+  const [ isMobile, setIsMobile ] = useState( false );
+
+  useEffect( () => {
+
+    const Resize = () => setIsMobile( window.innerWidth <= 768 );
+    window.addEventListener( "resize", Resize );
+
+    Resize();
+
+  }, [] );
+
   return (
     <>
       <header className={ Styles[ "header" ] }>

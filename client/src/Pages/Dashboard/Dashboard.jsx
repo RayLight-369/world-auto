@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Styles from "./Dashboard.module.css";
 import PageTitle from '../../Components/PageTitle/PageTitle';
 import { Link } from 'react-router-dom';
@@ -15,6 +15,16 @@ const Dashboard = () => {
   const [ brandToBeEdited, setBrandToBeEdited ] = useState( null );
   const [ brandToBeDeleted, setBrandToBeDeleted ] = useState( null );
   const [ carToBeDeleted, setCarToBeDeleted ] = useState( null );
+  const [ isMobile, setIsMobile ] = useState( false );
+
+  useEffect( () => {
+
+    const Resize = () => setIsMobile( window.innerWidth <= 768 );
+    Resize();
+
+    window.addEventListener( 'resize', Resize );
+
+  }, [] );
 
   return (
     <>

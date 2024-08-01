@@ -78,3 +78,10 @@ a#reg-btn {
   background: rgb(2 75 165);
   color: White;
 }
+
+@media screen and (max-width: 768px) {
+  div.logo img {
+    height: 70%;
+    width: auto;
+  }
+}

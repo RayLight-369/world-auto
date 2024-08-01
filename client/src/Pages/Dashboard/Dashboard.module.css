@@ -174,3 +174,24 @@ div.recent-updates-container > div {
 ::-webkit-scrollbar-thumb {
   background: #ddd;
 }
+
+@media screen and (max-width: 768px) {
+  div.page-content {
+    padding: 5px 10px;
+  }
+
+  /* .page-title {
+    padding: 0 10px !important;
+  } */
+
+  div.details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  div.recent-updates-container {
+    display: flex;
+    flex-direction: column;
+  }
+}

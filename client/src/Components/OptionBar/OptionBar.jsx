@@ -1,11 +1,22 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import Styles from "./OptionBar.module.css";
 
 
 const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen } ) => {
 
   const [ openOptionBar, setOpenOptionBar ] = useState( false );
+  const [ isMobile, setIsMobile ] = useState( false );
+
+  useEffect( () => {
+
+    const Resize = () => setIsMobile( window.innerWidth <= 768 );
+    Resize();
+
+    window.addEventListener( 'resize', Resize );
+
+  }, [] );
+
   // const [ closeOptionBarDivPosition, setCloseOptionBarDivPosition ] = useState( false );
 
 
@@ -20,7 +31,7 @@ const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen } ) => {
       }
     },
     animate: {
-      width: "55%",
+      width: !isMobile ? "55%" : "95%",
       transition: {
         duration: .5,
         type: "spring"
@@ -39,6 +50,10 @@ const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen } ) => {
       damping: 10,
       bounce: .3
     } }
+      style={ {
+        left: !isMobile ? "calc( 50% + 57px )" : "50%",
+        transform: !isMobile ? "translateX( calc( -50% + 57px ) )" : "translate(-50%)"
+      } }
       // drag
       // dragTransition={ { bounceStiffness: 600, bounceDamping: 10, min: -0, max: 0, } }
       // dragConstraints={ {

@@ -16,6 +16,8 @@ const Admin = () => {
   const [ openAddCarPopup, setAddCarPopup ] = useState( false );
   const [ openAddBrandPopup, setAddBrandPopup ] = useState( false );
 
+  const [ isMobile, setIsMobile ] = useState( false );
+
   // const links = useMemo( () => ( [
   //   {
   //     title: "Dashboard",
@@ -31,6 +33,12 @@ const Admin = () => {
     if ( [ "/admin", "/admin/", "admin" ].includes( location.pathname ) ) {
       navigate( "/admin/dashboard" );
     }
+
+    const Resize = () => setIsMobile( window.innerWidth <= 768 );
+    Resize();
+
+    window.addEventListener( 'resize', Resize );
+
   }, [] );
 
   const closePopUp = ( setState ) => setState( false );
@@ -45,7 +53,7 @@ const Admin = () => {
           { AdminLinks.map( ( route => (
             <NavLink className={ ( { isActive } ) =>
               isActive ? `${ Styles.active }` : undefined
-            } to={ route.path }>{ route.name }</NavLink>
+            } to={ route.path }>{ !isMobile ? route.name : route[ "name" ].split( " " )[ 1 ] || route[ "name" ] }</NavLink>
           ) ) ) }
         </nav>
       </header>

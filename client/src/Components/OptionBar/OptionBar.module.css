@@ -8,8 +8,8 @@ div.options-bar {
   background: #050505;
   border-radius: 50px;
   position: fixed;
-  left: calc(50% + 57px);
-  transform: translateX(calc(-50% + 57px));
+  /* left: calc(50% + 57px);
+  transform: translateX(calc(-50% + 57px)); */
   bottom: 40px;
   overflow: hidden;
 }

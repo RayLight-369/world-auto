@@ -38,6 +38,9 @@ const CarDetails = () => {
   const [ car, setCar ] = useState( null );
   const { brands } = useCars();
   const [ properties, setProperties ] = useState( {} );
+  const [ isMobile, setIsMobile ] = useState( false );
+
+
   const PROPERTIES = useMemo( () => ( {
     "brand": "Brand",
     "certificate": "Certificate",
@@ -100,6 +103,14 @@ const CarDetails = () => {
 
   }, [ id, brands ] );
 
+  useEffect( () => {
+
+    const Resize = () => setIsMobile( window.innerWidth <= 768 );
+    Resize();
+
+    window.addEventListener( "resize", Resize );
+  }, [] );
+
   if ( !car || !brands.length ) {
     return <div>Loading...</div>;
   }
@@ -115,7 +126,7 @@ const CarDetails = () => {
           zoom
           pagination={ { clickable: true, type: "fraction" } }
           scrollbar={ { draggable: true } }
-          autoplay={ { delay: 3000, pauseOnMouseEnter: true, disableOnInteraction: false } }
+          autoplay={ !isMobile && { delay: 3000, pauseOnMouseEnter: true, disableOnInteraction: false } }
           spaceBetween={ 25 }
           // slidesPerView={ 1 }
           className={ styles[ 'img-carousal' ] }

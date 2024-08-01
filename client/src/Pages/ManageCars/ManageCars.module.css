@@ -136,3 +136,87 @@ div.page-container {
 
   }
 }
+
+@media screen and (max-width: 768px) {
+  div.page-content {
+    padding: 5px 15px;
+  }
+
+  div.container {
+    padding: 16px 18px !important;
+  }
+
+  div.row {
+    padding: 5px !important;
+
+    p {
+      /* background: #000; */
+      position: relative;
+      left: 10px !important;
+      width: calc(25%) !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: .67em !important;
+      font-family: Abeezee;
+      color: #333;
+    }
+
+    p.brand-title {
+      position: absolute;
+      left: calc(30%) !important;
+      width: calc(20% - 5px) !important;
+    }
+
+    p.date {
+      position: absolute;
+      font-family: Galano !important;
+      font-size: .73em !important;
+      white-space: nowrap;
+      left: calc(52%) !important;
+      width: calc(28%) !important;
+    }
+
+    p.actions {
+      position: absolute;
+      left: calc(80%) !important;
+      width: calc(18%) !important;
+      display: flex;
+      justify-content: center;
+      gap: 2px !important;
+
+      span {
+        width: 19px !important;
+        height: 19px !important;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        /* padding: 5px; */
+
+        &.edit {
+          background: #025883;
+          text-align: center;
+          color: white;
+        }
+
+        &.del:hover {
+          background: red;
+          color: white;
+        }
+      }
+    }
+  }
+
+  div.header {
+    background: none;
+    font-size: 1.02em !important;
+    background: #eee;
+    border: none;
+
+    p {
+      color: #101010;
+    }
+  }
+
+}
