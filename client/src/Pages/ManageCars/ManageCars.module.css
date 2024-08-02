@@ -148,6 +148,7 @@ div.page-container {
 
   div.row {
     padding: 5px !important;
+    display: flex !important;
 
     p {
       /* background: #000; */
