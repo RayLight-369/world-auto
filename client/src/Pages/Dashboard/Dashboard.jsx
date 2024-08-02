@@ -62,7 +62,7 @@ const Dashboard = () => {
                           <div className={ Styles[ "content" ] }>
                             <div className={ Styles[ "brand-title" ] }>
                               <p className={ Styles[ "car-title" ] }>{ car.title }</p>
-                              <p className={ Styles[ "car-brand" ] }>{ brands?.find( brand => brand.id == car.brand ).brandName }</p>
+                              <p className={ Styles[ "car-brand" ] }>{ brands?.find( brand => brand.id == car.brand )?.brandName }</p>
                             </div>
                             <p className={ Styles[ "date" ] }>{ car.due_date }</p>
                           </div>
