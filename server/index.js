@@ -303,7 +303,7 @@ app.post( "/admin/contact", async ( req, res ) => {
   try {
     const { data, error } = await resend.emails.send( {
       from: "WorldAuto <buttrafay980@gmail.com>",
-      to: [ "abdulrafay.designs@gmail.com" ],
+      to: [ body.email ],
       subject: "hello Ray",
       html: "<strong>it works!</strong>",
     } );
