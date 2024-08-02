@@ -9,6 +9,7 @@ import CarsProvider from "./Contexts/CarsContext";
 import ManageCars from "./Pages/ManageCars/ManageCars";
 import ManageBrands from "./Pages/ManageBrands/ManageBrands";
 import CarDetails from "./Pages/CarDetails/CarDetails";
+import Contact from "./Pages/Contact/Contact";
 
 const App = () => {
   const location = useLocation();
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/" element={ <Header /> }>
               <Route index path="/" element={ <Home /> } />
               <Route path="about" element={ <About /> } />
+              <Route path="contact" element={ <Contact /> } />
               <Route path="/car/:id" element={ <CarDetails /> } />
             </Route>
           </Routes>

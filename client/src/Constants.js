@@ -38,4 +38,5 @@ export const API = {
   NEW_BRAND: `https://world-auto-api.vercel.app/admin/brands/new`,
   EDIT_BRAND: `https://world-auto-api.vercel.app/admin/brands/edit`,
   DEL_BRAND: `https://world-auto-api.vercel.app/admin/brands/delete`,
+  CONTACT_EMAIL: `https://world-auto-api.vercel.app/admin/contact`
 };

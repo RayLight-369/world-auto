@@ -8,6 +8,9 @@ const cookieParser = require( "cookie-parser" );
 const { log } = console;
 const cors = require( "cors" );
 const bcrypt = require( "bcrypt" );
+const { Resend } = require( "resend" );
+
+const resend = new Resend( process.env.RESEND_KEY );
 
 // const ENV = require( "./env.json" );
 
@@ -293,6 +296,27 @@ app.delete( "/admin/brands/delete", async ( req, res ) => {
     res.status( 500 ).json( { error: e } );
   }
 
+} );
+
+app.post( "/admin/contact", async ( req, res ) => {
+  const body = req.body;
+  try {
+    const { data, error } = await resend.emails.send( {
+      from: "WorldAuto <buttrafay980@gmail.com>",
+      to: [ "abdulrafay.designs@gmail.com" ],
+      subject: "hello Ray",
+      html: "<strong>it works!</strong>",
+    } );
+
+    if ( error ) {
+      return res.status( 400 ).json( { error } );
+    }
+
+    res.status( 200 ).json( { data } );
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).json( { error: e } );
+  }
 } );
 
 
