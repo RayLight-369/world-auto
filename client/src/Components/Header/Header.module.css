@@ -63,7 +63,7 @@ div.user-info {
   right: 30px;
 }
 
-div.user-info > * {
+div.user-info > :is(a, button) {
   text-decoration: none;
   padding: 1em 2em;
   border-radius: 50px;
@@ -71,6 +71,45 @@ div.user-info > * {
   color: rgb(42 107 188);
   font-family: Roboto;
   font-weight: bold;
+}
+
+img.pfp {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: 150ms;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+div.menu {
+  height: fit-content;
+  position: absolute;
+  top: 70px;
+  right: 0;
+  background: white;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px 5px 23px 23px;
+  transition: 150ms;
+  transform: translateX(200px);
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  button {
+    padding: .9em 1.8em;
+    border: none;
+    outline: none;
+    color: white;
+    border-radius: 50px;
+    background: #111 !important;
+  }
 }
 
 button#reg-btn {

@@ -45,7 +45,18 @@ const Header = () => {
         </div>
         <div className={ Styles[ "user-info" ] }>
           <NavLink to={ "tel:+33186950414" } className={ Styles[ "tel" ] }>01 86 95 04 14</NavLink>
-          <button id={ Styles[ 'reg-btn' ] } onClick={ Login } className={ Styles[ "register" ] }>Sign up</button>
+
+          { !isLoggedIn ? (
+            <button id={ Styles[ 'reg-btn' ] } onClick={ Login } className={ Styles[ "register" ] }>Sign-in</button>
+          ) : (
+            <>
+              <img src={ user?.image } alt="" className={ Styles[ 'pfp' ] } onClick={ () => setToggleDropdown( prev => !prev ) } />
+              <div className={ `${ Styles[ "menu" ] } ${ toggleDropdown && Styles[ "open" ] }` }>
+
+                <button id={ Styles[ 'reg-btn' ] } onClick={ Logout } className={ Styles[ "register" ] }>Sign-out</button>
+              </div>
+            </>
+          ) }
         </div>
       </>;
 
@@ -74,6 +85,8 @@ const Header = () => {
         >
           <div className={ Styles[ "links" ] }>
             <NavLink to={ "/" } className={ ( { isActive } ) => isActive ? Styles.active : "" }>Home</NavLink>
+            <NavLink to={ "/about" } className={ ( { isActive } ) => isActive ? Styles.active : "" }>About</NavLink>
+            <NavLink to={ "/contact" } className={ ( { isActive } ) => isActive ? Styles.active : "" }>Contact</NavLink>
             {/* { isLoggedIn && (
               <>
                 <NavLink

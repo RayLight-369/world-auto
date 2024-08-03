@@ -1,6 +1,8 @@
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { exists, insertData } from '../Supabase';
+import { exists, getData, insertData } from '../Supabase';
+import Cookies from "js-cookie";
+
 
 const SessionUserContext = createContext();
 
@@ -10,8 +12,49 @@ export const useUser = () => {
 
 const SessionUserProvider = ( { children } ) => {
 
-  const [ user, setUser ] = useState( JSON.parse( sessionStorage.getItem( "user" ) ) || null );
-  const [ isLoggedIn, setIsLoggedIn ] = useState( !!user );
+  const [ sessionStored, setSessionStored ] = useState( ( sessionStorage.getItem( "user" ) && JSON.parse( sessionStorage.getItem( "user" ) ) ) || ( Cookies.get( "user" ) && JSON.parse( Cookies.get( "user" ) ) ) || null );
+  const [ user, setUser ] = useState( null );
+  const [ isLoggedIn, setIsLoggedIn ] = useState( !!sessionStored );
+
+
+  const setUserBasedOnEmail = async ( email, name, picture ) => {
+
+    const userExists = await exists( {
+      table: "Users",
+      where: {
+        email: email
+      }
+    } );
+
+    if ( !userExists ) {
+      const { data } = await insertData( {
+        table: "Users",
+        object: {
+          email: email,
+          name: name,
+          image: picture
+        }
+      } );
+
+      if ( data ) {
+        setUser( data[ 0 ] );
+      }
+    } else {
+      const { data } = await getData( {
+        table: "Users",
+        where: {
+          email
+        }
+      } );
+
+      if ( data ) {
+        setUser( data[ 0 ] );
+      }
+    }
+
+  };
+
+
 
   const Login = useGoogleLogin( {
     onSuccess: async ( tokenResponse ) => {
@@ -24,34 +67,15 @@ const SessionUserProvider = ( { children } ) => {
 
       if ( res.ok ) {
         const body = await res.json();
-        setUser( body );
         setIsLoggedIn( true );
+
         sessionStorage.setItem( "user", JSON.stringify( body ) );
 
-        const userExists = await exists( {
-          table: "Users",
-          where: {
-            email: body.email
-          }
+        Cookies.set( "user", JSON.stringify( body ), {
+          expires: 7
         } );
 
-        if ( !userExists ) {
-          const { data } = await insertData( {
-            table: "Users",
-            object: {
-              email: body.email,
-              name: body.name,
-              image: body.picture
-            }
-          } );
-
-          if ( data ) {
-            setUser( prev => ( {
-              ...prev,
-              id: data[ 0 ].id
-            } ) );
-          }
-        }
+        setUserBasedOnEmail( body.email, body.name, body.picture );
       }
     },
     onError: ( error ) => console.log( 'Login Failed:', error ),
@@ -61,6 +85,7 @@ const SessionUserProvider = ( { children } ) => {
     googleLogout();
     setUser( null );
     sessionStorage.setItem( "user", null );
+    Cookies.remove( "user" );
     setIsLoggedIn( false );
     console.log( 'User logged out' );
   };
@@ -68,11 +93,11 @@ const SessionUserProvider = ( { children } ) => {
 
   useEffect( () => {
 
-    if ( !user ) {
-      setIsLoggedIn( false );
+    if ( sessionStored ) {
+      setUserBasedOnEmail( sessionStored.email, sessionStored.name, sessionStored.picture );
     }
 
-  }, [ user ] );
+  }, [] );
 
   return (
     <SessionUserContext.Provider value={ { user, isLoggedIn, setIsLoggedIn, setUser, Login, Logout } }>{ children }</SessionUserContext.Provider>

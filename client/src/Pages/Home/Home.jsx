@@ -41,9 +41,36 @@ const Home = () => {
         return ( { ...state, Brands } );
 
       }
+
+      case "price": case "prices": {
+
+        if ( action.ptype == "start" ) {
+          return ( {
+            ...state,
+            Price: {
+              end: state.Price.end,
+              start: action.start
+            }
+          } );
+        } else {
+          return ( {
+            ...state,
+            Price: {
+              start: state.Price.start,
+              end: action.end
+            }
+          } );
+        }
+
+      }
+
     }
   }, {
     Brands: [],
+    Price: {
+      start: 0,
+      end: undefined
+    }
   } );
 
   const variants = {
@@ -64,7 +91,7 @@ const Home = () => {
 
   useEffect( () => {
     console.log( filtersState );
-    const { Brands } = filtersState;
+    const { Brands, Price } = filtersState;
 
     console.log( "Brands: ", Brands );
     console.log( "Cars: ", Cars );
@@ -74,6 +101,23 @@ const Home = () => {
       setCars( cars.filter( car => Brands.includes( car.brand ) ) );
     else
       setCars( cars );
+
+    if ( Price ) {
+      setCars( cars.filter( car => {
+        let cases = [];
+
+        if ( Price.start && car.price_per_day >= Price.start ) {
+          cases[ 0 ] = 1;
+        }
+
+        if ( Price.end && car.price_per_day <= Price.end ) {
+          cases[ 1 ] = 1;
+        }
+
+        return cases.every( i => i != 0 );
+
+      } ) );
+    }
 
 
   }, [ filtersState ] );
@@ -127,9 +171,17 @@ const Home = () => {
               </div>
               <div className={ `${ Styles[ "some-container" ] } ${ priceFilterOpen && Styles[ "open" ] }` }>
                 <div className={ Styles[ "prices" ] } onClick={ e => e.stopPropagation() }>
-                  <input min={ 1 } type="number" name="starting" className={ Styles[ 'starting-price' ] } />
+                  <input min={ 1 } type="number" name="starting" value={ filtersState.Price.start } className={ Styles[ 'starting-price' ] } onChange={ e => filterDistpatch( {
+                    type: "price",
+                    action: "start",
+                    start: +e.target.value
+                  } ) } />
                   <p className={ Styles[ "to" ] }>to</p>
-                  <input min={ 1 } type="number" name="ending" className={ Styles[ 'ending-price' ] } />
+                  <input min={ 1 } type="number" name="ending" value={ filtersState.Price.end } className={ Styles[ 'ending-price' ] } onChange={ e => filterDistpatch( {
+                    type: "price",
+                    action: "end",
+                    end: +e.target.value
+                  } ) } />
                 </div>
               </div>
             </div>
