@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram, faLetterboxd, faMailchimp, faSquareLetterboxd, faTiktok, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import RequestForm from "../../Components/RequestForm/RequestForm";
 import { faLocation, faLocationDot, faLocationPin, faMailBulk, faMapLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
-
+import { API } from "../../Constants";
 
 
 const Star = ( { n } ) => {
@@ -77,6 +77,28 @@ const Contact = () => {
       },
     ], [] );
 
+  const handleFormSubmit = async () => {
+
+    try {
+
+      // const res = await fetch( API.CONTACT_EMAIL, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify( {
+      //     email: "abdulrafay.designs@gmail.com"
+      //   } )
+      // } );
+
+      // console.log( await res.json() );
+
+    } catch ( e ) {
+      console.log( e );
+    }
+
+  };
+
   return (
     // <AnimatePresence mode="wait">
     <motion.section id={ Styles[ "contact" ] } variants={ variants } initial="hidden" animate="animate" exit="exit">
@@ -111,7 +133,7 @@ const Contact = () => {
             </div>
           </div>
         </div>
-        <RequestForm />
+        <RequestForm handleSubmit={ handleFormSubmit } />
       </motion.div>
 
     </motion.section>

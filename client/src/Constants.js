@@ -28,6 +28,10 @@ export const AdminLinks = [
   },
 ];
 
+export const CREDENTIALS = {
+  GOOGLE_CLIENT_ID: process.env.REACT_APP_GOOGLE_ID
+};
+
 export const API = {
   GET_CARS: `https://world-auto-api.vercel.app/admin/cars`,
   GET_CAR: ( id ) => `https://world-auto-api.vercel.app/admin/cars/${ id }`,
@@ -38,5 +42,7 @@ export const API = {
   NEW_BRAND: `https://world-auto-api.vercel.app/admin/brands/new`,
   EDIT_BRAND: `https://world-auto-api.vercel.app/admin/brands/edit`,
   DEL_BRAND: `https://world-auto-api.vercel.app/admin/brands/delete`,
-  CONTACT_EMAIL: `https://world-auto-api.vercel.app/admin/contact`
+  CONTACT_EMAIL: `http://localhost:8030/admin/contact`
 };
+
+// https://world-auto-api.vercel.app/admin/contact

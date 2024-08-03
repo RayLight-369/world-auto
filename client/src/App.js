@@ -10,35 +10,40 @@ import ManageCars from "./Pages/ManageCars/ManageCars";
 import ManageBrands from "./Pages/ManageBrands/ManageBrands";
 import CarDetails from "./Pages/CarDetails/CarDetails";
 import Contact from "./Pages/Contact/Contact";
+import SessionUserProvider from "./Contexts/SessionUserContext";
+
+
 
 const App = () => {
   const location = useLocation();
 
   return (
-    <CarsProvider>
-      <MotionConfig transition={ {
-        type: "just",
-        staggerChildren: 0.1,
-      } }>
-        <AnimatePresence mode="wait">
-          <Routes location={ location } key={ location.pathname }>
-            <Route path="/" element={ <Header /> }>
-              <Route index path="/" element={ <Home /> } />
-              <Route path="about" element={ <About /> } />
-              <Route path="contact" element={ <Contact /> } />
-              <Route path="/car/:id" element={ <CarDetails /> } />
-            </Route>
-          </Routes>
-        </AnimatePresence>
-      </MotionConfig>
-      <Routes>
-        <Route path="admin" element={ <Admin /> }>
-          <Route index path="dashboard" element={ <Dashboard /> } />
-          <Route path="cars" element={ <ManageCars /> } />
-          <Route path="brands" element={ <ManageBrands /> } />
-        </Route>
-      </Routes>
-    </CarsProvider>
+    <SessionUserProvider>
+      <CarsProvider>
+        <MotionConfig transition={ {
+          type: "just",
+          staggerChildren: 0.1,
+        } }>
+          <AnimatePresence mode="wait">
+            <Routes location={ location } key={ location.pathname }>
+              <Route path="/" element={ <Header /> }>
+                <Route index path="/" element={ <Home /> } />
+                <Route path="about" element={ <About /> } />
+                <Route path="contact" element={ <Contact /> } />
+                <Route path="/car/:id" element={ <CarDetails /> } />
+              </Route>
+            </Routes>
+          </AnimatePresence>
+        </MotionConfig>
+        <Routes>
+          <Route path="admin" element={ <Admin /> }>
+            <Route index path="dashboard" element={ <Dashboard /> } />
+            <Route path="cars" element={ <ManageCars /> } />
+            <Route path="brands" element={ <ManageBrands /> } />
+          </Route>
+        </Routes>
+      </CarsProvider>
+    </SessionUserProvider>
   );
 };
 
