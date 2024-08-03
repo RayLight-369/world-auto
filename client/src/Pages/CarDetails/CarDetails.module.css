@@ -10,6 +10,19 @@ section#car-details {
   gap: 80px;
 }
 
+div.row-1 {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+div.title-overview {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 div.content {
   display: flex;
   flex-direction: column;
@@ -149,6 +162,7 @@ div.content {
   height: 350px;
   overflow: hidden;
   background: #111;
+  flex: 1;
   color: white !important;
   border-radius: 10px;
 }
@@ -156,7 +170,7 @@ div.content {
 img.img {
   /* object-fit: contain; */
   max-width: 100%;
-  max-height: 300px;
+  max-height: calc(100% - 20px);
   height: auto;
   width: auto;
   border-radius: 8px;
@@ -228,5 +242,14 @@ img.img {
 
   .img-carousal {
     width: 90vw !important;
+  }
+
+  div.accessories {
+    display: flex !important;
+    width: 100%;
+    flex-direction: column !important;
+
+    /* justify-items: center; */
+    gap: 30px;
   }
 }

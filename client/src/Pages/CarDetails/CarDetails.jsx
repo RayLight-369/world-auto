@@ -38,7 +38,7 @@ const CarDetails = () => {
   const [ car, setCar ] = useState( null );
   const { brands } = useCars();
   const [ properties, setProperties ] = useState( {} );
-  const [ isMobile, setIsMobile ] = useState( false );
+  const [ isMobile, setIsMobile ] = useState( true );
 
 
   const PROPERTIES = useMemo( () => ( {
@@ -117,36 +117,76 @@ const CarDetails = () => {
 
   return (
     <section id={ styles[ 'car-details' ] }>
-      <div className={ styles[ "img-carousal" ] }>
-        <Swiper
-          modules={ [ Navigation, Zoom, Pagination, Scrollbar, Keyboard, Mousewheel, Autoplay ] }
-          navigation
-          slidesPerView={ 'auto' }
-          centeredSlides={ true }
-          zoom
-          pagination={ { clickable: true, type: "fraction" } }
-          scrollbar={ { draggable: true } }
-          autoplay={ !isMobile && { delay: 3000, pauseOnMouseEnter: true, disableOnInteraction: false } }
-          spaceBetween={ 25 }
-          // slidesPerView={ 1 }
-          className={ styles[ 'img-carousal' ] }
-        >
-          { car?.images.map( ( i, k ) => (
-            <SwiperSlide zoom>
-              <img className={ styles[ 'img' ] } src={ i } alt="" key={ k } />
-            </SwiperSlide>
-          ) ) }
-        </Swiper>
-      </div>
+      { isMobile ? (
+        <div className={ styles[ "img-carousal" ] }>
+          <Swiper
+            modules={ [ Navigation, Zoom, Pagination, Scrollbar, Keyboard, Mousewheel, Autoplay ] }
+            navigation
+            slidesPerView={ 'auto' }
+            centeredSlides={ true }
+            zoom
+            pagination={ { clickable: true, type: "fraction" } }
+            scrollbar={ { draggable: true } }
+            autoplay={ !isMobile && { delay: 3000, pauseOnMouseEnter: true, disableOnInteraction: false } }
+            spaceBetween={ 25 }
+            // slidesPerView={ 1 }
+            className={ styles[ 'img-carousal' ] }
+          >
+            { car?.images.map( ( i, k ) => (
+              <SwiperSlide zoom>
+                <img className={ styles[ 'img' ] } src={ i } alt="" key={ k } />
+              </SwiperSlide>
+            ) ) }
+          </Swiper>
+        </div>
+      ) : (
+        <div className={ styles[ "row-1" ] }>
+          <div className={ styles[ "img-carousal" ] }>
+            <Swiper
+              modules={ [ Navigation, Zoom, Pagination, Scrollbar, Keyboard, Mousewheel, Autoplay ] }
+              navigation
+              slidesPerView={ 'auto' }
+              centeredSlides={ true }
+              zoom
+              pagination={ { clickable: true, type: "fraction" } }
+              scrollbar={ { draggable: true } }
+              autoplay={ !isMobile && { delay: 3000, pauseOnMouseEnter: true, disableOnInteraction: false } }
+              spaceBetween={ 25 }
+              // slidesPerView={ 1 }
+              className={ styles[ 'img-carousal' ] }
+            >
+              { car?.images.map( ( i, k ) => (
+                <SwiperSlide zoom>
+                  <img className={ styles[ 'img' ] } src={ i } alt="" key={ k } />
+                </SwiperSlide>
+              ) ) }
+            </Swiper>
+          </div>
+          <div className={ styles[ "title-overview" ] }>
+            <div className={ styles[ "title-price" ] }>
+              <h1>{ car.title }</h1>
+              <h1>{ car.price_per_day } USD / Day</h1>
+            </div>
+            <div className={ styles[ "overview" ] }>
+              <h1 className={ styles[ 'title' ] }>Overview</h1>
+              <p className={ styles[ "content" ] }>{ car.overview }</p>
+            </div>
+          </div>
+        </div>
+      ) }
       <div className={ styles[ "content" ] }>
-        <div className={ styles[ "title-price" ] }>
-          <h1>{ car.title }</h1>
-          <h1>{ car.price_per_day } USD / Day</h1>
-        </div>
-        <div className={ styles[ "overview" ] }>
-          <h1 className={ styles[ 'title' ] }>Overview</h1>
-          <p className={ styles[ "content" ] }>{ car.overview }</p>
-        </div>
+        { isMobile && (
+          <>
+            <div className={ styles[ "title-price" ] }>
+              <h1>{ car.title }</h1>
+              <h1>{ car.price_per_day } USD / Day</h1>
+            </div>
+            <div className={ styles[ "overview" ] }>
+              <h1 className={ styles[ 'title' ] }>Overview</h1>
+              <p className={ styles[ "content" ] }>{ car.overview }</p>
+            </div>
+          </>
+        ) }
         <div className={ styles[ "parent" ] }>
           <h1 className={ styles[ 'title' ] }>Details</h1>
           <div className={ styles[ "details" ] }>
