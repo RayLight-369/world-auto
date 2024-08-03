@@ -169,6 +169,10 @@ button#reg-btn {
   transition: 300ms;
   font-size: 0.95em;
   position: relative;
+
+  &.active {
+    background: var(--bg-blue);
+  }
 }
 
 /* Register button */
