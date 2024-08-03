@@ -22,6 +22,7 @@ nav.navbar div.logo {
   width: auto;
   display: flex;
   align-items: center;
+  left: 10px;
 }
 
 nav.navbar div.logo a {
@@ -43,7 +44,7 @@ div.nav-links {
   display: flex;
   gap: 30px;
   position: relative;
-  left: 2rem;
+  left: 2.4rem;
   align-items: center;
 }
 

@@ -12,6 +12,7 @@ const Home = () => {
   const [ brandFilterOpen, setBrandFilterOpen ] = useState( false );
   const [ priceFilterOpen, setPriceFilterOpen ] = useState( false );
   const [ fuelFilterOpen, setFuelFilterOpen ] = useState( false );
+  const [ mileageFilterOpen, setMileageFilterOpen ] = useState( false );
 
 
   useEffect( () => {
@@ -86,10 +87,36 @@ const Home = () => {
 
       }
 
+      case "mileage": {
+
+        if ( action.ptype == "start" ) {
+          return ( {
+            ...state,
+            Mileage: {
+              end: state.Mileage.end,
+              start: action.start
+            }
+          } );
+        } else {
+          return ( {
+            ...state,
+            Mileage: {
+              start: state.Mileage.start,
+              end: action.end
+            }
+          } );
+        }
+
+      }
+
     }
   }, {
     Brands: [],
     Price: {
+      start: 0,
+      end: 0
+    },
+    Mileage: {
       start: 0,
       end: 0
     },
@@ -114,7 +141,7 @@ const Home = () => {
 
   useEffect( () => {
     console.log( filtersState );
-    const { Brands, Price, Fuel_Types } = filtersState;
+    const { Brands, Price, Fuel_Types, Mileage } = filtersState;
 
     console.log( "Brands: ", Brands );
     console.log( "Cars: ", Cars );
@@ -152,7 +179,15 @@ const Home = () => {
       return startCheck && endCheck;
     }
 
-    setCars( cars.filter( car => BrandCheck( car ) && PriceCheck( car ) && FuelCheck( car ) ) );
+    function MileageCheck ( item ) {
+      const startCheck = Mileage.start ? +item.mileage >= Mileage.start : true;
+
+      const endCheck = Mileage.end ? +item.mileage <= Mileage.end : true;
+
+      return startCheck && endCheck;
+    }
+
+    setCars( cars.filter( car => BrandCheck( car ) && PriceCheck( car ) && FuelCheck( car ) && MileageCheck( car ) ) );
 
     // if ( Brands.length > 0 )
     //   setCars( cars.filter( car => Brands.includes( car.brand ) ) );
@@ -235,7 +270,7 @@ const Home = () => {
             </div>
             <div className={ `${ Styles[ "some-filter" ] } ${ fuelFilterOpen && Styles[ "open" ] }` } onClick={ () => setFuelFilterOpen( prev => !prev ) }>
               <div className={ Styles[ "title" ] }>
-                <p className={ Styles[ "name" ] }>FUEL TYPES</p>
+                <p className={ Styles[ "name" ] }>FUEL</p>
                 <p className={ Styles[ "indicator" ] }>{ ">" }</p>
               </div>
               <div className={ `${ Styles[ "some-container" ] } ${ fuelFilterOpen && Styles[ "open" ] }` }>
@@ -259,6 +294,27 @@ const Home = () => {
                     } } />
                   </div>
                 ) ) }
+              </div>
+            </div>
+            <div className={ `${ Styles[ "some-filter" ] } ${ mileageFilterOpen && Styles[ "open" ] }` } onClick={ () => setMileageFilterOpen( prev => !prev ) }>
+              <div className={ Styles[ "title" ] }>
+                <p className={ Styles[ "name" ] }>MILEAGE</p>
+                <p className={ Styles[ "indicator" ] }>{ ">" }</p>
+              </div>
+              <div className={ `${ Styles[ "some-container" ] } ${ mileageFilterOpen && Styles[ "open" ] }` }>
+                <div className={ Styles[ "mileage-range" ] } onClick={ e => e.stopPropagation() }>
+                  <input min={ 1 } type="number" name="starting" value={ filtersState.Mileage.start } className={ Styles[ 'starting-mileage' ] } onChange={ e => filterDistpatch( {
+                    type: "mileage",
+                    ptype: "start",
+                    start: +e.target.value
+                  } ) } />
+                  <p className={ Styles[ "to" ] }>to</p>
+                  <input min={ 1 } type="number" name="ending" value={ filtersState.Mileage.end } className={ Styles[ 'ending-mileage' ] } onChange={ e => filterDistpatch( {
+                    type: "mileage",
+                    ptype: "end",
+                    end: +e.target.value
+                  } ) } />
+                </div>
               </div>
             </div>
           </div>

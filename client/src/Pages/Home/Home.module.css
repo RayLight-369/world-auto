@@ -121,7 +121,7 @@ div.some-filter {
       padding: 5px;
       justify-content: space-between;
 
-      p:is(.brand-name, fuel-type) {
+      p:is(.brand-name, .fuel-type) {
         font-size: .75em;
         width: 100%;
       }
@@ -131,7 +131,7 @@ div.some-filter {
       }
     }
 
-    > div.prices {
+    > div:is(.prices, .mileage-range) {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -147,6 +147,18 @@ div.some-filter {
         border: none;
         border-bottom: 1px solid var(--soft-blue);
         outline: none;
+        position: relative;
+      }
+
+      > input::after {
+        content: "km";
+        position: absolute;
+        right: 20px;
+        bottom: 5px;
+        height: 10px;
+        width: 10px;
+        background: #000;
+        color: #555;
       }
     }
   }
@@ -248,13 +260,13 @@ div.list {
       transition: .2s ease-in-out;
       /* background: #888; */
 
-      > div.brand {
+      > div:is(.brand, .fuel) {
         display: flex;
         align-items: center;
         padding: 5px;
         justify-content: space-between;
 
-        p.brand-name {
+        p:is(.brand-name, .fuel-type) {
           font-size: .75em;
           width: 100%;
         }
@@ -264,7 +276,7 @@ div.list {
         }
       }
 
-      > div.prices {
+      > div:is(.prices, .mileage-range) {
         display: flex;
         flex-direction: column;
         align-items: center;
