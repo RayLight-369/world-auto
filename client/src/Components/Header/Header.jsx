@@ -15,10 +15,10 @@ const Header = () => {
   const [ isMobile, setIsMobile ] = useState( true );
   const { user, Login, isLoggedIn, Logout } = useUser();
 
-  const hideDropdown = () => {
-    setToggleDropdown( false );
-    setIcon( faBars );
-  };
+  // const hideDropdown = () => {
+  //   setToggleDropdown( false );
+  //   setIcon( faBars );
+  // };
 
 
 

@@ -251,6 +251,11 @@ button.signout {
 }
 
 @media screen and (max-width: 768px) {
+
+  div.logo {
+    left: 5px !important;
+  }
+
   div.logo img {
     height: 70%;
     width: auto;
