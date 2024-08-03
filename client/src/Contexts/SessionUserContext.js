@@ -1,5 +1,6 @@
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { exists, insertData } from '../Supabase';
 
 const SessionUserContext = createContext();
 
@@ -26,6 +27,31 @@ const SessionUserProvider = ( { children } ) => {
         setUser( body );
         setIsLoggedIn( true );
         sessionStorage.setItem( "user", JSON.stringify( body ) );
+
+        const userExists = await exists( {
+          table: "Users",
+          where: {
+            email: body.email
+          }
+        } );
+
+        if ( !userExists ) {
+          const { data } = await insertData( {
+            table: "Users",
+            object: {
+              email: body.email,
+              name: body.name,
+              image: body.picture
+            }
+          } );
+
+          if ( data ) {
+            setUser( prev => ( {
+              ...prev,
+              id: data[ 0 ].id
+            } ) );
+          }
+        }
       }
     },
     onError: ( error ) => console.log( 'Login Failed:', error ),
