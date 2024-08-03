@@ -11,6 +11,8 @@ const Home = () => {
   const [ Cars, setCars ] = useState( cars );
   const [ brandFilterOpen, setBrandFilterOpen ] = useState( false );
   const [ priceFilterOpen, setPriceFilterOpen ] = useState( false );
+  const [ fuelFilterOpen, setFuelFilterOpen ] = useState( false );
+
 
   useEffect( () => {
 
@@ -42,6 +44,26 @@ const Home = () => {
 
       }
 
+      case "fuel": case "fuels": {
+
+        const Fuel_Types = state.Fuel_Types;
+
+        if ( action.action == "add" && !Fuel_Types.includes( action.fuel ) ) {
+
+          Fuel_Types.push( action.fuel );
+
+        } else if ( action.action == "remove" && Fuel_Types.includes( action.fuel ) ) {
+
+          const index = Fuel_Types.indexOf( action.fuel );
+
+          Fuel_Types.splice( index, 1 );
+
+        }
+
+        return ( { ...state, Fuel_Types } );
+
+      }
+
       case "price": case "prices": {
 
         if ( action.ptype == "start" ) {
@@ -70,7 +92,8 @@ const Home = () => {
     Price: {
       start: 0,
       end: 0
-    }
+    },
+    Fuel_Types: []
   } );
 
   const variants = {
@@ -91,7 +114,7 @@ const Home = () => {
 
   useEffect( () => {
     console.log( filtersState );
-    const { Brands, Price } = filtersState;
+    const { Brands, Price, Fuel_Types } = filtersState;
 
     console.log( "Brands: ", Brands );
     console.log( "Cars: ", Cars );
@@ -109,6 +132,18 @@ const Home = () => {
       return true;
     }
 
+    function FuelCheck ( item ) {
+      if ( Fuel_Types.length > 0 ) {
+        if ( Fuel_Types.includes( item.fuel_type ) ) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
     function PriceCheck ( item ) {
       const startCheck = Price.start ? item.price_per_day >= Price.start : true;
 
@@ -117,7 +152,7 @@ const Home = () => {
       return startCheck && endCheck;
     }
 
-    setCars( cars.filter( car => BrandCheck( car ) && PriceCheck( car ) ) );
+    setCars( cars.filter( car => BrandCheck( car ) && PriceCheck( car ) && FuelCheck( car ) ) );
 
     // if ( Brands.length > 0 )
     //   setCars( cars.filter( car => Brands.includes( car.brand ) ) );
@@ -196,6 +231,34 @@ const Home = () => {
                     end: +e.target.value
                   } ) } />
                 </div>
+              </div>
+            </div>
+            <div className={ `${ Styles[ "some-filter" ] } ${ fuelFilterOpen && Styles[ "open" ] }` } onClick={ () => setFuelFilterOpen( prev => !prev ) }>
+              <div className={ Styles[ "title" ] }>
+                <p className={ Styles[ "name" ] }>FUEL TYPES</p>
+                <p className={ Styles[ "indicator" ] }>{ ">" }</p>
+              </div>
+              <div className={ `${ Styles[ "some-container" ] } ${ fuelFilterOpen && Styles[ "open" ] }` }>
+                { [ "Diesel", "Petrol", "CNG", "Electric" ].map( ( b, i ) => (
+                  <div className={ Styles[ "fuel" ] } key={ i } onClick={ e => e.stopPropagation() }>
+                    <p className={ Styles[ "fuel-type" ] }>{ b }</p>
+                    <input type="checkbox" onChange={ e => {
+                      if ( e.target.checked ) {
+                        filterDistpatch( {
+                          type: "fuel",
+                          action: "add",
+                          fuel: b
+                        } );
+                      } else {
+                        filterDistpatch( {
+                          type: "fuel",
+                          action: "remove",
+                          fuel: b
+                        } );
+                      }
+                    } } />
+                  </div>
+                ) ) }
               </div>
             </div>
           </div>

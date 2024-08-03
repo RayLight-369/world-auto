@@ -115,13 +115,13 @@ div.some-filter {
     transition: .2s ease-in-out;
     /* background: #888; */
 
-    > div.brand {
+    > div:is(.brand, .fuel) {
       display: flex;
       align-items: center;
       padding: 5px;
       justify-content: space-between;
 
-      p.brand-name {
+      p:is(.brand-name, fuel-type) {
         font-size: .75em;
         width: 100%;
       }
