@@ -1,24 +1,12 @@
-import { memo, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import Styles from "./Contact.module.css";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faInstagram, faLetterboxd, faMailchimp, faSquareLetterboxd, faTiktok, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faInstagram, faTiktok } from "@fortawesome/free-brands-svg-icons";
 import RequestForm from "../../Components/RequestForm/RequestForm";
-import { faLocation, faLocationDot, faLocationPin, faMailBulk, faMapLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { API } from "../../Constants";
+import { faLocationDot, faMailBulk, faPhone } from "@fortawesome/free-solid-svg-icons";
+// import { API } from "../../Constants";
 
-
-const Star = ( { n } ) => {
-
-  return (
-    <div className={ Styles[ "stars" ] }>
-      { Array.from( { length: n } ).map( ( _, i ) => (
-        <img key={ i } src="/Imgs/star.svg" alt="star" className={ Styles[ "starImage" ] } />
-      ) ) }
-    </div>
-  );
-
-};
 
 const Contact = () => {
 
@@ -37,45 +25,6 @@ const Contact = () => {
     }
   };
 
-  const reviews = useMemo( () =>
-    [
-      {
-        from: "KEBIR DGAYGUI",
-        msg: "I had the pleasure of meeting Brendon who was punctual, honest and kind. A car purchase carried out with professionalism is rare in used car sales.",
-        stars: 5,
-        link: "https://g.co/kgs/g5kmAo2"
-      },
-      {
-        from: "Arnaud Remy",
-        msg: "Serious seller and concerned that everything goes well. I recommend without reservation. Good luck in continuing your business",
-        stars: 5,
-        link: "https://g.co/kgs/M3s94WM"
-      },
-      {
-        from: "Samuel Melerio",
-        msg: "Efficient and responsive! Brendon was able to reassure us and support us during this purchase",
-        stars: 5,
-        link: "https://g.co/kgs/EQTV8Ts"
-      },
-      {
-        from: "Kikabou Jessy",
-        msg: "It's serious, it's honest, it's a good opportunity not to be missed.",
-        stars: 5,
-        link: "https://g.co/kgs/ZQrHeLh"
-      },
-      {
-        from: "Junior Ndiaye",
-        msg: "Very professional and honest. Vehicle without any problems after several weeks of use.",
-        stars: 5,
-        link: "https://g.co/kgs/73MHy8V"
-      },
-      {
-        from: "Nicolas GARNIER",
-        msg: "I recently bought a vehicle, it runs impeccably well. They are very accommodating and professional. I highly recommend!!",
-        stars: 5,
-        link: "https://g.co/kgs/sCB8T26"
-      },
-    ], [] );
 
   const handleFormSubmit = async () => {
 

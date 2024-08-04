@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import Styles from "./RequestForm.module.css";
-import { motion } from "framer-motion";
-import { CREDENTIALS } from "../../Constants";
+// import { motion } from "framer-motion";
+// import { CREDENTIALS } from "../../Constants";
 
 const RequestForm = ( { handleSubmit } ) => {
   const handleMsgChange = ( e ) => {

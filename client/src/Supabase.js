@@ -1,5 +1,5 @@
 const { createClient } = require( '@supabase/supabase-js' );
-const { CREDENTIALS } = require( './Constants' );
+// const { CREDENTIALS } = require( './Constants' );
 
 const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
 const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;

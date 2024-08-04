@@ -12,7 +12,7 @@ export const useUser = () => {
 
 const SessionUserProvider = ( { children } ) => {
 
-  const [ sessionStored, setSessionStored ] = useState( ( sessionStorage.getItem( "user" ) && JSON.parse( sessionStorage.getItem( "user" ) ) ) || ( Cookies.get( "user" ) && JSON.parse( Cookies.get( "user" ) ) ) || null );
+  const [ sessionStored ] = useState( ( sessionStorage.getItem( "user" ) && JSON.parse( sessionStorage.getItem( "user" ) ) ) || ( Cookies.get( "user" ) && JSON.parse( Cookies.get( "user" ) ) ) || null );
   const [ user, setUser ] = useState( null );
   const [ isLoggedIn, setIsLoggedIn ] = useState( !!sessionStored );
 
