@@ -281,6 +281,26 @@ const Home = () => {
 
   }, [ filtersState ] );
 
+  useEffect( () => {
+
+    const handleEvent = e => {
+      const { scrollY } = window;
+      const Filter = document.querySelector( "div." + Styles[ "filters-part" ] );
+
+      if ( scrollY > 150 ) {
+        Filter.classList.add( Styles.fixed );
+      } else {
+        Filter.classList.remove( Styles.fixed );
+      }
+
+    };
+
+    document.addEventListener( "scroll", handleEvent );
+
+    return () => document.removeEventListener( "scroll", handleEvent );
+
+  }, [] );
+
 
   return (
     <motion.section id={ Styles[ "home" ] } variants={ variants } initial="hidden" animate="animate" exit="exit">

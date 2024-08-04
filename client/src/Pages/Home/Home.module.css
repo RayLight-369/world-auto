@@ -41,6 +41,7 @@ input.search-input::placeholder {
 }
 
 section.body {
+  /* display: inline-block; */
   display: grid;
   gap: 15px;
   grid-template-columns: 250px auto;
@@ -181,6 +182,7 @@ div.content {
   flex-direction: column;
   gap: 25px;
   margin: 15px;
+  position: relative;
 }
 
 div.list {
@@ -216,7 +218,7 @@ div.list {
     font-family: Galano;
     font-size: 20px;
 
-    p span {
+    > p span {
       display: block;
     }
 
