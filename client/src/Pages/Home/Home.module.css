@@ -216,6 +216,10 @@ div.list {
     font-family: Galano;
     font-size: 20px;
 
+    p span {
+      display: block;
+    }
+
     div.filters-container {
       display: flex;
       height: fit-content;
