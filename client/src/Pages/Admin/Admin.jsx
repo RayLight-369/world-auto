@@ -79,7 +79,9 @@ const Admin = ( { adminVerified } ) => {
         </AnimatePresence>
 
         <AnimatePresence mode='wait'>
-          <OptionBar setAddBrandPopupOpen={ setAddBrandPopup } setAddCarPopupOpen={ setAddCarPopup } />
+          {adminVerified && (
+            <OptionBar setAddBrandPopupOpen={ setAddBrandPopup } setAddCarPopupOpen={ setAddCarPopup } />
+          )}
         </AnimatePresence>
 
         <AnimatePresence mode='wait'>
