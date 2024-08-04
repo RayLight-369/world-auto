@@ -113,15 +113,14 @@ div.some-filter {
     max-height: 0;
     overflow: auto;
     transition: .2s ease-in-out;
-    /* background: #888; */
 
-    > div:is(.brand, .fuel) {
+    > div:is(.brand, .fuel, .gearbox) {
       display: flex;
       align-items: center;
       padding: 5px;
       justify-content: space-between;
 
-      p:is(.brand-name, .fuel-type) {
+      p:is(.brand-name, .fuel-type, .gearbox-type) {
         font-size: .75em;
         width: 100%;
       }
@@ -131,7 +130,7 @@ div.some-filter {
       }
     }
 
-    > div:is(.prices, .mileage-range) {
+    > div:is(.prices, .mileage-range, .year-range) {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -260,13 +259,13 @@ div.list {
       transition: .2s ease-in-out;
       /* background: #888; */
 
-      > div:is(.brand, .fuel) {
+      > div:is(.brand, .fuel, .gearbox) {
         display: flex;
         align-items: center;
         padding: 5px;
         justify-content: space-between;
 
-        p:is(.brand-name, .fuel-type) {
+        p:is(.brand-name, .fuel-type, .gearbox-type) {
           font-size: .75em;
           width: 100%;
         }
@@ -276,7 +275,7 @@ div.list {
         }
       }
 
-      > div:is(.prices, .mileage-range) {
+      > div:is(.prices, .mileage-range, .year-range) {
         display: flex;
         flex-direction: column;
         align-items: center;

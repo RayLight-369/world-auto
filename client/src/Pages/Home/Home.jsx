@@ -14,6 +14,7 @@ const Home = () => {
   const [ fuelFilterOpen, setFuelFilterOpen ] = useState( false );
   const [ mileageFilterOpen, setMileageFilterOpen ] = useState( false );
   const [ gearboxFilterOpen, setGearboxFilterOpen ] = useState( false );
+  const [ modelYearFilterOpen, setModelYearFilterOpen ] = useState( false );
 
 
   useEffect( () => {
@@ -108,6 +109,28 @@ const Home = () => {
 
       }
 
+      case "year": case "my": {
+
+        if ( action.ptype == "start" ) {
+          return ( {
+            ...state,
+            Model_Year: {
+              end: state.Model_Year.end,
+              start: action.start
+            }
+          } );
+        } else {
+          return ( {
+            ...state,
+            Model_Year: {
+              start: state.Model_Year.start,
+              end: action.end
+            }
+          } );
+        }
+
+      }
+
       case "mileage": {
 
         if ( action.ptype == "start" ) {
@@ -137,6 +160,10 @@ const Home = () => {
       start: 0,
       end: 0
     },
+    Model_Year: {
+      start: 0,
+      end: 0
+    },
     Mileage: {
       start: 0,
       end: 0
@@ -163,7 +190,7 @@ const Home = () => {
 
   useEffect( () => {
     console.log( filtersState );
-    const { Brands, Price, Fuel_Types, Mileage, Gearbox } = filtersState;
+    const { Brands, Price, Fuel_Types, Mileage, Gearbox, Model_Year } = filtersState;
 
     console.log( "Brands: ", Brands );
     console.log( "Cars: ", Cars );
@@ -206,6 +233,7 @@ const Home = () => {
     }
 
     function PriceCheck ( item ) {
+
       const startCheck = Price.start ? item.price_per_day >= Price.start : true;
 
       const endCheck = Price.end ? item.price_per_day <= Price.end : true;
@@ -213,7 +241,17 @@ const Home = () => {
       return startCheck && endCheck;
     }
 
+    function ModelYearCheck ( item ) {
+
+      const startCheck = Model_Year.start ? item.model_year >= Model_Year.start : true;
+
+      const endCheck = Model_Year.end ? item.model_year <= Model_Year.end : true;
+
+      return startCheck && endCheck;
+    }
+
     function MileageCheck ( item ) {
+
       const startCheck = Mileage.start ? +item.mileage >= Mileage.start : true;
 
       const endCheck = Mileage.end ? +item.mileage <= Mileage.end : true;
@@ -221,7 +259,7 @@ const Home = () => {
       return startCheck && endCheck;
     }
 
-    setCars( cars.filter( car => BrandCheck( car ) && PriceCheck( car ) && FuelCheck( car ) && MileageCheck( car ) && GearboxCheck( car ) ) );
+    setCars( cars.filter( car => BrandCheck( car ) && PriceCheck( car ) && FuelCheck( car ) && MileageCheck( car ) && GearboxCheck( car ) && ModelYearCheck( car ) ) );
 
     // if ( Brands.length > 0 )
     //   setCars( cars.filter( car => Brands.includes( car.brand ) ) );
@@ -377,6 +415,27 @@ const Home = () => {
                     } } />
                   </div>
                 ) ) }
+              </div>
+            </div>
+            <div className={ `${ Styles[ "some-filter" ] } ${ modelYearFilterOpen && Styles[ "open" ] }` } onClick={ () => setModelYearFilterOpen( prev => !prev ) }>
+              <div className={ Styles[ "title" ] }>
+                <p className={ Styles[ "name" ] }>YEAR</p>
+                <p className={ Styles[ "indicator" ] }>{ ">" }</p>
+              </div>
+              <div className={ `${ Styles[ "some-container" ] } ${ modelYearFilterOpen && Styles[ "open" ] }` }>
+                <div className={ Styles[ "year-range" ] } onClick={ e => e.stopPropagation() }>
+                  <input min={ 1 } type="number" name="starting" value={ filtersState.Model_Year.start } className={ Styles[ 'starting-year' ] } onChange={ e => filterDistpatch( {
+                    type: "my",
+                    ptype: "start",
+                    start: +e.target.value
+                  } ) } />
+                  <p className={ Styles[ "to" ] }>to</p>
+                  <input min={ 1 } type="number" name="ending" value={ filtersState.Model_Year.end } className={ Styles[ 'ending-year' ] } onChange={ e => filterDistpatch( {
+                    type: "my",
+                    ptype: "end",
+                    end: +e.target.value
+                  } ) } />
+                </div>
               </div>
             </div>
           </div>
