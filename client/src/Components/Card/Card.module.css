@@ -4,11 +4,11 @@ div.card {
   cursor: pointer;
   height: fit-content;
   /* max-width: 700px; */
-  /* min-width: 300px; */
+  /* max-width: 350px; */
   overflow: hidden;
   transition: .2s ease-in-out;
   width: 100%;
-  flex: 1 1 400px;
+  /* flex: 1 1 400px; */
 }
 
 div.card a {
