@@ -13,6 +13,7 @@ const Home = () => {
   const [ priceFilterOpen, setPriceFilterOpen ] = useState( false );
   const [ fuelFilterOpen, setFuelFilterOpen ] = useState( false );
   const [ mileageFilterOpen, setMileageFilterOpen ] = useState( false );
+  const [ gearboxFilterOpen, setGearboxFilterOpen ] = useState( false );
 
 
   useEffect( () => {
@@ -42,6 +43,26 @@ const Home = () => {
         }
 
         return ( { ...state, Brands } );
+
+      }
+
+      case "gearbox": case "gb": {
+
+        const Gearbox = state.Gearbox;
+
+        if ( action.action == "add" && !Gearbox.includes( action.gearbox ) ) {
+
+          Gearbox.push( action.gearbox );
+
+        } else if ( action.action == "remove" && Gearbox.includes( action.gearbox ) ) {
+
+          const index = Gearbox.indexOf( action.gearbox );
+
+          Gearbox.splice( index, 1 );
+
+        }
+
+        return ( { ...state, Gearbox } );
 
       }
 
@@ -120,7 +141,8 @@ const Home = () => {
       start: 0,
       end: 0
     },
-    Fuel_Types: []
+    Fuel_Types: [],
+    Gearbox: []
   } );
 
   const variants = {
@@ -141,7 +163,7 @@ const Home = () => {
 
   useEffect( () => {
     console.log( filtersState );
-    const { Brands, Price, Fuel_Types, Mileage } = filtersState;
+    const { Brands, Price, Fuel_Types, Mileage, Gearbox } = filtersState;
 
     console.log( "Brands: ", Brands );
     console.log( "Cars: ", Cars );
@@ -150,6 +172,18 @@ const Home = () => {
     function BrandCheck ( item ) {
       if ( Brands.length > 0 ) {
         if ( Brands.includes( item.brand ) ) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    function GearboxCheck ( item ) {
+      if ( Gearbox.length > 0 ) {
+        if ( Gearbox.includes( item.gearbox ) ) {
           return true;
         } else {
           return false;
@@ -187,7 +221,7 @@ const Home = () => {
       return startCheck && endCheck;
     }
 
-    setCars( cars.filter( car => BrandCheck( car ) && PriceCheck( car ) && FuelCheck( car ) && MileageCheck( car ) ) );
+    setCars( cars.filter( car => BrandCheck( car ) && PriceCheck( car ) && FuelCheck( car ) && MileageCheck( car ) && GearboxCheck( car ) ) );
 
     // if ( Brands.length > 0 )
     //   setCars( cars.filter( car => Brands.includes( car.brand ) ) );
@@ -315,6 +349,34 @@ const Home = () => {
                     end: +e.target.value
                   } ) } />
                 </div>
+              </div>
+            </div>
+            <div className={ `${ Styles[ "some-filter" ] } ${ gearboxFilterOpen && Styles[ "open" ] }` } onClick={ () => setGearboxFilterOpen( prev => !prev ) }>
+              <div className={ Styles[ "title" ] }>
+                <p className={ Styles[ "name" ] }>GEARBOX</p>
+                <p className={ Styles[ "indicator" ] }>{ ">" }</p>
+              </div>
+              <div className={ `${ Styles[ "some-container" ] } ${ gearboxFilterOpen && Styles[ "open" ] }` }>
+                { [ "Manual", "Automatic", "Continuously variable automatic" ].map( ( b, i ) => (
+                  <div className={ Styles[ "gearbox" ] } key={ i } onClick={ e => e.stopPropagation() }>
+                    <p className={ Styles[ "gearbox-type" ] }>{ b }</p>
+                    <input type="checkbox" onChange={ e => {
+                      if ( e.target.checked ) {
+                        filterDistpatch( {
+                          type: "gearbox",
+                          action: "add",
+                          gearbox: b
+                        } );
+                      } else {
+                        filterDistpatch( {
+                          type: "gearbox",
+                          action: "remove",
+                          gearbox: b
+                        } );
+                      }
+                    } } />
+                  </div>
+                ) ) }
               </div>
             </div>
           </div>

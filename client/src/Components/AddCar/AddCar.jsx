@@ -34,6 +34,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
   const [ accessories, setAccessories ] = useState( car?.accessories || [] );
   const [ fuelDropdown, toggleFuelDropdown ] = useState( false );
   const [ brandDropdown, toggleBrandDropdown ] = useState( false );
+  const [ gearboxDropdown, toggleGearboxDropdown ] = useState( false );
 
   const [ images, setImages ] = useState( car?.images || [] );
   const [ imagesData, setImagesData ] = useState( {} );
@@ -134,15 +135,15 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       value: seatingCapacity,
       type: "number"
     },
-    {
-      element: "Gearbox",
-      class: "gearbox",
-      inputClass: "gearbox-input",
-      setState: setGearbox,
-      value: gearbox,
-      type: "text"
-    }
-  ], [ pricePerDay, pricePerMonth, mileage, energy, guarantee, color, certificate, emission, modelYear, seatingCapacity, gearbox ] );
+    // {
+    //   element: "Gearbox",
+    //   class: "gearbox",
+    //   inputClass: "gearbox-input",
+    //   setState: setGearbox,
+    //   value: gearbox,
+    //   type: "text"
+    // }
+  ], [ pricePerDay, pricePerMonth, mileage, energy, guarantee, color, certificate, emission, modelYear, seatingCapacity ] );
 
 
   // const [ priorityInput, setPriorityInput ] = useState( "" );
@@ -486,6 +487,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
                 <DropDown key={ "fuelType" } setState={ setFuelType } selected={ fuelType } array={ [ "Diesel", "Petrol", "CNG", "Electric" ] } label='Fuel Type' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
                 <DropDown key={ "brand" } setState={ setBrand } selected={ brand } array={ brands?.map( ( brand ) => brand.brandName ) } backWorkArray={ brands?.map( brand => brand.id ) } label='Brand' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
+                <DropDown key={ "gearbox" } setState={ setGearbox } selected={ gearbox } array={ [ "Automatic", "Manual", "Continuously variable automatic" ] } label='Gearbox' dropDownOpen={ gearboxDropdown } toggleDropDown={ toggleGearboxDropdown } />
 
                 { data.map( ( value, index ) => (
 
