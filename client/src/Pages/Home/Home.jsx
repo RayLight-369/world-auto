@@ -189,9 +189,9 @@ const Home = () => {
       const Filter = document.querySelector( "div." + Styles[ "filters-shortcut" ] + " > div" );
 
       if ( scrollY > 300 ) {
-        Filter.classList.add( Styles.appear );
+        Filter?.classList.add( Styles.appear );
       } else {
-        Filter.classList.remove( Styles.appear );
+        Filter?.classList.remove( Styles.appear );
       }
 
     };

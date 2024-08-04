@@ -92,7 +92,7 @@ div.buttons {
   gap: 15px;
 }
 
-div.buttons button.requestBtn {
+div.buttons a {
   border: none;
   outline: none;
   color: white;
@@ -100,26 +100,11 @@ div.buttons button.requestBtn {
   padding: 10px 22px;
   border-radius: 5px;
   font-size: 12px;
+  text-decoration: none;
   transition: 150ms;
 }
 
-div.buttons button.cancelBtn {
-  border: none;
-  outline: none;
-  border: 1px solid var(--soft-blue);
-  background: none;
-  color: var(--soft-blue);
-  padding: 10px 22px;
-  border-radius: 5px;
-  font-size: 12px;
-  transition: 150ms;
-}
-
-div.buttons button.requestBtn:hover {
+div.buttons a:hover {
   filter: saturate(.7);
-  transform: scale(.9);
-}
-
-div.buttons button.cancelBtn:hover {
   transform: scale(.9);
 }

@@ -1,12 +1,19 @@
 // import React, { useState } from "react";
+import { useState } from "react";
 import Styles from "./RequestForm.module.css";
 // import { motion } from "framer-motion";
 // import { CREDENTIALS } from "../../Constants";
 
 const RequestForm = ( { handleSubmit } ) => {
+
+  const [ email, setEmail ] = useState( "" );
+  const [ msg, setMsg ] = useState( "" );
+
   const handleMsgChange = ( e ) => {
     e.target.style.height = "auto";
     e.target.style.height = e.target.scrollHeight + "px";
+
+    setMsg( e.target.value );
   };
 
   return (
@@ -19,6 +26,8 @@ const RequestForm = ( { handleSubmit } ) => {
               type="text"
               id={ Styles[ "shows-request-input" ] }
               name={ Styles[ "shows-request-input" ] }
+              onChange={ e => setEmail( e.target.value ) }
+              value={ email }
             />
             <span>Your Email</span>
           </label>
@@ -30,19 +39,21 @@ const RequestForm = ( { handleSubmit } ) => {
               id={ Styles[ "shows-message-input" ] }
               onChange={ handleMsgChange }
               name={ Styles[ "shows-message-input" ] }
+              value={ msg }
             />
             <span>Message (Optional)</span>
           </label>
         </div>
       </div>
       <div className={ Styles.buttons }>
-        <button
-          type="button"
+        <a
+          // type="a"
           className={ Styles.requestBtn }
-          onClick={ handleSubmit }
+          href={ `mailto:${ "worlauto95530@gmail.com" }?subject=Hey I Contacted You Through WorldAuto Site&body=${ msg }` }
+        // onClick={ handleSubmit }
         >
           Send Message
-        </button>
+        </a>
       </div>
     </div>
   );
