@@ -8,13 +8,14 @@ import Modal from '../../Components/Modal/Modal';
 import AddBrand from '../../Components/AddBrand/AddBrand';
 import { AdminLinks } from '../../Constants';
 
-const Admin = () => {
+const Admin = ( { adminVerified } ) => {
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const [ openAddCarPopup, setAddCarPopup ] = useState( false );
   const [ openAddBrandPopup, setAddBrandPopup ] = useState( false );
+  // const [ verified, setVerified ] = useState( false );
 
   const [ isMobile, setIsMobile ] = useState( false );
 
@@ -31,7 +32,11 @@ const Admin = () => {
 
   useEffect( () => {
     if ( [ "/admin", "/admin/", "admin" ].includes( location.pathname ) ) {
-      navigate( "/admin/dashboard" );
+      if ( !adminVerified ) {
+        navigate( "/admin/login" );
+      } else {
+        navigate( "/admin/dashboard" );
+      }
     }
 
     const Resize = () => setIsMobile( window.innerWidth <= 768 );
