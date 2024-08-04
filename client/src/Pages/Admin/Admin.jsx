@@ -46,6 +46,12 @@ const Admin = ( { adminVerified } ) => {
 
   }, [] );
 
+  useEffect( () => {
+    if ( !adminVerified && !location.pathname.includes( "login" ) ) {
+      navigate( "/admin/login" );
+    }
+  }, [ location ] );
+
   const closePopUp = ( setState ) => setState( false );
 
   return (
