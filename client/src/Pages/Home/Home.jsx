@@ -5,7 +5,11 @@ import CreateAlert from '../../Components/CreateAlert/CreateAlert';
 import { motion } from "framer-motion";
 import { useCars } from '../../Contexts/CarsContext';
 import PriceBox from "../../Components/PriceBox/PriceBox";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faCross, faCrosshairs, faX } from '@fortawesome/free-solid-svg-icons';
 const Home = () => {
+
+  const [ filtersDivOpen, setFiltersDivOpen ] = useState( false );
 
   const { cars, brands } = useCars();
   const [ Cars, setCars ] = useState( cars );
@@ -289,8 +293,10 @@ const Home = () => {
 
       <motion.section className={ Styles[ "body" ] } variants={ variants }>
         <div className={ Styles[ "filters-part" ] }>
-          <p>Filter your Search Criteria</p>
-          <div className={ Styles[ "filters-container" ] }>
+          <p>Filter your Search Criteria <span onClick={ () => {
+            setFiltersDivOpen( prev => !prev );
+          } }><FontAwesomeIcon icon={ filtersDivOpen ? faX : faBars } /></span></p>
+          <div className={ `${ Styles[ "filters-container" ] } ${ filtersDivOpen && Styles[ "open" ] }` }>
             <div className={ `${ Styles[ "some-filter" ] } ${ brandFilterOpen && Styles[ "open" ] }` } onClick={ () => setBrandFilterOpen( prev => !prev ) }>
               <div className={ Styles[ "title" ] }>
                 <p className={ Styles[ "name" ] }>BRAND</p>

@@ -64,6 +64,8 @@ div.filters-part {
     position: sticky;
     top: 25px;
     flex-direction: column;
+    /* max-height: 0; */
+    transition: 150ms;
     /* gap: 20px; */
   }
 }
@@ -73,6 +75,16 @@ div.filters-part > p {
   margin-bottom: 0;
   margin-left: 15px;
   margin-top: 25px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    position: relative;
+    right: 10px;
+    color: #555;
+  }
 }
 
 div.some-filter {
@@ -200,21 +212,26 @@ div.list {
     display: flex;
     flex-direction: column;
     gap: 25px;
-    /* justify-content: center; */
-    /* align-items: center; */
     font-family: Galano;
     font-size: 20px;
 
     div.filters-container {
       display: flex;
-      /* height: calc(100vh - 25px); */
       height: fit-content;
-      /* max-height: ; */
       overflow-y: auto;
       padding: 0 7px;
       position: sticky;
       top: 25px;
       flex-direction: column;
+      max-height: 0;
+      opacity: 0;
+      transition: all 150ms;
+
+      &.open {
+        max-height: 500px;
+        opacity: 1;
+      }
+
       /* gap: 20px; */
     }
   }
