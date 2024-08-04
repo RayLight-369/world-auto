@@ -7,27 +7,15 @@ import { useCars } from '../../Contexts/CarsContext';
 import PriceBox from "../../Components/PriceBox/PriceBox";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCross, faCrosshairs, faX } from '@fortawesome/free-solid-svg-icons';
+import FiltersContainer from '../../Components/FiltersContainer/FiltersContainer';
+
+
 const Home = () => {
 
-  const [ filtersDivOpen, setFiltersDivOpen ] = useState( false );
 
   const { cars, brands } = useCars();
   const [ Cars, setCars ] = useState( cars );
-  const [ brandFilterOpen, setBrandFilterOpen ] = useState( false );
-  const [ priceFilterOpen, setPriceFilterOpen ] = useState( false );
-  const [ fuelFilterOpen, setFuelFilterOpen ] = useState( false );
-  const [ mileageFilterOpen, setMileageFilterOpen ] = useState( false );
-  const [ gearboxFilterOpen, setGearboxFilterOpen ] = useState( false );
-  const [ modelYearFilterOpen, setModelYearFilterOpen ] = useState( false );
-
-
-  useEffect( () => {
-
-    if ( cars.length && !Cars?.length ) setCars( cars );
-
-    console.log( cars );
-
-  }, [ cars ] );
+  const [ shortcutFilterOpen, setShortcutFilterOpen ] = useState( false );
 
   const [ filtersState, filterDistpatch ] = useReducer( ( state, action ) => {
     switch ( action.type ) {
@@ -176,6 +164,7 @@ const Home = () => {
     Gearbox: []
   } );
 
+
   const variants = {
     hidden: {
       opacity: 0,
@@ -192,105 +181,17 @@ const Home = () => {
   };
 
 
-  useEffect( () => {
-    console.log( filtersState );
-    const { Brands, Price, Fuel_Types, Mileage, Gearbox, Model_Year } = filtersState;
-
-    console.log( "Brands: ", Brands );
-    console.log( "Cars: ", Cars );
-    console.log( "cars: ", cars );
-
-    function BrandCheck ( item ) {
-      if ( Brands.length > 0 ) {
-        if ( Brands.includes( item.brand ) ) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-
-      return true;
-    }
-
-    function GearboxCheck ( item ) {
-      if ( Gearbox.length > 0 ) {
-        if ( Gearbox.includes( item.gearbox ) ) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-
-      return true;
-    }
-
-    function FuelCheck ( item ) {
-      if ( Fuel_Types.length > 0 ) {
-        if ( Fuel_Types.includes( item.fuel_type ) ) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-
-      return true;
-    }
-
-    function PriceCheck ( item ) {
-
-      const startCheck = Price.start ? item.price_per_day >= Price.start : true;
-
-      const endCheck = Price.end ? item.price_per_day <= Price.end : true;
-
-      return startCheck && endCheck;
-    }
-
-    function ModelYearCheck ( item ) {
-
-      const startCheck = Model_Year.start ? item.model_year >= Model_Year.start : true;
-
-      const endCheck = Model_Year.end ? item.model_year <= Model_Year.end : true;
-
-      return startCheck && endCheck;
-    }
-
-    function MileageCheck ( item ) {
-
-      const startCheck = Mileage.start ? +item.mileage >= Mileage.start : true;
-
-      const endCheck = Mileage.end ? +item.mileage <= Mileage.end : true;
-
-      return startCheck && endCheck;
-    }
-
-    setCars( cars.filter( car => BrandCheck( car ) && PriceCheck( car ) && FuelCheck( car ) && MileageCheck( car ) && GearboxCheck( car ) && ModelYearCheck( car ) ) );
-
-    // if ( Brands.length > 0 )
-    //   setCars( cars.filter( car => Brands.includes( car.brand ) ) );
-    // else
-    //   setCars( cars );
-
-    // if ( Price ) {
-    //   setCars( cars.filter( car => {
-
-
-
-    //   } ) );
-    // }
-
-
-  }, [ filtersState ] );
 
   useEffect( () => {
 
     const handleEvent = e => {
       const { scrollY } = window;
-      const Filter = document.querySelector( "div." + Styles[ "filters-part" ] );
+      const Filter = document.querySelector( "div." + Styles[ "filters-shortcut" ] + " > div" );
 
-      if ( scrollY > 150 ) {
-        Filter.classList.add( Styles.fixed );
+      if ( scrollY > 300 ) {
+        Filter.classList.add( Styles.appear );
       } else {
-        Filter.classList.remove( Styles.fixed );
+        Filter.classList.remove( Styles.appear );
       }
 
     };
@@ -312,160 +213,7 @@ const Home = () => {
       </motion.section>
 
       <motion.section className={ Styles[ "body" ] } variants={ variants }>
-        <div className={ Styles[ "filters-part" ] }>
-          <p>Filter your Search Criteria <span onClick={ () => {
-            setFiltersDivOpen( prev => !prev );
-          } }><FontAwesomeIcon icon={ filtersDivOpen ? faX : faBars } /></span></p>
-          <div className={ `${ Styles[ "filters-container" ] } ${ filtersDivOpen && Styles[ "open" ] }` }>
-            <div className={ `${ Styles[ "some-filter" ] } ${ brandFilterOpen && Styles[ "open" ] }` } onClick={ () => setBrandFilterOpen( prev => !prev ) }>
-              <div className={ Styles[ "title" ] }>
-                <p className={ Styles[ "name" ] }>BRAND</p>
-                <p className={ Styles[ "indicator" ] }>{ ">" }</p>
-              </div>
-              <div className={ `${ Styles[ "some-container" ] } ${ brandFilterOpen && Styles[ "open" ] }` }>
-                { brands?.map( ( b, i ) => (
-                  <div className={ Styles[ "brand" ] } key={ i } onClick={ e => e.stopPropagation() }>
-                    <p className={ Styles[ "brand-name" ] }>{ b.brandName }</p>
-                    <input type="checkbox" onChange={ e => {
-                      if ( e.target.checked ) {
-                        filterDistpatch( {
-                          type: "brand",
-                          action: "add",
-                          brand: b.id
-                        } );
-                      } else {
-                        filterDistpatch( {
-                          type: "brand",
-                          action: "remove",
-                          brand: b.id
-                        } );
-                      }
-                    } } />
-                  </div>
-                ) ) }
-              </div>
-            </div>
-            <div className={ `${ Styles[ "some-filter" ] } ${ priceFilterOpen && Styles[ "open" ] }` } onClick={ () => setPriceFilterOpen( prev => !prev ) }>
-              <div className={ Styles[ "title" ] }>
-                <p className={ Styles[ "name" ] }>PRICE</p>
-                <p className={ Styles[ "indicator" ] }>{ ">" }</p>
-              </div>
-              <div className={ `${ Styles[ "some-container" ] } ${ priceFilterOpen && Styles[ "open" ] }` }>
-                <div className={ Styles[ "prices" ] } onClick={ e => e.stopPropagation() }>
-                  <input min={ 1 } type="number" name="starting" value={ filtersState.Price.start } className={ Styles[ 'starting-price' ] } onChange={ e => filterDistpatch( {
-                    type: "price",
-                    ptype: "start",
-                    start: +e.target.value
-                  } ) } />
-                  <p className={ Styles[ "to" ] }>to</p>
-                  <input min={ 1 } type="number" name="ending" value={ filtersState.Price.end } className={ Styles[ 'ending-price' ] } onChange={ e => filterDistpatch( {
-                    type: "price",
-                    ptype: "end",
-                    end: +e.target.value
-                  } ) } />
-                </div>
-              </div>
-            </div>
-            <div className={ `${ Styles[ "some-filter" ] } ${ fuelFilterOpen && Styles[ "open" ] }` } onClick={ () => setFuelFilterOpen( prev => !prev ) }>
-              <div className={ Styles[ "title" ] }>
-                <p className={ Styles[ "name" ] }>FUEL</p>
-                <p className={ Styles[ "indicator" ] }>{ ">" }</p>
-              </div>
-              <div className={ `${ Styles[ "some-container" ] } ${ fuelFilterOpen && Styles[ "open" ] }` }>
-                { [ "Diesel", "Petrol", "CNG", "Electric" ].map( ( b, i ) => (
-                  <div className={ Styles[ "fuel" ] } key={ i } onClick={ e => e.stopPropagation() }>
-                    <p className={ Styles[ "fuel-type" ] }>{ b }</p>
-                    <input type="checkbox" onChange={ e => {
-                      if ( e.target.checked ) {
-                        filterDistpatch( {
-                          type: "fuel",
-                          action: "add",
-                          fuel: b
-                        } );
-                      } else {
-                        filterDistpatch( {
-                          type: "fuel",
-                          action: "remove",
-                          fuel: b
-                        } );
-                      }
-                    } } />
-                  </div>
-                ) ) }
-              </div>
-            </div>
-            <div className={ `${ Styles[ "some-filter" ] } ${ mileageFilterOpen && Styles[ "open" ] }` } onClick={ () => setMileageFilterOpen( prev => !prev ) }>
-              <div className={ Styles[ "title" ] }>
-                <p className={ Styles[ "name" ] }>MILEAGE</p>
-                <p className={ Styles[ "indicator" ] }>{ ">" }</p>
-              </div>
-              <div className={ `${ Styles[ "some-container" ] } ${ mileageFilterOpen && Styles[ "open" ] }` }>
-                <div className={ Styles[ "mileage-range" ] } onClick={ e => e.stopPropagation() }>
-                  <input min={ 1 } type="number" name="starting" value={ filtersState.Mileage.start } className={ Styles[ 'starting-mileage' ] } onChange={ e => filterDistpatch( {
-                    type: "mileage",
-                    ptype: "start",
-                    start: +e.target.value
-                  } ) } />
-                  <p className={ Styles[ "to" ] }>to</p>
-                  <input min={ 1 } type="number" name="ending" value={ filtersState.Mileage.end } className={ Styles[ 'ending-mileage' ] } onChange={ e => filterDistpatch( {
-                    type: "mileage",
-                    ptype: "end",
-                    end: +e.target.value
-                  } ) } />
-                </div>
-              </div>
-            </div>
-            <div className={ `${ Styles[ "some-filter" ] } ${ gearboxFilterOpen && Styles[ "open" ] }` } onClick={ () => setGearboxFilterOpen( prev => !prev ) }>
-              <div className={ Styles[ "title" ] }>
-                <p className={ Styles[ "name" ] }>GEARBOX</p>
-                <p className={ Styles[ "indicator" ] }>{ ">" }</p>
-              </div>
-              <div className={ `${ Styles[ "some-container" ] } ${ gearboxFilterOpen && Styles[ "open" ] }` }>
-                { [ "Manual", "Automatic", "Continuously variable automatic" ].map( ( b, i ) => (
-                  <div className={ Styles[ "gearbox" ] } key={ i } onClick={ e => e.stopPropagation() }>
-                    <p className={ Styles[ "gearbox-type" ] }>{ b }</p>
-                    <input type="checkbox" onChange={ e => {
-                      if ( e.target.checked ) {
-                        filterDistpatch( {
-                          type: "gearbox",
-                          action: "add",
-                          gearbox: b
-                        } );
-                      } else {
-                        filterDistpatch( {
-                          type: "gearbox",
-                          action: "remove",
-                          gearbox: b
-                        } );
-                      }
-                    } } />
-                  </div>
-                ) ) }
-              </div>
-            </div>
-            <div className={ `${ Styles[ "some-filter" ] } ${ modelYearFilterOpen && Styles[ "open" ] }` } onClick={ () => setModelYearFilterOpen( prev => !prev ) }>
-              <div className={ Styles[ "title" ] }>
-                <p className={ Styles[ "name" ] }>YEAR</p>
-                <p className={ Styles[ "indicator" ] }>{ ">" }</p>
-              </div>
-              <div className={ `${ Styles[ "some-container" ] } ${ modelYearFilterOpen && Styles[ "open" ] }` }>
-                <div className={ Styles[ "year-range" ] } onClick={ e => e.stopPropagation() }>
-                  <input min={ 1 } type="number" name="starting" value={ filtersState.Model_Year.start } className={ Styles[ 'starting-year' ] } onChange={ e => filterDistpatch( {
-                    type: "my",
-                    ptype: "start",
-                    start: +e.target.value
-                  } ) } />
-                  <p className={ Styles[ "to" ] }>to</p>
-                  <input min={ 1 } type="number" name="ending" value={ filtersState.Model_Year.end } className={ Styles[ 'ending-year' ] } onChange={ e => filterDistpatch( {
-                    type: "my",
-                    ptype: "end",
-                    end: +e.target.value
-                  } ) } />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <FiltersContainer cars={ cars } Cars={ Cars } brands={ brands } setCars={ setCars } filterDistpatch={ filterDistpatch } filtersState={ filtersState } />
         <div className={ Styles[ "content" ] }>
           <p className={ Styles[ "results" ] }>{ Cars?.length } Cars match your search</p>
           <div className={ Styles[ "list" ] }>
@@ -473,6 +221,10 @@ const Home = () => {
               <Card key={ car.id } img={ car.images[ 0 ] } id={ car.id } fuel={ car.fuel_type } ppd={ car.price_per_day } ppm={ car.price_per_month } distance={ car.mileage } guarantee={ car.guarantee } overview={ car.overview } title={ car.title } year={ car.model_year } manual={ car?.accessories.includes( "Automatic" ) } />
             ) ) }
           </div>
+        </div>
+        <div className={ `${ Styles[ "filters-shortcut" ] } ${ shortcutFilterOpen && Styles.open }` }>
+          <p className={ Styles[ "shortcut-icon" ] } onClick={ () => setShortcutFilterOpen( prev => !prev ) }><FontAwesomeIcon icon={ faBars } /></p>
+          <FiltersContainer Cars={ Cars } cars={ cars } brands={ brands } setCars={ setCars } filterDistpatch={ filterDistpatch } filtersState={ filtersState } key={ 2 } />
         </div>
       </motion.section>
     </motion.section>
