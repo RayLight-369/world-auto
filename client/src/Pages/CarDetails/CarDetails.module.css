@@ -245,6 +245,15 @@ img.img {
   }
 
   :is(.parent, .overview) {
+
+    gap: 20px !important;
+
+    div.property {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: space-between !important;
+    }
+
     h1 {
       text-align: center !important;
     }
