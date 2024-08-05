@@ -323,7 +323,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     if ( images.length && imagesDone ) {
       ( async () => {
 
-        await updateData( {
+        const Data = await updateData( {
           table: "Cars",
           where: {
             id: carID
@@ -331,7 +331,13 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
           object: {
             images
           }
-        } ).then( console.log );
+        } );
+
+        const car = Data.data[ 0 ];
+
+        setCars( prev =>
+          prev.map( prevCar => car.id == prevCar.id ? car : prevCar )
+        );
 
       } )();
     }
@@ -420,6 +426,8 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       if ( res.ok ) {
         const body = await res.json();
         const car = body.data[ 0 ];
+
+        console.log( "car: ", car );
 
         setCarID( car.id );
 

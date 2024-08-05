@@ -35,7 +35,7 @@ div.title-overview {
 
     h1 {
       font-family: Poppins;
-      font-size: 1.3em;
+      font-size: 1.5em;
       color: #1a1a1a;
       width: 100%;
       white-space: wrap;
@@ -61,10 +61,11 @@ div.title-overview {
     h1 {
       color: var(--primary-blue);
       font-weight: bold;
+      font-size: 1.6em;
     }
 
     p {
-      font-size: .8em;
+      font-size: .96em;
       line-height: 1.5;
       max-height: 195px;
       overflow-y: auto;
@@ -300,5 +301,9 @@ img.img {
 
     /* justify-items: center; */
     gap: 30px;
+
+    > div {
+      flex-wrap: nowrap !important;
+    }
   }
 }
