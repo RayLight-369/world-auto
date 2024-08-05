@@ -165,7 +165,10 @@ const CarDetails = () => {
           <div className={ styles[ "title-overview" ] }>
             <div className={ styles[ "title-price" ] }>
               <h1>{ car.title }</h1>
-              <h1>{ car.price_per_day } USD / Day</h1>
+              <div className={ styles[ "price-buy" ] }>
+                <h1>{ car.price_per_day } USD / Day</h1>
+                <button>Reserve</button>
+              </div>
             </div>
             <div className={ styles[ "overview" ] }>
               <h1 className={ styles[ 'title' ] }>Overview</h1>
@@ -180,6 +183,7 @@ const CarDetails = () => {
             <div className={ styles[ "title-price" ] }>
               <h1>{ car.title }</h1>
               <h1>{ car.price_per_day } USD / Day</h1>
+              <button>Reserve</button>
             </div>
             <div className={ styles[ "overview" ] }>
               <h1 className={ styles[ 'title' ] }>Overview</h1>
