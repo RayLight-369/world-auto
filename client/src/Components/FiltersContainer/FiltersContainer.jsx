@@ -1,9 +1,9 @@
-import { useState, useEffect, useReducer, memo } from 'react';
+import { useState, useEffect, useReducer, memo, useMemo } from 'react';
 
 import Styles from "./FiltersContainer.module.css";
 import { useCars } from '../../Contexts/CarsContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faX } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCaretRight, faX } from '@fortawesome/free-solid-svg-icons';
 
 const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDistpatch } ) => {
 
@@ -101,6 +101,10 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
       setCars( cars.filter( car => BrandCheck( car ) && PriceCheck( car ) && FuelCheck( car ) && MileageCheck( car ) && GearboxCheck( car ) && ModelYearCheck( car ) ) );
     }
   }, [ filtersState ] );
+
+  const Elements = useMemo( () => {
+
+  }, [] );
 
   // if ( !filtersState ) return <p>Loading...</p>;
 
@@ -239,7 +243,7 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
         <div className={ `${ Styles[ "some-filter" ] } ${ modelYearFilterOpen && Styles[ "open" ] }` } onClick={ () => setModelYearFilterOpen( prev => !prev ) }>
           <div className={ Styles[ "title" ] }>
             <p className={ Styles[ "name" ] }>YEAR</p>
-            <p className={ Styles[ "indicator" ] }>{ ">" }</p>
+            <p className={ Styles[ "indicator" ] }><FontAwesomeIcon icon={ faCaretRight } /></p>
           </div>
           <div className={ `${ Styles[ "some-container" ] } ${ modelYearFilterOpen && Styles[ "open" ] }` }>
             <div className={ Styles[ "year-range" ] } onClick={ e => e.stopPropagation() }>

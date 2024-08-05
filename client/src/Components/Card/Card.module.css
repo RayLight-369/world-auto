@@ -2,13 +2,17 @@ div.card {
   border-radius: 20px;
   box-shadow: 1px 1px 6px #ccc;
   cursor: pointer;
-  height: fit-content;
+  height: 100%;
   /* max-width: 700px; */
   /* max-width: 350px; */
   overflow: hidden;
   transition: .2s ease-in-out;
   width: 100%;
   /* flex: 1 1 400px; */
+}
+
+div.card:hover {
+  transform: scale(1.04);
 }
 
 div.card a {
@@ -67,7 +71,7 @@ div.infos {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 30px 15px 40px;
+  padding: 30px 15px 30px;
 }
 
 p.title {

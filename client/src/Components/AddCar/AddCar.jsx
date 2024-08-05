@@ -18,7 +18,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
   const [ adding, setAdding ] = useState( false );
   const [ carTitle, setCarTitle ] = useState( car?.title || "" );
   const [ carOverview, setCarOverview ] = useState( car?.overview || "" );
-  const [ brand, setBrand ] = useState( car?.brand || undefined );
+  const [ brand, setBrand ] = useState( brands?.find( brand => brand.id == car?.brand )?.brandName || undefined );
   const [ fuelType, setFuelType ] = useState( car?.fuel_type || "" );
   const [ pricePerDay, setPricePerDay ] = useState( car?.price_per_day || 0 );
   const [ pricePerMonth, setPricePerMonth ] = useState( car?.price_per_month || 0 );
@@ -390,6 +390,8 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
     setAdding( true );
 
+    console.log( car );
+
     const dateParts = dateInput.split( "-" );
 
     [ dateParts[ 0 ], dateParts[ 2 ] ] = [ dateParts[ 2 ], dateParts[ 0 ] ];
@@ -401,7 +403,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     };
 
 
-    if ( !carTitle.trim().length || !Object.keys( imagesData ).length ) return setAdding( false );
+    if ( !car && ( !carTitle.trim().length || !Object.keys( imagesData ).length ) ) return setAdding( false );
 
     if ( type === "edit" || type == "del" ) ReqData.id = car.id;
 

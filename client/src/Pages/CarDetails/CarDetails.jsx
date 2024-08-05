@@ -86,7 +86,7 @@ const CarDetails = () => {
 
         if ( body?.data?.length ) body.data[ 0 ].brand = brands.find( brand => brand.id == body.data[ 0 ].brand )?.brandName;
 
-        const { title, price_per_day, overview, id, accessories, images, ...rest } = body.data[ 0 ];
+        const { title, price_per_day, price_per_month, overview, id, accessories, images, ...rest } = body.data[ 0 ];
 
         setProperties( rest );
 
@@ -193,7 +193,7 @@ const CarDetails = () => {
             { Object.entries( properties ).map( ( [ key, val ] ) => (
               <div className={ styles[ "property" ] } key={ key } title={ val }>
                 <p className={ styles[ "key" ] }>{ PROPERTIES[ key ] }</p>
-                <p className={ styles[ "value" ] }>{ val } { key.includes( "price" ) && "USD" } </p>
+                <p className={ styles[ "value" ] }>{ val }</p>
               </div>
             ) ) }
           </div>
