@@ -5,6 +5,20 @@ import { useCars } from '../../Contexts/CarsContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCaretRight, faX } from '@fortawesome/free-solid-svg-icons';
 
+
+const FilterPart = ( { filterOpen, setFilterOpen, label, children } ) => (
+  <div className={ `${ Styles[ "some-filter" ] } ${ filterOpen && Styles[ "open" ] }` } onClick={ () => setFilterOpen( prev => !prev ) }>
+    <div className={ Styles[ "title" ] }>
+      <p className={ Styles[ "name" ] }>{ label }</p>
+      <p className={ Styles[ "indicator" ] }><FontAwesomeIcon icon={ faCaretRight } /></p>
+    </div>
+    <div className={ `${ Styles[ "some-container" ] } ${ filterOpen && Styles[ "open" ] }` }>
+      { children }
+    </div>
+  </div>
+);
+
+
 const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDistpatch } ) => {
 
   const [ filtersDivOpen, setFiltersDivOpen ] = useState( false );
@@ -114,153 +128,117 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
         setFiltersDivOpen( prev => !prev );
       } }><FontAwesomeIcon icon={ filtersDivOpen ? faX : faBars } /></span></p>
       <div className={ `${ Styles[ "filters-container" ] } ${ filtersDivOpen && Styles[ "open" ] }` }>
-        <div className={ `${ Styles[ "some-filter" ] } ${ brandFilterOpen && Styles[ "open" ] }` } onClick={ () => setBrandFilterOpen( prev => !prev ) }>
-          <div className={ Styles[ "title" ] }>
-            <p className={ Styles[ "name" ] }>BRAND</p>
-            <p className={ Styles[ "indicator" ] }>{ ">" }</p>
-          </div>
-          <div className={ `${ Styles[ "some-container" ] } ${ brandFilterOpen && Styles[ "open" ] }` }>
-            { brands?.map( ( b, i ) => (
-              <div className={ Styles[ "brand" ] } key={ i } onClick={ e => e.stopPropagation() }>
-                <p className={ Styles[ "brand-name" ] }>{ b.brandName }</p>
-                <input type="checkbox" onChange={ e => {
-                  if ( e.target.checked ) {
-                    filterDistpatch( {
-                      type: "brand",
-                      action: "add",
-                      brand: b.id
-                    } );
-                  } else {
-                    filterDistpatch( {
-                      type: "brand",
-                      action: "remove",
-                      brand: b.id
-                    } );
-                  }
-                } } checked={ filtersState?.Brands.includes( b.id ) } />
-              </div>
-            ) ) }
-          </div>
-        </div>
-        <div className={ `${ Styles[ "some-filter" ] } ${ priceFilterOpen && Styles[ "open" ] }` } onClick={ () => setPriceFilterOpen( prev => !prev ) }>
-          <div className={ Styles[ "title" ] }>
-            <p className={ Styles[ "name" ] }>PRICE</p>
-            <p className={ Styles[ "indicator" ] }>{ ">" }</p>
-          </div>
-          <div className={ `${ Styles[ "some-container" ] } ${ priceFilterOpen && Styles[ "open" ] }` }>
-            <div className={ Styles[ "prices" ] } onClick={ e => e.stopPropagation() }>
-              <input min={ 1 } type="number" name="starting" value={ filtersState?.Price.start } className={ Styles[ 'starting-price' ] } onChange={ e => filterDistpatch( {
-                type: "price",
-                ptype: "start",
-                start: +e.target.value
-              } ) } />
-              <p className={ Styles[ "to" ] }>to</p>
-              <input min={ 1 } type="number" name="ending" value={ filtersState?.Price.end } className={ Styles[ 'ending-price' ] } onChange={ e => filterDistpatch( {
-                type: "price",
-                ptype: "end",
-                end: +e.target.value
-              } ) } />
+        <FilterPart filterOpen={ brandFilterOpen } setFilterOpen={ setBrandFilterOpen } label={ "BRANDS" } key={ "brands" }>
+          { brands?.map( ( b, i ) => (
+            <div className={ Styles[ "brand" ] } key={ i } onClick={ e => e.stopPropagation() }>
+              <p className={ Styles[ "brand-name" ] }>{ b.brandName }</p>
+              <input type="checkbox" onChange={ e => {
+                if ( e.target.checked ) {
+                  filterDistpatch( {
+                    type: "brand",
+                    action: "add",
+                    brand: b.id
+                  } );
+                } else {
+                  filterDistpatch( {
+                    type: "brand",
+                    action: "remove",
+                    brand: b.id
+                  } );
+                }
+              } } checked={ filtersState?.Brands.includes( b.id ) } />
             </div>
+          ) ) }
+        </FilterPart>
+        <FilterPart filterOpen={ priceFilterOpen } setFilterOpen={ setPriceFilterOpen } label={ "PRICE" } key={ "price" }>
+          <div className={ Styles[ "prices" ] } onClick={ e => e.stopPropagation() }>
+            <input min={ 1 } type="number" name="starting" value={ filtersState?.Price.start } className={ Styles[ 'starting-price' ] } onChange={ e => filterDistpatch( {
+              type: "price",
+              ptype: "start",
+              start: +e.target.value
+            } ) } />
+            <p className={ Styles[ "to" ] }>to</p>
+            <input min={ 1 } type="number" name="ending" value={ filtersState?.Price.end } className={ Styles[ 'ending-price' ] } onChange={ e => filterDistpatch( {
+              type: "price",
+              ptype: "end",
+              end: +e.target.value
+            } ) } />
           </div>
-        </div>
-        <div className={ `${ Styles[ "some-filter" ] } ${ fuelFilterOpen && Styles[ "open" ] }` } onClick={ () => setFuelFilterOpen( prev => !prev ) }>
-          <div className={ Styles[ "title" ] }>
-            <p className={ Styles[ "name" ] }>FUEL</p>
-            <p className={ Styles[ "indicator" ] }>{ ">" }</p>
-          </div>
-          <div className={ `${ Styles[ "some-container" ] } ${ fuelFilterOpen && Styles[ "open" ] }` }>
-            { [ "Diesel", "Petrol", "CNG", "Electric" ].map( ( b, i ) => (
-              <div className={ Styles[ "fuel" ] } key={ i } onClick={ e => e.stopPropagation() }>
-                <p className={ Styles[ "fuel-type" ] }>{ b }</p>
-                <input type="checkbox" onChange={ e => {
-                  if ( e.target.checked ) {
-                    filterDistpatch( {
-                      type: "fuel",
-                      action: "add",
-                      fuel: b
-                    } );
-                  } else {
-                    filterDistpatch( {
-                      type: "fuel",
-                      action: "remove",
-                      fuel: b
-                    } );
-                  }
-                } } checked={ filtersState?.Fuel_Types.includes( b ) } />
-              </div>
-            ) ) }
-          </div>
-        </div>
-        <div className={ `${ Styles[ "some-filter" ] } ${ mileageFilterOpen && Styles[ "open" ] }` } onClick={ () => setMileageFilterOpen( prev => !prev ) }>
-          <div className={ Styles[ "title" ] }>
-            <p className={ Styles[ "name" ] }>MILEAGE</p>
-            <p className={ Styles[ "indicator" ] }>{ ">" }</p>
-          </div>
-          <div className={ `${ Styles[ "some-container" ] } ${ mileageFilterOpen && Styles[ "open" ] }` }>
-            <div className={ Styles[ "mileage-range" ] } onClick={ e => e.stopPropagation() }>
-              <input min={ 1 } type="number" name="starting" value={ filtersState?.Mileage.start } className={ Styles[ 'starting-mileage' ] } onChange={ e => filterDistpatch( {
-                type: "mileage",
-                ptype: "start",
-                start: +e.target.value
-              } ) } />
-              <p className={ Styles[ "to" ] }>to</p>
-              <input min={ 1 } type="number" name="ending" value={ filtersState?.Mileage.end } className={ Styles[ 'ending-mileage' ] } onChange={ e => filterDistpatch( {
-                type: "mileage",
-                ptype: "end",
-                end: +e.target.value
-              } ) } />
+        </FilterPart>
+        <FilterPart label={ "FUEL" } filterOpen={ fuelFilterOpen } setFilterOpen={ setFuelFilterOpen } key={ "fuel" }>
+          { [ "Diesel", "Petrol", "CNG", "Electric" ].map( ( b, i ) => (
+            <div className={ Styles[ "fuel" ] } key={ i } onClick={ e => e.stopPropagation() }>
+              <p className={ Styles[ "fuel-type" ] }>{ b }</p>
+              <input type="checkbox" onChange={ e => {
+                if ( e.target.checked ) {
+                  filterDistpatch( {
+                    type: "fuel",
+                    action: "add",
+                    fuel: b
+                  } );
+                } else {
+                  filterDistpatch( {
+                    type: "fuel",
+                    action: "remove",
+                    fuel: b
+                  } );
+                }
+              } } checked={ filtersState?.Fuel_Types.includes( b ) } />
             </div>
+          ) ) }
+        </FilterPart>
+        <FilterPart filterOpen={ mileageFilterOpen } setFilterOpen={ setMileageFilterOpen } label={ "MILEAGE" } key={ "mileage" }>
+          <div className={ Styles[ "mileage-range" ] } onClick={ e => e.stopPropagation() }>
+            <input min={ 1 } type="number" name="starting" value={ filtersState?.Mileage.start } className={ Styles[ 'starting-mileage' ] } onChange={ e => filterDistpatch( {
+              type: "mileage",
+              ptype: "start",
+              start: +e.target.value
+            } ) } />
+            <p className={ Styles[ "to" ] }>to</p>
+            <input min={ 1 } type="number" name="ending" value={ filtersState?.Mileage.end } className={ Styles[ 'ending-mileage' ] } onChange={ e => filterDistpatch( {
+              type: "mileage",
+              ptype: "end",
+              end: +e.target.value
+            } ) } />
           </div>
-        </div>
-        <div className={ `${ Styles[ "some-filter" ] } ${ gearboxFilterOpen && Styles[ "open" ] }` } onClick={ () => setGearboxFilterOpen( prev => !prev ) }>
-          <div className={ Styles[ "title" ] }>
-            <p className={ Styles[ "name" ] }>GEARBOX</p>
-            <p className={ Styles[ "indicator" ] }>{ ">" }</p>
-          </div>
-          <div className={ `${ Styles[ "some-container" ] } ${ gearboxFilterOpen && Styles[ "open" ] }` }>
-            { [ "Manual", "Automatic", "Continuously variable automatic" ].map( ( b, i ) => (
-              <div className={ Styles[ "gearbox" ] } key={ i } onClick={ e => e.stopPropagation() }>
-                <p className={ Styles[ "gearbox-type" ] }>{ b }</p>
-                <input type="checkbox" onChange={ e => {
-                  if ( e.target.checked ) {
-                    filterDistpatch( {
-                      type: "gearbox",
-                      action: "add",
-                      gearbox: b
-                    } );
-                  } else {
-                    filterDistpatch( {
-                      type: "gearbox",
-                      action: "remove",
-                      gearbox: b
-                    } );
-                  }
-                } } checked={ filtersState?.Gearbox.includes( b ) } />
-              </div>
-            ) ) }
-          </div>
-        </div>
-        <div className={ `${ Styles[ "some-filter" ] } ${ modelYearFilterOpen && Styles[ "open" ] }` } onClick={ () => setModelYearFilterOpen( prev => !prev ) }>
-          <div className={ Styles[ "title" ] }>
-            <p className={ Styles[ "name" ] }>YEAR</p>
-            <p className={ Styles[ "indicator" ] }><FontAwesomeIcon icon={ faCaretRight } /></p>
-          </div>
-          <div className={ `${ Styles[ "some-container" ] } ${ modelYearFilterOpen && Styles[ "open" ] }` }>
-            <div className={ Styles[ "year-range" ] } onClick={ e => e.stopPropagation() }>
-              <input min={ 1 } type="number" name="starting" value={ filtersState?.Model_Year.start } className={ Styles[ 'starting-year' ] } onChange={ e => filterDistpatch( {
-                type: "my",
-                ptype: "start",
-                start: +e.target.value
-              } ) } />
-              <p className={ Styles[ "to" ] }>to</p>
-              <input min={ 1 } type="number" name="ending" value={ filtersState?.Model_Year.end } className={ Styles[ 'ending-year' ] } onChange={ e => filterDistpatch( {
-                type: "my",
-                ptype: "end",
-                end: +e.target.value
-              } ) } />
+        </FilterPart>
+        <FilterPart filterOpen={ gearboxFilterOpen } setFilterOpen={ setGearboxFilterOpen } label={ "GEARBOX" } key={ "gearbox" }>
+          { [ "Manual", "Automatic", "Continuously variable automatic" ].map( ( b, i ) => (
+            <div className={ Styles[ "gearbox" ] } key={ i } onClick={ e => e.stopPropagation() }>
+              <p className={ Styles[ "gearbox-type" ] }>{ b }</p>
+              <input type="checkbox" onChange={ e => {
+                if ( e.target.checked ) {
+                  filterDistpatch( {
+                    type: "gearbox",
+                    action: "add",
+                    gearbox: b
+                  } );
+                } else {
+                  filterDistpatch( {
+                    type: "gearbox",
+                    action: "remove",
+                    gearbox: b
+                  } );
+                }
+              } } checked={ filtersState?.Gearbox.includes( b ) } />
             </div>
+          ) ) }
+        </FilterPart>
+        <FilterPart filterOpen={ modelYearFilterOpen } setFilterOpen={ setModelYearFilterOpen } label={ "YEAR" } key={ "year" }>
+          <div className={ Styles[ "year-range" ] } onClick={ e => e.stopPropagation() }>
+            <input min={ 1 } type="number" name="starting" value={ filtersState?.Model_Year.start } className={ Styles[ 'starting-year' ] } onChange={ e => filterDistpatch( {
+              type: "my",
+              ptype: "start",
+              start: +e.target.value
+            } ) } />
+            <p className={ Styles[ "to" ] }>to</p>
+            <input min={ 1 } type="number" name="ending" value={ filtersState?.Model_Year.end } className={ Styles[ 'ending-year' ] } onChange={ e => filterDistpatch( {
+              type: "my",
+              ptype: "end",
+              end: +e.target.value
+            } ) } />
           </div>
-        </div>
+        </FilterPart>
       </div>
     </div>
   );

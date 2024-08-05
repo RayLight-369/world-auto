@@ -65,8 +65,9 @@ div.some-filter {
     text-transform: uppercase;
 
     p.indicator {
-      font-size: 1.2em;
+      font-size: 1em;
       transition: 150ms;
+      color: #aaa;
     }
   }
 
