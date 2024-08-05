@@ -240,6 +240,10 @@ img.img {
     gap: 80px;
   }
 
+  div.overview p.content {
+    text-align: left !important;
+  }
+
   :is(.parent, .overview) {
     h1 {
       text-align: center !important;
@@ -303,7 +307,10 @@ img.img {
     gap: 30px;
 
     > div {
+      display: flex !important;
+      flex-direction: row !important;
       flex-wrap: nowrap !important;
+      overflow: hidden;
     }
   }
 }
