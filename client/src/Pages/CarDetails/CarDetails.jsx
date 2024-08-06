@@ -93,18 +93,19 @@ const CarDetails = () => {
 
         setCar( body.data[ 0 ] );
 
-        let msg = `Subject: Car Reservation Request
-        Dear WorldAuto!,
-        I am interested in reserving the following car and would like to provide the details:
+        let msg = `
+Subject: Car Reservation Request
+Dear WorldAuto!,
+I am interested in reserving the following car and would like to provide the details:
         
-        - **ID** : ${ id }
-        - **Title** : ${ title }
-        - **Price** : ${ price_per_day }
+- *ID* : ${ id }
+- *Title* : ${ title }
+- *Price* : ${ price_per_day }
 
-        `;
+`;
 
         accessories.forEach( ( v, i ) => {
-          msg += `**${ i + 1 }.** ${ v }\n`;
+          msg += `*${ i + 1 }.* ${ v }\n`;
         } );
 
         setMsg( msg );
