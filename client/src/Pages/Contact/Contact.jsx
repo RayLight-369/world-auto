@@ -52,8 +52,8 @@ const Contact = () => {
     // <AnimatePresence mode="wait">
     <motion.section id={ Styles[ "contact" ] } variants={ variants } initial="hidden" animate="animate" exit="exit">
       <motion.div className={ Styles[ "banner" ] } variants={ variants }>
-        <h1 className={ Styles[ "title" ] }>Contact Us</h1>
-        <p className={ Styles[ "desc" ] }>Get in Touch</p>
+        <h1 className={ Styles[ "title" ] }>Contactez-nous</h1>
+        <p className={ Styles[ "desc" ] }>Entrer en contact</p>
         <div className={ Styles[ "social" ] }>
           <a href="https://www.facebook.com/worldautopro1?locale=fr_FR"><FontAwesomeIcon icon={ faFacebook } /></a>
           <a href="https://www.instagram.com/worldauto_idf/"><FontAwesomeIcon icon={ faInstagram } /></a>
@@ -62,7 +62,7 @@ const Contact = () => {
       </motion.div>
       <motion.div className={ Styles[ "info" ] } variants={ variants }>
         <div className={ Styles[ "panel" ] }>
-          <h1>Let's explore something <span>exciting</span> together!</h1>
+          <h1>Explorons ensemble quelque chose <span>d'excitant !</span></h1>
           <div className={ Styles[ "social-attrs" ] }>
             <div className={ Styles[ "attr" ] }>
               <FontAwesomeIcon icon={ faMailBulk } />

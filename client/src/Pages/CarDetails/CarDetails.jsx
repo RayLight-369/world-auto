@@ -190,7 +190,7 @@ I am interested in reserving the following car and would like to provide the det
               </div>
             </div>
             <div className={ styles[ "overview" ] }>
-              <h1 className={ styles[ 'title' ] }>Overview</h1>
+              <h1 className={ styles[ 'title' ] }>Aperçu</h1>
               <p className={ styles[ "content" ] }>{ car.overview }</p>
             </div>
 
@@ -206,14 +206,14 @@ I am interested in reserving the following car and would like to provide the det
               <h1>{ car.price_per_day } €</h1>
             </div>
             <div className={ styles[ "overview" ] }>
-              <h1 className={ styles[ 'title' ] }>Overview</h1>
+              <h1 className={ styles[ 'title' ] }>Aperçu</h1>
               <p className={ styles[ "content" ] }>{ car.overview }</p>
             </div>
             <a target='_blank' className={ styles[ 'reserve' ] } href={ `https://wa.me/33751287393?text=${ encodeURIComponent( `Hey I contacted you through World Auto Site! \n\n ${ msg }` ) }` }>Reserve</a>
           </>
         ) }
         <div className={ styles[ "parent" ] }>
-          <h1 className={ styles[ 'title' ] }>Details</h1>
+          <h1 className={ styles[ 'title' ] }>Détails</h1>
           <div className={ styles[ "details" ] }>
             { Object.entries( properties ).map( ( [ key, val ] ) => (
               <div className={ styles[ "property" ] } key={ key } title={ val }>
@@ -224,7 +224,7 @@ I am interested in reserving the following car and would like to provide the det
           </div>
         </div>
         <div className={ styles[ "parent" ] }>
-          <h1 className={ styles[ 'title' ] }>Accessories / Features Available</h1>
+          <h1 className={ styles[ 'title' ] }>Accessoires / fonctionnalités disponibles</h1>
           <div className={ styles[ "accessories" ] }>
             { car?.accessories.map( ( val, i ) => (
               <div className={ styles[ "accessory" ] } key={ i } title={ val }>

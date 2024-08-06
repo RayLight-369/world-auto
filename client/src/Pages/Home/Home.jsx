@@ -1,12 +1,11 @@
-import React, { useEffect, useMemo, useReducer, useState } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 import Styles from "./Home.module.css";
 import Card from '../../Components/Card/Card';
 import CreateAlert from '../../Components/CreateAlert/CreateAlert';
 import { motion } from "framer-motion";
 import { useCars } from '../../Contexts/CarsContext';
-import PriceBox from "../../Components/PriceBox/PriceBox";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faCross, faCrosshairs, faX } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faX } from '@fortawesome/free-solid-svg-icons';
 import FiltersContainer from '../../Components/FiltersContainer/FiltersContainer';
 
 
@@ -244,7 +243,7 @@ const Home = () => {
       <motion.section className={ Styles[ "search-section" ] } variants={ variants }>
 
         <h1 className={ Styles[ "ad-title" ] }>Achetez votre voiture d’occasion contrôlée & garantie</h1>
-        <input type="text" name="search" className={ Styles[ 'search-input' ] } placeholder='Make, Model, Fuel, Gearbox' onChange={ e => setSearchInputText( e.target.value ) } value={ searchInputText } />
+        <input type="text" name="search" className={ Styles[ 'search-input' ] } placeholder='Marque, Modèle, Carburant, Boite de vitesse' onChange={ e => setSearchInputText( e.target.value ) } value={ searchInputText } />
 
       </motion.section>
 

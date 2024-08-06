@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import Styles from "./Header.module.css";
 import { Outlet, NavLink } from "react-router-dom";
 import { NavLinks } from '../../Constants';
@@ -158,4 +158,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo( Header );

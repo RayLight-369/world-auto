@@ -77,8 +77,8 @@ const About = () => {
     // <AnimatePresence mode="wait">
     <motion.section id={ Styles[ "about" ] } variants={ variants } initial="hidden" animate="animate" exit="exit">
       <motion.div className={ Styles[ "banner" ] } variants={ variants }>
-        <h1 className={ Styles[ "title" ] }>About Us</h1>
-        <p className={ Styles[ "desc" ] }>Discover Our Story</p>
+        <h1 className={ Styles[ "title" ] }>À propos de nous</h1>
+        <p className={ Styles[ "desc" ] }>Découvrez notre histoire</p>
       </motion.div>
       <motion.div className={ Styles[ "info" ] } variants={ variants }>
         <div className={ Styles[ "img" ] } />
@@ -89,7 +89,7 @@ const About = () => {
         </p>
       </motion.div>
       <motion.div className={ Styles[ "reviews" ] } variants={ variants }>
-        <h1>Reviews From Google</h1>
+        <h1>Avis de Google</h1>
         <div className={ Styles[ "reviews-container" ] }>
           { reviews.map( ( review, i ) => (
             <a href={ review.link }>

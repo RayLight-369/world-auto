@@ -29,7 +29,7 @@ const RequestForm = ( { handleSubmit } ) => {
               onChange={ e => setEmail( e.target.value ) }
               value={ email }
             />
-            <span>Your Email</span>
+            <span>votre email</span>
           </label>
         </div>
         <div className={ Styles[ "shows-message" ] }>
@@ -41,7 +41,7 @@ const RequestForm = ( { handleSubmit } ) => {
               name={ Styles[ "shows-message-input" ] }
               value={ msg }
             />
-            <span>Message (Optional)</span>
+            <span>Message (optionnel)</span>
           </label>
         </div>
       </div>
@@ -50,11 +50,11 @@ const RequestForm = ( { handleSubmit } ) => {
           // type="a"
           className={ Styles.requestBtn }
           // href={ `mailto:${ "worlauto95530@gmail.com" }?subject=Hey I Contacted You Through WorldAuto Site&body=${ msg }` }
-          href={ `https://wa.me/33751287393?text=${ encodeURIComponent( `Hey I Contacted You Through WorldAuto Site! My Email is ${ email }\n${ msg }` ) }` }
+          href={ `https://wa.me/33751287393?text=${ encodeURIComponent( `Hé, je vous ai contacté via le site WorldAuto ! Mon email est ${ email }\n${ msg }` ) }` }
           target="_blank"
         // onClick={ handleSubmit }
         >
-          Send Message
+          Envoyer
         </a>
       </div>
     </div>
