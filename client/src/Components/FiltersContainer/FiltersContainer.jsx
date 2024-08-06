@@ -127,11 +127,11 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
 
   return (
     <div className={ Styles[ "filters-part" ] }>
-      <p>Filter your Search Criteria <span onClick={ () => {
+      <p>Filtrer vos critères de recherche <span onClick={ () => {
         setFiltersDivOpen( prev => !prev );
       } }><FontAwesomeIcon icon={ filtersDivOpen ? faX : faBars } /></span></p>
       <div className={ `${ Styles[ "filters-container" ] } ${ filtersDivOpen && Styles[ "open" ] }` }>
-        <FilterPart filterOpen={ brandFilterOpen } setFilterOpen={ setBrandFilterOpen } label={ "BRANDS" } key={ "brands" }>
+        <FilterPart filterOpen={ brandFilterOpen } setFilterOpen={ setBrandFilterOpen } label={ "MARQUE" } key={ "brands" }>
           { brands?.map( ( b, i ) => (
             <div className={ Styles[ "brand" ] } key={ i } onClick={ e => e.stopPropagation() }>
               <p className={ Styles[ "brand-name" ] }>{ b.brandName }</p>
@@ -153,14 +153,14 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
             </div>
           ) ) }
         </FilterPart>
-        <FilterPart filterOpen={ priceFilterOpen } setFilterOpen={ setPriceFilterOpen } label={ "PRICE" } key={ "price" }>
+        <FilterPart filterOpen={ priceFilterOpen } setFilterOpen={ setPriceFilterOpen } label={ "PRIX" } key={ "price" }>
           <div className={ Styles[ "prices" ] } onClick={ e => e.stopPropagation() }>
             <input min={ 1 } type="number" name="starting" value={ filtersState?.Price.start } className={ Styles[ 'starting-price' ] } onChange={ e => filterDistpatch( {
               type: "price",
               ptype: "start",
               start: +e.target.value
             } ) } />
-            <p className={ Styles[ "to" ] }>to</p>
+            <p className={ Styles[ "to" ] }>Jusqu'à</p>
             <input min={ 1 } type="number" name="ending" value={ filtersState?.Price.end } className={ Styles[ 'ending-price' ] } onChange={ e => filterDistpatch( {
               type: "price",
               ptype: "end",
@@ -168,7 +168,7 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
             } ) } />
           </div>
         </FilterPart>
-        <FilterPart label={ "FUEL" } filterOpen={ fuelFilterOpen } setFilterOpen={ setFuelFilterOpen } key={ "fuel" }>
+        <FilterPart label={ "CARBURANT" } filterOpen={ fuelFilterOpen } setFilterOpen={ setFuelFilterOpen } key={ "fuel" }>
           { [ "Diesel", "Petrol", "CNG", "Electric" ].map( ( b, i ) => (
             <div className={ Styles[ "fuel" ] } key={ i } onClick={ e => e.stopPropagation() }>
               <p className={ Styles[ "fuel-type" ] }>{ b }</p>
@@ -190,14 +190,14 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
             </div>
           ) ) }
         </FilterPart>
-        <FilterPart filterOpen={ mileageFilterOpen } setFilterOpen={ setMileageFilterOpen } label={ "MILEAGE" } key={ "mileage" }>
+        <FilterPart filterOpen={ mileageFilterOpen } setFilterOpen={ setMileageFilterOpen } label={ "Kilomètrage" } key={ "mileage" }>
           <div className={ Styles[ "mileage-range" ] } onClick={ e => e.stopPropagation() }>
             <input min={ 1 } type="number" name="starting" value={ filtersState?.Mileage.start } className={ Styles[ 'starting-mileage' ] } onChange={ e => filterDistpatch( {
               type: "mileage",
               ptype: "start",
               start: +e.target.value
             } ) } />
-            <p className={ Styles[ "to" ] }>to</p>
+            <p className={ Styles[ "to" ] }>Jusqu'à</p>
             <input min={ 1 } type="number" name="ending" value={ filtersState?.Mileage.end } className={ Styles[ 'ending-mileage' ] } onChange={ e => filterDistpatch( {
               type: "mileage",
               ptype: "end",
@@ -205,7 +205,7 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
             } ) } />
           </div>
         </FilterPart>
-        <FilterPart filterOpen={ gearboxFilterOpen } setFilterOpen={ setGearboxFilterOpen } label={ "GEARBOX" } key={ "gearbox" }>
+        <FilterPart filterOpen={ gearboxFilterOpen } setFilterOpen={ setGearboxFilterOpen } label={ "Boite de vitesse" } key={ "gearbox" }>
           { [ "Manual", "Automatic", "Continuously variable automatic" ].map( ( b, i ) => (
             <div className={ Styles[ "gearbox" ] } key={ i } onClick={ e => e.stopPropagation() }>
               <p className={ Styles[ "gearbox-type" ] }>{ b }</p>
@@ -227,14 +227,14 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
             </div>
           ) ) }
         </FilterPart>
-        <FilterPart filterOpen={ modelYearFilterOpen } setFilterOpen={ setModelYearFilterOpen } label={ "YEAR" } key={ "year" }>
+        <FilterPart filterOpen={ modelYearFilterOpen } setFilterOpen={ setModelYearFilterOpen } label={ "Année" } key={ "year" }>
           <div className={ Styles[ "year-range" ] } onClick={ e => e.stopPropagation() }>
             <input min={ 1 } type="number" name="starting" value={ filtersState?.Model_Year.start } className={ Styles[ 'starting-year' ] } onChange={ e => filterDistpatch( {
               type: "my",
               ptype: "start",
               start: +e.target.value
             } ) } />
-            <p className={ Styles[ "to" ] }>to</p>
+            <p className={ Styles[ "to" ] }>Jusqu'à</p>
             <input min={ 1 } type="number" name="ending" value={ filtersState?.Model_Year.end } className={ Styles[ 'ending-year' ] } onChange={ e => filterDistpatch( {
               type: "my",
               ptype: "end",

@@ -1,10 +1,10 @@
 export const NavLinks = [
   {
-    name: "Home",
+    name: "Maison",
     path: "/"
   },
   {
-    name: "About",
+    name: "À propos",
     path: "/about"
   },
   {
@@ -15,15 +15,15 @@ export const NavLinks = [
 
 export const AdminLinks = [
   {
-    name: "Dashboard",
+    name: "Tableau de bord",
     path: "/admin/dashboard"
   },
   {
-    name: "Manage Cars",
+    name: "Voitures",
     path: "/admin/cars"
   },
   {
-    name: "Manage Brands",
+    name: "Marques",
     path: "/admin/brands"
   },
 ];

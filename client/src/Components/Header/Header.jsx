@@ -47,13 +47,13 @@ const Header = () => {
           <NavLink to={ "tel:+33186950414" } className={ Styles[ "tel" ] }>01 86 95 04 14</NavLink>
 
           { !isLoggedIn ? (
-            <button id={ Styles[ 'reg-btn' ] } onClick={ Login } className={ Styles[ "register" ] }>Sign-in</button>
+            <button id={ Styles[ 'reg-btn' ] } onClick={ Login } className={ Styles[ "register" ] }>Me Connecter</button>
           ) : (
             <>
               <img src={ user?.image } alt="" className={ Styles[ 'pfp' ] } onClick={ () => setToggleDropdown( prev => !prev ) } />
               <div className={ `${ Styles[ "menu" ] } ${ toggleDropdown && Styles[ "open" ] }` }>
 
-                <button id={ Styles[ 'reg-btn' ] } onClick={ Logout } className={ Styles[ "register" ] }>Sign-out</button>
+                <button id={ Styles[ 'reg-btn' ] } onClick={ Logout } className={ Styles[ "register" ] }>Me Déconnecter</button>
               </div>
             </>
           ) }

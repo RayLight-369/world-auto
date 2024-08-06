@@ -243,7 +243,7 @@ const Home = () => {
     <motion.section id={ Styles[ "home" ] } variants={ variants } initial="hidden" animate="animate" exit="exit">
       <motion.section className={ Styles[ "search-section" ] } variants={ variants }>
 
-        <h1 className={ Styles[ "ad-title" ] }>Buy your used car checked & guaranteed</h1>
+        <h1 className={ Styles[ "ad-title" ] }>Achetez votre voiture d’occasion contrôlée & garantie</h1>
         <input type="text" name="search" className={ Styles[ 'search-input' ] } placeholder='Make, Model, Fuel, Gearbox' onChange={ e => setSearchInputText( e.target.value ) } value={ searchInputText } />
 
       </motion.section>
@@ -251,7 +251,7 @@ const Home = () => {
       <motion.section className={ Styles[ "body" ] } variants={ variants }>
         <FiltersContainer cars={ cars } Cars={ Cars } brands={ brands } setCars={ setCars } filterDistpatch={ filterDistpatch } filtersState={ filtersState } searchInputText={ searchInputText } />
         <div className={ Styles[ "content" ] }>
-          <p className={ Styles[ "results" ] }>{ Cars?.length } Cars match your search</p>
+          <p className={ Styles[ "results" ] }>{ filteredAndSortedCars?.length } voitures correspondent à votre recherche</p>
           <div className={ Styles[ "list" ] }>
             { filteredAndSortedCars.length && filteredAndSortedCars.map( ( car, i ) => (
               <Card key={ car.id } img={ car.images[ 0 ] } id={ car.id } fuel={ car.fuel_type } ppd={ car.price_per_day } ppm={ car.price_per_month } distance={ car.mileage } guarantee={ car.guarantee } overview={ car.overview } title={ car.title } year={ car.model_year } manual={ !car?.accessories.includes( "Automatic" ) && car?.gearbox == "Manual" } />
