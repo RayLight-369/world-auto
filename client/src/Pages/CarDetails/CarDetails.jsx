@@ -182,7 +182,7 @@ const CarDetails = () => {
           <>
             <div className={ styles[ "title-price" ] }>
               <h1>{ car.title }</h1>
-              <h1>{ car.price_per_day } USD / Day</h1>
+              <h1>{ car.price_per_day } €</h1>
               <button>Reserve</button>
             </div>
             <div className={ styles[ "overview" ] }>

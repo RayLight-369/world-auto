@@ -11,7 +11,7 @@ const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guaran
         <div className={ Styles[ "thumbnail" ] }>
           <img src={ img } alt="" />
           <div className={ Styles[ "price-notch" ] }>
-            <p className={ Styles[ "price" ] }>{ ppd } USD</p>
+            <p className={ Styles[ "price" ] }>{ ppd } €</p>
             {/* <p className={ Styles[ "monthly" ] }>That's { ppm } USD/month</p> */ }
           </div>
 
