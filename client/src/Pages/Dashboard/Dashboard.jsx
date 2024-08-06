@@ -29,26 +29,26 @@ const Dashboard = () => {
   return (
     <>
       <div className={ Styles[ "container" ] }>
-        <PageTitle className={ Styles[ "page-title" ] } title={ "Dashboard" } />
+        <PageTitle className={ Styles[ "page-title" ] } title={ "Tableau de bord" } />
         <div className={ Styles[ "page-content" ] }>
           <div className={ Styles[ "details-container" ] }>
             <Link to={ "/admin/cars" }>
               <div className={ `${ Styles[ "cars" ] } ${ Styles[ "container" ] }` }>
-                <p className={ Styles[ "title" ] }>Cars</p>
-                <p className={ Styles[ "desc" ] }>Check Your Cars Here</p>
+                <p className={ Styles[ "title" ] }>Voitures</p>
+                <p className={ Styles[ "desc" ] }>Vérifiez vos voitures ici</p>
               </div>
             </Link>
 
             <Link to={ "/admin/brands" }>
               <div className={ `${ Styles[ "brands" ] } ${ Styles[ "container" ] }` }>
-                <p className={ Styles[ "title" ] }>Brands</p>
-                <p className={ Styles[ "desc" ] }>Check Your Brands Here</p>
+                <p className={ Styles[ "title" ] }>Marques</p>
+                <p className={ Styles[ "desc" ] }>Vérifiez vos marques ici</p>
               </div>
             </Link>
           </div>
           <div className={ Styles[ "recent-updates-container" ] }>
             <div className={ `${ Styles[ "recent-cars" ] } ${ Styles[ "container" ] }` }>
-              <p className={ Styles[ "title" ] }>Recently Added Cars</p>
+              <p className={ Styles[ "title" ] }>Voitures récemment ajoutées</p>
               <div className={ Styles[ "list" ] }>
                 { carsLoading && (
                   <p className={ Styles[ "no-recent-note" ] }>Loading...</p>
@@ -72,7 +72,7 @@ const Dashboard = () => {
                           </div>
                         </div>
                       ) ) : (
-                        <p className={ Styles[ 'no-recent-note' ] }>No Cars Added!</p>
+                        <p className={ Styles[ 'no-recent-note' ] }>Aucune voiture ajoutée !</p>
                       )
                     }
                   </>
@@ -80,7 +80,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div className={ `${ Styles[ "recent-brands" ] } ${ Styles[ "container" ] }` }>
-              <p className={ Styles[ "title" ] }>Recently Added Brands</p>
+              <p className={ Styles[ "title" ] }>Marques récemment ajoutées</p>
               <div className={ Styles[ "list" ] }>
                 { carsLoading && (
                   <p className={ Styles[ "no-recent-note" ] }>Loading...</p>
@@ -100,7 +100,7 @@ const Dashboard = () => {
                         </div>
                       </div>
                     ) ) : (
-                      <p className={ Styles[ 'no-recent-note' ] }>No Brands Added!</p>
+                      <p className={ Styles[ 'no-recent-note' ] }>Aucune marque ajoutée !</p>
                     ) }
                   </>
                 ) }

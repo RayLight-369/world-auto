@@ -43,38 +43,38 @@ const CarDetails = () => {
 
 
   const PROPERTIES = useMemo( () => ( {
-    "brand": "Brand",
-    "certificate": "Certificate",
-    "color": "Color",
+    "brand": "Marque",
+    "certificate": "Certificat",
+    "color": "Couleur",
     "due_date": "Uploaded Date",
-    "emission": "Emission",
-    "energy": "Energy",
-    "fuel_type": "Fuel Type",
-    "gearbox": "Gearbox",
-    "guarantee": "Guarantee",
-    "mileage": "Mileage",
-    "model_year": "Model Year",
-    "price_per_day": "Price Per Day",
-    "price_per_month": "Price Per Month",
-    "seating_capacity": "Seating Capacity"
+    "emission": "Émission",
+    "energy": "Énergie",
+    "fuel_type": "Carburant",
+    "gearbox": "Boîte de vitesses",
+    "guarantee": "Garantie",
+    "mileage": "Kilométrage",
+    "model_year": "Modèle",
+    "price_per_day": "Prix ​​par jour",
+    "price_per_month": "Prix ​​par mois",
+    "seating_capacity": "Nombre de places"
   } ), [] );
 
   const ICONS_FOR_ACCESSORIES = useMemo( () => ( {
-    "Air Conditioner": faSnowflake,
-    "Power Door Locks": faLock,
-    "AntiLock Braking System": faCar,
-    "Brake Assist": faLifeRing,
-    "Power Steering": faCog,
-    "Driver Airbag": faUser,
-    "Passenger Airbag": faUserFriends,
-    "Power Windows": faWindowRestore,
-    "CD Player": faCompactDisc,
-    "Central Locking": faLockOpen,
-    "Crash Sensor": faCarCrash,
-    "Leather Seats": faCouch,
+    "Climatiseur": faSnowflake,
+    "Serrures de porte électriques": faLock,
+    "Système de freinage antiblocage": faCar,
+    "Assistance au freinage": faLifeRing,
+    "Direction assistée": faCog,
+    "Airbag conducteur": faUser,
+    "Airbag passager": faUserFriends,
+    "Vitres électriques": faWindowRestore,
+    "Lecteur CD": faCompactDisc,
+    "Verrouillage centralisé": faLockOpen,
+    "Capteur de collision": faCarCrash,
+    "Sièges en cuir": faCouch,
     "Bluetooth": faBluetooth,
-    "Rear View Camera": faCamera,
-    "Automatic": faAutomobile
+    "Caméra de vision arrière": faCamera,
+    "Automatique": faAutomobile
   } ), [] );
 
   useEffect( () => {

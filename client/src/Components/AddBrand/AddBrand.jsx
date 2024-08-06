@@ -90,7 +90,7 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
     <MotionConfig transition={ { type: "spring", damping: 7 } } >
       <div className={ styles[ "add-brand" ] }>
         <div className={ styles[ "header" ] }>
-          <p className={ styles[ "title" ] }>{ type === "edit" ? "Edit Your Brand" : type != "del" ? "Add New Brand" : "Are You Sure?" }</p>
+          <p className={ styles[ "title" ] }>{ type === "edit" ? "Modifiez votre marque" : type != "del" ? "Ajouter une nouvelle marque" : "Es-tu sûr?" }</p>
           <motion.button type='button' whileHover={ buttonWhileHovering( 1.2, .2 ) } className={ styles[ 'close' ] } onClick={ handleClose }>✖</motion.button>
         </div>
         {
@@ -107,14 +107,14 @@ const AddBrand = ( { handleClose, brand, type = 'new' } ) => {
             onClick={ addBrand }
             disabled={ adding }
           >
-            { adding ? type == 'new' ? "Adding..." : type == "edit" ? "Updating..." : "Deleting" : type == 'new' ? "Add" : type == "edit" ? "Update" : "Delete" }
+            { adding ? type == 'new' ? "Ajouter..." : type == "edit" ? "Mise à jour..." : "Suppression..." : type == 'new' ? "Ajouter" : type == "edit" ? "Mise à jour" : "Supprimer" }
           </motion.button>
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }
             className={ styles[ "cancel-button" ] }
             onClick={ handleClose }
           >
-            Cancel
+            Annuler
           </motion.button>
         </div>
       </div>

@@ -70,8 +70,8 @@ const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen } ) => {
       <motion.div className={ Styles[ "major-options" ] }>
         {/* <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ exportCSV }>+ Export CSV</button> */ }
 
-        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddCarPopupOpen( true ) }>+ Add Car</button>
-        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddBrandPopupOpen( true ) }>+ Add Brand</button>
+        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddCarPopupOpen( true ) }>+ Ajouter une voiture</button>
+        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddBrandPopupOpen( true ) }>+ Ajouter une marque</button>
         {/* <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddTaskPopupOpen( true ) }>+ Add Task</button> */ }
         {/* <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ importCSV }>+ Import CSV</button> */ }
 
@@ -82,7 +82,6 @@ const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen } ) => {
           e.stopPropagation();
           e.preventDefault();
           setOpenOptionBar( prev => !prev );
-          console.log( 123 );
         } }>
         <p>{ openOptionBar ? "✖" : "☰" }</p>
       </motion.div>

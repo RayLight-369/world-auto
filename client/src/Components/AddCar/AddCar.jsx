@@ -40,7 +40,23 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
   const [ imagesData, setImagesData ] = useState( {} );
   const [ imagesDone, setImagesDone ] = useState( false );
 
-  const Accessories = useMemo( () => [ "Air Conditioner", "Power Door Locks", "AntiLock Braking System", "Brake Assist", "Power Steering", "Driver Airbag", "Passenger Airbag", "Power Windows", "CD Player", "Central Locking", "Crash Sensor", "Leather Seats", "Bluetooth", "Rear View Camera", "Automatic" ], [] );
+  const Accessories = useMemo( () => [
+    "Climatiseur",
+    "Serrures de porte électriques",
+    "Système de freinage antiblocage",
+    "Assistance au freinage",
+    "Direction assistée",
+    "Airbag conducteur",
+    "Airbag passager",
+    "Vitres électriques",
+    "Lecteur CD",
+    "Verrouillage centralisé",
+    "Capteur de collision",
+    "Sièges en cuir",
+    "Bluetooth",
+    "Caméra de vision arrière",
+    "Automatique"
+  ], [] );
 
   // <div className={ styles[ "price-per-day" ] }>
   //   <label htmlFor="price-per-day">Price Per Day:</label>
@@ -56,7 +72,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
   const data = useMemo( () => [
     {
-      element: "Price / Day (USD)",
+      element: "Prix / Jour €",
       class: "price-per-day",
       inputClass: "price-per-day-input",
       setState: setPricePerDay,
@@ -64,7 +80,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       type: "number"
     },
     {
-      element: "Price / Month (USD)",
+      element: "Prix / Mois €",
       class: "price-per-month",
       inputClass: "price-per-month-input",
       setState: setPricePerMonth,
@@ -72,7 +88,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       type: "number"
     },
     {
-      element: "Mileage",
+      element: "Kilométrage",
       class: "mileage",
       inputClass: "mileage-input",
       setState: setMilage,
@@ -80,7 +96,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       type: "number"
     },
     {
-      element: "Energy",
+      element: "Énergie",
       class: "energy",
       inputClass: "energy-input",
       setState: setEnergy,
@@ -88,7 +104,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       type: "text"
     },
     {
-      element: "Guarantee",
+      element: "Garantie",
       class: "guarantee",
       inputClass: "guarantee-input",
       setState: setGuarantee,
@@ -96,7 +112,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       type: "text"
     },
     {
-      element: "Color",
+      element: "Couleur",
       class: "color",
       inputClass: "color-input",
       setState: setColor,
@@ -104,7 +120,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       type: "text"
     },
     {
-      element: "Certificate",
+      element: "Certificat",
       class: "certificate",
       inputClass: "certificate-input",
       setState: setCertificate,
@@ -112,7 +128,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       type: "text"
     },
     {
-      element: "Emission",
+      element: "Émission",
       class: "emission",
       inputClass: "emission-input",
       setState: setEmission,
@@ -120,7 +136,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       type: "text"
     },
     {
-      element: "Model Year",
+      element: "Année modèle",
       class: "model-year",
       inputClass: "model-year-input",
       setState: setModelYear,
@@ -128,7 +144,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       type: "text"
     },
     {
-      element: "Seating Capacity",
+      element: "Nombre de places",
       class: "seating-capacity",
       inputClass: "seating-capacity-input",
       setState: setSeatingCapacity,
@@ -482,22 +498,22 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     <MotionConfig transition={ { type: "spring", damping: 7 } } >
       <div className={ styles[ "add-car" ] }>
         <div className={ styles[ "header" ] }>
-          <p className={ styles[ "title" ] }>{ type === "edit" ? "Edit Your Car" : type == "new" ? "Add New Car" : "Are You Sure?" }</p>
+          <p className={ styles[ "title" ] }>{ type === "edit" ? "Modifiez votre voiture" : type == "new" ? "Ajouter une nouvelle voiture" : "Es-tu sûr?" }</p>
           <motion.button type='button' whileHover={ buttonWhileHovering( 1.2, .2 ) } className={ styles[ 'close' ] } onClick={ handleClose }>✖</motion.button>
         </div>
         {
           type != "del" && (
             <>
               <div className={ styles[ "inputs" ] }>
-                <input type="text" placeholder='Car Title' className={ styles[ "name" ] } value={ carTitle } onChange={ e => setCarTitle( e.target.value ) } />
-                <textarea placeholder='Car Overview' className={ styles[ "description" ] } value={ carOverview } onChange={ e => setCarOverview( e.target.value ) } />
+                <input type="text" placeholder='Titre de la voiture' className={ styles[ "name" ] } value={ carTitle } onChange={ e => setCarTitle( e.target.value ) } />
+                <textarea placeholder='Aperçu de la voiture' className={ styles[ "description" ] } value={ carOverview } onChange={ e => setCarOverview( e.target.value ) } />
               </div>
 
               <div className={ styles[ "infos" ] }>
 
-                <DropDown key={ "fuelType" } setState={ setFuelType } selected={ fuelType } array={ [ "Diesel", "Petrol", "CNG", "Electric" ] } label='Fuel Type' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
-                <DropDown key={ "brand" } setState={ setBrand } selected={ brand } array={ brands?.map( ( brand ) => brand.brandName ) } backWorkArray={ brands?.map( brand => brand.id ) } label='Brand' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
-                <DropDown key={ "gearbox" } setState={ setGearbox } selected={ gearbox } array={ [ "Automatic", "Manual", "Continuously variable automatic" ] } label='Gearbox' dropDownOpen={ gearboxDropdown } toggleDropDown={ toggleGearboxDropdown } />
+                <DropDown key={ "fuelType" } setState={ setFuelType } selected={ fuelType } array={ [ "Diesel", "Petrol", "CNG", "Electric" ] } label='Carburant' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
+                <DropDown key={ "brand" } setState={ setBrand } selected={ brand } array={ brands?.map( ( brand ) => brand.brandName ) } backWorkArray={ brands?.map( brand => brand.id ) } label='Marque' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
+                <DropDown key={ "gearbox" } setState={ setGearbox } selected={ gearbox } array={ [ "Automatique", "Manuel", "Automatique à variation continue" ] } label='Boîte de vitesses' dropDownOpen={ gearboxDropdown } toggleDropDown={ toggleGearboxDropdown } />
 
                 { data.map( ( value, index ) => (
 
@@ -511,7 +527,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
                 ) ) }
 
                 <div className={ styles[ "accessories" ] }>
-                  <label htmlFor="accessories">Accessories:</label>
+                  <label htmlFor="accessories">Accessoires:</label>
                   <div className={ styles[ "content" ] }>
                     { Accessories.map( ( a, i ) => (
                       <div className={ styles[ "accessory" ] }>
@@ -537,7 +553,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
                 <div className={ styles[ "images" ] }>
                   <p>Images: </p>
                   <label htmlFor={ "file" } className={ styles[ "image-label" ] }>
-                    Select Images
+                    Sélectionnez des images
                   </label>
                   <input
                     type="file"
@@ -568,7 +584,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
                           className={ styles[ "delete-img" ] }
                           onClick={ ( e ) => handleDelete( e, key ) }
                         >
-                          x
+                          ✖
                         </button>
                       </div>
                     ) ) }
@@ -588,14 +604,14 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
             } }
             disabled={ adding }
           >
-            { adding ? type == 'new' ? "Adding..." : type == "edit" ? "Updating..." : "Deleting..." : type == 'new' ? "Add" : type == "edit" ? "Update" : "Delete" }
+            { adding ? type == 'new' ? "Ajouter..." : type == "edit" ? "Mise à jour..." : "Suppression..." : type == 'new' ? "Ajouter" : type == "edit" ? "Mise à jour" : "Supprimer" }
           </motion.button>
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }
             className={ styles[ "cancel-button" ] }
             onClick={ handleClose }
           >
-            Cancel
+            Annuler
           </motion.button>
         </div>
       </div>

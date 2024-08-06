@@ -40,7 +40,7 @@ const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guaran
             ) }
 
             { manual != undefined && (
-              <p className={ Styles[ "automatic" ] }>{ manual ? "Manual" : "Automatic" }</p>
+              <p className={ Styles[ "automatic" ] }>{ manual }</p>
             ) }
           </div>
           <div className={ Styles[ "card-footer" ] }>

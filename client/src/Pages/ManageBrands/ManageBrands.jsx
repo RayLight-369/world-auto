@@ -23,18 +23,18 @@ const ManageCars = () => {
   return (
     <>
       <div className={ Styles[ "container" ] }>
-        <PageTitle className={ Styles[ "page-title" ] } title={ "Manage Brands" } />
+        <PageTitle className={ Styles[ "page-title" ] } title={ "Marques" } />
         <div className={ Styles[ "page-content" ] }>
           <div className={ Styles[ "page-container" ] }>
             <div className={ Styles[ "buttons" ] }>
-              <button type="button" onClick={ () => openPopUp( setAddBrandPopupOpen ) } id={ Styles[ 'add-brand' ] }>Add Brands</button>
+              <button type="button" onClick={ () => openPopUp( setAddBrandPopupOpen ) } id={ Styles[ 'add-brand' ] }>Ajouter des marques</button>
             </div>
 
             <div className={ Styles[ "table" ] }>
               <div className={ `${ Styles[ "header" ] } ${ Styles[ "row" ] }` }>
 
-                <p className={ Styles[ "brand-title" ] }>Name</p>
-                <p className={ Styles[ "date" ] }>Date</p>
+                <p className={ Styles[ "brand-title" ] }>Nom</p>
+                <p className={ Styles[ "date" ] }></p>
                 <p className={ Styles[ "actions" ] }>Actions</p>
 
               </div>

@@ -120,8 +120,8 @@ div.page-container {
     right: 0;
 
     button {
-      padding: 9px;
-      width: 117px;
+      padding: 9px 20px;
+      width: fit-content;
       border: none;
       outline: none;
       background: #025883;

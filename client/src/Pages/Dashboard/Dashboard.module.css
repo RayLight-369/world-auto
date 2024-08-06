@@ -138,6 +138,12 @@ div.recent-updates-container > div {
         width: 100%;
         transition: 200ms;
 
+        div.brand-title {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+        }
+
         p.car-title,
         p.brand-title {
           font-size: .98em;
@@ -158,6 +164,7 @@ div.recent-updates-container > div {
           font-family: Quicksand;
           transition: 200ms;
           position: relative;
+          white-space: nowrap;
           /* left: 50px; */
           transition: 100ms;
         }

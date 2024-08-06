@@ -47,19 +47,19 @@ const AdminLogin = ( { adminVerified, setAdminVerified } ) => {
   return (
     <div className={ styles.loginContainer }>
       <form className={ styles.loginForm } onSubmit={ handleSubmit }>
-        <h2>Admin Login</h2>
+        <h2>Connexion administrateur</h2>
         <div className={ styles.inputGroup }>
-          <label htmlFor="email">User</label>
+          <label htmlFor="name">Nom</label>
           <input
             type="text"
-            id="email"
+            id="name"
             value={ user }
             onChange={ ( e ) => setUser( e.target.value ) }
             required
           />
         </div>
         <div className={ styles.inputGroup }>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Mot de passe</label>
           <input
             type="password"
             id="password"
@@ -68,7 +68,7 @@ const AdminLogin = ( { adminVerified, setAdminVerified } ) => {
             required
           />
         </div>
-        <button type="submit" className={ styles.loginButton }>Login</button>
+        <button type="submit" className={ styles.loginButton }>Se connecter</button>
       </form>
     </div>
   );

@@ -33,17 +33,17 @@ const ManageCars = () => {
   return (
     <>
       <div className={ Styles[ "container" ] }>
-        <PageTitle className={ Styles[ "page-title" ] } title={ "Manage Cars" } />
+        <PageTitle className={ Styles[ "page-title" ] } title={ "Voitures" } />
         <div className={ Styles[ "page-content" ] }>
           <div className={ Styles[ "page-container" ] }>
             <div className={ Styles[ "buttons" ] }>
-              <button type="button" onClick={ () => openPopUp( setAddCarPopupOpen ) } id={ Styles[ 'add-car' ] }>Add Car</button>
+              <button type="button" onClick={ () => openPopUp( setAddCarPopupOpen ) } id={ Styles[ 'add-car' ] }>Ajouter une voiture</button>
             </div>
 
             <div className={ Styles[ "table" ] }>
               <div className={ `${ Styles[ "header" ] } ${ Styles[ "row" ] }` }>
-                <p className={ Styles[ "car-title" ] }>Name</p>
-                <p className={ Styles[ "brand-title" ] }>Brand</p>
+                <p className={ Styles[ "car-title" ] }>Nom</p>
+                <p className={ Styles[ "brand-title" ] }>Marque</p>
                 <p className={ Styles[ "date" ] }>Date</p>
                 <p className={ Styles[ "actions" ] }>Actions</p>
               </div>

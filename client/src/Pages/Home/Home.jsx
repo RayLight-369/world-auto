@@ -253,7 +253,7 @@ const Home = () => {
           <p className={ Styles[ "results" ] }>{ filteredAndSortedCars?.length } voitures correspondent à votre recherche</p>
           <div className={ Styles[ "list" ] }>
             { filteredAndSortedCars.length && filteredAndSortedCars.map( ( car, i ) => (
-              <Card key={ car.id } img={ car.images[ 0 ] } id={ car.id } fuel={ car.fuel_type } ppd={ car.price_per_day } ppm={ car.price_per_month } distance={ car.mileage } guarantee={ car.guarantee } overview={ car.overview } title={ car.title } year={ car.model_year } manual={ !car?.accessories.includes( "Automatic" ) && car?.gearbox == "Manual" } />
+              <Card key={ car.id } img={ car.images[ 0 ] } id={ car.id } fuel={ car.fuel_type } ppd={ car.price_per_day } ppm={ car.price_per_month } distance={ car.mileage } guarantee={ car.guarantee } overview={ car.overview } title={ car.title } year={ car.model_year } manual={ car?.gearbox || ( car?.accessories.includes( "Automatique" ) && "Automatique" ) } />
             ) ) }
           </div>
         </div>
