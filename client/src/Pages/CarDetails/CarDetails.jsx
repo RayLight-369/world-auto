@@ -94,8 +94,8 @@ const CarDetails = () => {
         setCar( body.data[ 0 ] );
 
         let msg = `
-Subject: Car Reservation Request
-Dear WorldAuto!,
+*Subject: Car Reservation Request*
+Dear _WorldAuto!_ ,
 I am interested in reserving the following car and would like to provide the details:
         
 - *ID* : ${ id }
