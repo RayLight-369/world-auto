@@ -40,7 +40,7 @@ const Header = () => {
       <>
         <div className={ Styles[ "nav-links" ] }>
           { NavLinks.map( ( route ) => (
-            <NavLink to={ route.path } key={ route.path }>{ route.name }</NavLink>
+            <NavLink to={ route.path } key={ route.path } className={ ( { isActive } ) => isActive ? Styles.active : "" }>{ route.name }</NavLink>
           ) ) }
         </div>
         <div className={ Styles[ "user-info" ] }>
@@ -84,9 +84,12 @@ const Header = () => {
           className={ `${ Styles.dropdown } ${ toggleDropdown ? Styles.open : "" }` }
         >
           <div className={ Styles[ "links" ] }>
-            <NavLink to={ "/" } className={ ( { isActive } ) => isActive ? Styles.active : "" }>Home</NavLink>
+            {/* <NavLink to={ "/" } className={ ( { isActive } ) => isActive ? Styles.active : "" }>Home</NavLink>
             <NavLink to={ "/about" } className={ ( { isActive } ) => isActive ? Styles.active : "" }>About</NavLink>
-            <NavLink to={ "/contact" } className={ ( { isActive } ) => isActive ? Styles.active : "" }>Contact</NavLink>
+            <NavLink to={ "/contact" } className={ ( { isActive } ) => isActive ? Styles.active : "" }>Contact</NavLink> */}
+            { NavLinks.map( ( route ) => (
+              <NavLink to={ route.path } key={ route.path } className={ ( { isActive } ) => isActive ? Styles.active : "" }>{ route.name }</NavLink>
+            ) ) }
             {/* { isLoggedIn && (
               <>
                 <NavLink

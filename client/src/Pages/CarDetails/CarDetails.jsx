@@ -194,7 +194,7 @@ I am interested in reserving the following car and would like to provide the det
               <p className={ styles[ "content" ] }>{ car.overview }</p>
             </div>
 
-            <a target='_blank' className={ styles[ 'reserve' ] } href={ `https://wa.me/33751287393?text=${ encodeURIComponent( `Hey I contacted you through World Auto Site\n\n ${ msg } ` ) }` }>Reserve</a>
+            <a target='_blank' className={ styles[ 'reserve' ] } href={ `https://wa.me/33751287393?text=${ encodeURIComponent( `Hey I contacted you through World Auto Site\n\n ${ msg } ` ) }` }>Enquire</a>
           </div >
         </div >
       ) }
@@ -209,7 +209,7 @@ I am interested in reserving the following car and would like to provide the det
               <h1 className={ styles[ 'title' ] }>Aperçu</h1>
               <p className={ styles[ "content" ] }>{ car.overview }</p>
             </div>
-            <a target='_blank' className={ styles[ 'reserve' ] } href={ `https://wa.me/33751287393?text=${ encodeURIComponent( `Hey I contacted you through World Auto Site! \n\n ${ msg }` ) }` }>Reserve</a>
+            <a target='_blank' className={ styles[ 'reserve' ] } href={ `https://wa.me/33751287393?text=${ encodeURIComponent( `Hey I contacted you through World Auto Site! \n\n ${ msg }` ) }` }>Enquire</a>
           </>
         ) }
         <div className={ styles[ "parent" ] }>

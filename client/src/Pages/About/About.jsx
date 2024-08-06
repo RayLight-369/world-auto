@@ -37,37 +37,37 @@ const About = () => {
     [
       {
         from: "KEBIR DGAYGUI",
-        msg: "I had the pleasure of meeting Brendon who was punctual, honest and kind. A car purchase carried out with professionalism is rare in used car sales.",
+        msg: "J'ai eu le plaisir de rencontrer Brendon qui a fait preuve de ponctualité, d'honnêteté et de gentillesse. Un achat de voiture mené avec professionnalisme, c'est rare dans la vente de voiture d'occasion.",
         stars: 5,
         link: "https://g.co/kgs/g5kmAo2"
       },
       {
         from: "Arnaud Remy",
-        msg: "Serious seller and concerned that everything goes well. I recommend without reservation. Good luck in continuing your business",
+        msg: "Vendeur sérieux et soucieux que tout se passe pour le mieux. Je recommande sans réserve. Bonne chance dans la poursuite de votre activité",
         stars: 5,
         link: "https://g.co/kgs/M3s94WM"
       },
       {
         from: "Samuel Melerio",
-        msg: "Efficient and responsive! Brendon was able to reassure us and support us during this purchase",
+        msg: "Efficace et réactif! Brendon a su nous rassurer et nous accompagner lors de cet achat",
         stars: 5,
         link: "https://g.co/kgs/EQTV8Ts"
       },
       {
         from: "Kikabou Jessy",
-        msg: "It's serious, it's honest, it's a good opportunity not to be missed.",
+        msg: "C’est du sérieux, c’est honnête, c’est des bonnes occasions à ne pas louper.",
         stars: 5,
         link: "https://g.co/kgs/ZQrHeLh"
       },
       {
         from: "Junior Ndiaye",
-        msg: "Very professional and honest. Vehicle without any problems after several weeks of use.",
+        msg: "Très pro et honnête. Véhicule sans aucun problème après plusieurs semaines d’utilisation.",
         stars: 5,
         link: "https://g.co/kgs/73MHy8V"
       },
       {
         from: "Nicolas GARNIER",
-        msg: "I recently bought a vehicle, it runs impeccably well. They are very accommodating and professional. I highly recommend!!",
+        msg: "J’ai acheté un véhicule dernièrement, elle roule impeccablement bien. Ils sont très arrangeant et professionnel. Je recommande vivement !!",
         stars: 5,
         link: "https://g.co/kgs/sCB8T26"
       },
@@ -92,7 +92,7 @@ const About = () => {
         <h1>Avis de Google</h1>
         <div className={ Styles[ "reviews-container" ] }>
           { reviews.map( ( review, i ) => (
-            <a href={ review.link }>
+            <a href={ review.link } target="_blank">
               <div className={ Styles[ "review" ] } key={ i }>
                 <p className={ Styles[ "name" ] }>{ review.from }</p>
                 <Star n={ review.stars } />

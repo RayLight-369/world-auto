@@ -222,6 +222,8 @@ div.content {
           border-radius: 3px;
           background: var(--bg-light-blue);
           color: var(--primary-blue);
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
