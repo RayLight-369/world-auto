@@ -184,8 +184,9 @@ div.content {
 
       div.property {
         display: flex;
+        flex-direction: row !important;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-between !important;
         position: relative;
         padding: 7px 12px;
         /* border: 1px solid #a9e0fc; */
@@ -222,6 +223,7 @@ div.content {
 
     div.accessory {
       display: flex;
+      flex-direction: row !important;
       /* flex-direction: column; */
       /* justify-content: center; */
       align-items: center;
