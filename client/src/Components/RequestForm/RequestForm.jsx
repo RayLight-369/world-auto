@@ -49,7 +49,9 @@ const RequestForm = ( { handleSubmit } ) => {
         <a
           // type="a"
           className={ Styles.requestBtn }
-          href={ `mailto:${ "worlauto95530@gmail.com" }?subject=Hey I Contacted You Through WorldAuto Site&body=${ msg }` }
+          // href={ `mailto:${ "worlauto95530@gmail.com" }?subject=Hey I Contacted You Through WorldAuto Site&body=${ msg }` }
+          href={ `https://wa.me/923064217304?text=${ encodeURIComponent( `Hey I Contacted You Through WorldAuto Site! ${ msg }` ) }` }
+          target="_blank"
         // onClick={ handleSubmit }
         >
           Send Message
