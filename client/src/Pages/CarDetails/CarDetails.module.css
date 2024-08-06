@@ -294,11 +294,35 @@ img.img {
     padding: 10px 20px;
     display: flex;
     flex-direction: column;
-    gap: 80px;
+    gap: 40px;
   }
 
   div.overview p.content {
     text-align: left !important;
+  }
+
+  a.reserve {
+    text-decoration: none !important;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    display: block;
+    width: 180px;
+    border-radius: 25px;
+    background: var(--primary-blue);
+    color: white;
+    cursor: pointer;
+    transition: 150ms ease-out;
+    font-size: 1.2em;
+    position: relative;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+
+    &:hover {
+      transform: translateX(-50%) scale(1.08);
+    }
   }
 
   :is(.parent, .overview) {
@@ -328,26 +352,6 @@ img.img {
     width: 100%;
     align-items: flex-start !important;
     gap: 20px;
-
-    button {
-      border: none;
-      outline: none;
-      padding: 8px 18px;
-      display: block;
-      width: 140px;
-      border-radius: 20px;
-      background: var(--primary-blue);
-      font-size: .8em;
-      color: white;
-      cursor: pointer;
-      transition: 150ms ease-out;
-      position: relative;
-      top: 20px;
-
-      &:hover {
-        transform: scale(1.08);
-      }
-    }
 
     h1 {
       font-family: Poppins;

@@ -184,12 +184,12 @@ const CarDetails = () => {
             <div className={ styles[ "title-price" ] }>
               <h1>{ car.title }</h1>
               <h1>{ car.price_per_day } €</h1>
-              <button>Reserve</button>
             </div>
             <div className={ styles[ "overview" ] }>
               <h1 className={ styles[ 'title' ] }>Overview</h1>
               <p className={ styles[ "content" ] }>{ car.overview }</p>
             </div>
+            <a target='_blank' className={ styles[ 'reserve' ] } href={ `https://wa.me/33751287393?text=${ encodeURIComponent( `Hey I contacted you through World Auto Site! ` ) }` }>Reserve</a>
           </>
         ) }
         <div className={ styles[ "parent" ] }>
