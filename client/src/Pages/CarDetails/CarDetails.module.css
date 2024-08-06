@@ -215,7 +215,7 @@ div.content {
     div.accessories {
       display: grid !important;
       width: 100%;
-      grid-template-columns: repeat(5, minmax(220px, 1fr)) !important;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
 
       /* justify-items: center; */
       gap: 30px;
@@ -227,7 +227,7 @@ div.content {
       /* flex-direction: column; */
       /* justify-content: center; */
       align-items: center;
-      padding: 20px 24px;
+      padding: 19px 23px;
       border-radius: 8px;
       /* background-color: #eee; */
       box-shadow: 0 0 10px #00000025;
@@ -242,7 +242,7 @@ div.content {
       }
 
       .a-icon {
-        font-size: 1.5em;
+        font-size: 1.2em;
       }
 
       p {
@@ -254,7 +254,7 @@ div.content {
 
       p.value {
         font-weight: bold;
-        font-size: 1em;
+        font-size: .9em;
       }
     }
 
