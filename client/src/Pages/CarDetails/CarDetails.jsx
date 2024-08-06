@@ -167,13 +167,14 @@ const CarDetails = () => {
               <h1>{ car.title }</h1>
               <div className={ styles[ "price-buy" ] }>
                 <h1>{ car.price_per_day } USD / Day</h1>
-                <button>Reserve</button>
               </div>
             </div>
             <div className={ styles[ "overview" ] }>
               <h1 className={ styles[ 'title' ] }>Overview</h1>
               <p className={ styles[ "content" ] }>{ car.overview }</p>
             </div>
+
+            <a target='_blank' className={ styles[ 'reserve' ] } href={ `https://wa.me/33751287393?text=${ encodeURIComponent( `Hey I contacted you through World Auto Site! ` ) }` }>Reserve</a>
           </div>
         </div>
       ) }

@@ -21,7 +21,8 @@ div.title-overview {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 14px;
+  position: relative;
+  padding-top: 0;
 
   .title-price {
     display: flex;
@@ -48,9 +49,9 @@ div.title-overview {
       justify-content: space-between;
       align-items: center;
       position: relative;
-      top: 5px;
+      /* top: 5px; */
 
-      button {
+      /* button {
         border: none;
         outline: none;
         padding: 10px 20px;
@@ -66,7 +67,7 @@ div.title-overview {
         &:hover {
           transform: scale(1.08);
         }
-      }
+      } */
 
       h1 {
         /* color: var(--primary-blue); */
@@ -81,7 +82,7 @@ div.title-overview {
     flex-direction: column;
     gap: 7px;
     position: relative;
-    top: 25px;
+    top: 10px;
     overflow: hidden;
     max-height: calc(100% - 115px);
 
@@ -94,8 +95,32 @@ div.title-overview {
     p {
       font-size: .99em;
       line-height: 1.5;
-      max-height: 195px;
+      max-height: 170px;
       overflow-y: auto;
+    }
+  }
+
+  a.reserve {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    display: block;
+    width: 175px;
+    border-radius: 25px;
+    background: var(--primary-blue);
+    color: white;
+    cursor: pointer;
+    transition: 150ms ease-out;
+    font-size: .94em;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    bottom: -25px;
+
+    &:hover {
+      transform: translateX(-50%) scale(1.08);
     }
   }
 }
