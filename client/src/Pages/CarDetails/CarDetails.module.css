@@ -175,7 +175,7 @@ div.content {
     }
 
     div.details {
-      display: grid;
+      display: grid !important;
       width: 100%;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 10px 150px;
@@ -183,7 +183,7 @@ div.content {
       box-shadow: 0 0 10px #00000015;
 
       div.property {
-        display: flex;
+        display: flex !important;
         flex-direction: row !important;
         align-items: center;
         justify-content: space-between !important;
@@ -213,16 +213,16 @@ div.content {
     }
 
     div.accessories {
-      display: grid;
+      display: grid !important;
       width: 100%;
-      grid-template-columns: repeat(5, minmax(220px, 1fr));
+      grid-template-columns: repeat(5, minmax(220px, 1fr)) !important;
 
       /* justify-items: center; */
       gap: 30px;
     }
 
     div.accessory {
-      display: flex;
+      display: flex !important;
       flex-direction: row !important;
       /* flex-direction: column; */
       /* justify-content: center; */
