@@ -23,6 +23,8 @@ div.title-overview {
   flex-direction: column;
   position: relative;
   padding-top: 0;
+  height: fit-content;
+  /* background: #777; */
 
   .title-price {
     display: flex;
@@ -117,7 +119,7 @@ div.title-overview {
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    bottom: -25px;
+    top: calc(100% + 25px);
 
     &:hover {
       transform: translateX(-50%) scale(1.08);

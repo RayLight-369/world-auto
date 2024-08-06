@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import Styles from "./Home.module.css";
 import Card from '../../Components/Card/Card';
 import CreateAlert from '../../Components/CreateAlert/CreateAlert';
@@ -16,6 +16,7 @@ const Home = () => {
   const { cars, brands } = useCars();
   const [ Cars, setCars ] = useState( cars );
   const [ shortcutFilterOpen, setShortcutFilterOpen ] = useState( false );
+  const [ searchInputText, setSearchInputText ] = useState( "" );
 
   const [ filtersState, filterDistpatch ] = useReducer( ( state, action ) => {
     switch ( action.type ) {
@@ -202,22 +203,57 @@ const Home = () => {
 
   }, [] );
 
+  const filteredAndSortedCars = useMemo( () => {
+    if ( !searchInputText ) return Cars;
+
+    const searchTerms = searchInputText.toLowerCase().split( ' ' );
+    return Cars.filter( car => {
+      return searchTerms.every( term => {
+        return (
+          car.title.toLowerCase().includes( term ) ||
+          car.model_year.toLowerCase().includes( term ) ||
+          car.fuel_type.toLowerCase().includes( term ) ||
+          car.gearbox.toLowerCase().includes( term ) ||
+          car.overview.toLowerCase().includes( term )
+        );
+      } );
+    } ).sort( ( a, b ) => {
+      let relevanceA = 0;
+      let relevanceB = 0;
+
+      searchTerms.forEach( term => {
+        if ( a.title.toLowerCase().includes( term ) ) relevanceA += 2;
+        if ( b.title.toLowerCase().includes( term ) ) relevanceB += 2;
+        if ( a.model_year.toLowerCase().includes( term ) ) relevanceA += 2;
+        if ( b.model_year.toLowerCase().includes( term ) ) relevanceB += 2;
+        if ( a.fuel_type.toLowerCase().includes( term ) ) relevanceA += 1;
+        if ( b.fuel_type.toLowerCase().includes( term ) ) relevanceB += 1;
+        if ( a.gearbox.toLowerCase().includes( term ) ) relevanceA += 1;
+        if ( b.gearbox.toLowerCase().includes( term ) ) relevanceB += 1;
+        if ( a.overview.toLowerCase().includes( term ) ) relevanceA += .4;
+        if ( b.overview.toLowerCase().includes( term ) ) relevanceB += .4;
+      } );
+
+      return relevanceB - relevanceA;
+    } );
+  }, [ searchInputText, Cars ] );
+
 
   return (
     <motion.section id={ Styles[ "home" ] } variants={ variants } initial="hidden" animate="animate" exit="exit">
       <motion.section className={ Styles[ "search-section" ] } variants={ variants }>
 
         <h1 className={ Styles[ "ad-title" ] }>Buy your used car checked & guaranteed</h1>
-        <input type="text" name="search" className={ Styles[ 'search-input' ] } placeholder='Make, Model, Fuel, Gearbox' />
+        <input type="text" name="search" className={ Styles[ 'search-input' ] } placeholder='Make, Model, Fuel, Gearbox' onChange={ e => setSearchInputText( e.target.value ) } value={ searchInputText } />
 
       </motion.section>
 
       <motion.section className={ Styles[ "body" ] } variants={ variants }>
-        <FiltersContainer cars={ cars } Cars={ Cars } brands={ brands } setCars={ setCars } filterDistpatch={ filterDistpatch } filtersState={ filtersState } />
+        <FiltersContainer cars={ cars } Cars={ Cars } brands={ brands } setCars={ setCars } filterDistpatch={ filterDistpatch } filtersState={ filtersState } searchInputText={ searchInputText } />
         <div className={ Styles[ "content" ] }>
           <p className={ Styles[ "results" ] }>{ Cars?.length } Cars match your search</p>
           <div className={ Styles[ "list" ] }>
-            { Cars.length && Cars.map( ( car, i ) => (
+            { filteredAndSortedCars.length && filteredAndSortedCars.map( ( car, i ) => (
               <Card key={ car.id } img={ car.images[ 0 ] } id={ car.id } fuel={ car.fuel_type } ppd={ car.price_per_day } ppm={ car.price_per_month } distance={ car.mileage } guarantee={ car.guarantee } overview={ car.overview } title={ car.title } year={ car.model_year } manual={ !car?.accessories.includes( "Automatic" ) && car?.gearbox == "Manual" } />
             ) ) }
           </div>
