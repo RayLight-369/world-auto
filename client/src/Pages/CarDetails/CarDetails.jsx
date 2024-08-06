@@ -100,7 +100,7 @@ I am interested in reserving the following car and would like to provide the det
         
 - *ID* : ${ id }
 - *Title* : ${ title }
-- *Price* : ${ price_per_day }
+- *Price* : ${ price_per_day } €
 
 `;
 
