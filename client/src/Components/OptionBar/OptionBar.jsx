@@ -3,7 +3,7 @@ import React, { memo, useEffect, useState } from 'react';
 import Styles from "./OptionBar.module.css";
 
 
-const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen } ) => {
+const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen, setAddTruckPopupOpen } ) => {
 
   const [ openOptionBar, setOpenOptionBar ] = useState( false );
   const [ isMobile, setIsMobile ] = useState( false );
@@ -40,7 +40,7 @@ const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen } ) => {
   };
 
   const OpenOptionBar = () => setOpenOptionBar( true );
-  const CloseOptionBar = () => setOpenOptionBar( false );
+  // const CloseOptionBar = () => setOpenOptionBar( false );
 
 
   return (
@@ -72,6 +72,7 @@ const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen } ) => {
 
         <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddCarPopupOpen( true ) }>+ Ajouter une voiture</button>
         <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddBrandPopupOpen( true ) }>+ Ajouter une marque</button>
+        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddTruckPopupOpen( true ) }>+ Ajouter une camion</button>
         {/* <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddTaskPopupOpen( true ) }>+ Add Task</button> */ }
         {/* <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ importCSV }>+ Import CSV</button> */ }
 

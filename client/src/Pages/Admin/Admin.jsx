@@ -7,6 +7,7 @@ import AddCar from '../../Components/AddCar/AddCar';
 import Modal from '../../Components/Modal/Modal';
 import AddBrand from '../../Components/AddBrand/AddBrand';
 import { AdminLinks } from '../../Constants';
+import AddTruck from '../../Components/AddTruck/AddTruck';
 
 const Admin = ( { adminVerified } ) => {
 
@@ -15,6 +16,7 @@ const Admin = ( { adminVerified } ) => {
 
   const [ openAddCarPopup, setAddCarPopup ] = useState( false );
   const [ openAddBrandPopup, setAddBrandPopup ] = useState( false );
+  const [ openAddTruckPopup, setAddTruckPopup ] = useState( false );
   // const [ verified, setVerified ] = useState( false );
 
   const [ isMobile, setIsMobile ] = useState( false );
@@ -80,7 +82,7 @@ const Admin = ( { adminVerified } ) => {
 
         <AnimatePresence mode='wait'>
           { adminVerified && (
-            <OptionBar setAddBrandPopupOpen={ setAddBrandPopup } setAddCarPopupOpen={ setAddCarPopup } />
+            <OptionBar setAddBrandPopupOpen={ setAddBrandPopup } setAddCarPopupOpen={ setAddCarPopup } setAddTruckPopupOpen={ setAddTruckPopup } />
           ) }
         </AnimatePresence>
 
@@ -93,6 +95,11 @@ const Admin = ( { adminVerified } ) => {
           { openAddBrandPopup && (
             <Modal handleClose={ () => closePopUp( setAddBrandPopup ) }>
               <AddBrand handleClose={ () => closePopUp( setAddBrandPopup ) } />
+            </Modal>
+          ) }
+          { openAddTruckPopup && (
+            <Modal handleClose={ () => closePopUp( setAddTruckPopup ) }>
+              <AddTruck handleClose={ () => closePopUp( setAddTruckPopup ) } />
             </Modal>
           ) }
         </AnimatePresence>

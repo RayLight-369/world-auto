@@ -12,14 +12,14 @@ import { uploadFile, updateData, deleteFile } from "../../Supabase";
 const AddTruck = ( { handleClose, type = "new", truck } ) => {
 
   // const navigate = useNavigate();
-  const { setCars, brands } = useCars();
+  const { setTrucks, brands } = useCars();
   const [ truckID, setTruckID ] = useState( truck?.id || 0 );
   const [ adding, setAdding ] = useState( false );
   const [ truckTitle, setTruckTitle ] = useState( truck?.title || "" );
   const [ truckOverview, setTruckOverview ] = useState( truck?.overview || "" );
   const [ pricePerDay, setPricePerDay ] = useState( truck?.price_per_day || 0 );
 
-  // const [ brand, setBrand ] = useState( brands?.find( brand => brand.id == truck?.brand )?.brandName || undefined );
+  const [ brand, setBrand ] = useState( brands?.find( brand => brand.id == truck?.brand )?.brandName || undefined );
   const [ fuelType, setFuelType ] = useState( truck?.fuel_type || "" );
   // const [ pricePerMonth, setPricePerMonth ] = useState( truck?.price_per_month || 0 );
   // const [ mileage, setMilage ] = useState( truck?.milage || "" );
@@ -42,7 +42,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
   const [ dimensions, setDimensions ] = useState( truck?.dimensions || {} );
   const [ weight, setWeight ] = useState( truck?.weight || {} );
 
-  // const [ accessories, setAccessories ] = useState( truck?.accessories || [] );
+  const [ accessories, setAccessories ] = useState( truck?.accessories || [] );
   const [ fuelDropdown, toggleFuelDropdown ] = useState( false );
   const [ brandDropdown, toggleBrandDropdown ] = useState( false );
   const [ gearboxDropdown, toggleGearboxDropdown ] = useState( false );
@@ -227,14 +227,6 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       type: "text"
     },
     {
-      element: "Boîte de vitesses",
-      class: "boite-de-vitesses",
-      inputClass: "boite-de-vitesses-input",
-      setState: setGearbox,
-      value: gearbox,
-      type: "text"
-    },
-    {
       element: "Carrosserie",
       class: "carrosserie",
       inputClass: "carrosserie-input",
@@ -249,15 +241,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       setState: setEndOfCommercializationDate,
       value: endOfCommercializationDate,
       type: "text"
-    },
-    {
-      element: "Prix du véhicule neuf au 01/11/2013",
-      class: "prix-neuf",
-      inputClass: "prix-neuf-input",
-      setState: setNewVehiclePrice,
-      value: newVehiclePrice,
-      type: "text"
-    },
+    }
     // {
     //   element: "Gearbox",
     //   class: "gearbox",
@@ -275,8 +259,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
     co2Emission,
     gearbox,
     bodyType,
-    endOfCommercializationDate,
-    newVehiclePrice
+    endOfCommercializationDate
   ] );
 
 
@@ -385,7 +368,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
 
     try {
 
-      // const res = await fetch( API.EDIT_CAR, {
+      // const res = await fetch( API.EDIT_TRUCK, {
       //   method: "PUT",
       //   headers: {
       //     "Content-Type": "application/json"
@@ -469,7 +452,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
 
         const truck = Data.data[ 0 ];
 
-        setCars( prev =>
+        setTrucks( prev =>
           prev.map( prevTruck => truck.id == prevTruck.id ? truck : prevTruck )
         );
 
@@ -539,7 +522,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
     const due_date = dateParts.join( "-" );
 
     const ReqData = {
-      title: truckTitle, overview: truckOverview, due_date, brand, fuel_type: fuelType, images, accessories, certificate, color, gearbox, emission, energy, mileage, guarantee, seating_capacity: seatingCapacity, model_year: modelYear, price_per_day: pricePerDay, price_per_month: pricePerMonth
+      title: truckTitle, overview: truckOverview, brand, fuel_type: fuelType, images, accessories, gearbox, energy, price_per_day: pricePerDay, commercial_power: commercialPower, fiscal_power: fiscalPower, mixed_consumption: mixedConsumption, co2_emission: co2Emission, body_type: bodyType, end_of_commercialization_date: endOfCommercializationDate, new_vehicle_price: newVehiclePrice, dimensions, weight,
     };
 
 
@@ -549,7 +532,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
 
     try {
 
-      const res = await fetch( type == "edit" ? API.EDIT_CAR : type == "new" ? API.NEW_CAR : API.DEL_CAR, {
+      const res = await fetch( type == "edit" ? API.EDIT_TRUCK : type == "new" ? API.NEW_TRUCK : API.DEL_TRUCK, {
         method: type == "edit" ? "PUT" : type == "new" ? 'POST' : "DELETE",
         body: JSON.stringify( ReqData ),
         headers: {
@@ -573,19 +556,19 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
         console.log( body.data );
 
         if ( type === "edit" ) {
-          setCars( prevTrucks =>
+          setTrucks( prevTrucks =>
             prevTrucks.map( prevTruck =>
               prevTruck.id === truck.id ? truck : prevTruck
             )
           );
         } else if ( type == "del" ) {
-          setCars( prevTrucks =>
+          setTrucks( prevTrucks =>
             prevTrucks.filter( prevTruck =>
               prevTruck.id != ReqData.id
             )
           );
         } else {
-          setCars( prev => [ truck, ...prev ] );
+          setTrucks( prev => [ truck, ...prev ] );
         }
 
         handleClose();
@@ -616,20 +599,20 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
     <MotionConfig transition={ { type: "spring", damping: 7 } } >
       <div className={ styles[ "add-truck" ] }>
         <div className={ styles[ "header" ] }>
-          <p className={ styles[ "title" ] }>{ type === "edit" ? "Modifiez votre voiture" : type == "new" ? "Ajouter une nouvelle voiture" : "Es-tu sûr?" }</p>
+          <p className={ styles[ "title" ] }>{ type === "edit" ? "Modifier le camion" : type == "new" ? "Ajouter un nouveau camion" : "Es-tu sûr?" }</p>
           <motion.button type='button' whileHover={ buttonWhileHovering( 1.2, .2 ) } className={ styles[ 'close' ] } onClick={ handleClose }>✖</motion.button>
         </div>
         {
           type != "del" && (
             <>
               <div className={ styles[ "inputs" ] }>
-                <input type="text" placeholder='Titre de la voiture' className={ styles[ "name" ] } value={ truckTitle } onChange={ e => setTruckTitle( e.target.value ) } />
-                <textarea placeholder='Aperçu de la voiture' className={ styles[ "description" ] } value={ truckOverview } onChange={ e => setTruckOverview( e.target.value ) } />
+                <input type="text" placeholder='Titre du camion' className={ styles[ "name" ] } value={ truckTitle } onChange={ e => setTruckTitle( e.target.value ) } />
+                <textarea placeholder='Description du camion' className={ styles[ "description" ] } value={ truckOverview } onChange={ e => setTruckOverview( e.target.value ) } />
               </div>
 
               <div className={ styles[ "infos" ] }>
 
-                <DropDown key={ "fuelType" } setState={ setFuelType } selected={ fuelType } array={ [ "Diesel", "Petrol", "CNG", "Electric" ] } label='Truckburant' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
+                <DropDown key={ "fuelType" } setState={ setFuelType } selected={ fuelType } array={ [ "Diesel", "Petrol", "CNG", "Electric" ] } label='Carburant' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
                 <DropDown key={ "brand" } setState={ setBrand } selected={ brand } array={ brands?.map( ( brand ) => brand.brandName ) } backWorkArray={ brands?.map( brand => brand.id ) } label='Marque' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
                 <DropDown key={ "gearbox" } setState={ setGearbox } selected={ gearbox } array={ [ "Automatique", "Manuel", "Automatique à variation continue" ] } label='Boîte de vitesses' dropDownOpen={ gearboxDropdown } toggleDropDown={ toggleGearboxDropdown } />
 

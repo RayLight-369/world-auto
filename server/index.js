@@ -234,6 +234,8 @@ app.post( "/admin/trucks/new", async ( req, res ) => {
       object
     } );
 
+    console.log( data );
+
     if ( data.error ) {
 
       console.log( data.error );
