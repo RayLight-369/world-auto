@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import Styles from "./Header.module.css";
 import { Outlet, NavLink } from "react-router-dom";
 import { NavLinks } from '../../Constants';
@@ -12,7 +12,8 @@ const Header = () => {
 
   const [ toggleDropdown, setToggleDropdown ] = useState( false );
   const [ icon, setIcon ] = useState( faBars );
-  const [ isMobile, setIsMobile ] = useState( true );
+  const [ mobile, setMobile ] = useState( true );
+  const isMobile = useMemo( () => window.innerWidth <= 768, [ mobile ] );
   const { user, Login, isLoggedIn, Logout } = useUser();
 
   // const hideDropdown = () => {
@@ -25,10 +26,12 @@ const Header = () => {
 
   useEffect( () => {
 
-    const Resize = () => setIsMobile( window.innerWidth <= 768 );
+    const Resize = () => setMobile( window.innerWidth <= 768 );
     window.addEventListener( "resize", Resize );
 
     Resize();
+
+    return () => window.removeEventListener( "resize", Resize );
 
   }, [] );
 

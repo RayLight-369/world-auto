@@ -1,5 +1,6 @@
 import { Route, Routes, BrowserRouter as Router, useLocation } from "react-router-dom";
 import Home from './Pages/Home/Home';
+import TruckRental from './Pages/TruckRental/TruckRental';
 import Header from "./Components/Header/Header";
 import AdminLogin from "./Components/AdminLogin/AdminLogin";
 import About from "./Pages/About/About";
@@ -34,6 +35,7 @@ const App = () => {
                 <Route index path="/" element={ <Home /> } />
                 <Route path="about" element={ <About /> } />
                 <Route path="contact" element={ <Contact /> } />
+                <Route path="trucks" element={ <TruckRental /> } />
                 <Route path="/car/:id" element={ <CarDetails /> } />
               </Route>
             </Routes>

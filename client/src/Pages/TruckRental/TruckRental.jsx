@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useReducer, useState } from 'react';
-import Styles from "./Home.module.css";
+import Styles from "./TruckRental.module.css";
 import Card from '../../Components/Card/Card';
 import CreateAlert from '../../Components/CreateAlert/CreateAlert';
 import { motion } from "framer-motion";
@@ -10,7 +10,7 @@ import FiltersContainer from '../../Components/FiltersContainer/FiltersContainer
 import CardsContainer from '../../Components/CardsContainer/CardsContainer';
 
 
-const Home = () => {
+const TruckRental = () => {
 
 
   const { cars, brands } = useCars();
@@ -243,7 +243,7 @@ const Home = () => {
     <motion.section id={ Styles[ "home" ] } variants={ variants } initial="hidden" animate="animate" exit="exit">
       <motion.section className={ Styles[ "search-section" ] } variants={ variants }>
 
-        <h1 className={ Styles[ "ad-title" ] }>Achetez votre voiture d’occasion contrôlée & garantie</h1>
+        <h1 className={ Styles[ "ad-title" ] }>Achetez votre Camion d'occasion, vérifié et garanti</h1>
         <input type="text" name="search" className={ Styles[ 'search-input' ] } placeholder='Marque, Modèle, Carburant, Boite de vitesse' onChange={ e => setSearchInputText( e.target.value ) } value={ searchInputText } />
 
       </motion.section>
@@ -263,4 +263,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default TruckRental;

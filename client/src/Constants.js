@@ -4,6 +4,10 @@ export const NavLinks = [
     path: "/"
   },
   {
+    name: "Camions",
+    path: "/trucks"
+  },
+  {
     name: "À propos",
     path: "/about"
   },
@@ -38,6 +42,11 @@ export const API = {
   NEW_CAR: `https://world-auto-api.vercel.app/admin/cars/new`,
   EDIT_CAR: `https://world-auto-api.vercel.app/admin/cars/edit`,
   DEL_CAR: `https://world-auto-api.vercel.app/admin/cars/delete`,
+  GET_TRUCKS: `https://world-auto-api.vercel.app/admin/trucks`,
+  GET_TRUCK: ( id ) => `https://world-auto-api.vercel.app/admin/trucks/${ id }`,
+  NEW_TRUCK: `https://world-auto-api.vercel.app/admin/trucks/new`,
+  EDIT_TRUCK: `https://world-auto-api.vercel.app/admin/trucks/edit`,
+  DEL_TRUCK: `https://world-auto-api.vercel.app/admin/trucks/delete`,
   GET_BRANDS: `https://world-auto-api.vercel.app/admin/brands`,
   NEW_BRAND: `https://world-auto-api.vercel.app/admin/brands/new`,
   EDIT_BRAND: `https://world-auto-api.vercel.app/admin/brands/edit`,
