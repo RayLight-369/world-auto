@@ -155,7 +155,7 @@ div.page-container {
       /* background: #000; */
       position: relative;
       left: 10px !important;
-      width: calc(25%) !important;
+      width: calc(35%) !important;
       overflow: hidden;
       text-overflow: ellipsis;
       font-size: .67em !important;
@@ -165,8 +165,9 @@ div.page-container {
 
     p.brand-title {
       position: absolute;
-      left: calc(30%) !important;
+      left: calc(40%) !important;
       width: calc(20% - 5px) !important;
+      background: #000;
     }
 
     p.date {
@@ -174,13 +175,13 @@ div.page-container {
       font-family: Galano !important;
       font-size: .75em !important;
       white-space: nowrap;
-      left: calc(52%) !important;
-      width: calc(28%) !important;
+      left: calc(62%) !important;
+      width: fit-content !important;
     }
 
     p.actions {
       position: absolute;
-      left: calc(80%) !important;
+      left: calc(83%) !important;
       width: calc(18%) !important;
       display: flex;
       justify-content: center;
