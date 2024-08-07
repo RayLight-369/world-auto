@@ -152,6 +152,58 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
     }
   ], [] );
 
+  const Weights = useMemo( () => [
+    {
+      element: "Poids à vide",
+      class: "poids-vide",
+      inputClass: "poids-vide-input",
+      setState: value => setWeight( prev => ( { ...prev, "Poids à vide": value } ) ),
+      value: truck?.weights?.[ "Poids à vide" ] || "",
+      type: "text"
+    },
+    {
+      element: "PTAC (Poids Total Autorisé en Charge)",
+      class: "ptac",
+      inputClass: "ptac-input",
+      setState: value => setWeight( prev => ( { ...prev, "PTAC (Poids Total Autorisé en Charge)": value } ) ),
+      value: truck?.weights?.[ "PTAC (Poids Total Autorisé en Charge)" ] || "",
+      type: "text"
+    },
+    {
+      element: "PTRA (Poids Total Roulant Autorisé)",
+      class: "ptra",
+      inputClass: "ptra-input",
+      setState: value => setWeight( prev => ( { ...prev, "PTRA (Poids Total Roulant Autorisé)": value } ) ),
+      value: truck?.weights?.[ "PTRA (Poids Total Roulant Autorisé)" ] || "",
+      type: "text"
+    },
+    {
+      element: "Charge utile",
+      class: "charge-utile",
+      inputClass: "charge-utile-input",
+      setState: value => setWeight( prev => ( { ...prev, "Charge utile": value } ) ),
+      value: truck?.weights?.[ "Charge utile" ] || "",
+      type: "text"
+    },
+    {
+      element: "Poids tracté freiné",
+      class: "poids-tracte-freine",
+      inputClass: "poids-tracte-freine-input",
+      setState: value => setWeight( prev => ( { ...prev, "Poids tracté freiné": value } ) ),
+      value: truck?.weights?.[ "Poids tracté freiné" ] || "",
+      type: "text"
+    },
+    {
+      element: "Poids tracté non freiné",
+      class: "poids-tracte-non-freine",
+      inputClass: "poids-tracte-non-freine-input",
+      setState: value => setWeight( prev => ( { ...prev, "Poids tracté non freiné": value } ) ),
+      value: truck?.weights?.[ "Poids tracté non freiné" ] || "",
+      type: "text"
+    }
+  ], [ [] ] );
+
+
 
   // const Dimensions = useMemo( () => ( {
   //   "Longueur": truck?.dimensions?.length || "",
@@ -522,7 +574,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
     const due_date = dateParts.join( "-" );
 
     const ReqData = {
-      title: truckTitle, overview: truckOverview, brand, fuel_type: fuelType, images, accessories, gearbox, energy, price_per_day: pricePerDay, commercial_power: commercialPower, fiscal_power: fiscalPower, mixed_consumption: mixedConsumption, co2_emission: co2Emission, body_type: bodyType, end_of_commercialization_date: endOfCommercializationDate, new_vehicle_price: newVehiclePrice, dimensions, weight,
+      title: truckTitle, overview: truckOverview, due_date, brand, fuel_type: fuelType, images, accessories, gearbox, energy, price_per_day: pricePerDay, commercial_power: commercialPower, fiscal_power: fiscalPower, mixed_consumption: mixedConsumption, co2_emission: co2Emission, body_type: bodyType, end_of_commercialization_date: endOfCommercializationDate, new_vehicle_price: newVehiclePrice, dimensions, weight,
     };
 
 
@@ -628,6 +680,17 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
                 ) ) }
 
                 { Dimensions.map( ( value, index ) => (
+
+                  <div className={ styles[ value.class ] } key={ index }>
+                    <label htmlFor={ value.class }>{ value.element }:</label>
+                    <input onChange={ ( e ) => {
+                      value.setState( e.target.value );
+                    } } value={ value.value } type={ value.type } name={ value.class } id={ value.class } className={ styles[ value.inputClass ] } />
+                  </div>
+
+                ) ) }
+
+                { Weights.map( ( value, index ) => (
 
                   <div className={ styles[ value.class ] } key={ index }>
                     <label htmlFor={ value.class }>{ value.element }:</label>

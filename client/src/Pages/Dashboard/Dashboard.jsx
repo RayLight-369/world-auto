@@ -7,14 +7,17 @@ import { AnimatePresence } from 'framer-motion';
 import Modal from '../../Components/Modal/Modal';
 import AddCar from '../../Components/AddCar/AddCar';
 import AddBrand from '../../Components/AddBrand/AddBrand';
+import AddTruck from '../../Components/AddTruck/AddTruck';
 
 const Dashboard = () => {
 
-  const { cars, brands, carsLoading } = useCars();
+  const { cars, brands, trucks, carsLoading } = useCars();
   const [ carToBeEdited, setCarToBeEdited ] = useState( null );
+  const [ truckToBeEdited, setTruckToBeEdited ] = useState( null );
   const [ brandToBeEdited, setBrandToBeEdited ] = useState( null );
   const [ brandToBeDeleted, setBrandToBeDeleted ] = useState( null );
   const [ carToBeDeleted, setCarToBeDeleted ] = useState( null );
+  const [ truckToBeDeleted, setTruckToBeDeleted ] = useState( null );
   const [ isMobile, setIsMobile ] = useState( false );
 
   useEffect( () => {
@@ -45,6 +48,13 @@ const Dashboard = () => {
                 <p className={ Styles[ "desc" ] }>Vérifiez vos marques ici</p>
               </div>
             </Link>
+
+            <Link to={ "/admin/trucks" }>
+              <div className={ `${ Styles[ "trucks" ] } ${ Styles[ "container" ] }` }>
+                <p className={ Styles[ "title" ] }>Camions</p>
+                <p className={ Styles[ "desc" ] }>Vérifiez vos camions ici</p>
+              </div>
+            </Link>
           </div>
           <div className={ Styles[ "recent-updates-container" ] }>
             <div className={ `${ Styles[ "recent-cars" ] } ${ Styles[ "container" ] }` }>
@@ -73,6 +83,38 @@ const Dashboard = () => {
                         </div>
                       ) ) : (
                         <p className={ Styles[ 'no-recent-note' ] }>Aucune voiture ajoutée !</p>
+                      )
+                    }
+                  </>
+                ) }
+              </div>
+            </div>
+            <div className={ `${ Styles[ "recent-trucks" ] } ${ Styles[ "container" ] }` }>
+              <p className={ Styles[ "title" ] }>Camions récemment ajoutés</p>
+              <div className={ Styles[ "list" ] }>
+                { carsLoading && (
+                  <p className={ Styles[ "no-recent-note" ] }>Loading...</p>
+                ) }
+
+                { !carsLoading && (
+                  <>
+                    {
+                      trucks.length ? trucks.map( ( truck ) => (
+                        <div className={ Styles[ "truck" ] } key={ truck.id }>
+                          <div className={ Styles[ "content" ] }>
+                            <div className={ Styles[ "brand-title" ] }>
+                              <p className={ Styles[ "truck-title" ] }>{ truck.title }</p>
+                              <p className={ Styles[ "truck-brand" ] }>{ brands?.find( brand => brand.id == truck.brand )?.brandName }</p>
+                            </div>
+                            <p className={ Styles[ "date" ] }>{ truck.due_date }</p>
+                          </div>
+                          <div className={ Styles[ "edit-del" ] }>
+                            <button className={ Styles[ 'edit-btn' ] } onClick={ () => setTruckToBeEdited( truck ) }>&#9998;</button>
+                            <button onClick={ () => setTruckToBeDeleted( truck ) }>&#128465;</button>
+                          </div>
+                        </div>
+                      ) ) : (
+                        <p className={ Styles[ 'no-recent-note' ] }>Aucune Camions ajoutée !</p>
                       )
                     }
                   </>
@@ -118,6 +160,16 @@ const Dashboard = () => {
         { carToBeDeleted && (
           <Modal>
             <AddCar handleClose={ () => setCarToBeDeleted( null ) } car={ carToBeDeleted } type={ "del" } />
+          </Modal>
+        ) }
+        { truckToBeEdited && (
+          <Modal>
+            <AddTruck handleClose={ () => setTruckToBeEdited( null ) } car={ truckToBeEdited } type={ "edit" } />
+          </Modal>
+        ) }
+        { truckToBeDeleted && (
+          <Modal>
+            <AddTruck handleClose={ () => setTruckToBeDeleted( null ) } car={ truckToBeDeleted } type={ "del" } />
           </Modal>
         ) }
         { brandToBeEdited && (

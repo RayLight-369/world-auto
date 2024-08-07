@@ -30,6 +30,10 @@ export const AdminLinks = [
     name: "Marques",
     path: "/admin/brands"
   },
+  {
+    name: "Camions",
+    path: "/admin/trucks"
+  },
 ];
 
 export const CREDENTIALS = {

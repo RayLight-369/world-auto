@@ -14,6 +14,7 @@ import CarDetails from "./Pages/CarDetails/CarDetails";
 import Contact from "./Pages/Contact/Contact";
 import SessionUserProvider from "./Contexts/SessionUserContext";
 import { useState } from "react";
+import ManageTrucks from "./Pages/ManageTrucks/ManageTrucks";
 
 
 
@@ -47,6 +48,7 @@ const App = () => {
             <Route path="login" element={ <AdminLogin adminVerified={ adminVerified } setAdminVerified={ setAdminVerified } /> } />
             <Route path="cars" element={ <ManageCars /> } />
             <Route path="brands" element={ <ManageBrands /> } />
+            <Route path="trucks" element={ <ManageTrucks /> } />
           </Route>
         </Routes>
       </CarsProvider>

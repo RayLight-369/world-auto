@@ -12,7 +12,7 @@ div.page-content {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow: hidden;
+  overflow: auto;
 }
 
 div.details-container {
@@ -27,7 +27,9 @@ div.details-container a {
 
 div.container {
   padding: 16px 18px;
-  border: 1px solid #bfbfbf;
+  /* border: 1px solid #bfbfbf; */
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.14);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -55,19 +57,30 @@ div.details-container div p.desc {
 
 div.recent-updates-container {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  /* background: #000; */
   height: calc(100% - 60px);
   border-radius: 8px;
+  gap: 35px;
+  /* overflow: hidden; */
+  /* display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content: space-between;
+  width: 100%; */
+  /* background: #000; */
+  /* height: calc(100% - 60px); */
+  /* border-radius: 8px;
   gap: 25px;
-  overflow: hidden;
+  overflow: hidden; */
 }
 
 div.recent-updates-container > div {
-  height: calc(100%);
+  max-height: calc(80%);
+  height: fit-content;
   font-size: 90%;
   display: flex;
   flex-direction: column;
