@@ -50,7 +50,7 @@ div.page-container {
         /* background: #000; */
         position: relative;
         left: 10px;
-        width: calc(31%);
+        width: calc(48%);
         overflow: hidden;
         text-overflow: ellipsis;
         font-size: .86em;
@@ -60,19 +60,20 @@ div.page-container {
 
       p.brand-title {
         position: absolute;
-        left: calc(35%);
+        left: calc(50%);
         width: calc(26% - 5px);
       }
 
       p.date {
         position: absolute;
-        left: calc(62%);
-        width: calc(16%);
+        left: calc(76%);
+        width: fit-content;
+        /* width: calc(16%); */
       }
 
       p.actions {
         position: absolute;
-        left: calc(80%);
+        left: calc(85%);
         width: calc(18%);
         display: flex;
         justify-content: center;
