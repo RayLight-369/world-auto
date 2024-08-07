@@ -11,10 +11,11 @@ export const useCars = () => {
 const CarsProvider = ( { children } ) => {
 
   const [ cars, setCars ] = useState( [] );
+  const [ truck, setTrucks ] = useState( [] );
   const [ brands, setBrands ] = useState( [] );
   const [ carsLoading, setCarsLoading ] = useState( true );
-  const [ currentCar, setCurrentCar ] = useState( null );
-  const [ cycles, setCycles ] = useState( 0 );
+  // const [ currentCar, setCurrentCar ] = useState( null );
+  // const [ cycles, setCycles ] = useState( 0 );
 
   useEffect( () => {
     async function fetchData () {
@@ -25,6 +26,13 @@ const CarsProvider = ( { children } ) => {
         }
         const carsData = await carsRes.json();
         setCars( carsData.data );
+
+        const trucksRes = await fetch( API.GET_TRUCKS );
+        if ( !trucksRes.ok ) {
+          throw new Error( `Failed to fetch cars: ${ trucksRes.status } ${ trucksRes.statusText }` );
+        }
+        const trucksData = await trucksRes.json();
+        setCars( trucksData.data );
 
         const brandsRes = await fetch( API.GET_BRANDS );
         if ( !brandsRes.ok ) {
@@ -48,7 +56,7 @@ const CarsProvider = ( { children } ) => {
   }, [] );
 
   return (
-    <CarsContext.Provider value={ { cars, setCars, carsLoading, currentCar, setCurrentCar, brands, setBrands } }>{ children }</CarsContext.Provider>
+    <CarsContext.Provider value={ { cars, setCars, carsLoading, brands, setBrands } }>{ children }</CarsContext.Provider>
   );
 };
 

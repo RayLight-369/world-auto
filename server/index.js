@@ -198,6 +198,113 @@ app.delete( "/admin/cars/delete", async ( req, res ) => {
 
 } );
 
+app.get( [ "/admin/trucks", "/admin/trucks/:id" ], async ( req, res ) => {
+  try {
+
+    const id = req.params?.id;
+    const query = { table: "Trucks" };
+
+    if ( id ) query.where = { id };
+
+    const { data, error } = await getData( query );
+
+    if ( data ) res.status( 200 ).json( { data } );
+    else {
+      console.log( error );
+      res.status( 404 ).json( { error: "No Trucks Found!" } );
+    }
+
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).json( { error: e } );
+  }
+} );
+
+
+
+app.post( "/admin/trucks/new", async ( req, res ) => {
+
+  try {
+
+    const object = await req.body;
+    console.log( object );
+
+    const data = await insertData( {
+      table: "Trucks",
+      object
+    } );
+
+    if ( data.error ) {
+
+      console.log( data.error );
+      res.status( data.status ).json( { error: data.error } );
+
+    } else res.status( data.status ).json( { data: data.data } );
+
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).json( { error: e } );
+  }
+
+} );
+
+app.put( "/admin/trucks/edit", async ( req, res ) => {
+
+  try {
+
+    const object = await req.body;
+    console.log( object );
+
+    const Data = await updateData( {
+      table: "Trucks",
+      where: {
+        id: object.id
+      },
+      object
+    } );
+
+    if ( Data.error ) {
+
+      console.log( Data.error );
+      res.status( Data.status ).json( { error: Data.error } );
+
+    } else res.status( Data.status ).json( { data: Data.data } );
+
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).json( { error: e } );
+  }
+
+} );
+
+app.delete( "/admin/trucks/delete", async ( req, res ) => {
+
+  try {
+
+    const object = await req.body;
+    console.log( object );
+
+    const Data = await deleteData( {
+      table: "Trucks",
+      where: {
+        id: object.id
+      }
+    } );
+
+    if ( Data.error ) {
+
+      console.log( Data.error );
+      res.status( Data.status ).json( { error: Data.error } );
+
+    } else res.status( 200 ).json( { data: Data.data || [ object ] } );
+
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).json( { error: e } );
+  }
+
+} );
+
 app.get( "/admin/brands", async ( req, res ) => {
   try {
 
