@@ -158,7 +158,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "poids-vide",
       inputClass: "poids-vide-input",
       setState: value => setWeight( prev => ( { ...prev, "Poids à vide": value } ) ),
-      value: truck?.weights?.[ "Poids à vide" ] || "",
+      value: weight?.[ "Poids à vide" ],
       type: "text"
     },
     {
@@ -166,7 +166,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "ptac",
       inputClass: "ptac-input",
       setState: value => setWeight( prev => ( { ...prev, "PTAC (Poids Total Autorisé en Charge)": value } ) ),
-      value: truck?.weights?.[ "PTAC (Poids Total Autorisé en Charge)" ] || "",
+      value: weight?.[ "PTAC (Poids Total Autorisé en Charge)" ],
       type: "text"
     },
     {
@@ -174,7 +174,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "ptra",
       inputClass: "ptra-input",
       setState: value => setWeight( prev => ( { ...prev, "PTRA (Poids Total Roulant Autorisé)": value } ) ),
-      value: truck?.weights?.[ "PTRA (Poids Total Roulant Autorisé)" ] || "",
+      value: weight?.[ "PTRA (Poids Total Roulant Autorisé)" ],
       type: "text"
     },
     {
@@ -182,7 +182,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "charge-utile",
       inputClass: "charge-utile-input",
       setState: value => setWeight( prev => ( { ...prev, "Charge utile": value } ) ),
-      value: truck?.weights?.[ "Charge utile" ] || "",
+      value: weight?.[ "Charge utile" ],
       type: "text"
     },
     {
@@ -190,7 +190,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "poids-tracte-freine",
       inputClass: "poids-tracte-freine-input",
       setState: value => setWeight( prev => ( { ...prev, "Poids tracté freiné": value } ) ),
-      value: truck?.weights?.[ "Poids tracté freiné" ] || "",
+      value: weight?.[ "Poids tracté freiné" ],
       type: "text"
     },
     {
@@ -198,7 +198,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "poids-tracte-non-freine",
       inputClass: "poids-tracte-non-freine-input",
       setState: value => setWeight( prev => ( { ...prev, "Poids tracté non freiné": value } ) ),
-      value: truck?.weights?.[ "Poids tracté non freiné" ] || "",
+      value: weight?.[ "Poids tracté non freiné" ],
       type: "text"
     }
   ], [ [] ] );
@@ -404,7 +404,8 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       await uploadFile(
         Truck.id,
         fileId + "." + extension,
-        images_[ image ]
+        images_[ image ],
+        "trucks"
       );
     };
 
@@ -578,7 +579,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
     };
 
 
-    if ( !truck && ( !truckTitle.trim().length || !Object.keys( imagesData ).length ) ) return setAdding( false );
+    if ( !truck && ( !truckTitle.trim().length || !Object.keys( imagesData ).length ) && type != "del" ) return setAdding( false );
 
     if ( type === "edit" || type == "del" ) ReqData.id = truck.id;
 

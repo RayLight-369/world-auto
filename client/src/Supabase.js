@@ -207,13 +207,13 @@ const deleteData = async ( {
   return false;
 };
 
-const uploadFile = async ( postID, id, file ) => {
+const uploadFile = async ( postID, id, file, type = "users" ) => {
 
   try {
 
     supabase.storage
       .from( "images" )
-      .upload( `users/${ postID }/${ id }`, file, {
+      .upload( `${ type }/${ postID }/${ id }`, file, {
         cacheControl: '3600',
         upsert: false
       } ).then( console.log );

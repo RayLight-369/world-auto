@@ -425,7 +425,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     };
 
 
-    if ( !car && ( !carTitle.trim().length || !Object.keys( imagesData ).length ) ) return setAdding( false );
+    if ( !car && ( !carTitle.trim().length || !Object.keys( imagesData ).length ) && type != "del" ) return setAdding( false );
 
     if ( type === "edit" || type == "del" ) ReqData.id = car.id;
 

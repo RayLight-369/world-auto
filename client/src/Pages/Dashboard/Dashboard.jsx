@@ -164,12 +164,12 @@ const Dashboard = () => {
         ) }
         { truckToBeEdited && (
           <Modal>
-            <AddTruck handleClose={ () => setTruckToBeEdited( null ) } car={ truckToBeEdited } type={ "edit" } />
+            <AddTruck handleClose={ () => setTruckToBeEdited( null ) } truck={ truckToBeEdited } type={ "edit" } />
           </Modal>
         ) }
         { truckToBeDeleted && (
           <Modal>
-            <AddTruck handleClose={ () => setTruckToBeDeleted( null ) } car={ truckToBeDeleted } type={ "del" } />
+            <AddTruck handleClose={ () => setTruckToBeDeleted( null ) } truck={ truckToBeDeleted } type={ "del" } />
           </Modal>
         ) }
         { brandToBeEdited && (
