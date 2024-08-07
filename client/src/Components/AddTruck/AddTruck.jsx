@@ -545,7 +545,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       for ( const image of deletedImages ) {
         const url = image.split( "/" );
         const fileID = url[ url.length - 1 ];
-        await deleteFile( `users/${ truck.id }/${ fileID }` );
+        await deleteFile( `trucks/${ truck.id }/${ fileID }` );
       }
     }
 
