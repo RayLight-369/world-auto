@@ -56,7 +56,13 @@ const TruckDetails = () => {
     "model_year": "Modèle",
     "price_per_day": "Prix ​​par jour",
     "price_per_month": "Prix ​​par mois",
-    "seating_capacity": "Nombre de places"
+    "seating_capacity": "Nombre de places",
+    "commercial_power": "Puissance commerciale",
+    "fiscal_power": "Puissance fiscale",
+    "co2_emission": "Émission de CO2",
+    "mixed_consumption": "Consommation mixte",
+    "body_type": "Carrosserie",
+    "end_of_commercialization_date": "Date de fin"
   } ), [] );
 
   const ICONS_FOR_ACCESSORIES = useMemo( () => ( {
@@ -216,8 +222,34 @@ I am interested in reserving the following truck and would like to provide the d
           <h1 className={ styles[ 'title' ] }>Détails</h1>
           <div className={ styles[ "details" ] }>
             { Object.entries( properties ).map( ( [ key, val ] ) => (
+              <>
+                { val?.toString().trim().length ? (
+                  <div className={ styles[ "property" ] } key={ key } title={ val }>
+                    <p className={ styles[ "key" ] }>{ PROPERTIES[ key ] }</p>
+                    <p className={ styles[ "value" ] }>{ val }</p>
+                  </div>
+                ) : <></> }
+              </>
+            ) ) }
+          </div>
+        </div>
+        <div className={ styles[ "parent" ] }>
+          <h1 className={ styles[ 'title' ] }>Dimensions</h1>
+          <div className={ styles[ "details" ] }>
+            { Object.entries( truck?.dimensions ).map( ( [ key, val ] ) => (
               <div className={ styles[ "property" ] } key={ key } title={ val }>
-                <p className={ styles[ "key" ] }>{ PROPERTIES[ key ] }</p>
+                <p className={ styles[ "key" ] }>{ key }</p>
+                <p className={ styles[ "value" ] }>{ val }</p>
+              </div>
+            ) ) }
+          </div>
+        </div>
+        <div className={ styles[ "parent" ] }>
+          <h1 className={ styles[ 'title' ] }>Weight</h1>
+          <div className={ styles[ "details" ] }>
+            { Object.entries( truck?.weight ).map( ( [ key, val ] ) => (
+              <div className={ styles[ "property" ] } key={ key } title={ val }>
+                <p className={ styles[ "key" ] }>{ key }</p>
                 <p className={ styles[ "value" ] }>{ val }</p>
               </div>
             ) ) }
