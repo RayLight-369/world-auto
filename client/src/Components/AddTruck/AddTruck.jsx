@@ -22,9 +22,9 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
   const [ brand, setBrand ] = useState( brands?.find( brand => brand.id == truck?.brand )?.brandName || undefined );
   const [ fuelType, setFuelType ] = useState( truck?.fuel_type || "" );
   // const [ pricePerMonth, setPricePerMonth ] = useState( truck?.price_per_month || 0 );
-  // const [ mileage, setMilage ] = useState( truck?.milage || "" );
+  const [ mileage, setMilage ] = useState( truck?.milage || "" );
   // const [ guarantee, setGuarantee ] = useState( truck?.guarantee || "" );
-  // const [ color, setColor ] = useState( truck?.color || "" );
+  const [ color, setColor ] = useState( truck?.color || "" );
   // const [ certificate, setCertificate ] = useState( truck?.certificate || "" );
   // const [ emission, setEmission ] = useState( truck?.emission || "" );
   // const [ modelYear, setModelYear ] = useState( truck?.modelYear || "" );
@@ -244,6 +244,22 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       inputClass: "energie-input",
       setState: setEnergy,
       value: energy,
+      type: "text"
+    },
+    {
+      element: "Couleur",
+      class: "color",
+      inputClass: "color-input",
+      setState: setColor,
+      value: color,
+      type: "text"
+    },
+    {
+      element: "Kilométrage",
+      class: "mileage",
+      inputClass: "mileage-input",
+      setState: setMilage,
+      value: mileage,
       type: "text"
     },
     {

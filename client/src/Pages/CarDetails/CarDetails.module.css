@@ -203,6 +203,7 @@ div.content {
         justify-content: space-between !important;
         position: relative;
         padding: 7px 12px;
+        gap: 10px;
         /* border: 1px solid #a9e0fc; */
         /* border-radius: 8px; */
 
@@ -215,6 +216,12 @@ div.content {
           color: #111;
           font-weight: bold;
           white-space: nowrap;
+        }
+
+        p.key {
+          flex: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         p.value {
