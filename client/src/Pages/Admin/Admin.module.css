@@ -140,7 +140,7 @@ section#content {
     width: fit-content;
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 7px;
     align-items: center;
     position: relative;
     top: 0 !important;
@@ -150,7 +150,7 @@ section#content {
 
   nav#nav a {
     text-decoration: none;
-    font-size: .7rem;
+    font-size: .67rem;
     border-radius: 3px;
     width: fit-content;
     padding: 6px 8px;

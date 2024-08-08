@@ -71,3 +71,11 @@ div.major-options > button {
   transition: 120ms;
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+  div.major-options > button {
+    padding: 2px 5px !important;
+    font-size: 11px !important;
+    border-radius: 10px !important;
+  }
+}
