@@ -16,6 +16,7 @@ import SessionUserProvider from "./Contexts/SessionUserContext";
 import { useState } from "react";
 import ManageTrucks from "./Pages/ManageTrucks/ManageTrucks";
 import TruckDetails from "./Pages/TruckDetails/TruckDetails";
+import VTCtransport from "./Pages/VTCtransport/VTCtransport";
 
 
 
@@ -38,7 +39,7 @@ const App = () => {
                 <Route path="about" element={ <About /> } />
                 <Route path="contact" element={ <Contact /> } />
                 <Route path="trucks" element={ <TruckRental /> } />
-                <Route path="vtc-transport" element={ <TruckRental /> } />
+                <Route path="vtc-transport" element={ <VTCtransport /> } />
                 <Route path="/car/:id" element={ <CarDetails /> } />
                 <Route path="/truck/:id" element={ <TruckDetails /> } />
               </Route>
