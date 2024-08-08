@@ -13,8 +13,8 @@ import CardsContainer from '../../Components/CardsContainer/CardsContainer';
 const TruckRental = () => {
 
 
-  const { cars, brands } = useCars();
-  const [ Cars, setCars ] = useState( cars );
+  const { trucks, brands } = useCars();
+  const [ Trucks, setTrucks ] = useState( trucks );
   const [ shortcutFilterOpen, setShortcutFilterOpen ] = useState( false );
   const [ searchInputText, setSearchInputText ] = useState( "" );
 
@@ -203,18 +203,18 @@ const TruckRental = () => {
 
   }, [] );
 
-  const filteredAndSortedCars = useMemo( () => {
-    if ( !searchInputText ) return Cars;
+  const filteredAndSortedTrucks = useMemo( () => {
+    if ( !searchInputText ) return Trucks;
 
     const searchTerms = searchInputText.toLowerCase().split( ' ' );
-    return Cars.filter( car => {
+    return Trucks.filter( truck => {
       return searchTerms.every( term => {
         return (
-          car.title.toLowerCase().includes( term ) ||
-          car.model_year.toLowerCase().includes( term ) ||
-          car.fuel_type.toLowerCase().includes( term ) ||
-          car.gearbox.toLowerCase().includes( term ) ||
-          car.overview.toLowerCase().includes( term )
+          truck.title.toLowerCase().includes( term ) ||
+          truck?.model_year.toLowerCase().includes( term ) ||
+          truck.fuel_type.toLowerCase().includes( term ) ||
+          truck.gearbox.toLowerCase().includes( term ) ||
+          truck.overview.toLowerCase().includes( term )
         );
       } );
     } ).sort( ( a, b ) => {
@@ -224,8 +224,8 @@ const TruckRental = () => {
       searchTerms.forEach( term => {
         if ( a.title.toLowerCase().includes( term ) ) relevanceA += 2;
         if ( b.title.toLowerCase().includes( term ) ) relevanceB += 2;
-        if ( a.model_year.toLowerCase().includes( term ) ) relevanceA += 2;
-        if ( b.model_year.toLowerCase().includes( term ) ) relevanceB += 2;
+        if ( a?.model_year.toLowerCase().includes( term ) ) relevanceA += 2;
+        if ( b?.model_year.toLowerCase().includes( term ) ) relevanceB += 2;
         if ( a.fuel_type.toLowerCase().includes( term ) ) relevanceA += 1;
         if ( b.fuel_type.toLowerCase().includes( term ) ) relevanceB += 1;
         if ( a.gearbox.toLowerCase().includes( term ) ) relevanceA += 1;
@@ -236,7 +236,7 @@ const TruckRental = () => {
 
       return relevanceB - relevanceA;
     } );
-  }, [ searchInputText, Cars ] );
+  }, [ searchInputText, Trucks ] );
 
 
   return (
@@ -249,14 +249,14 @@ const TruckRental = () => {
       </motion.section>
 
       <motion.section className={ Styles[ "body" ] } variants={ variants }>
-        <FiltersContainer cars={ cars } Cars={ Cars } brands={ brands } setCars={ setCars } filterDistpatch={ filterDistpatch } filtersState={ filtersState } searchInputText={ searchInputText } />
+        <FiltersContainer cars={ trucks } Cars={ Trucks } brands={ brands } setCars={ setTrucks } filterDistpatch={ filterDistpatch } filtersState={ filtersState } searchInputText={ searchInputText } />
         <div className={ Styles[ "content" ] }>
-          <p className={ Styles[ "results" ] }>{ filteredAndSortedCars?.length } voitures correspondent à votre recherche</p>
-          <CardsContainer filteredAndSortedCars={ filteredAndSortedCars } key={ "cars" } />
+          <p className={ Styles[ "results" ] }>{ filteredAndSortedTrucks?.length } Camion correspondent à votre recherche</p>
+          <CardsContainer filteredAndSortedCars={ filteredAndSortedTrucks } type={ "truck" } />
         </div>
         <div className={ `${ Styles[ "filters-shortcut" ] } ${ shortcutFilterOpen && Styles.open }` }>
           <p className={ Styles[ "shortcut-icon" ] } onClick={ () => setShortcutFilterOpen( prev => !prev ) }><FontAwesomeIcon icon={ faBars } /></p>
-          <FiltersContainer Cars={ Cars } cars={ cars } brands={ brands } setCars={ setCars } filterDistpatch={ filterDistpatch } filtersState={ filtersState } key={ 2 } />
+          <FiltersContainer Cars={ Trucks } cars={ trucks } brands={ brands } setCars={ setTrucks } filterDistpatch={ filterDistpatch } filtersState={ filtersState } key={ 3 } />
         </div>
       </motion.section>
     </motion.section>

@@ -1,0 +1,420 @@
+section#truck-details {
+  /* background: #000; */
+  width: 100vw;
+  height: 100%;
+  position: relative;
+  top: 80px;
+  padding: 10px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+div.row-1 {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+div.title-overview {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 0;
+  height: fit-content;
+  /* background: #777; */
+
+  .title-price {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 1.3rem;
+    /* align-items: center; */
+
+    h1 {
+      font-family: Poppins;
+      font-size: 1.5em;
+      color: #1a1a1a;
+      width: 100%;
+      white-space: wrap;
+      color: var(--primary-blue);
+
+    }
+
+    div.price-buy {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      /* top: 5px; */
+
+      /* button {
+        border: none;
+        outline: none;
+        padding: 10px 20px;
+        display: block;
+        width: 150px;
+        border-radius: 25px;
+        background: var(--primary-blue);
+        color: white;
+        cursor: pointer;
+        transition: 150ms ease-out;
+        font-size: .8em;
+
+        &:hover {
+          transform: scale(1.08);
+        }
+      } */
+
+      h1 {
+        /* color: var(--primary-blue); */
+        color: var(--primary-blue);
+        font-size: 1.3em;
+        position: relative;
+        border-radius: 6px;
+        border: 1.3px dashed var(--primary-blue);
+        width: fit-content;
+        padding: 2px 5px;
+
+        &::before {
+          content: "Prix: ";
+          position: relative;
+          left: 0;
+          color: #111;
+        }
+      }
+    }
+  }
+
+  div.overview {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    position: relative;
+    top: 10px;
+    overflow: hidden;
+    max-height: calc(100% - 115px);
+
+    h1 {
+      color: var(--primary-blue);
+      font-weight: bold;
+      font-size: 1.6em;
+    }
+
+    p {
+      font-size: .99em;
+      line-height: 1.5;
+      max-height: 170px;
+      overflow-y: auto;
+    }
+  }
+
+  a.reserve {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    display: block;
+    width: 175px;
+    border-radius: 25px;
+    background: var(--primary-blue);
+    color: white;
+    cursor: pointer;
+    transition: 150ms ease-out;
+    font-size: .94em;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    top: calc(100% + 25px);
+
+    &:hover {
+      transform: translateX(-50%) scale(1.08);
+    }
+  }
+}
+
+div.content {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  width: 100%;
+
+  .title-price {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: 1.3rem;
+    align-items: center;
+
+    h1 {
+      font-family: Poppins;
+      color: #1a1a1a;
+
+      &:nth-child(2) {
+        color: var(--primary-blue);
+        font-size: 1.5em;
+      }
+    }
+  }
+
+  div.overview {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+    top: -25px;
+
+    h1 {
+      color: var(--primary-blue);
+    }
+  }
+
+  div.parent {
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 35px !important;
+    position: relative;
+    top: -20px;
+
+    h1 {
+      color: var(--primary-blue);
+    }
+
+    div.details {
+      display: grid !important;
+      width: 100%;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px 150px;
+      padding: 4px 10px;
+      box-shadow: 0 0 10px #00000015;
+
+      div.property {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+        justify-content: space-between !important;
+        position: relative;
+        padding: 7px 12px;
+        /* border: 1px solid #a9e0fc; */
+        /* border-radius: 8px; */
+
+        &:not(:last-child) {
+          border-bottom: 1px solid #ddd;
+        }
+
+        p {
+          font-size: .97em;
+          color: #111;
+          font-weight: bold;
+          white-space: nowrap;
+        }
+
+        p.value {
+          padding: 3.5px 10px;
+          border-radius: 3px;
+          background: var(--bg-light-blue);
+          color: var(--primary-blue);
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    div.accessories {
+      display: grid !important;
+      width: 100%;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+
+      /* justify-items: center; */
+      gap: 30px;
+    }
+
+    div.accessory {
+      display: flex !important;
+      flex-direction: row !important;
+      /* flex-direction: column; */
+      /* justify-content: center; */
+      align-items: center;
+      padding: 19px 23px;
+      border-radius: 8px;
+      /* background-color: #eee; */
+      box-shadow: 0 0 10px #00000025;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      transition: 150ms;
+      cursor: default;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+
+      .a-icon {
+        font-size: 1.2em;
+      }
+
+      p {
+        color: #1e1e1e;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      p.value {
+        font-weight: bold;
+        font-size: .9em;
+      }
+    }
+
+  }
+
+}
+
+.img-carousal {
+  height: 350px;
+  overflow: hidden;
+  background: #111;
+  flex: 1;
+  color: white !important;
+  border-radius: 10px;
+  box-shadow: 1px 3px 11px rgba(0, 0, 0, .4);
+}
+
+img.img {
+  /* object-fit: contain; */
+  max-width: 100%;
+  max-height: calc(100% - 20px);
+  height: auto;
+  width: auto;
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 768px) {
+
+  section#truck-details {
+    /* background: #000; */
+    width: 100vw;
+    height: 100%;
+    position: relative;
+    top: 80px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  div.overview p.content {
+    text-align: left !important;
+  }
+
+  a.reserve {
+    text-decoration: none !important;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    display: block;
+    width: 180px;
+    border-radius: 25px;
+    background: var(--primary-blue);
+    color: white;
+    cursor: pointer;
+    transition: 150ms ease-out;
+    font-size: 1.2em;
+    position: relative;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+
+    &:hover {
+      transform: translateX(-50%) scale(1.08);
+    }
+  }
+
+  :is(.parent, .overview) {
+
+    gap: 20px !important;
+
+    div.property {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: space-between !important;
+    }
+
+    h1 {
+      text-align: center !important;
+    }
+
+    > p {
+      text-align: center !important;
+    }
+  }
+
+  .title-price {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: -20px;
+    width: 100%;
+    align-items: flex-start !important;
+    gap: 20px;
+
+    h1 {
+      font-family: Poppins;
+      color: #0a0a0a;
+      font-size: 1.2em !important;
+      width: 100% !important;
+      /* background: #000; */
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:nth-child(2) {
+        color: #333 !important;
+        font-size: .9em !important;
+        position: relative;
+        top: 20px;
+
+        &::before {
+          content: "Price: ";
+          position: relative;
+          left: 0;
+          width: fit-content;
+          height: auto;
+          color: var(--primary-blue);
+          font-size: 1.2em;
+          font-weight: 0;
+          font-family: Galano;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  .img-carousal {
+    width: 90vw !important;
+  }
+
+  div.accessories {
+    display: flex !important;
+    width: 100%;
+    flex-direction: column !important;
+
+    /* justify-items: center; */
+    gap: 30px;
+
+    > div {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      overflow: hidden;
+    }
+  }
+}

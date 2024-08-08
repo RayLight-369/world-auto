@@ -15,6 +15,7 @@ import Contact from "./Pages/Contact/Contact";
 import SessionUserProvider from "./Contexts/SessionUserContext";
 import { useState } from "react";
 import ManageTrucks from "./Pages/ManageTrucks/ManageTrucks";
+import TruckDetails from "./Pages/TruckDetails/TruckDetails";
 
 
 
@@ -38,6 +39,7 @@ const App = () => {
                 <Route path="contact" element={ <Contact /> } />
                 <Route path="trucks" element={ <TruckRental /> } />
                 <Route path="/car/:id" element={ <CarDetails /> } />
+                <Route path="/truck/:id" element={ <TruckDetails /> } />
               </Route>
             </Routes>
           </AnimatePresence>
