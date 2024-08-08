@@ -1,5 +1,94 @@
 section#vtc {
   position: relative;
   top: 80px;
-  padding: 30px;
+}
+
+div.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url(../../../public/Imgs/carbg.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 90px 30px;
+  /* justify-content: center; */
+  gap: 5px;
+
+  h1 {
+    font-size: 3em;
+    color: #fefefe;
+    position: relative;
+    text-align: center;
+    top: -5px;
+  }
+
+  p {
+    font-size: 1.1em;
+    color: white;
+    position: relative;
+    top: -2px;
+  }
+
+  a,
+  button {
+    display: block;
+    text-decoration: none;
+    white-space: nowrap;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    font-size: 13.5px;
+    padding: 10px 20px;
+    width: 195px;
+    background: #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: #111;
+    position: relative;
+    top: 10px;
+    cursor: pointer;
+    text-align: left;
+    transition: 150ms;
+    overflow: hidden;
+
+    &::after {
+      position: absolute;
+      white-space: nowrap;
+      display: block;
+      right: -30px;
+      content: "\2192";
+      top: 50%;
+      transform: translateY(-50%);
+      transition: 150ms;
+      /* width: 10px; */
+      /* height: 10px; */
+    }
+
+    &:hover {
+      width: 220px;
+
+      &::after {
+        right: 16px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  div.hero {
+    h1 {
+      font-size: 2em !important;
+      position: relative;
+      top: -15px !important;
+    }
+
+    p {
+      font-size: .9em !important;
+      position: relative;
+      top: -5px;
+      text-align: center;
+    }
+  }
 }
