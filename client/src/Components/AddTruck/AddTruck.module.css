@@ -242,7 +242,7 @@ div.images {
 }
 
 @media screen and (max-width: 768px) {
-  div.add-car {
+  div.add-truck {
     width: 90vw;
     padding: 25px 30px;
     top: -20px !important;

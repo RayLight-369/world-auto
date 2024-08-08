@@ -81,6 +81,7 @@ div.recent-updates-container {
 div.recent-updates-container > div {
   max-height: calc(80%);
   height: fit-content;
+  min-height: max(140px, 20%);
   font-size: 90%;
   display: flex;
   flex-direction: column;
@@ -103,7 +104,8 @@ div.recent-updates-container > div {
 
     > div {
       border-radius: 8px;
-      border: 1px solid #ccc;
+      border: 1px solid #e5e5e5;
+      /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
       padding: 10px 12px;
       display: flex;
       justify-content: space-between;
@@ -157,15 +159,14 @@ div.recent-updates-container > div {
           gap: 5px;
         }
 
-        p.car-title,
-        p.brand-title {
+        p:is(.car-title, .truck-title, .brand-title) {
           font-size: .98em;
           font-weight: bold;
           color: #333;
           font-family: Quicksand;
         }
 
-        p.car-brand {
+        p:is(.car-brand, .truck-brand) {
           font-size: .88em;
           color: #2b2b2b;
           font-family: Quicksand;
@@ -205,13 +206,14 @@ div.recent-updates-container > div {
   } */
 
   div.details-container {
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
     gap: 20px;
   }
 
   div.recent-updates-container {
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    flex-direction: column !important;
   }
 }

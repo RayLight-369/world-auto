@@ -152,7 +152,6 @@ div.page-container {
     display: flex !important;
 
     p {
-      /* background: #000; */
       position: relative;
       left: 10px !important;
       width: calc(35%) !important;
@@ -167,7 +166,6 @@ div.page-container {
       position: absolute;
       left: calc(40%) !important;
       width: calc(20% - 5px) !important;
-      background: #000;
     }
 
     p.date {
