@@ -1,6 +1,8 @@
 section#vtc {
   position: relative;
   top: 80px;
+  display: flex;
+  flex-direction: column;
 }
 
 div.hero {
@@ -76,6 +78,94 @@ div.hero {
   }
 }
 
+div.rates {
+  /* background: #777; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 25px;
+  width: 100%;
+
+  h1 {
+    font-size: 2em;
+  }
+
+  div.rate {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid #bbb;
+    align-items: center;
+    transition: 150ms;
+    position: relative;
+    overflow: hidden;
+    /* background: #444; */
+
+    p.title {
+      font-size: 1.3em;
+    }
+
+    p.price {
+      font-size: 1.24em;
+      position: absolute;
+      right: 30px;
+      transition: 170ms;
+    }
+
+    a {
+      position: absolute;
+      text-decoration: none;
+      font-size: 13.2px;
+      right: 15px;
+      transform: translateX(calc(100% + 50px));
+      border-radius: 40px;
+      border: none;
+      outline: none;
+      background-color: var(--primary-blue);
+      padding: 8px 18px;
+      color: white;
+      transition: 300ms;
+      cursor: pointer;
+
+      &:hover {
+        padding: 8px 24px;
+      }
+    }
+
+    &:hover {
+      p.price {
+        transform: translateX(-110px);
+      }
+
+      a {
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
+div.note {
+  display: flex;
+  gap: 10px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  top: 30px;
+  padding: 0 10px 30px 10px;
+
+  a {
+    display: block;
+    text-decoration: none;
+    border-radius: 20px;
+    padding: 5px 15px;
+    color: white;
+    background: green;
+  }
+}
+
 @media screen and (max-width: 768px) {
   div.hero {
     h1 {
@@ -90,5 +180,9 @@ div.hero {
       top: -5px;
       text-align: center;
     }
+  }
+
+  div.rate {
+    width: 90% !important;
   }
 }
