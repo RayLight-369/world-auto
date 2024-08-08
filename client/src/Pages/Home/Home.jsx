@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faX } from '@fortawesome/free-solid-svg-icons';
 import FiltersContainer from '../../Components/FiltersContainer/FiltersContainer';
 import CardsContainer from '../../Components/CardsContainer/CardsContainer';
+import useDebounce from '../../Hooks/useDebounce';
 
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
   const [ Cars, setCars ] = useState( cars );
   const [ shortcutFilterOpen, setShortcutFilterOpen ] = useState( false );
   const [ searchInputText, setSearchInputText ] = useState( "" );
+  const debouncedInputText = useDebounce( searchInputText, 500 );
 
   const [ filtersState, filterDistpatch ] = useReducer( ( state, action ) => {
     switch ( action.type ) {
@@ -206,7 +208,7 @@ const Home = () => {
   const filteredAndSortedCars = useMemo( () => {
     if ( !searchInputText ) return Cars;
 
-    const searchTerms = searchInputText.toLowerCase().split( ' ' );
+    const searchTerms = debouncedInputText.toLowerCase().split( ' ' );
     return Cars.filter( car => {
       return searchTerms.every( term => {
         return (
@@ -236,7 +238,7 @@ const Home = () => {
 
       return relevanceB - relevanceA;
     } );
-  }, [ searchInputText, Cars ] );
+  }, [ debouncedInputText, Cars ] );
 
 
   return (

@@ -1,5 +1,4 @@
 const { createClient } = require( '@supabase/supabase-js' );
-// const { CREDENTIALS } = require( './Constants' );
 
 const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
 const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
@@ -133,61 +132,6 @@ const exists = async ( {
 
   return false;
 };
-
-// const search = async ( { table, columns, query, filter, range, orderBy = {
-//   property: 'id',
-//   ascending: false
-// } } ) => {
-
-//   try {
-
-//     let formattedQuery = query.split( ' ' ).join( "%" );
-
-//     let formattedString = columns.map( col => `${ col }.ilike.%${ formattedQuery }%` ).join( ", " );
-
-//     const Data = supabase.
-//       from( table )
-//       .select()
-//       .or( formattedString )
-//       .order( orderBy.property, { ascending: orderBy.ascending } );
-
-//     if ( range && range.length == 2 ) {
-//       Data.range( range[ 0 ], range[ 1 ] );
-//     }
-
-//     const { data, error } = await Data;
-
-//     if ( filter && filter != "relevance" ) {
-//       return data;
-//     }
-
-//     const resultArray = data.map( item => {
-
-//       let formattedArray = query.split( " " );
-
-//       const titleScore = item.title.toLowerCase().replaceAll( "\n", " " ).split( " " ).filter( value => formattedArray.includes( value ) ).length * 3;
-//       const descriptionScore = item.description.toLowerCase().replaceAll( "\n", " " ).split( " " ).filter( value => formattedArray.includes( value ) ).length * 2;
-//       const tagsScore = item.tags.replaceAll( "#", "" ).split( " " ).filter( value => formattedArray.includes( value ) ).length;
-
-//       const score = titleScore + descriptionScore + tagsScore;
-
-//       return {
-//         ...item,
-//         score,
-//       };
-//     } ).sort( ( a, b ) => b.score - a.score );
-
-//     if ( resultArray.length ) {
-//       return resultArray;
-//     }
-
-//   } catch ( e ) {
-
-//     console.log( e );
-
-//   }
-
-// };
 
 const deleteData = async ( {
   table,

@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faX } from '@fortawesome/free-solid-svg-icons';
 import FiltersContainer from '../../Components/FiltersContainer/FiltersContainer';
 import CardsContainer from '../../Components/CardsContainer/CardsContainer';
+import useDebounce from '../../Hooks/useDebounce';
 
 
 const TruckRental = () => {
@@ -17,6 +18,7 @@ const TruckRental = () => {
   const [ Trucks, setTrucks ] = useState( trucks );
   const [ shortcutFilterOpen, setShortcutFilterOpen ] = useState( false );
   const [ searchInputText, setSearchInputText ] = useState( "" );
+  const debouncedInputText = useDebounce( searchInputText, 500 );
 
   const [ filtersState, filterDistpatch ] = useReducer( ( state, action ) => {
     switch ( action.type ) {
@@ -206,7 +208,7 @@ const TruckRental = () => {
   const filteredAndSortedTrucks = useMemo( () => {
     if ( !searchInputText ) return Trucks;
 
-    const searchTerms = searchInputText.toLowerCase().split( ' ' );
+    const searchTerms = debouncedInputText.toLowerCase().split( ' ' );
     return Trucks.filter( truck => {
       return searchTerms.every( term => {
         return (
@@ -236,7 +238,7 @@ const TruckRental = () => {
 
       return relevanceB - relevanceA;
     } );
-  }, [ searchInputText, Trucks ] );
+  }, [ debouncedInputText, Trucks ] );
 
 
   return (

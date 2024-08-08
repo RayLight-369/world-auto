@@ -8,6 +8,10 @@ export const NavLinks = [
     path: "/trucks"
   },
   {
+    name: "Transports VTC",
+    path: "/vtc-transport"
+  },
+  {
     name: "À propos",
     path: "/about"
   },
