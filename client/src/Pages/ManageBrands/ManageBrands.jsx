@@ -34,7 +34,7 @@ const ManageCars = () => {
               <div className={ `${ Styles[ "header" ] } ${ Styles[ "row" ] }` }>
 
                 <p className={ Styles[ "brand-title" ] }>Nom</p>
-                <p className={ Styles[ "date" ] }></p>
+                <p className={ Styles[ "date" ] }>Date</p>
                 <p className={ Styles[ "actions" ] }>Actions</p>
 
               </div>

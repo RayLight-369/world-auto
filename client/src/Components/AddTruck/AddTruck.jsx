@@ -28,7 +28,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
   // const [ certificate, setCertificate ] = useState( truck?.certificate || "" );
   // const [ emission, setEmission ] = useState( truck?.emission || "" );
   // const [ modelYear, setModelYear ] = useState( truck?.modelYear || "" );
-  // const [ seatingCapacity, setSeatingCapacity ] = useState( truck?.seating_capacity || "" );
+  const [ seatingCapacity, setSeatingCapacity ] = useState( truck?.seating_capacity || "" );
 
   const [ energy, setEnergy ] = useState( truck?.energy || "" );
   const [ gearbox, setGearbox ] = useState( truck?.gearbox || "" );
@@ -277,6 +277,14 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       setState: setFiscalPower,
       value: fiscalPower,
       type: "text"
+    },
+    {
+      element: "Nombre de places",
+      class: "seating-capacity",
+      inputClass: "seating-capacity-input",
+      setState: setSeatingCapacity,
+      value: seatingCapacity,
+      type: "number"
     },
     {
       element: "Consommation mixte",
