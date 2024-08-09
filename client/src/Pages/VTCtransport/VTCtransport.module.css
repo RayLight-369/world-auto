@@ -185,4 +185,9 @@ div.note {
   div.rate {
     width: 90% !important;
   }
+
+  div.note {
+    display: flex !important;
+    flex-direction: column !important;
+  }
 }
