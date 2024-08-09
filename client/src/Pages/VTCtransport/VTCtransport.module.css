@@ -106,6 +106,7 @@ div.rates {
 
     p.title {
       font-size: 1.3em;
+      transition: 150ms;
     }
 
     p.price {
@@ -136,6 +137,11 @@ div.rates {
     }
 
     &:hover {
+      p.title {
+        opacity: .5;
+        filter: blur(5px);
+      }
+
       p.price {
         transform: translateX(-110px);
       }
