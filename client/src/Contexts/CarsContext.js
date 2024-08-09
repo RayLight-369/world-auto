@@ -19,6 +19,7 @@ const CarsProvider = ( { children } ) => {
 
   useEffect( () => {
     async function fetchData () {
+      setCarsLoading( true );
       try {
         const carsRes = await fetch( API.GET_CARS );
         if ( !carsRes.ok ) {

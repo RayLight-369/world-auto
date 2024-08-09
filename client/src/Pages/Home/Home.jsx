@@ -14,7 +14,7 @@ import useDebounce from '../../Hooks/useDebounce';
 const Home = () => {
 
 
-  const { cars, brands } = useCars();
+  const { cars, brands, carsLoading } = useCars();
   const [ Cars, setCars ] = useState( cars );
   const [ shortcutFilterOpen, setShortcutFilterOpen ] = useState( false );
   const [ searchInputText, setSearchInputText ] = useState( "" );
@@ -254,7 +254,7 @@ const Home = () => {
         <FiltersContainer cars={ cars } Cars={ Cars } brands={ brands } setCars={ setCars } filterDistpatch={ filterDistpatch } filtersState={ filtersState } searchInputText={ searchInputText } />
         <div className={ Styles[ "content" ] }>
           <p className={ Styles[ "results" ] }>{ filteredAndSortedCars?.length } voitures correspondent à votre recherche</p>
-          <CardsContainer filteredAndSortedCars={ filteredAndSortedCars } key={ "cars" } />
+          <CardsContainer filteredAndSortedCars={ filteredAndSortedCars } key={ "cars" } carLoading={ carsLoading } />
         </div>
         <div className={ `${ Styles[ "filters-shortcut" ] } ${ shortcutFilterOpen && Styles.open }` }>
           <p className={ Styles[ "shortcut-icon" ] } onClick={ () => setShortcutFilterOpen( prev => !prev ) }><FontAwesomeIcon icon={ faBars } /></p>
