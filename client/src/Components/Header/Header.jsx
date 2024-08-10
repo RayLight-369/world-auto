@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faBarsStaggered } from "@fortawesome/free-solid-svg-icons";
 // import { GoogleLogin, googleLogout, useGoogleLogin, useGoogleOneTapLogin } from '@react-oauth/google';
 import { useUser } from '../../Contexts/SessionUserContext';
+import Footer from '../Footer/Footer';
 
 
 const Header = () => {
@@ -160,6 +161,7 @@ const Header = () => {
         </nav>
       </header>
       <Outlet />
+      <Footer />
     </>
   );
 };
