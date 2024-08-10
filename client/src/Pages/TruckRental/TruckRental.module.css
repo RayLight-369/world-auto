@@ -119,7 +119,7 @@ div.content {
     flex-direction: column;
     gap: 25px;
     margin: 15px;
-    min-height: 180px !important;
+    min-height: calc(100vh - 700px) !important;
   }
 
   div.list {
