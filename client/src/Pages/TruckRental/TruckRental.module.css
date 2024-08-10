@@ -112,6 +112,7 @@ div.content {
     gap: 15px;
     flex-direction: column;
     padding: 10px 20px;
+    min-height: 180px !important;
   }
 
   div.content {
