@@ -83,7 +83,7 @@ div.title-overview {
         padding: 2px 5px;
 
         &.hour:before {
-          content: "Prix / Heure: ";
+          content: "Prix / 24H: ";
         }
 
         &.week:before {
@@ -413,7 +413,7 @@ img.img {
         top: 20px;
 
         &.hour::before {
-          content: "Prix / Heure: ";
+          content: "Prix / 24H: ";
         }
 
         &.week::before {
