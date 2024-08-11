@@ -6,7 +6,7 @@ section#vtc {
 }
 
 div.hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url(../../../public/Imgs/carbg.jpeg);
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.45)), url(../../../public/Imgs/carbg.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
