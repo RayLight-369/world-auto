@@ -139,6 +139,12 @@ div.title-overview {
   }
 }
 
+div.loading-div {
+  position: relative;
+  top: 100px;
+  min-height: 700px;
+}
+
 div.content {
   display: flex;
   flex-direction: column;

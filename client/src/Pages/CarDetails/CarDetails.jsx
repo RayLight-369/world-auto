@@ -132,7 +132,7 @@ I am interested in reserving the following car and would like to provide the det
   }, [] );
 
   if ( !car || !brands.length ) {
-    return <div>Loading...</div>;
+    return <div className={ styles[ 'loading-div' ] }>Loading...</div>;
   }
 
   return (

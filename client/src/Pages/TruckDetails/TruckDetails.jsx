@@ -140,7 +140,7 @@ I am interested in reserving the following truck and would like to provide the d
   }, [] );
 
   if ( !truck || !brands.length ) {
-    return <div>Loading...</div>;
+    return <div className={ styles[ 'loading-div' ] }>Loading...</div>;
   }
 
   return (
