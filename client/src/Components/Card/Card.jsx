@@ -10,10 +10,12 @@ const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guaran
       <Link to={ `/${ type }/${ id }` }>
         <div className={ Styles[ "thumbnail" ] }>
           <img src={ img } alt="" />
-          <div className={ Styles[ "price-notch" ] }>
-            <p className={ Styles[ "price" ] }>{ ppd } €</p>
-            {/* <p className={ Styles[ "monthly" ] }>That's { ppm } USD/month</p> */ }
-          </div>
+          { type == "car" ?
+            <div className={ Styles[ "price-notch" ] }>
+              <p className={ Styles[ "price" ] }>{ ppd } €</p>
+            </div>
+            : <></>
+          }
 
         </div>
         <div className={ Styles[ "infos" ] }>

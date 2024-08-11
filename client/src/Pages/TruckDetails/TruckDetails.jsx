@@ -93,20 +93,22 @@ const TruckDetails = () => {
 
         if ( body?.data?.length ) body.data[ 0 ].brand = brands.find( brand => brand.id == body.data[ 0 ].brand )?.brandName;
 
-        const { title, price_per_day, overview, id, accessories, dimensions, weight, images, ...rest } = body.data[ 0 ];
+        const { title, price_per_hour, price_per_week, price_on_weekend, overview, id, accessories, dimensions, weight, images, ...rest } = body.data[ 0 ];
 
         setProperties( rest );
 
         setTruck( body.data[ 0 ] );
 
         let msg = `
-*Subject: Car Reservation Request*
+*Subject: Truck Rental Request*
 Dear _WorldAuto!_ ,
 I am interested in reserving the following truck and would like to provide the details:
         
 - *ID* : ${ id }
 - *Title* : ${ title }
-- *Price* : ${ price_per_day } €
+- *Prix / heure* : ${ price_per_hour } €
+- *Prix / semaine* : ${ price_per_week } €
+- *Prix / weekend* : ${ price_on_weekend } €
 
 `;
 
@@ -192,7 +194,9 @@ I am interested in reserving the following truck and would like to provide the d
             <div className={ styles[ "title-price" ] }>
               <h1>{ truck.title }</h1>
               <div className={ styles[ "price-buy" ] }>
-                <h1>{ truck.price_per_day } €</h1>
+                { truck?.price_per_hour && <h1 className={ styles.hour }>{ truck.price_per_hour } €</h1> }
+                { truck?.price_per_week && <h1 className={ styles.week }>{ truck.price_per_week } €</h1> }
+                { truck?.price_on_weekend && <h1 className={ styles.weekend }>{ truck.price_on_weekend } €</h1> }
               </div>
             </div>
             <div className={ styles[ "overview" ] }>
@@ -209,7 +213,9 @@ I am interested in reserving the following truck and would like to provide the d
           <>
             <div className={ styles[ "title-price" ] }>
               <h1>{ truck.title }</h1>
-              <h1>{ truck.price_per_day } €</h1>
+              { truck?.price_per_hour && <h1 className={ styles.hour }>{ truck.price_per_hour } €</h1> }
+              { truck?.price_per_week && <h1 className={ styles.week }>{ truck.price_per_week } €</h1> }
+              { truck?.price_on_weekend && <h1 className={ styles.weekend }>{ truck.price_on_weekend } €</h1> }
             </div>
             <div className={ styles[ "overview" ] }>
               <h1 className={ styles[ 'title' ] }>Aperçu</h1>

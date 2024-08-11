@@ -38,10 +38,10 @@ const App = () => {
                 <Route index path="/" element={ <Home /> } />
                 <Route path="about" element={ <About /> } />
                 <Route path="contact" element={ <Contact /> } />
-                <Route path="trucks" element={ <TruckRental /> } />
+                <Route path="trucks-rental" element={ <TruckRental /> } />
                 <Route path="vtc-transport" element={ <VTCtransport /> } />
                 <Route path="/car/:id" element={ <CarDetails /> } />
-                <Route path="/truck/:id" element={ <TruckDetails /> } />
+                <Route path="/trucks-rental/:id" element={ <TruckDetails /> } />
               </Route>
             </Routes>
           </AnimatePresence>

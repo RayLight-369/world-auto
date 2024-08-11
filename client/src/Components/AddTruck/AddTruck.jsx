@@ -17,7 +17,9 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
   const [ adding, setAdding ] = useState( false );
   const [ truckTitle, setTruckTitle ] = useState( truck?.title || "" );
   const [ truckOverview, setTruckOverview ] = useState( truck?.overview || "" );
-  const [ pricePerDay, setPricePerDay ] = useState( truck?.price_per_day || 0 );
+  const [ pricePerHour, setPricePerHour ] = useState( truck?.price_per_hour || 0 );
+  const [ pricePerWeek, setPricePerWeek ] = useState( truck?.price_per_week || 0 );
+  const [ priceOnWeekend, setPriceOnWeekend ] = useState( truck?.price_on_weekend || 0 );
 
   const [ brand, setBrand ] = useState( brands?.find( brand => brand.id == truck?.brand )?.brandName || undefined );
   const [ fuelType, setFuelType ] = useState( truck?.fuel_type || "" );
@@ -27,7 +29,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
   const [ color, setColor ] = useState( truck?.color || "" );
   // const [ certificate, setCertificate ] = useState( truck?.certificate || "" );
   // const [ emission, setEmission ] = useState( truck?.emission || "" );
-  // const [ modelYear, setModelYear ] = useState( truck?.modelYear || "" );
+  const [ modelYear, setModelYear ] = useState( truck?.model_year || "" );
   const [ seatingCapacity, setSeatingCapacity ] = useState( truck?.seating_capacity || "" );
 
   const [ energy, setEnergy ] = useState( truck?.energy || "" );
@@ -92,6 +94,13 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       inputClass: "hauteur-input",
       setState: value => setDimensions( prev => ( { ...prev, "Hauteur": value } ) ),
       value: dimensions?.[ "Hauteur" ],
+      type: "text"
+    }, {
+      element: "Année modèle",
+      class: "model-year",
+      inputClass: "model-year-input",
+      setState: setModelYear,
+      value: modelYear,
       type: "text"
     },
     {
@@ -221,8 +230,8 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
   // <div className={ styles[ "price-per-day" ] }>
   //   <label htmlFor="price-per-day">Price Per Day:</label>
   //   <input onChange={ ( e ) => {
-  //     setPricePerDay( e.target.value );
-  //   } } value={ pricePerDay } type="number" min={ 0 } name="price-per-day" id="price-per-day" className={ styles[ 'price-per-day-input' ] } />
+  //     setPricePerHour( e.target.value );
+  //   } } value={ pricePerHour } type="number" min={ 0 } name="price-per-day" id="price-per-day" className={ styles[ 'price-per-day-input' ] } />
   // </div>;
 
 
@@ -232,11 +241,25 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
 
   const data = useMemo( () => [
     {
-      element: "Prix €",
+      element: "Prix / Heure €",
       class: "price",
       inputClass: "price-input",
-      setState: setPricePerDay,
-      value: pricePerDay,
+      setState: setPricePerHour,
+      value: pricePerHour,
+      type: "number"
+    }, {
+      element: "Prix / Semaine €",
+      class: "price",
+      inputClass: "price-input",
+      setState: setPricePerWeek,
+      value: pricePerWeek,
+      type: "number"
+    }, {
+      element: "Prix ​​le week-end €",
+      class: "price",
+      inputClass: "price-input",
+      setState: setPriceOnWeekend,
+      value: priceOnWeekend,
       type: "number"
     }, {
       element: "Énergie",
@@ -327,7 +350,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
     //   type: "text"
     // }
   ], [
-    pricePerDay,
+    pricePerHour,
     energy,
     commercialPower,
     fiscalPower,
@@ -335,7 +358,8 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
     co2Emission,
     gearbox,
     bodyType,
-    endOfCommercializationDate
+    endOfCommercializationDate,
+    modelYear
   ] );
 
 
@@ -559,7 +583,8 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
         await uploadFile(
           truck.id,
           `${ fileId }.${ extension }`,
-          images_[ image ]
+          images_[ image ],
+          "trucks"
         );
       } else {
         imageArray.push( image );
@@ -599,7 +624,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
     const due_date = dateParts.join( "-" );
 
     const ReqData = {
-      title: truckTitle, overview: truckOverview, due_date, brand, fuel_type: fuelType, images, accessories, gearbox, energy, price_per_day: pricePerDay, commercial_power: commercialPower, fiscal_power: fiscalPower, mixed_consumption: mixedConsumption, co2_emission: co2Emission, body_type: bodyType, end_of_commercialization_date: endOfCommercializationDate, new_vehicle_price: newVehiclePrice, dimensions, weight,
+      title: truckTitle, overview: truckOverview, due_date, brand, fuel_type: fuelType, images, accessories, gearbox, energy, price_per_hour: pricePerHour, commercial_power: commercialPower, fiscal_power: fiscalPower, mixed_consumption: mixedConsumption, co2_emission: co2Emission, body_type: bodyType, end_of_commercialization_date: endOfCommercializationDate, new_vehicle_price: newVehiclePrice, dimensions, weight,
     };
 
 

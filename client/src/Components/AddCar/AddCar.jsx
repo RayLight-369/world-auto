@@ -28,7 +28,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
   const [ color, setColor ] = useState( car?.color || "" );
   const [ certificate, setCertificate ] = useState( car?.certificate || "" );
   const [ emission, setEmission ] = useState( car?.emission || "" );
-  const [ modelYear, setModelYear ] = useState( car?.modelYear || "" );
+  const [ modelYear, setModelYear ] = useState( car?.model_year || "" );
   const [ seatingCapacity, setSeatingCapacity ] = useState( car?.seating_capacity || "" );
   const [ gearbox, setGearbox ] = useState( car?.gearbox || "" );
   const [ accessories, setAccessories ] = useState( car?.accessories || [] );

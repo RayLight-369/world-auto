@@ -48,7 +48,8 @@ div.title-overview {
 
     div.price-buy {
       display: flex;
-      justify-content: space-between;
+      gap: 5px;
+      flex-wrap: wrap;
       align-items: center;
       position: relative;
       /* top: 5px; */
@@ -74,19 +75,31 @@ div.title-overview {
       h1 {
         /* color: var(--primary-blue); */
         color: var(--primary-blue);
-        font-size: 1.3em;
+        font-size: 1em;
         position: relative;
         border-radius: 6px;
         border: 1.3px dashed var(--primary-blue);
         width: fit-content;
         padding: 2px 5px;
 
+        &.hour:before {
+          content: "Prix / Heure: ";
+        }
+
+        &.week:before {
+          content: "Prix / Semaine: ";
+        }
+
+        &.weekend:before {
+          content: "Prix ​​le week-end: ";
+        }
+
         &::before {
-          content: "Prix: ";
           position: relative;
           left: 0;
           color: #111;
         }
+
       }
     }
   }
@@ -385,14 +398,26 @@ img.img {
       overflow: hidden;
       text-overflow: ellipsis;
 
-      &:nth-child(2) {
+      &:not(:nth-child(1)) {
         color: #333 !important;
         font-size: .9em !important;
         position: relative;
+        white-space: wrap;
         top: 20px;
 
+        &.hour::before {
+          content: "Prix / Heure: ";
+        }
+
+        &.week::before {
+          content: "Prix / Semaine: ";
+        }
+
+        &.weekend::before {
+          content: "Prix ​​le week-end: ";
+        }
+
         &::before {
-          content: "Price: ";
           position: relative;
           left: 0;
           width: fit-content;
