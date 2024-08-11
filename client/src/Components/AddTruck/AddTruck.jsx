@@ -354,6 +354,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
     pricePerWeek,
     priceOnWeekend,
     color,
+    mileage,
     energy,
     commercialPower,
     fiscalPower,
@@ -363,7 +364,8 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
     bodyType,
     endOfCommercializationDate,
     modelYear,
-    newVehiclePrice
+    newVehiclePrice,
+    seatingCapacity
   ] );
 
 
