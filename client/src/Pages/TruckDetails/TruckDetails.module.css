@@ -1,6 +1,7 @@
 section#truck-details {
   /* background: #000; */
   width: 100vw;
+  min-height: 700px;
   height: 100%;
   position: relative;
   top: 80px;
