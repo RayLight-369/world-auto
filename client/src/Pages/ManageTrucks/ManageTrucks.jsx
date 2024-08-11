@@ -50,9 +50,9 @@ const ManageTrucks = () => {
               </div>
               { trucks?.length && trucks.map( truck => (
                 <div className={ `${ Styles[ "row" ] }` }>
-                  <p className={ Styles[ "truck-title" ] }>{ truck.title }</p>
+                  <p className={ Styles[ "truck-title" ] }>{ truck?.title }</p>
                   <p className={ Styles[ "brand-title" ] }>{ brands?.find( brand => brand.id == truck.brand )?.brandName }</p>
-                  <p className={ Styles[ "date" ] }>{ truck.due_date }</p>
+                  <p className={ Styles[ "date" ] }>{ truck?.due_date }</p>
                   <p className={ Styles[ "actions" ] }>
                     <span className={ Styles[ "edit" ] } onClick={ () => setTruckToBeEdited( truck ) }>&#9998;</span>
                     <span className={ Styles[ "del" ] } onClick={ () => setTruckToBeDeleted( truck ) }>&#128465;</span>
@@ -71,12 +71,12 @@ const ManageTrucks = () => {
         ) }
         { truckToBeEdited && (
           <Modal handleClose={ () => setTruckToBeEdited( null ) }>
-            <AddTruck handleClose={ () => setTruckToBeEdited( null ) } car={ truckToBeEdited } type='edit' />
+            <AddTruck handleClose={ () => setTruckToBeEdited( null ) } truck={ truckToBeEdited } type='edit' />
           </Modal>
         ) }
         { truckToBeDeleted && (
           <Modal handleClose={ () => setTruckToBeDeleted( null ) }>
-            <AddTruck handleClose={ () => setTruckToBeDeleted( null ) } car={ truckToBeDeleted } type='del' />
+            <AddTruck handleClose={ () => setTruckToBeDeleted( null ) } truck={ truckToBeDeleted } type='del' />
           </Modal>
         ) }
       </AnimatePresence>
