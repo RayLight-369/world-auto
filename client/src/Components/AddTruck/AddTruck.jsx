@@ -630,7 +630,29 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
     const due_date = dateParts.join( "-" );
 
     const ReqData = {
-      title: truckTitle, overview: truckOverview, due_date, brand, fuel_type: fuelType, images, accessories, gearbox, energy, price_per_hour: pricePerHour, commercial_power: commercialPower, fiscal_power: fiscalPower, mixed_consumption: mixedConsumption, co2_emission: co2Emission, body_type: bodyType, end_of_commercialization_date: endOfCommercializationDate, new_vehicle_price: newVehiclePrice, dimensions, weight,
+      title: truckTitle,
+      overview: truckOverview,
+      due_date,
+      brand,
+      fuel_type: fuelType,
+      images,
+      accessories,
+      gearbox,
+      energy,
+      price_per_hour: pricePerHour,
+      price_per_week: pricePerWeek,
+      price_on_weekend: priceOnWeekend,
+      commercial_power: commercialPower,
+      fiscal_power: fiscalPower,
+      mixed_consumption: mixedConsumption,
+      co2_emission: co2Emission,
+      body_type: bodyType,
+      end_of_commercialization_date: endOfCommercializationDate,
+      new_vehicle_price: newVehiclePrice,
+      dimensions,
+      weight,
+      color,
+      mileage
     };
 
 
