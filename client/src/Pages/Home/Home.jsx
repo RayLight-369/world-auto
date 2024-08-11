@@ -256,10 +256,10 @@ const Home = () => {
           <p className={ Styles[ "results" ] }>{ filteredAndSortedCars?.length } voitures correspondent à votre recherche</p>
           <CardsContainer filteredAndSortedCars={ filteredAndSortedCars } key={ "cars" } carLoading={ carsLoading } />
         </div>
-        <div className={ `${ Styles[ "filters-shortcut" ] } ${ shortcutFilterOpen && Styles.open }` }>
+        {/* <div className={ `${ Styles[ "filters-shortcut" ] } ${ shortcutFilterOpen && Styles.open }` }>
           <p className={ Styles[ "shortcut-icon" ] } onClick={ () => setShortcutFilterOpen( prev => !prev ) }><FontAwesomeIcon icon={ faBars } /></p>
           <FiltersContainer Cars={ Cars } cars={ cars } brands={ brands } setCars={ setCars } filterDistpatch={ filterDistpatch } filtersState={ filtersState } key={ 2 } />
-        </div>
+        </div> */}
       </motion.section>
     </motion.section>
   );
