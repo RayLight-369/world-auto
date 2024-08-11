@@ -95,13 +95,6 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       setState: value => setDimensions( prev => ( { ...prev, "Hauteur": value } ) ),
       value: dimensions?.[ "Hauteur" ],
       type: "text"
-    }, {
-      element: "Année modèle",
-      class: "model-year",
-      inputClass: "model-year-input",
-      setState: setModelYear,
-      value: modelYear,
-      type: "text"
     },
     {
       element: "Hauteur avec barres de toit",
@@ -275,6 +268,14 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       inputClass: "color-input",
       setState: setColor,
       value: color,
+      type: "text"
+    },
+    {
+      element: "Année modèle",
+      class: "model-year",
+      inputClass: "model-year-input",
+      setState: setModelYear,
+      value: modelYear,
       type: "text"
     },
     {
@@ -652,7 +653,8 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       dimensions,
       weight,
       color,
-      mileage
+      mileage,
+      model_year: modelYear
     };
 
 
