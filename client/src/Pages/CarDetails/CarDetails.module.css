@@ -1,7 +1,6 @@
 section#car-details {
   /* background: #000; */
   width: 100vw;
-  min-height: 700px;
   height: 100%;
   position: relative;
   top: 80px;
@@ -144,6 +143,7 @@ div.content {
   display: flex;
   flex-direction: column;
   gap: 80px;
+  min-height: 700px;
   width: 100%;
 
   .title-price {
