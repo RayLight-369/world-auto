@@ -142,7 +142,7 @@ div.some-filter {
 
     div.filters-container {
       display: flex;
-      height: fit-content;
+      height: fit-content !important;
       overflow-y: auto;
       padding: 0 7px;
       position: sticky;
