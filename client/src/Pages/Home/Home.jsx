@@ -185,25 +185,25 @@ const Home = () => {
 
 
 
-  useEffect( () => {
+  // useEffect( () => {
 
-    const handleEvent = e => {
-      const { scrollY } = window;
-      const Filter = document.querySelector( "div." + Styles[ "filters-shortcut" ] + " > div" );
+  //   const handleEvent = e => {
+  //     const { scrollY } = window;
+  //     const Filter = document.querySelector( "div." + Styles[ "filters-shortcut" ] + " > div" );
 
-      if ( scrollY > 300 ) {
-        Filter?.classList.add( Styles.appear );
-      } else {
-        Filter?.classList.remove( Styles.appear );
-      }
+  //     if ( scrollY > 300 ) {
+  //       Filter?.classList.add( Styles.appear );
+  //     } else {
+  //       Filter?.classList.remove( Styles.appear );
+  //     }
 
-    };
+  //   };
 
-    document.addEventListener( "scroll", handleEvent );
+  //   document.addEventListener( "scroll", handleEvent );
 
-    return () => document.removeEventListener( "scroll", handleEvent );
+  //   return () => document.removeEventListener( "scroll", handleEvent );
 
-  }, [] );
+  // }, [] );
 
   const filteredAndSortedCars = useMemo( () => {
     if ( !searchInputText ) return Cars;
