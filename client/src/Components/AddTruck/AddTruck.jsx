@@ -152,7 +152,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       value: dimensions?.[ "Voies arrière" ],
       type: "text"
     }
-  ], [] );
+  ], [ Dimensions ] );
 
   const Weights = useMemo( () => [
     {
@@ -203,7 +203,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       value: weight?.[ "Poids tracté non freiné" ],
       type: "text"
     }
-  ], [ [] ] );
+  ], [ [ Weights ] ] );
 
 
 
