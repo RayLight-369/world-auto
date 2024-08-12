@@ -39,7 +39,7 @@ const CarsProvider = ( { children } ) => {
         setCars( carsData.data );
         setCarPages( {
           lastIndex: carsData.data.length - 1,
-          hasMore: !!carsData.remaining
+          hasMore: !!( carsData.remaining - carsData.data.length )
         } );
 
         const brandsRes = await fetch( API.GET_BRANDS );
@@ -57,7 +57,7 @@ const CarsProvider = ( { children } ) => {
         setTrucks( trucksData.data );
         setTruckPages( {
           lastIndex: trucksData.data.length - 1,
-          hasMore: !!trucksData.remaining
+          hasMore: !!( trucksData.remaining - trucksData.data.length )
         } );
 
       } catch ( e ) {

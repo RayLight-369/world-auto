@@ -9,12 +9,14 @@ import { faBars, faX } from '@fortawesome/free-solid-svg-icons';
 import FiltersContainer from '../../Components/FiltersContainer/FiltersContainer';
 import CardsContainer from '../../Components/CardsContainer/CardsContainer';
 import useDebounce from '../../Hooks/useDebounce';
+import { API } from '../../Constants';
 
 
 const TruckRental = () => {
 
 
-  const { trucks, brands, carsLoading } = useCars();
+  const { trucks, brands, carsLoading, setTrucks: SetTrucks, truckPages, setTruckPages } = useCars();
+  const [ adding, setAdding ] = useState( false );
   const [ Trucks, setTrucks ] = useState( trucks );
   const [ shortcutFilterOpen, setShortcutFilterOpen ] = useState( false );
   const [ searchInputText, setSearchInputText ] = useState( "" );
@@ -240,6 +242,29 @@ const TruckRental = () => {
     } );
   }, [ debouncedInputText, Trucks ] );
 
+  const handleGetMore = async () => {
+    setAdding( true );
+    try {
+
+      const res = await fetch( `${ API.GET_TRUCKS }/${ truckPages.lastIndex }` );
+
+      if ( res.ok ) {
+        const body = await res.json();
+        setTruckPages( {
+          lastIndex: trucks.length + body.data.length - 1,
+          hasMore: !!( body.remaining - trucks.length - body.data.length )
+        } );
+
+        SetTrucks( prev => ( [ ...prev, ...body.data ] ) );
+      }
+
+    } catch ( e ) {
+      console.log( e );
+    } finally {
+      setAdding( false );
+    }
+  };
+
 
   return (
     <motion.section id={ Styles[ "home" ] } variants={ variants } initial="hidden" animate="animate" exit="exit">
@@ -255,11 +280,14 @@ const TruckRental = () => {
         <div className={ Styles[ "content" ] }>
           <p className={ Styles[ "results" ] }>{ filteredAndSortedTrucks?.length } Camion correspondent à votre recherche</p>
           <CardsContainer filteredAndSortedCars={ filteredAndSortedTrucks } type={ "trucks-rental" } carLoading={ carsLoading } />
+          { truckPages.hasMore && (
+            <button className={ Styles[ 'get-more' ] } disabled={ adding } onClick={ handleGetMore }>Get More</button>
+          ) }
         </div>
-        <div className={ `${ Styles[ "filters-shortcut" ] } ${ shortcutFilterOpen && Styles.open }` }>
+        {/* <div className={ `${ Styles[ "filters-shortcut" ] } ${ shortcutFilterOpen && Styles.open }` }>
           <p className={ Styles[ "shortcut-icon" ] } onClick={ () => setShortcutFilterOpen( prev => !prev ) }><FontAwesomeIcon icon={ faBars } /></p>
           <FiltersContainer Cars={ Trucks } cars={ trucks } brands={ brands } setCars={ setTrucks } filterDistpatch={ filterDistpatch } filtersState={ filtersState } key={ 3 } />
-        </div>
+        </div> */}
       </motion.section>
     </motion.section>
   );

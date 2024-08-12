@@ -94,6 +94,24 @@ div.content {
   position: relative;
 }
 
+button.get-more {
+  width: fit-content;
+  padding: 6px 12px;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  background: var(--primary-blue);
+  color: white;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: 200ms;
+
+  &:hover {
+    transform: translateX(-50%) scale(1.03);
+  }
+}
+
 @media screen and (max-width: 768px) {
   h1.ad-title {
     font-size: 1.5em;
