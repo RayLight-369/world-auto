@@ -276,7 +276,7 @@ const TruckRental = () => {
       </motion.section>
 
       <motion.section className={ Styles[ "body" ] } variants={ variants }>
-        <FiltersContainer cars={ trucks } Cars={ Trucks } brands={ brands } setCars={ setTrucks } filterDistpatch={ filterDistpatch } filtersState={ filtersState } searchInputText={ searchInputText } />
+        <FiltersContainer cars={ trucks } Cars={ Trucks } handleGetMore={ handleGetMore } brands={ brands } setCars={ setTrucks } filterDistpatch={ filterDistpatch } filtersState={ filtersState } searchInputText={ searchInputText } />
         <div className={ Styles[ "content" ] }>
           <p className={ Styles[ "results" ] }>{ filteredAndSortedTrucks?.length } Camion correspondent à votre recherche</p>
           <CardsContainer filteredAndSortedCars={ filteredAndSortedTrucks } type={ "trucks-rental" } carLoading={ carsLoading } />

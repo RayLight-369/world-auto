@@ -9,7 +9,7 @@ const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guaran
     <div className={ Styles[ "card" ] }>
       <Link to={ `/${ type }/${ id }` }>
         <div className={ Styles[ "thumbnail" ] }>
-          <img src={ img } alt="" />
+          <img src={ img } className={ Styles[ type ] } alt="" />
           { type == "car" ?
             <div className={ Styles[ "price-notch" ] }>
               <p className={ Styles[ "price" ] }>{ ppd } €</p>

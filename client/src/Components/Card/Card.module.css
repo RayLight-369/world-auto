@@ -33,6 +33,12 @@ div.thumbnail img {
   height: 190px;
   object-fit: cover;
   width: 100%;
+
+  &.trucks-rental {
+    /* object-fit: contain !important; */
+    height: 100%;
+    aspect-ratio: 1 / 1;
+  }
 }
 
 div.price-notch {
