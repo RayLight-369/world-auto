@@ -342,31 +342,23 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       value: endOfCommercializationDate,
       type: "text"
     }
-    // {
-    //   element: "Gearbox",
-    //   class: "gearbox",
-    //   inputClass: "gearbox-input",
-    //   setState: setGearbox,
-    //   value: gearbox,
-    //   type: "text"
-    // }
   ], [
-    pricePerHour,
-    pricePerWeek,
-    priceOnWeekend,
-    color,
-    mileage,
-    energy,
-    commercialPower,
-    fiscalPower,
-    mixedConsumption,
-    co2Emission,
+    pricePerHour,//
+    pricePerWeek,//
+    priceOnWeekend,//
+    color,//
+    mileage,//
+    energy,//
+    commercialPower,//
+    fiscalPower,//
+    mixedConsumption,//
+    co2Emission,//
     gearbox,
-    bodyType,
-    endOfCommercializationDate,
-    modelYear,
-    newVehiclePrice,
-    seatingCapacity
+    bodyType,//
+    endOfCommercializationDate,//
+    modelYear,//
+    newVehiclePrice,//
+    seatingCapacity//
   ] );
 
 
