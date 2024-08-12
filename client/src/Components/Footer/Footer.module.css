@@ -1,5 +1,5 @@
 .footer {
-  background-color: var(--soft-blue);
+  background-color: #333;
   color: white;
   padding: 20px;
   text-align: center;
@@ -7,11 +7,12 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin-top: 370px;
+  top: 50px;
+  margin-top: 350px;
 }
 
 .logoContainer {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 .logo {
@@ -40,7 +41,7 @@
 
 .copyright {
   font-size: 14px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .poweredBy {
@@ -84,7 +85,7 @@
     font-size: small;
     text-align: left !important;
     width: 50%;
-    top: calc(50% + 10px);
+    top: calc(50%);
   }
 
   p.poweredBy {
@@ -96,8 +97,9 @@
     left: 50%;
     top: auto !important;
     margin-bottom: 0 !important;
-    border-top: 1px solid #3498db;
+    border-top: 1px solid #444;
     bottom: 0;
+    padding: 2px 0;
 
     a {
       color: white;
