@@ -103,7 +103,7 @@ app.get( [ "/admin/cars/:id", "/admin/cars/range/:lastindex" ], async ( req, res
     if ( id ) query.where = { id };
     if ( lastIndex ) {
       const index = +lastIndex;
-      query.range = [ index + 1, index + 2 ];
+      query.range = [ index + 1, index + 20 ];
 
       // console.log( "range: ", query.range );
     }
