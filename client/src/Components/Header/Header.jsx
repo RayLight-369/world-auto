@@ -27,7 +27,7 @@ const Header = () => {
 
   useEffect( () => {
 
-    const Resize = () => setMobile( window.innerWidth <= 768 );
+    const Resize = () => setMobile( window.innerWidth <= 1200 );
     window.addEventListener( "resize", Resize );
 
     Resize();
