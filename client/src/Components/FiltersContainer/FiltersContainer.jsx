@@ -129,7 +129,7 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
 
   return (
     <div className={ Styles[ "filters-part" ] }>
-      <p>Filtrer vos critères de recherche <span onClick={ () => {
+      <p>Filtres <span onClick={ () => {
         setFiltersDivOpen( prev => !prev );
       } }><FontAwesomeIcon icon={ filtersDivOpen ? faX : faBars } /></span></p>
       <div className={ `${ Styles[ "filters-container" ] } ${ filtersDivOpen && Styles[ "open" ] }` }>
