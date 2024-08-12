@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer, useState } from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import Styles from "./Home.module.css";
 import Card from '../../Components/Card/Card';
 import CreateAlert from '../../Components/CreateAlert/CreateAlert';
@@ -13,7 +13,6 @@ import { API } from '../../Constants';
 
 
 const Home = () => {
-
 
   const { cars, setCars: SetCars, carPages, setCarPages, brands, carsLoading } = useCars();
   const [ Cars, setCars ] = useState( cars );
@@ -243,7 +242,7 @@ const Home = () => {
   }, [ debouncedInputText, Cars ] );
 
 
-  const handleGetMore = async () => {
+  const handleGetMore = useCallback( async () => {
     setAdding( true );
     try {
 
@@ -264,7 +263,7 @@ const Home = () => {
     } finally {
       setAdding( false );
     }
-  };
+  } );
 
 
 
@@ -278,7 +277,7 @@ const Home = () => {
       </motion.section>
 
       <motion.section className={ Styles[ "body" ] } variants={ variants }>
-        <FiltersContainer cars={ cars } Cars={ Cars } brands={ brands } setCars={ setCars } filterDistpatch={ filterDistpatch } filtersState={ filtersState } searchInputText={ searchInputText } />
+        <FiltersContainer cars={ cars } handleGetMore={ handleGetMore } Cars={ Cars } brands={ brands } setCars={ setCars } filterDistpatch={ filterDistpatch } filtersState={ filtersState } searchInputText={ searchInputText } />
         <div className={ Styles[ "content" ] }>
           <p className={ Styles[ "results" ] }>{ filteredAndSortedCars?.length } voitures correspondent à votre recherche</p>
           <CardsContainer filteredAndSortedCars={ filteredAndSortedCars } key={ "cars" } carLoading={ carsLoading } />

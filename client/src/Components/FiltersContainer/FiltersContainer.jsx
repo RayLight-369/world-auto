@@ -19,7 +19,7 @@ const FilterPart = ( { filterOpen, setFilterOpen, label, children } ) => (
 );
 
 
-const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDistpatch, searchInputText } ) => {
+const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDistpatch, handleGetMore, searchInputText } ) => {
 
   const [ filtersDivOpen, setFiltersDivOpen ] = useState( false );
 
@@ -112,7 +112,12 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
       const filteredCars = cars.filter( car => BrandCheck( car ) && PriceCheck( car ) && FuelCheck( car ) && MileageCheck( car ) && GearboxCheck( car ) && ModelYearCheck( car ) );
 
       // if ( filteredCars != cars )
+      // if ( filteredCars.length ) {
+
       setCars( filteredCars );
+      if ( !filteredCars.length ) {
+        handleGetMore();
+      }
 
     }
   }, [ filtersState, cars ] );
