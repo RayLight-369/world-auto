@@ -91,17 +91,22 @@ app.post( "/admin", async ( req, res ) => {
 
 } );
 
-app.get( [ "/admin/cars", "/admin/cars/:id" ], async ( req, res ) => {
+app.get( [ "/admin/cars", "/admin/cars/:id", "/admin/cars/range/:lastindex" ], async ( req, res ) => {
   try {
 
     const id = req.params?.id;
+    const lastIndex = req.params?.lastindex;
     const query = { table: "Cars" };
 
     if ( id ) query.where = { id };
+    if ( lastIndex ) {
+      const range = lastIndex.split( "-" ).map( item => +item );
+      query.range = range;
+    }
 
-    const { data, error } = await getData( query );
+    const { data, error, remaining } = await getData( query );
 
-    if ( data ) res.status( 200 ).json( { data } );
+    if ( data ) res.status( 200 ).json( { data, remaining } );
     else {
       console.log( error );
       res.status( 404 ).json( { error: "No Cars Found!" } );

@@ -16,6 +16,7 @@ const Home = () => {
 
   const { cars, brands, carsLoading } = useCars();
   const [ Cars, setCars ] = useState( cars );
+
   const [ shortcutFilterOpen, setShortcutFilterOpen ] = useState( false );
   const [ searchInputText, setSearchInputText ] = useState( "" );
   const debouncedInputText = useDebounce( searchInputText, 500 );

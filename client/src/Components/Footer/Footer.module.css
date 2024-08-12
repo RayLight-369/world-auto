@@ -94,6 +94,8 @@
     width: 100%;
     transform: translateX(-50%);
     left: 50%;
+    top: auto !important;
+    margin-bottom: 0 !important;
     border-top: 1px solid #3498db;
     bottom: 0;
 

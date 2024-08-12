@@ -14,6 +14,16 @@ const CarsProvider = ( { children } ) => {
   const [ trucks, setTrucks ] = useState( [] );
   const [ brands, setBrands ] = useState( [] );
   const [ carsLoading, setCarsLoading ] = useState( true );
+  const [ carPages, setCarPages ] = useState( {
+    currentPage: 0,
+    hasNextPage: false
+  } );
+
+  const [ truckPages, setTruckPages ] = useState( {
+    currentPage: 0,
+    hasNextPage: false
+  } );
+
   // const [ currentCar, setCurrentCar ] = useState( null );
   // const [ cycles, setCycles ] = useState( 0 );
 
