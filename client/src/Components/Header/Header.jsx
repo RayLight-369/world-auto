@@ -14,7 +14,7 @@ const Header = () => {
   const [ toggleDropdown, setToggleDropdown ] = useState( false );
   const [ icon, setIcon ] = useState( faBars );
   const [ mobile, setMobile ] = useState( true );
-  const isMobile = useMemo( () => window.innerWidth <= 768, [ mobile ] );
+  const isMobile = useMemo( () => window.innerWidth <= 1200, [ mobile ] );
   const { user, Login, isLoggedIn, Logout } = useUser();
 
   // const hideDropdown = () => {

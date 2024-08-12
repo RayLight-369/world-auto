@@ -283,7 +283,7 @@ button.signout {
   font-weight: bold;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
 
   div.logo {
     left: 5px !important;

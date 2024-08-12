@@ -6,9 +6,9 @@ import { NavLinks } from '../../Constants';
 const Footer = () => {
   return (
     <footer className={ styles.footer }>
-      <div className={ styles.logoContainer }>
+      {/* <div className={ styles.logoContainer }>
         <img src={ "/Imgs/worldauto.jpg" } alt="Logo" className={ styles.logo } />
-      </div>
+      </div> */}
       <ul className={ styles.links }>
         { NavLinks.map( ( link, key ) => (
           <li key={ key }>
