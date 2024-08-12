@@ -32,8 +32,8 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
 
 
   useEffect( () => {
-
-    if ( cars.length && !Cars?.length ) setCars( cars );
+    //  && !Cars?.length
+    if ( cars.length && cars != Cars ) setCars( cars );
 
     console.log( cars );
 
@@ -112,13 +112,13 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
         return startCheck && endCheck;
       }
 
-      function SearchResultCheck ( item ) {
-        //make
-      }
+      const filteredCars = cars.filter( car => BrandCheck( car ) && PriceCheck( car ) && FuelCheck( car ) && MileageCheck( car ) && GearboxCheck( car ) && ModelYearCheck( car ) );
 
-      setCars( cars.filter( car => BrandCheck( car ) && PriceCheck( car ) && FuelCheck( car ) && MileageCheck( car ) && GearboxCheck( car ) && ModelYearCheck( car ) ) );
+      // if ( filteredCars != cars )
+      setCars( filteredCars );
+
     }
-  }, [ filtersState ] );
+  }, [ filtersState, cars ] );
 
 
 

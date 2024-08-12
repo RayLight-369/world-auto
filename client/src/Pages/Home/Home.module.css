@@ -48,6 +48,16 @@ section.body {
   padding: 10px 20px;
 }
 
+button.get-more {
+  width: fit-content;
+  padding: 6px 12px;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  background: var(--primary-blue);
+  color: white;
+}
+
 div.filters-shortcut {
   width: fit-content;
   height: fit-content;

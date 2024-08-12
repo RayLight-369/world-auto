@@ -45,7 +45,7 @@ const getData = async ( {
 
     let { data, error, statusText, count, status } = await Data;
 
-    return { data, statusText, error, status, remaining: count - ( data ? data.length : 0 ) };
+    return { data, statusText, error, status, remaining: count };
 
   } catch ( error ) {
 

@@ -9,15 +9,16 @@ import { faBars, faX } from '@fortawesome/free-solid-svg-icons';
 import FiltersContainer from '../../Components/FiltersContainer/FiltersContainer';
 import CardsContainer from '../../Components/CardsContainer/CardsContainer';
 import useDebounce from '../../Hooks/useDebounce';
+import { API } from '../../Constants';
 
 
 const Home = () => {
 
 
-  const { cars, brands, carsLoading } = useCars();
+  const { cars, setCars: SetCars, carPages, setCarPages, brands, carsLoading } = useCars();
   const [ Cars, setCars ] = useState( cars );
+  const [ adding, setAdding ] = useState( false );
 
-  const [ shortcutFilterOpen, setShortcutFilterOpen ] = useState( false );
   const [ searchInputText, setSearchInputText ] = useState( "" );
   const debouncedInputText = useDebounce( searchInputText, 500 );
 
@@ -242,6 +243,34 @@ const Home = () => {
   }, [ debouncedInputText, Cars ] );
 
 
+  const handleGetMore = async () => {
+    setAdding( true );
+    try {
+
+      const res = await fetch( `${ API.GET_CARS }/${ carPages.lastIndex }` );
+
+      if ( res.ok ) {
+        const body = await res.json();
+        setCarPages( {
+          lastIndex: cars.length + body.data.length - 1,
+          hasMore: !!( body.remaining - cars.length - body.data.length )
+        } );
+        console.log( body );
+        SetCars( prev => ( [ ...prev, ...body.data ] ) );
+      }
+
+    } catch ( e ) {
+      console.log( e );
+    } finally {
+      setAdding( false );
+    }
+  };
+
+  useEffect( () => {
+    console.log( "carPages: ", carPages );
+  }, [ carPages ] );
+
+
   return (
     <motion.section id={ Styles[ "home" ] } variants={ variants } initial="hidden" animate="animate" exit="exit">
       <motion.section className={ Styles[ "search-section" ] } variants={ variants }>
@@ -256,6 +285,9 @@ const Home = () => {
         <div className={ Styles[ "content" ] }>
           <p className={ Styles[ "results" ] }>{ filteredAndSortedCars?.length } voitures correspondent à votre recherche</p>
           <CardsContainer filteredAndSortedCars={ filteredAndSortedCars } key={ "cars" } carLoading={ carsLoading } />
+          { carPages.hasMore && (
+            <button className={ Styles[ 'get-more' ] } disabled={ adding } onClick={ handleGetMore }>Get More</button>
+          ) }
         </div>
         {/* <div className={ `${ Styles[ "filters-shortcut" ] } ${ shortcutFilterOpen && Styles.open }` }>
           <p className={ Styles[ "shortcut-icon" ] } onClick={ () => setShortcutFilterOpen( prev => !prev ) }><FontAwesomeIcon icon={ faBars } /></p>

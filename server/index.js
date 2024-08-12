@@ -98,13 +98,19 @@ app.get( [ "/admin/cars/:id", "/admin/cars/range/:lastindex" ], async ( req, res
     const lastIndex = req.params?.lastindex;
     const query = { table: "Cars" };
 
+    // console.log( "last index: ", lastIndex );
+
     if ( id ) query.where = { id };
     if ( lastIndex ) {
       const index = +lastIndex;
-      query.range = [ index + 1, index + 20 ];
+      query.range = [ index + 1, index + 2 ];
+
+      // console.log( "range: ", query.range );
     }
 
     const { data, error, remaining } = await getData( query );
+
+    console.log( error, remaining );
 
     if ( data ) res.status( 200 ).json( { data, remaining } );
     else {
