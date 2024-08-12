@@ -19,6 +19,9 @@ const Footer = () => {
       <p className={ styles.copyright }>
         © 2024 World Auto. All rights reserved.
       </p>
+      <p className={ styles.poweredBy }>
+        Powered by <a href="https://itc.aions.co" target="_blank">Aions</a>
+      </p>
     </footer>
   );
 };
