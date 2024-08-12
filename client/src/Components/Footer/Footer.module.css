@@ -46,6 +46,9 @@
 .poweredBy {
   font-size: 14px;
   margin-top: 10px;
+  position: relative;
+  top: 10px;
+  margin-bottom: 10px;
 
   a {
     color: aqua;
@@ -85,7 +88,7 @@
   }
 
   p.poweredBy {
-    position: absolute;
+    position: absolute !important;
     font-size: small;
     text-align: center !important;
     width: 100%;
