@@ -91,7 +91,7 @@ app.post( "/admin", async ( req, res ) => {
 
 } );
 
-app.get( [ "/admin/cars", "/admin/cars/:id", "/admin/cars/range/:lastindex" ], async ( req, res ) => {
+app.get( [ "/admin/cars/:id", "/admin/cars/range/:lastindex" ], async ( req, res ) => {
   try {
 
     const id = req.params?.id;
@@ -100,8 +100,8 @@ app.get( [ "/admin/cars", "/admin/cars/:id", "/admin/cars/range/:lastindex" ], a
 
     if ( id ) query.where = { id };
     if ( lastIndex ) {
-      const range = lastIndex.split( "-" ).map( item => +item );
-      query.range = range;
+      const index = +lastIndex;
+      query.range = [ index + 1, index + 20 ];
     }
 
     const { data, error, remaining } = await getData( query );
@@ -203,17 +203,23 @@ app.delete( "/admin/cars/delete", async ( req, res ) => {
 
 } );
 
-app.get( [ "/admin/trucks", "/admin/trucks/:id" ], async ( req, res ) => {
+app.get( [ "/admin/trucks/range/:lastindex", "/admin/trucks/:id" ], async ( req, res ) => {
   try {
 
     const id = req.params?.id;
+    const lastIndex = req.params?.lastindex;
     const query = { table: "Trucks" };
 
     if ( id ) query.where = { id };
+    if ( lastIndex ) {
+      const index = +lastIndex;
+      query.range = [ index + 1, index + 20 ];
+    }
 
-    const { data, error } = await getData( query );
+    const { data, error, remaining } = await getData( query );
 
-    if ( data ) res.status( 200 ).json( { data } );
+    if ( data ) res.status( 200 ).json( { data, remaining } );
+
     else {
       console.log( error );
       res.status( 404 ).json( { error: "No Trucks Found!" } );

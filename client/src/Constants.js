@@ -45,12 +45,12 @@ export const CREDENTIALS = {
 };
 
 export const API = {
-  GET_CARS: `https://world-auto-api.vercel.app/admin/cars`,
+  GET_CARS: `https://world-auto-api.vercel.app/admin/cars/range`,
   GET_CAR: ( id ) => `https://world-auto-api.vercel.app/admin/cars/${ id }`,
   NEW_CAR: `https://world-auto-api.vercel.app/admin/cars/new`,
   EDIT_CAR: `https://world-auto-api.vercel.app/admin/cars/edit`,
   DEL_CAR: `https://world-auto-api.vercel.app/admin/cars/delete`,
-  GET_TRUCKS: `https://world-auto-api.vercel.app/admin/trucks`,
+  GET_TRUCKS: `https://world-auto-api.vercel.app/admin/trucks/range`,
   GET_TRUCK: ( id ) => `https://world-auto-api.vercel.app/admin/trucks/${ id }`,
   NEW_TRUCK: `https://world-auto-api.vercel.app/admin/trucks/new`,
   EDIT_TRUCK: `https://world-auto-api.vercel.app/admin/trucks/edit`,
