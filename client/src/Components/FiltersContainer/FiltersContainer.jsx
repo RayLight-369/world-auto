@@ -35,19 +35,16 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
     //  && !Cars?.length
     if ( cars.length && cars != Cars ) setCars( cars );
 
-    console.log( cars );
+    // console.log( cars );
 
   }, [ cars ] );
 
   useEffect( () => {
-    console.log( filtersState );
+    // console.log( filtersState );
 
     if ( filtersState ) {
       const { Brands, Price, Fuel_Types, Mileage, Gearbox, Model_Year } = filtersState;
 
-      console.log( "Brands: ", Brands );
-      console.log( "Cars: ", Cars );
-      console.log( "cars: ", cars );
 
       function BrandCheck ( item ) {
         if ( Brands.length > 0 ) {

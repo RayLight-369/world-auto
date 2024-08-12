@@ -255,7 +255,7 @@ const Home = () => {
           lastIndex: cars.length + body.data.length - 1,
           hasMore: !!( body.remaining - cars.length - body.data.length )
         } );
-        console.log( body );
+
         SetCars( prev => ( [ ...prev, ...body.data ] ) );
       }
 
@@ -266,9 +266,6 @@ const Home = () => {
     }
   };
 
-  useEffect( () => {
-    console.log( "carPages: ", carPages );
-  }, [ carPages ] );
 
 
   return (
