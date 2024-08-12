@@ -243,10 +243,16 @@ I am interested in reserving the following truck and would like to provide the d
           <h1 className={ styles[ 'title' ] }>Dimensions</h1>
           <div className={ styles[ "details" ] }>
             { Object.entries( truck?.dimensions ).map( ( [ key, val ] ) => (
-              <div className={ styles[ "property" ] } key={ key } title={ val }>
-                <p className={ styles[ "key" ] }>{ key }</p>
-                <p className={ styles[ "value" ] }>{ val }</p>
-              </div>
+              <>
+                { val.toString().trim().length ? (
+                  <div className={ styles[ "property" ] } key={ key } title={ val }>
+                    <p className={ styles[ "key" ] }>{ key }</p>
+                    <p className={ styles[ "value" ] }>{ val }</p>
+                  </div>
+                ) : (
+                  <></>
+                ) }
+              </>
             ) ) }
           </div>
         </div>
@@ -254,10 +260,16 @@ I am interested in reserving the following truck and would like to provide the d
           <h1 className={ styles[ 'title' ] }>Weight</h1>
           <div className={ styles[ "details" ] }>
             { Object.entries( truck?.weight ).map( ( [ key, val ] ) => (
-              <div className={ styles[ "property" ] } key={ key } title={ val }>
-                <p className={ styles[ "key" ] }>{ key }</p>
-                <p className={ styles[ "value" ] }>{ val }</p>
-              </div>
+              <>
+                { val.toString().trim().length ? (
+                  <div className={ styles[ "property" ] } key={ key } title={ val }>
+                    <p className={ styles[ "key" ] }>{ key }</p>
+                    <p className={ styles[ "value" ] }>{ val }</p>
+                  </div>
+                ) : (
+                  <></>
+                ) }
+              </>
             ) ) }
           </div>
         </div>
