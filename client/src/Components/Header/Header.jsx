@@ -48,7 +48,7 @@ const Header = () => {
           ) ) }
         </div>
         <div className={ Styles[ "user-info" ] }>
-          <NavLink to={ "tel:+33751287393" } className={ Styles[ "tel" ] }>01 86 95 04 14</NavLink>
+          <NavLink to={ "tel:+33751287393" } className={ Styles[ "tel" ] }>7 51 28 73 93</NavLink>
 
           { !isLoggedIn ? (
             <button id={ Styles[ 'reg-btn' ] } onClick={ Login } className={ Styles[ "register" ] }>Me Connecter</button>
