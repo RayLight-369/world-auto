@@ -66,15 +66,11 @@ const Contact = () => {
           <div className={ Styles[ "social-attrs" ] }>
             <div className={ Styles[ "attr" ] }>
               <FontAwesomeIcon icon={ faMailBulk } />
-              <p>worlauto95530@gmail.com</p>
+              <p>worldauto95530@gmail.com</p>
             </div>
             <div className={ Styles[ "attr" ] }>
               <FontAwesomeIcon icon={ faPhone } />
               <p>+33 7 51 28 73 93</p>
-            </div>
-            <div className={ Styles[ "attr" ] }>
-              <FontAwesomeIcon icon={ faMailBulk } />
-              <p>worldauto95530@gmail.com</p>
             </div>
             <div className={ Styles[ "attr" ] }>
               <FontAwesomeIcon icon={ faLocationDot } />
