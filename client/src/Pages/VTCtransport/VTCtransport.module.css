@@ -107,6 +107,7 @@ div.rates {
     p.title {
       font-size: 1.3em;
       transition: 150ms;
+      filter: none;
     }
 
     p.price {
@@ -208,7 +209,7 @@ div.note {
       }
 
       p.price {
-        transform: translateX(-110px);
+        transform: translateX(-100px) !important;
       }
 
       a {
