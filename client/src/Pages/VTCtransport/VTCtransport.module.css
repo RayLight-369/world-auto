@@ -107,7 +107,6 @@ div.rates {
     p.title {
       font-size: 1.3em;
       transition: 150ms;
-      filter: none;
     }
 
     p.price {
@@ -204,8 +203,11 @@ div.note {
 
     &:hover {
       p.title {
-        opacity: .5;
-        filter: blur(5px);
+        opacity: .8;
+        width: 30%;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap;
       }
 
       p.price {
