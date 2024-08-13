@@ -3,6 +3,7 @@ div.card {
   box-shadow: 1px 1px 6px #ccc;
   cursor: pointer;
   height: 100%;
+  min-height: 384px;
   /* max-width: 700px; */
   /* max-width: 350px; */
   overflow: hidden;
