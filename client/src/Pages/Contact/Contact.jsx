@@ -74,7 +74,7 @@ const Contact = () => {
             </div>
             <div className={ Styles[ "attr" ] }>
               <FontAwesomeIcon icon={ faMailBulk } />
-              <p>worlauto95530@gmail.com</p>
+              <p>worldauto95530@gmail.com</p>
             </div>
             <div className={ Styles[ "attr" ] }>
               <FontAwesomeIcon icon={ faLocationDot } />

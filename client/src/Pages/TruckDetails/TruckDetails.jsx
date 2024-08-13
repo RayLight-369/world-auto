@@ -204,7 +204,7 @@ I am interested in reserving the following truck and would like to provide the d
               <p className={ styles[ "content" ] }>{ truck.overview }</p>
             </div>
 
-            <a target='_blank' className={ styles[ 'reserve' ] } href={ `https://wa.me/33751287393?text=${ encodeURIComponent( `Hey I contacted you through World Auto Site\n\n ${ msg } ` ) }` }>Enquire</a>
+            <a target='_blank' className={ styles[ 'reserve' ] } href={ `https://wa.me/33751287393?text=${ encodeURIComponent( `Hé, je vous ai contacté via World Auto Site !\n\n ${ msg } ` ) }` }>Contactez moi</a>
           </div >
         </div >
       ) }
@@ -221,7 +221,7 @@ I am interested in reserving the following truck and would like to provide the d
               <h1 className={ styles[ 'title' ] }>Aperçu</h1>
               <p className={ styles[ "content" ] }>{ truck.overview }</p>
             </div>
-            <a target='_blank' className={ styles[ 'reserve' ] } href={ `https://wa.me/33751287393?text=${ encodeURIComponent( `Hey I contacted you through World Auto Site! \n\n ${ msg }` ) }` }>Enquire</a>
+            <a target='_blank' className={ styles[ 'reserve' ] } href={ `https://wa.me/33751287393?text=${ encodeURIComponent( `Hé, je vous ai contacté via World Auto Site ! \n\n ${ msg }` ) }` }>Contactez moi</a>
           </>
         ) }
         <div className={ styles[ "parent" ] }>

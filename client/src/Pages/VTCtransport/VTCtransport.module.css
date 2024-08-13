@@ -137,10 +137,6 @@ div.rates {
     }
 
     &:hover {
-      p.title {
-        opacity: .5;
-        filter: blur(5px);
-      }
 
       p.price {
         transform: translateX(-110px);
@@ -189,11 +185,44 @@ div.note {
   }
 
   div.rate {
-    width: 90% !important;
+    width: 98% !important;
+
+    p.title {
+      font-size: .9em !important;
+      max-width: 70% !important;
+      white-space: wrap;
+    }
+
+    p.price {
+      font-size: 1em !important;
+    }
+
+    a {
+      padding: 6px 14px !important;
+    }
+
+    &:hover {
+      p.title {
+        opacity: .5;
+        filter: blur(5px);
+      }
+
+      p.price {
+        transform: translateX(-110px);
+      }
+
+      a {
+        transform: translateX(0);
+      }
+    }
   }
 
   div.note {
     display: flex !important;
     flex-direction: column !important;
+
+    p {
+      text-align: center !important;
+    }
   }
 }
