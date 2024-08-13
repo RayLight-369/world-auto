@@ -20,6 +20,8 @@ div.card a {
   color: #000;
   text-decoration: none;
   font-family: Galano;
+  display: block;
+  height: 100%;
 }
 
 div.thumbnail {
@@ -27,6 +29,7 @@ div.thumbnail {
   height: auto;
   position: relative;
   width: 100%;
+  height: fit-content;
 }
 
 div.thumbnail img {
@@ -78,6 +81,7 @@ div.infos {
   flex-direction: column;
   gap: 5px;
   padding: 30px 15px 30px;
+  height: fit-content !important;
 }
 
 p.title {

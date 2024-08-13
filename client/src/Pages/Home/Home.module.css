@@ -129,7 +129,7 @@ div.content {
     display: flex;
     gap: 15px;
     flex-direction: column;
-    padding: 10px 20px;
+    padding: 10px 14px;
   }
 
   div.content {
