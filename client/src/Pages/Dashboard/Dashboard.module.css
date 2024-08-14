@@ -172,7 +172,7 @@ div.recent-updates-container > div {
           font-family: Quicksand;
         }
 
-        p.date {
+        p:is(.date, .price) {
           font-size: .87em;
           color: #444;
           font-family: Quicksand;

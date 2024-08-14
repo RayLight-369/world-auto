@@ -8,14 +8,17 @@ import Modal from '../../Components/Modal/Modal';
 import AddCar from '../../Components/AddCar/AddCar';
 import AddBrand from '../../Components/AddBrand/AddBrand';
 import AddTruck from '../../Components/AddTruck/AddTruck';
+import AddRate from '../../Components/AddRate/AddRate';
 
 const Dashboard = () => {
 
-  const { cars, brands, trucks, carsLoading } = useCars();
+  const { cars, brands, rates, trucks, carsLoading } = useCars();
   const [ carToBeEdited, setCarToBeEdited ] = useState( null );
   const [ truckToBeEdited, setTruckToBeEdited ] = useState( null );
   const [ brandToBeEdited, setBrandToBeEdited ] = useState( null );
   const [ brandToBeDeleted, setBrandToBeDeleted ] = useState( null );
+  const [ rateToBeEdited, setRateToBeEdited ] = useState( null );
+  const [ rateToBeDeleted, setRateToBeDeleted ] = useState( null );
   const [ carToBeDeleted, setCarToBeDeleted ] = useState( null );
   const [ truckToBeDeleted, setTruckToBeDeleted ] = useState( null );
   const [ isMobile, setIsMobile ] = useState( false );
@@ -148,6 +151,33 @@ const Dashboard = () => {
                 ) }
               </div>
             </div>
+            <div className={ `${ Styles[ "recent-rates" ] } ${ Styles[ "container" ] }` }>
+              <p className={ Styles[ "title" ] }>Tarifs récemment ajoutées</p>
+              <div className={ Styles[ "list" ] }>
+                { carsLoading && (
+                  <p className={ Styles[ "no-recent-note" ] }>Loading...</p>
+                ) }
+
+                { !carsLoading && (
+                  <>
+                    { rates.length ? rates.map( ( rate ) => (
+                      <div className={ Styles[ "rate" ] } key={ rate.id }>
+                        <div className={ Styles[ "content" ] }>
+                          <p className={ Styles[ "rate-title" ] }>{ rate.title }</p>
+                          <p className={ Styles[ "price" ] }>{ rate.price }</p>
+                        </div>
+                        <div className={ Styles[ "edit-del" ] }>
+                          <button className={ Styles[ 'edit-btn' ] } onClick={ () => setRateToBeEdited( rate ) }>&#9998;</button>
+                          <button onClick={ () => setRateToBeDeleted( rate ) }>&#128465;</button>
+                        </div>
+                      </div>
+                    ) ) : (
+                      <p className={ Styles[ 'no-recent-note' ] }>Aucune marque ajoutée !</p>
+                    ) }
+                  </>
+                ) }
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -180,6 +210,16 @@ const Dashboard = () => {
         { brandToBeDeleted && (
           <Modal>
             <AddBrand handleClose={ () => setBrandToBeDeleted( null ) } brand={ brandToBeDeleted } type={ "del" } />
+          </Modal>
+        ) }
+        { rateToBeEdited && (
+          <Modal>
+            <AddRate handleClose={ () => setRateToBeEdited( null ) } rate={ rateToBeEdited } type={ "edit" } />
+          </Modal>
+        ) }
+        { rateToBeDeleted && (
+          <Modal>
+            <AddRate handleClose={ () => setRateToBeDeleted( null ) } rate={ rateToBeDeleted } type={ "del" } />
           </Modal>
         ) }
       </AnimatePresence>
