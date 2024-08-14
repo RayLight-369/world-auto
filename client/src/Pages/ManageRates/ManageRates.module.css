@@ -53,12 +53,12 @@ div.page-container {
         width: calc(31%);
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: .86em;
+        font-size: .84em !important;
         font-family: Abeezee;
         color: #333;
       }
 
-      p.price {
+      p.rate-price {
         position: absolute;
         left: calc(35%);
         width: calc(26% - 5px);
@@ -148,25 +148,25 @@ div.page-container {
       /* background: #000; */
       position: relative;
       left: 10px;
-      width: calc(25%) !important;
+      width: calc(35%) !important;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-size: .67em;
+      font-size: .65em;
       font-family: Abeezee;
       color: #333;
     }
 
-    p.price {
+    p.rate-price {
       position: absolute;
-      left: calc(32%) !important;
-      width: calc(40% - 5px) !important;
+      left: calc(50%) !important;
+      width: calc(20% - 5px) !important;
       font-family: Galano !important;
       font-size: .78em !important;
     }
 
     p.actions {
       position: absolute;
-      left: 80%;
+      left: 70% !important;
       width: calc(18%);
       display: flex !important;
       justify-content: center;

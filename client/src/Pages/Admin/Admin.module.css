@@ -150,18 +150,20 @@ section#content {
 
   nav#nav a {
     text-decoration: none;
-    font-size: .67rem;
+    font-size: .65rem !important;
     border-radius: 3px;
     width: fit-content;
-    padding: 6px 8px;
+    max-width: 70px !important;
+    padding: 6px !important;
     color: #244b8d;
     font-family: Quicksand;
     font-weight: bold;
     transition: 200ms;
     cursor: pointer;
     position: relative;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
   }
 
   nav#nav a.active {
