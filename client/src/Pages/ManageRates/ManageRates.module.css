@@ -58,6 +58,12 @@ div.page-container {
         color: #333;
       }
 
+      p.price {
+        position: absolute;
+        left: calc(35%);
+        width: calc(26% - 5px);
+      }
+
       p.actions {
         position: absolute;
         left: 80%;
@@ -148,6 +154,14 @@ div.page-container {
       font-size: .67em;
       font-family: Abeezee;
       color: #333;
+    }
+
+    p.price {
+      position: absolute;
+      left: calc(32%) !important;
+      width: calc(40% - 5px) !important;
+      font-family: Galano !important;
+      font-size: .78em !important;
     }
 
     p.actions {

@@ -3,7 +3,7 @@ import React, { memo, useEffect, useState } from 'react';
 import Styles from "./OptionBar.module.css";
 
 
-const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen, setAddTruckPopupOpen } ) => {
+const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen, setAddRatePopupOpen, setAddTruckPopupOpen } ) => {
 
   const [ openOptionBar, setOpenOptionBar ] = useState( false );
   const [ isMobile, setIsMobile ] = useState( false );
@@ -70,9 +70,10 @@ const OptionBar = ( { setAddBrandPopupOpen, setAddCarPopupOpen, setAddTruckPopup
       <motion.div className={ Styles[ "major-options" ] }>
         {/* <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ exportCSV }>+ Export CSV</button> */ }
 
-        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddCarPopupOpen( true ) }>{ !isMobile ? "+ Ajouter une voiture" : "+ Nouvelle voiture" }</button>
-        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddBrandPopupOpen( true ) }>{ !isMobile ? "+ Ajouter une marque" : "+ Nouvelle marque" }</button>
-        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddTruckPopupOpen( true ) }>{ !isMobile ? "+ Ajouter une camion" : "+ Nouvelle camion" }</button>
+        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddCarPopupOpen( true ) }>{ "+ Voiture" }</button>
+        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddBrandPopupOpen( true ) }>{ "+ Marque" }</button>
+        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddTruckPopupOpen( true ) }>{ "+ Camion" }</button>
+        <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddRatePopupOpen( true ) }>{ "+ Tarif" }</button>
         {/* <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ () => setAddTaskPopupOpen( true ) }>+ Add Task</button> */ }
         {/* <button type='button' className={ Styles[ 'major-options-btn' ] } onClick={ importCSV }>+ Import CSV</button> */ }
 

@@ -11,10 +11,7 @@ const AddRate = ( { handleClose, rate, type = 'new' } ) => {
   const [ price, setPrice ] = useState( rate?.price || 0 );
   // const [ Brand, setBrand ] = useState( rate );
   const [ adding, setAdding ] = useState( false );
-  const { setRates, setCars } = useCars();
-
-  const currentDate = new Date();
-  const [ dateInput ] = useState( `${ currentDate.getFullYear() }-${ currentDate.getMonth() + 1 >= 10 ? currentDate.getMonth() + 1 : "0" + ( currentDate.getMonth() + 1 ) }-${ currentDate.getDate() > 9 ? currentDate.getDate() : "0" + currentDate.getDate() }` );
+  const { setRates } = useCars();
 
 
 

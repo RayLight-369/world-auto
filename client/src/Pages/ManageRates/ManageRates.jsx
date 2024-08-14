@@ -34,12 +34,14 @@ const ManageRates = () => {
               <div className={ `${ Styles[ "header" ] } ${ Styles[ "row" ] }` }>
 
                 <p className={ Styles[ "rate-title" ] }>Titre</p>
+                <p className={ Styles[ "rate-price" ] }>Prix</p>
                 <p className={ Styles[ "actions" ] }>Actions</p>
 
               </div>
               { rates?.length && rates.map( rate => (
                 <div className={ `${ Styles[ "row" ] }` }>
                   <p className={ Styles[ "rate-title" ] }>{ rate.title }</p>
+                  <p className={ Styles[ "rate-price" ] }>{ rate.price }</p>
                   <p className={ Styles[ "actions" ] }>
                     <span className={ Styles[ "edit" ] } onClick={ () => setRateToBeEdited( rate ) }>&#9998;</span>
                     <span className={ Styles[ "del" ] } onClick={ () => setRateToBeDeleted( rate ) }>&#128465;</span>
