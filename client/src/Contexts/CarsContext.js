@@ -13,6 +13,7 @@ const CarsProvider = ( { children } ) => {
   const [ cars, setCars ] = useState( [] );
   const [ trucks, setTrucks ] = useState( [] );
   const [ brands, setBrands ] = useState( [] );
+  const [ rates, setRates ] = useState( [] );
   const [ carsLoading, setCarsLoading ] = useState( true );
   const [ carPages, setCarPages ] = useState( {
     lastIndex: -1,
@@ -49,6 +50,13 @@ const CarsProvider = ( { children } ) => {
         const brandsData = await brandsRes.json();
         setBrands( brandsData.data );
 
+        const ratesRes = await fetch( API.GET_RATES );
+        if ( !ratesRes.ok ) {
+          throw new Error( `Failed to fetch rates: ${ ratesRes.status } ${ ratesRes.statusText }` );
+        }
+        const ratesData = await ratesRes.json();
+        setRates( ratesData.data );
+
         const trucksRes = await fetch( `${ API.GET_TRUCKS }/${ -1 }` );
         if ( !trucksRes.ok ) {
           throw new Error( `Failed to fetch cars: ${ trucksRes.status } ${ trucksRes.statusText }` );
@@ -76,7 +84,7 @@ const CarsProvider = ( { children } ) => {
   }, [] );
 
   return (
-    <CarsContext.Provider value={ { cars, setCars, carsLoading, brands, setBrands, trucks, setTrucks, truckPages, carPages, setCarPages, setTruckPages } }>{ children }</CarsContext.Provider>
+    <CarsContext.Provider value={ { cars, setCars, carsLoading, brands, setBrands, rates, setRates, trucks, setTrucks, truckPages, carPages, setCarPages, setTruckPages } }>{ children }</CarsContext.Provider>
   );
 };
 

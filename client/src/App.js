@@ -17,6 +17,7 @@ import { useState } from "react";
 import ManageTrucks from "./Pages/ManageTrucks/ManageTrucks";
 import TruckDetails from "./Pages/TruckDetails/TruckDetails";
 import VTCtransport from "./Pages/VTCtransport/VTCtransport";
+import ManageRates from "./Pages/ManageRates/ManageRates";
 
 
 
@@ -52,6 +53,7 @@ const App = () => {
             <Route path="login" element={ <AdminLogin adminVerified={ adminVerified } setAdminVerified={ setAdminVerified } /> } />
             <Route path="cars" element={ <ManageCars /> } />
             <Route path="brands" element={ <ManageBrands /> } />
+            <Route path="rates" element={ <ManageRates /> } />
             <Route path="trucks" element={ <ManageTrucks /> } />
           </Route>
         </Routes>

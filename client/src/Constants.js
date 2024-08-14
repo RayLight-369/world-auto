@@ -38,6 +38,10 @@ export const AdminLinks = [
     name: "Camions",
     path: "/admin/trucks"
   },
+  {
+    name: "Tarifs",
+    path: "/admin/rates"
+  },
 ];
 
 export const CREDENTIALS = {
@@ -59,6 +63,10 @@ export const API = {
   NEW_BRAND: `https://world-auto-api.vercel.app/admin/brands/new`,
   EDIT_BRAND: `https://world-auto-api.vercel.app/admin/brands/edit`,
   DEL_BRAND: `https://world-auto-api.vercel.app/admin/brands/delete`,
+  GET_RATES: `https://world-auto-api.vercel.app/admin/rates`,
+  NEW_RATE: `https://world-auto-api.vercel.app/admin/rates/new`,
+  EDIT_RATE: `https://world-auto-api.vercel.app/admin/rates/edit`,
+  DEL_RATE: `https://world-auto-api.vercel.app/admin/rates/delete`,
   CONTACT_EMAIL: `https://world-auto-api.vercel.app/admin/contact`,
   ADMIN: `https://world-auto-api.vercel.app/admin`
 };

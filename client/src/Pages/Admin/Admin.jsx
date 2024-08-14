@@ -8,6 +8,7 @@ import Modal from '../../Components/Modal/Modal';
 import AddBrand from '../../Components/AddBrand/AddBrand';
 import { AdminLinks } from '../../Constants';
 import AddTruck from '../../Components/AddTruck/AddTruck';
+import AddRate from '../../Components/AddRate/AddRate';
 
 const Admin = ( { adminVerified } ) => {
 
@@ -16,6 +17,7 @@ const Admin = ( { adminVerified } ) => {
 
   const [ openAddCarPopup, setAddCarPopup ] = useState( false );
   const [ openAddBrandPopup, setAddBrandPopup ] = useState( false );
+  const [ openAddRatePopup, setAddRatePopup ] = useState( false );
   const [ openAddTruckPopup, setAddTruckPopup ] = useState( false );
   // const [ verified, setVerified ] = useState( false );
 
@@ -95,6 +97,11 @@ const Admin = ( { adminVerified } ) => {
           { openAddBrandPopup && (
             <Modal handleClose={ () => closePopUp( setAddBrandPopup ) }>
               <AddBrand handleClose={ () => closePopUp( setAddBrandPopup ) } />
+            </Modal>
+          ) }
+          { openAddRatePopup && (
+            <Modal handleClose={ () => closePopUp( setAddRatePopup ) }>
+              <AddRate handleClose={ () => closePopUp( setAddRatePopup ) } />
             </Modal>
           ) }
           { openAddTruckPopup && (

@@ -334,7 +334,7 @@ app.get( "/admin/brands", async ( req, res ) => {
     if ( data ) res.status( 200 ).json( { data } );
     else {
       console.log( error );
-      res.status( 404 ).json( { error: "No Cars Found!" } );
+      res.status( 404 ).json( { error: "No Brands Found!" } );
     }
 
   } catch ( e ) {
@@ -405,6 +405,106 @@ app.delete( "/admin/brands/delete", async ( req, res ) => {
 
     const Data = await deleteData( {
       table: "Brands",
+      where: {
+        id: object.id
+      }
+    } );
+
+    console.log( "object: ", Data );
+
+    if ( Data.error ) {
+      console.log( Data.error );
+      res.status( Data.status ).json( { error: Data.error } );
+    } else res.status( 200 ).json( { data: Data.data || [ object ] } );
+
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).json( { error: e } );
+  }
+
+} );
+
+app.get( "/admin/rates", async ( req, res ) => {
+  try {
+
+    const { data, error } = await getData( {
+      table: "Rates"
+    } );
+
+    if ( data ) res.status( 200 ).json( { data } );
+    else {
+      console.log( error );
+      res.status( 404 ).json( { error: "No Rates Found!" } );
+    }
+
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).json( { error: e } );
+  }
+} );
+
+app.post( "/admin/rates/new", async ( req, res ) => {
+
+  try {
+
+    const object = await req.body;
+    console.log( object );
+
+    const data = await insertData( {
+      table: "Rates",
+      object
+    } );
+
+    if ( data.error ) {
+      console.log( data.error );
+      res.status( data.status ).json( { error: data.error } );
+    } else res.status( data.status ).json( { data: data.data } );
+
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).json( { error: e } );
+  }
+
+} );
+
+app.put( "/admin/rates/edit", async ( req, res ) => {
+
+  try {
+
+    const object = await req.body;
+
+    console.log( "object: ", object );
+
+    const Data = await updateData( {
+      table: "Rates",
+      where: {
+        id: object.id
+      },
+      object
+    } );
+
+    if ( Data.error ) {
+      console.log( Data.error );
+      res.status( Data.status ).json( { error: Data.error } );
+    } else res.status( Data.status ).json( { data: Data.data } );
+
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).json( { error: e } );
+  }
+
+} );
+
+app.delete( "/admin/rates/delete", async ( req, res ) => {
+
+  try {
+
+    const object = await req.body;
+
+    console.log( "object: ", object );
+
+    const Data = await deleteData( {
+      table: "Rates",
       where: {
         id: object.id
       }
