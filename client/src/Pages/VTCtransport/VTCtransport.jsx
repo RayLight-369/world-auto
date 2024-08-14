@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import Styles from "./VTCtransport.module.css";
 
 const VTCtransport = () => {
@@ -6,7 +6,8 @@ const VTCtransport = () => {
   const Rates = useMemo( () => ( {
     "PARIS - ORLY": 99,
     "PARIS - PARIS": 59,
-    "PARIS - BEAUVAIS": 169
+    "PARIS - BEAUVAIS": 169,
+    "PARIS - CDG": 69
   } ), [] );
 
   return (
