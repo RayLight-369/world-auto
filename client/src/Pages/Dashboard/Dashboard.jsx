@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Styles from "./Dashboard.module.css";
 import PageTitle from '../../Components/PageTitle/PageTitle';
 import { Link } from 'react-router-dom';
@@ -23,6 +23,13 @@ const Dashboard = () => {
   const [ truckToBeDeleted, setTruckToBeDeleted ] = useState( null );
   const [ isMobile, setIsMobile ] = useState( false );
 
+  const Links = useMemo( () => ( {
+    "cars": "voitures",
+    "brands": "marques",
+    "trucks": "camions",
+    "rates": "tarifs"
+  } ), [] );
+
   useEffect( () => {
 
     const Resize = () => setIsMobile( window.innerWidth <= 768 );
@@ -38,26 +45,16 @@ const Dashboard = () => {
         <PageTitle className={ Styles[ "page-title" ] } title={ "Tableau de bord" } />
         <div className={ Styles[ "page-content" ] }>
           <div className={ Styles[ "details-container" ] }>
-            <Link to={ "/admin/cars" }>
-              <div className={ `${ Styles[ "cars" ] } ${ Styles[ "container" ] }` }>
-                <p className={ Styles[ "title" ] }>Voitures</p>
-                <p className={ Styles[ "desc" ] }>Vérifiez vos voitures ici</p>
-              </div>
-            </Link>
+            { Object.entries( Links ).map( ( [ key, val ] ) => (
 
-            <Link to={ "/admin/brands" }>
-              <div className={ `${ Styles[ "brands" ] } ${ Styles[ "container" ] }` }>
-                <p className={ Styles[ "title" ] }>Marques</p>
-                <p className={ Styles[ "desc" ] }>Vérifiez vos marques ici</p>
-              </div>
-            </Link>
+              <Link to={ "/admin/" + key }>
+                <div className={ `${ Styles[ key ] } ${ Styles[ "container" ] }` }>
+                  <p className={ Styles[ "title" ] }>{ val }</p>
+                  <p className={ Styles[ "desc" ] }>Vérifiez vos { val } ici</p>
+                </div>
+              </Link>
 
-            <Link to={ "/admin/trucks" }>
-              <div className={ `${ Styles[ "trucks" ] } ${ Styles[ "container" ] }` }>
-                <p className={ Styles[ "title" ] }>Camions</p>
-                <p className={ Styles[ "desc" ] }>Vérifiez vos camions ici</p>
-              </div>
-            </Link>
+            ) ) }
           </div>
           <div className={ Styles[ "recent-updates-container" ] }>
             <div className={ `${ Styles[ "recent-cars" ] } ${ Styles[ "container" ] }` }>

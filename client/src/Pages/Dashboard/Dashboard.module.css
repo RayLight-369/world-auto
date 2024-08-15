@@ -47,6 +47,7 @@ p.title {
   font-size: 1.3em;
   color: #111;
   font-weight: bold;
+  text-transform: capitalize;
 }
 
 div.details-container div p.desc {
@@ -81,7 +82,7 @@ div.recent-updates-container {
 div.recent-updates-container > div {
   max-height: calc(80%);
   height: fit-content;
-  min-height: max(140px, 20%);
+  min-height: max(140px, 40%);
   font-size: 90%;
   display: flex;
   flex-direction: column;
