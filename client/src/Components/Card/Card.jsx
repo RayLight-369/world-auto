@@ -12,7 +12,7 @@ const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guaran
           <img src={ img } className={ Styles[ type ] } alt="" />
           { type == "car" ?
             <div className={ Styles[ "price-notch" ] }>
-              <p className={ Styles[ "price" ] }>{ ppd } €</p>
+              <p className={ Styles[ "price" ] }>€ { ppd }</p>
             </div>
             : <></>
           }

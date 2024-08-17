@@ -71,4 +71,4 @@ export const API = {
   ADMIN: `https://world-auto-api.vercel.app/admin`
 };
 
-// https://world-auto-api.vercel.app/admin/contact
+export const getFormattedNumber = ( formattedNumber ) => parseInt( formattedNumber?.replace( /,/g, '' ), 10 ) || formattedNumber;

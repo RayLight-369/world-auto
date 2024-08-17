@@ -239,21 +239,21 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       inputClass: "price-input",
       setState: setPricePerHour,
       value: pricePerHour,
-      type: "number"
+      type: "text"
     }, {
       element: "Prix / Semaine €",
       class: "price",
       inputClass: "price-input",
       setState: setPricePerWeek,
       value: pricePerWeek,
-      type: "number"
+      type: "text"
     }, {
       element: "Prix ​​le week-end €",
       class: "price",
       inputClass: "price-input",
       setState: setPriceOnWeekend,
       value: priceOnWeekend,
-      type: "number"
+      type: "text"
     }, {
       element: "Énergie",
       class: "energie",
@@ -284,7 +284,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       inputClass: "mileage-input",
       setState: setMilage,
       value: mileage,
-      type: "text"
+      type: "number"
     },
     {
       element: "Puissance commerciale",
@@ -736,7 +736,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
 
               <div className={ styles[ "infos" ] }>
 
-                <DropDown key={ "fuelType" } setState={ setFuelType } selected={ fuelType } array={ [ "Diesel", "Petrol", "CNG", "Electric" ] } label='Carburant' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
+                <DropDown key={ "fuelType" } setState={ setFuelType } selected={ fuelType } array={ [ "Diesel", "Unleaded Petrol", "CNG", "Electric" ] } label='Carburant' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
                 <DropDown key={ "brand" } setState={ setBrand } selected={ brand } array={ brands?.map( ( brand ) => brand.brandName ) } backWorkArray={ brands?.map( brand => brand.id ) } label='Marque' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
                 <DropDown key={ "gearbox" } setState={ setGearbox } selected={ gearbox } array={ [ "Automatique", "Manuel", "Automatique à variation continue" ] } label='Boîte de vitesses' dropDownOpen={ gearboxDropdown } toggleDropDown={ toggleGearboxDropdown } />
 

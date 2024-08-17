@@ -77,7 +77,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       inputClass: "price-per-day-input",
       setState: setPricePerDay,
       value: pricePerDay,
-      type: "number"
+      type: "text"
     },
     {
       element: "Prix / Mois €",
@@ -85,7 +85,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       inputClass: "price-per-month-input",
       setState: setPricePerMonth,
       value: pricePerMonth,
-      type: "number"
+      type: "text"
     },
     {
       element: "Kilométrage",
@@ -511,7 +511,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
               <div className={ styles[ "infos" ] }>
 
-                <DropDown key={ "fuelType" } setState={ setFuelType } selected={ fuelType } array={ [ "Diesel", "Petrol", "CNG", "Electric" ] } label='Carburant' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
+                <DropDown key={ "fuelType" } setState={ setFuelType } selected={ fuelType } array={ [ "Diesel", "Unleaded Petrol", "CNG", "Electric" ] } label='Carburant' dropDownOpen={ fuelDropdown } toggleDropDown={ toggleFuelDropdown } />
                 <DropDown key={ "brand" } setState={ setBrand } selected={ brand } array={ brands?.map( ( brand ) => brand.brandName ) } backWorkArray={ brands?.map( brand => brand.id ) } label='Marque' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
                 <DropDown key={ "gearbox" } setState={ setGearbox } selected={ gearbox } array={ [ "Automatique", "Manuel", "Automatique à variation continue" ] } label='Boîte de vitesses' dropDownOpen={ gearboxDropdown } toggleDropDown={ toggleGearboxDropdown } />
 

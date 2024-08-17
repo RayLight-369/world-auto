@@ -62,7 +62,7 @@ const Contact = () => {
       </motion.div>
       <motion.div className={ Styles[ "info" ] } variants={ variants }>
         <div className={ Styles[ "panel" ] }>
-          <h1>Explorons ensemble quelque chose <span>d'excitant !</span></h1>
+          <h1>Fier de vous offrir le meilleur rapport <span>qualité/prix du marché</span></h1>
           <div className={ Styles[ "social-attrs" ] }>
             <div className={ Styles[ "attr" ] }>
               <FontAwesomeIcon icon={ faMailBulk } />

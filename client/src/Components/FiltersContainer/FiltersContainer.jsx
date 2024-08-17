@@ -4,6 +4,7 @@ import Styles from "./FiltersContainer.module.css";
 import { useCars } from '../../Contexts/CarsContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCaretRight, faX } from '@fortawesome/free-solid-svg-icons';
+import { getFormattedNumber } from '../../Constants';
 
 
 const FilterPart = ( { filterOpen, setFilterOpen, label, children } ) => (
@@ -84,9 +85,9 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
 
       function PriceCheck ( item ) {
 
-        const startCheck = Price.start ? item.price_per_day >= Price.start : true;
+        const startCheck = Price.start ? getFormattedNumber( item.price_per_day ) >= Price.start : true;
 
-        const endCheck = Price.end ? item.price_per_day <= Price.end : true;
+        const endCheck = Price.end ? getFormattedNumber( item.price_per_day ) <= Price.end : true;
 
         return startCheck && endCheck;
       }
@@ -171,7 +172,7 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
           </div>
         </FilterPart>
         <FilterPart label={ "CARBURANT" } filterOpen={ fuelFilterOpen } setFilterOpen={ setFuelFilterOpen } key={ "fuel" }>
-          { [ "Diesel", "Petrol", "CNG", "Electric" ].map( ( b, i ) => (
+          { [ "Diesel", "Unleaded Petrol", "CNG", "Electric" ].map( ( b, i ) => (
             <div className={ Styles[ "fuel" ] } key={ i } onClick={ e => e.stopPropagation() }>
               <p className={ Styles[ "fuel-type" ] }>{ b }</p>
               <input type="checkbox" onChange={ e => {
