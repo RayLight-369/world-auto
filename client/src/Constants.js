@@ -72,4 +72,10 @@ export const API = {
 };
 
 export const getFormattedNumber = ( formattedNumber ) => parseInt( formattedNumber?.replace( /,/g, '' ), 10 ) || formattedNumber;
-export const formatNumber = ( num ) => ( +num ).toLocaleString( 'en-US' );
+export const formatNumber = ( num ) => {
+  if ( !isNaN( num ) ) {
+    return ( +num ).toLocaleString( "en-US" );
+  } else {
+    return num;
+  }
+};
