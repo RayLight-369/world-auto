@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import Styles from "./Card.module.css";
 import { Link } from 'react-router-dom';
+import { formatNumber } from '../../Constants';
 
 export const BreakSpan = memo( () => <span className={ Styles[ 'break' ] }>|</span> );
 
@@ -12,7 +13,7 @@ const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guaran
           <img src={ img } className={ Styles[ type ] } alt="" />
           { type == "car" ?
             <div className={ Styles[ "price-notch" ] }>
-              <p className={ Styles[ "price" ] }>€ { ppd }</p>
+              <p className={ Styles[ "price" ] }>€ { typeof ppd == "number" ? formatNumber( ppd ) : ppd }</p>
             </div>
             : <></>
           }
