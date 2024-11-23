@@ -11,6 +11,8 @@ const VTCtransport = () => {
     return p;
   }, {} ), [ rates ] );
 
+  useEffect( () => console.log( rates, Rates ), [ rates, Rates ] );
+
   return (
     <section id={ Styles[ "vtc" ] }>
       <div className={ Styles[ "hero" ] }>
