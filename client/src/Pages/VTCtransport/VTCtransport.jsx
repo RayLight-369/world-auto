@@ -1,14 +1,15 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import Styles from "./VTCtransport.module.css";
+import { useCars } from '../../Contexts/CarsContext';
 
 const VTCtransport = () => {
 
-  const Rates = useMemo( () => ( {
-    "PARIS - ORLY": 99,
-    "PARIS - PARIS": 59,
-    "PARIS - BEAUVAIS": 169,
-    "PARIS - CDG": 69
-  } ), [] );
+  const { rates } = useCars();
+
+  const Rates = useMemo( () => rates.reduce( ( p, c ) => {
+    p[ c.title ] = c.price;
+    return p;
+  }, {} ), [ rates ] );
 
   return (
     <section id={ Styles[ "vtc" ] }>
