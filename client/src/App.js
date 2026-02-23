@@ -18,6 +18,7 @@ import ManageTrucks from "./Pages/ManageTrucks/ManageTrucks";
 import TruckDetails from "./Pages/TruckDetails/TruckDetails";
 import VTCtransport from "./Pages/VTCtransport/VTCtransport";
 import ManageRates from "./Pages/ManageRates/ManageRates";
+import { Analytics } from "@vercel/analytics/react";
 
 
 
@@ -67,6 +68,7 @@ const Root = () => {
     <Router>
 
       <App />
+      <Analytics />
 
     </Router>
   );
