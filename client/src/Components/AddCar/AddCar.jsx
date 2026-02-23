@@ -655,13 +655,15 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
           >
             Annuler
           </motion.button>
-          <motion.button
-            whileHover={ buttonWhileHovering( 1.1, .2 ) }
-            className={ styles[ "cancel-button" ] }
-            onClick={ handleSold }
-          >
-            { sold ? "Rendre disponible" : "Vendu" }
-          </motion.button>
+          { type == "edit" && (
+            <motion.button
+              whileHover={ buttonWhileHovering( 1.1, .2 ) }
+              className={ styles[ "cancel-button" ] }
+              onClick={ handleSold }
+            >
+              { sold ? "Rendre disponible" : "Vendu" }
+            </motion.button>
+          ) }
         </div>
       </div>
     </MotionConfig>
