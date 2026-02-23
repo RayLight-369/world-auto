@@ -32,9 +32,11 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
   const [ seatingCapacity, setSeatingCapacity ] = useState( car?.seating_capacity || "" );
   const [ gearbox, setGearbox ] = useState( car?.gearbox || "" );
   const [ accessories, setAccessories ] = useState( car?.accessories || [] );
+  const [ sold, setSold ] = useState( !!( car?.sold ) || false );
   const [ fuelDropdown, toggleFuelDropdown ] = useState( false );
   const [ brandDropdown, toggleBrandDropdown ] = useState( false );
   const [ gearboxDropdown, toggleGearboxDropdown ] = useState( false );
+  const [ selling, setSelling ] = useState( false );
 
   const [ images, setImages ] = useState( car?.images || [] );
   const [ imagesData, setImagesData ] = useState( {} );
@@ -200,7 +202,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
   }, [ car ] );
 
-  function deleteEntry ( obj, indexToDelete ) {
+  function deleteEntry( obj, indexToDelete ) {
     const keys = Object.keys( obj );
 
     if ( indexToDelete < 0 || indexToDelete >= keys.length ) {
@@ -408,7 +410,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
   //   scale: 1.06,
   // };
 
-  async function addCar ( images_ ) {
+  async function addCar( images_ ) {
 
     setAdding( true );
 
@@ -481,11 +483,51 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
 
   }
 
-  useEffect( () => {
+  async function handleSold() {
+    const newSoldStatus = !sold;
 
-    console.log( accessories );
+    let confirmed = window.confirm(
+      newSoldStatus
+        ? "Voulez-vous vendre cette voiture?"
+        : "Voulez-vous annuler la vente de cette voiture?"
+    );
 
-  }, [ accessories ] );
+    if ( !confirmed ) return;
+
+    setSold( newSoldStatus );
+    setSelling( true );
+
+    try {
+      const res = await fetch( API.EDIT_CAR, {
+        method: "PATCH",
+        body: JSON.stringify( { sold: newSoldStatus, id: carID } ),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      } );
+
+      if ( res.ok ) {
+        const body = await res.json();
+        const updatedCar = body.data[ 0 ];
+
+        setCars( prevCars =>
+          prevCars.map( prevCar =>
+            prevCar.id === updatedCar.id ? updatedCar : prevCar
+          )
+        );
+
+        handleClose();
+      } else {
+        setSold( !newSoldStatus );
+        console.error( "Failed to update status" );
+      }
+    } catch ( e ) {
+      setSold( !newSoldStatus );
+      console.log( e );
+    } finally {
+      setSelling( false );
+    }
+  }
 
   useEffect( () => {
 
@@ -612,6 +654,13 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
             onClick={ handleClose }
           >
             Annuler
+          </motion.button>
+          <motion.button
+            whileHover={ buttonWhileHovering( 1.1, .2 ) }
+            className={ styles[ "cancel-button" ] }
+            onClick={ handleSold }
+          >
+            { sold ? "Rendre disponible" : "Vendu" }
           </motion.button>
         </div>
       </div>

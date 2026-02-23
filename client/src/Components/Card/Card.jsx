@@ -5,9 +5,10 @@ import { formatNumber } from '../../Constants';
 
 export const BreakSpan = memo( () => <span className={ Styles[ 'break' ] }>|</span> );
 
-const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guarantee, id, img, type = "car" } ) => {
+const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guarantee, id, img, type = "car", sold = false } ) => {
   return (
     <div className={ Styles[ "card" ] }>
+      { sold && <p className={ Styles[ "sold" ] }>Vendu</p> }
       <Link to={ `/${ type }/${ id }` }>
         <div className={ Styles[ "thumbnail" ] }>
           <img src={ img } className={ Styles[ type ] } alt="" />

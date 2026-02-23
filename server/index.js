@@ -5,7 +5,6 @@ const app = require( "express" )();
 const server = http.createServer( app );
 const bodyParser = require( "body-parser" );
 const cookieParser = require( "cookie-parser" );
-const { log } = console;
 const cors = require( "cors" );
 const bcrypt = require( "bcrypt" );
 const { Resend } = require( "resend" );
@@ -13,7 +12,6 @@ const { Resend } = require( "resend" );
 const resend = new Resend( process.env.RESEND_KEY );
 
 // const ENV = require( "./env.json" );
-
 
 const { insertData, getData, updateData, deleteData } = require( "./Supabase" );
 
@@ -110,7 +108,7 @@ app.get( [ "/admin/cars/:id", "/admin/cars/range/:lastindex" ], async ( req, res
 
     const { data, error, remaining } = await getData( query );
 
-    console.log( error, remaining );
+    console.log( 112, error, remaining );
 
     if ( data ) res.status( 200 ).json( { data, remaining } );
     else {
@@ -180,13 +178,45 @@ app.put( "/admin/cars/edit", async ( req, res ) => {
   }
 
 } );
+app.patch( "/admin/cars/edit", async ( req, res ) => {
+
+  try {
+
+    const object = await req.body;
+    // console.log( 187, object );
+
+    const Data = await updateData( {
+      table: "Cars",
+      where: {
+        id: object.id
+      },
+      object: {
+        sold: object.sold
+      }
+    } );
+
+    // console.log( 199, Data.data );
+
+    if ( Data.error ) {
+
+      console.log( Data.error );
+      res.status( Data.status ).json( { error: Data.error } );
+
+    } else res.status( Data.status ).json( { data: Data.data } );
+
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).json( { error: e } );
+  }
+
+} );
 
 app.delete( "/admin/cars/delete", async ( req, res ) => {
 
   try {
 
     const object = await req.body;
-    console.log( object );
+    // console.log( object );
 
     const Data = await deleteData( {
       table: "Cars",
@@ -244,14 +274,14 @@ app.post( "/admin/trucks/new", async ( req, res ) => {
   try {
 
     const object = await req.body;
-    console.log( object );
+    // console.log( object );
 
     const data = await insertData( {
       table: "Trucks",
       object
     } );
 
-    console.log( data );
+    // console.log( data );
 
     if ( data.error ) {
 
@@ -272,7 +302,7 @@ app.put( "/admin/trucks/edit", async ( req, res ) => {
   try {
 
     const object = await req.body;
-    console.log( object );
+    // console.log( object );
 
     const Data = await updateData( {
       table: "Trucks",
@@ -301,7 +331,7 @@ app.delete( "/admin/trucks/delete", async ( req, res ) => {
   try {
 
     const object = await req.body;
-    console.log( object );
+    // console.log( object );
 
     const Data = await deleteData( {
       table: "Trucks",
@@ -348,7 +378,7 @@ app.post( "/admin/brands/new", async ( req, res ) => {
   try {
 
     const object = await req.body;
-    console.log( object );
+    // console.log( object );
 
     const data = await insertData( {
       table: "Brands",
@@ -373,7 +403,7 @@ app.put( "/admin/brands/edit", async ( req, res ) => {
 
     const object = await req.body;
 
-    console.log( "object: ", object );
+    // console.log( "object: ", object );
 
     const Data = await updateData( {
       table: "Brands",
@@ -401,7 +431,7 @@ app.delete( "/admin/brands/delete", async ( req, res ) => {
 
     const object = await req.body;
 
-    console.log( "object: ", object );
+    // console.log( "object: ", object );
 
     const Data = await deleteData( {
       table: "Brands",
@@ -410,7 +440,7 @@ app.delete( "/admin/brands/delete", async ( req, res ) => {
       }
     } );
 
-    console.log( "object: ", Data );
+    // console.log( "object: ", Data );
 
     if ( Data.error ) {
       console.log( Data.error );
@@ -448,7 +478,7 @@ app.post( "/admin/rates/new", async ( req, res ) => {
   try {
 
     const object = await req.body;
-    console.log( object );
+    // console.log( object );
 
     const data = await insertData( {
       table: "Rates",
@@ -473,7 +503,7 @@ app.put( "/admin/rates/edit", async ( req, res ) => {
 
     const object = await req.body;
 
-    console.log( "object: ", object );
+    // console.log( "object: ", object );
 
     const Data = await updateData( {
       table: "Rates",
@@ -501,7 +531,7 @@ app.delete( "/admin/rates/delete", async ( req, res ) => {
 
     const object = await req.body;
 
-    console.log( "object: ", object );
+    // console.log( "object: ", object );
 
     const Data = await deleteData( {
       table: "Rates",
@@ -510,7 +540,7 @@ app.delete( "/admin/rates/delete", async ( req, res ) => {
       }
     } );
 
-    console.log( "object: ", Data );
+    // console.log( "object: ", Data );
 
     if ( Data.error ) {
       console.log( Data.error );
