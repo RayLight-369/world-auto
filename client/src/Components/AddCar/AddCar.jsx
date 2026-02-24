@@ -13,7 +13,7 @@ import { uploadFile, updateData, deleteFile } from "../../Supabase";
 const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
 
   // const navigate = useNavigate();
-  const { setCars, brands } = useCars();
+  const { setCars, brands, setRentalCars } = useCars();
   const [ carID, setCarID ] = useState( car?.id || 0 );
   const [ adding, setAdding ] = useState( false );
   const [ carTitle, setCarTitle ] = useState( car?.title || "" );
@@ -457,17 +457,31 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
         console.log( body.data );
 
         if ( type === "edit" ) {
-          setCars( prevCars =>
-            prevCars.map( prevCar =>
-              prevCar.id === car.id ? car : prevCar
-            )
-          );
+          if ( !rent )
+            setCars( prevCars =>
+              prevCars.map( prevCar =>
+                prevCar.id === car.id ? car : prevCar
+              )
+            );
+          else
+            setRentalCars( prevCars =>
+              prevCars.map( prevCar =>
+                prevCar.id === car.id ? car : prevCar
+              )
+            );
         } else if ( type == "del" ) {
-          setCars( prevCars =>
-            prevCars.filter( prevCar =>
-              prevCar.id != ReqData.id
-            )
-          );
+          if ( !rent )
+            setCars( prevCars =>
+              prevCars.filter( prevCar =>
+                prevCar.id != ReqData.id
+              )
+            );
+          else
+            setRentalCars( prevCars =>
+              prevCars.filter( prevCar =>
+                prevCar.id != ReqData.id
+              )
+            );
         } else {
           setCars( prev => [ car, ...prev ] );
         }

@@ -106,9 +106,11 @@ app.get( [ "/admin/cars/:id", "/admin/cars/range/:lastindex" ], async ( req, res
       // console.log( "range: ", query.range );
     }
 
+    query.where_not = { rent: true };
+
     const { data, error, remaining } = await getData( query );
 
-    console.log( 112, error, remaining );
+    console.log( 112, error, data, remaining );
 
     if ( data ) res.status( 200 ).json( { data, remaining } );
     else {

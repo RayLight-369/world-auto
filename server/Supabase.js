@@ -14,6 +14,7 @@ const getData = async ( {
   range,
   columns = [],
   where = {},
+  where_not = {},
   contains = {},
   orderBy = {
     property: 'id',
@@ -29,17 +30,23 @@ const getData = async ( {
 
     let Data = supabase
       .from( table )
-      .select( columns, { count: "exact" } )
+      .select( columns || "*", { count: "exact" } )
       .match( where )
       .order( orderBy.property, { ascending: orderBy.ascending } );
 
+    if ( Object.keys( where_not ).length ) {
+      for ( let key in where_not ) {
+        Data = Data.not( key, 'eq', where_not[ key ] );
+      }
+    }
+
     if ( range && range.length === 2 ) {
-      Data.range( range[ 0 ], range[ 1 ] );
+      Data = Data.range( range[ 0 ], range[ 1 ] );
     }
 
     if ( Object.keys( contains ).length ) {
       for ( let key in contains ) {
-        Data.ilike( key, `%${ contains[ key ].join( "%" ) }%` );
+        Data = Data.ilike( key, `%${ contains[ key ].join( "%" ) }%` );
       }
     }
 
@@ -48,13 +55,10 @@ const getData = async ( {
     return { data, statusText, error, status, remaining: count };
 
   } catch ( error ) {
-
     console.log( error );
-
   }
 
   return false;
-
 };
 
 const insertData = async ( {
