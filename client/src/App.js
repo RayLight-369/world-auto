@@ -18,6 +18,7 @@ import ManageTrucks from "./Pages/ManageTrucks/ManageTrucks";
 import TruckDetails from "./Pages/TruckDetails/TruckDetails";
 import VTCtransport from "./Pages/VTCtransport/VTCtransport";
 import ManageRates from "./Pages/ManageRates/ManageRates";
+import ManageRentalCars from "./Pages/ManageRentalCars/ManageRentalCars";
 
 
 
@@ -52,6 +53,7 @@ const App = () => {
             <Route index path="dashboard" element={ <Dashboard /> } />
             <Route path="login" element={ <AdminLogin adminVerified={ adminVerified } setAdminVerified={ setAdminVerified } /> } />
             <Route path="cars" element={ <ManageCars /> } />
+            <Route path="rental_cars" element={ <ManageRentalCars /> } />
             <Route path="brands" element={ <ManageBrands /> } />
             <Route path="rates" element={ <ManageRates /> } />
             <Route path="trucks" element={ <ManageTrucks /> } />

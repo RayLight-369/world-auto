@@ -121,6 +121,42 @@ app.get( [ "/admin/cars/:id", "/admin/cars/range/:lastindex" ], async ( req, res
     res.status( 500 ).json( { error: e } );
   }
 } );
+app.get( [ "/admin/rentalcars/:id", "/admin/rentalcars/range/:lastindex" ], async ( req, res ) => {
+
+  try {
+
+    const id = req.params?.id;
+    const lastIndex = req.params?.lastindex;
+    const query = { table: "Cars" };
+
+    // console.log( "last index: ", lastIndex );
+
+    query.where = { rent: true };
+
+    if ( id ) query.where.id = id;
+    if ( lastIndex ) {
+      const index = +lastIndex;
+      query.range = [ index + 1, index + 20 ];
+
+      // console.log( "range: ", query.range );
+    }
+
+
+    const { data, error, remaining } = await getData( query );
+
+    console.log( 144, error, remaining );
+
+    if ( data ) res.status( 200 ).json( { data, remaining } );
+    else {
+      console.log( error );
+      res.status( 404 ).json( { error: "No Rental Cars Found!" } );
+    }
+
+  } catch ( e ) {
+    console.log( e );
+    res.status( 500 ).json( { error: e } );
+  }
+} );
 
 
 
@@ -577,4 +613,4 @@ app.post( "/admin/contact", async ( req, res ) => {
 
 
 
-server.listen( process.env.port, () => log( `server listening on ${ process.env.port }` ) );
+server.listen( process.env.port, () => console.log( `server listening on ${ process.env.port }` ) );

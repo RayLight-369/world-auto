@@ -31,6 +31,10 @@ export const AdminLinks = [
     path: "/admin/cars"
   },
   {
+    name: "voitures de location",
+    path: "/admin/rental_cars"
+  },
+  {
     name: "Marques",
     path: "/admin/brands"
   },
@@ -53,6 +57,8 @@ const BASE_URL = "https://world-auto-api.vercel.app";
 export const API = {
   GET_CARS: `${ BASE_URL }/admin/cars/range`,
   GET_CAR: ( id ) => `${ BASE_URL }/admin/cars/${ id }`,
+  GET_RENTAL_CARS: `${ BASE_URL }/admin/rentalcars/range`,
+  GET_RENTAL_CAR: ( id ) => `${ BASE_URL }/admin/rentalcars/${ id }`,
   NEW_CAR: `${ BASE_URL }/admin/cars/new`,
   EDIT_CAR: `${ BASE_URL }/admin/cars/edit`,
   DEL_CAR: `${ BASE_URL }/admin/cars/delete`,

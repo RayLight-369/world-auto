@@ -12,7 +12,7 @@ import AddRate from '../../Components/AddRate/AddRate';
 
 const Dashboard = () => {
 
-  const { cars, brands, rates, trucks, carsLoading } = useCars();
+  const { cars, brands, rates, trucks, carsLoading, rentalCars } = useCars();
   const [ carToBeEdited, setCarToBeEdited ] = useState( null );
   const [ truckToBeEdited, setTruckToBeEdited ] = useState( null );
   const [ brandToBeEdited, setBrandToBeEdited ] = useState( null );
@@ -21,10 +21,12 @@ const Dashboard = () => {
   const [ rateToBeDeleted, setRateToBeDeleted ] = useState( null );
   const [ carToBeDeleted, setCarToBeDeleted ] = useState( null );
   const [ truckToBeDeleted, setTruckToBeDeleted ] = useState( null );
+  const [ for_rent, setForRent ] = useState( false );
   const [ isMobile, setIsMobile ] = useState( false );
 
   const Links = useMemo( () => ( {
     "cars": "voitures",
+    "rental_cars": "voitures de location",
     "brands": "marques",
     "trucks": "camions",
     "rates": "tarifs"
@@ -47,7 +49,7 @@ const Dashboard = () => {
           <div className={ Styles[ "details-container" ] }>
             { Object.entries( Links ).map( ( [ key, val ] ) => (
 
-              <Link to={ "/admin/" + key }>
+              <Link to={ "/admin/" + key } key={ key + val }>
                 <div className={ `${ Styles[ key ] } ${ Styles[ "container" ] }` }>
                   <p className={ Styles[ "title" ] }>{ val }</p>
                   <p className={ Styles[ "desc" ] }>Vérifiez vos { val } ici</p>
@@ -78,6 +80,41 @@ const Dashboard = () => {
                           </div>
                           <div className={ Styles[ "edit-del" ] }>
                             <button className={ Styles[ 'edit-btn' ] } onClick={ () => setCarToBeEdited( car ) }>&#9998;</button>
+                            <button onClick={ () => setCarToBeDeleted( car ) }>&#128465;</button>
+                          </div>
+                        </div>
+                      ) ) : (
+                        <p className={ Styles[ 'no-recent-note' ] }>Aucune voiture ajoutée !</p>
+                      )
+                    }
+                  </>
+                ) }
+              </div>
+            </div>
+            <div className={ `${ Styles[ "recent-cars" ] } ${ Styles[ "container" ] } _rental_cars_` }>
+              <p className={ Styles[ "title" ] }>voitures de location récemment ajoutées</p>
+              <div className={ Styles[ "list" ] }>
+                { carsLoading && (
+                  <p className={ Styles[ "no-recent-note" ] }>Loading...</p>
+                ) }
+
+                { !carsLoading && (
+                  <>
+                    {
+                      rentalCars.length ? rentalCars.map( ( car ) => (
+                        <div className={ Styles[ "car" ] } key={ car.id }>
+                          <div className={ Styles[ "content" ] }>
+                            <div className={ Styles[ "brand-title" ] }>
+                              <p className={ Styles[ "car-title" ] }>{ car.title }</p>
+                              <p className={ Styles[ "car-brand" ] }>{ brands?.find( brand => brand.id == car.brand )?.brandName }</p>
+                            </div>
+                            <p className={ Styles[ "date" ] }>{ car.due_date }</p>
+                          </div>
+                          <div className={ Styles[ "edit-del" ] }>
+                            <button className={ Styles[ 'edit-btn' ] } onClick={ () => {
+                              setCarToBeEdited( car );
+                              setForRent( true );
+                            } }>&#9998;</button>
                             <button onClick={ () => setCarToBeDeleted( car ) }>&#128465;</button>
                           </div>
                         </div>
@@ -181,7 +218,10 @@ const Dashboard = () => {
       <AnimatePresence mode='wait'>
         { carToBeEdited && (
           <Modal>
-            <AddCar handleClose={ () => setCarToBeEdited( null ) } car={ carToBeEdited } type={ "edit" } />
+            <AddCar handleClose={ () => {
+              setCarToBeEdited( null );
+              setForRent( false );
+            } } car={ carToBeEdited } type={ "edit" } rent={ for_rent } />
           </Modal>
         ) }
         { carToBeDeleted && (

@@ -10,7 +10,7 @@ import { v4 as uid } from "uuid";
 import { uploadFile, updateData, deleteFile } from "../../Supabase";
 
 
-const AddCar = ( { handleClose, type = "new", car } ) => {
+const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
 
   // const navigate = useNavigate();
   const { setCars, brands } = useCars();
@@ -81,14 +81,14 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
       value: pricePerDay,
       type: "text"
     },
-    {
+    ...( !rent ? [ {
       element: "Prix / Mois €",
       class: "price-per-month",
       inputClass: "price-per-month-input",
       setState: setPricePerMonth,
       value: pricePerMonth,
       type: "text"
-    },
+    } ] : [] ),
     {
       element: "Kilométrage",
       class: "mileage",
@@ -161,14 +161,14 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     //   value: gearbox,
     //   type: "text"
     // }
-  ], [ pricePerDay, pricePerMonth, mileage, energy, guarantee, color, certificate, emission, modelYear, seatingCapacity ] );
+  ], [ pricePerDay, pricePerMonth, mileage, energy, guarantee, color, certificate, emission, modelYear, seatingCapacity, rent ] );
 
 
   // const [ priorityInput, setPriorityInput ] = useState( "" );
   // const [ assigneeInput, setAssigneeInput ] = useState( "" );
   // const [ reporterInput, setReporterInput ] = useState( "" );
   const currentDate = new Date();
-  const [ dateInput, setDateInput ] = useState( `${ currentDate.getFullYear() }-${ currentDate.getMonth() + 1 >= 10 ? currentDate.getMonth() + 1 : "0" + ( currentDate.getMonth() + 1 ) }-${ currentDate.getDate() > 9 ? currentDate.getDate() : "0" + currentDate.getDate() }` );
+  const dateInput = useMemo( () => `${ currentDate.getFullYear() }-${ currentDate.getMonth() + 1 >= 10 ? currentDate.getMonth() + 1 : "0" + ( currentDate.getMonth() + 1 ) }-${ currentDate.getDate() > 9 ? currentDate.getDate() : "0" + currentDate.getDate() }`, [] );
 
 
   useEffect( () => {
@@ -423,7 +423,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
     const due_date = dateParts.join( "-" );
 
     const ReqData = {
-      title: carTitle, overview: carOverview, due_date, brand, fuel_type: fuelType, images, accessories, certificate, color, gearbox, emission, energy, mileage, guarantee, seating_capacity: seatingCapacity, model_year: modelYear, price_per_day: pricePerDay, price_per_month: pricePerMonth
+      title: carTitle, overview: carOverview, due_date, brand, fuel_type: fuelType, images, accessories, certificate, color, gearbox, emission, energy, mileage, guarantee, seating_capacity: seatingCapacity, model_year: modelYear, price_per_day: pricePerDay, price_per_month: pricePerMonth, rent
     };
 
 
@@ -641,7 +641,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }
             className={ styles[ "add-button" ] }
-            onClick={ e => {
+            onClick={ () => {
               addCar( imagesData );
             } }
             disabled={ adding }
@@ -655,7 +655,7 @@ const AddCar = ( { handleClose, type = "new", car } ) => {
           >
             Annuler
           </motion.button>
-          { type == "edit" && (
+          { type == "edit" && !rent && (
             <motion.button
               whileHover={ buttonWhileHovering( 1.1, .2 ) }
               className={ styles[ "cancel-button" ] }

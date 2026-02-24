@@ -10,12 +10,18 @@ export const useCars = () => {
 
 const CarsProvider = ( { children } ) => {
 
+  const [ rentalCars, setRentalCars ] = useState( [] );
   const [ cars, setCars ] = useState( [] );
   const [ trucks, setTrucks ] = useState( [] );
   const [ brands, setBrands ] = useState( [] );
   const [ rates, setRates ] = useState( [] );
   const [ carsLoading, setCarsLoading ] = useState( true );
   const [ carPages, setCarPages ] = useState( {
+    lastIndex: -1,
+    hasMore: false
+  } );
+
+  const [ rentalCarPages, setRentalCarPages ] = useState( {
     lastIndex: -1,
     hasMore: false
   } );
@@ -27,7 +33,7 @@ const CarsProvider = ( { children } ) => {
 
 
   useEffect( () => {
-    async function fetchData () {
+    async function fetchData() {
       setCarsLoading( true );
       try {
 
@@ -40,6 +46,18 @@ const CarsProvider = ( { children } ) => {
         setCarPages( {
           lastIndex: carsData.data.length - 1,
           hasMore: !!( carsData.remaining - carsData.data.length )
+        } );
+
+
+        const rentalCarsRes = await fetch( `${ API.GET_RENTAL_CARS }/${ -1 }` );
+        if ( !rentalCarsRes.ok ) {
+          throw new Error( `Failed to fetch cars: ${ rentalCarsRes.status } ${ rentalCarsRes.statusText }` );
+        }
+        const rentalCarsData = await rentalCarsRes.json();
+        setRentalCars( rentalCarsData.data );
+        setRentalCarPages( {
+          lastIndex: rentalCarsData.data.length - 1,
+          hasMore: !!( rentalCarsData.remaining - rentalCarsData.data.length )
         } );
 
 
@@ -84,7 +102,7 @@ const CarsProvider = ( { children } ) => {
   }, [] );
 
   return (
-    <CarsContext.Provider value={ { cars, setCars, carsLoading, brands, setBrands, rates, setRates, trucks, setTrucks, truckPages, carPages, setCarPages, setTruckPages } }>{ children }</CarsContext.Provider>
+    <CarsContext.Provider value={ { cars, setCars, carsLoading, brands, setBrands, rates, setRates, trucks, setTrucks, truckPages, carPages, setCarPages, setTruckPages, rentalCars, rentalCarPages } }>{ children }</CarsContext.Provider>
   );
 };
 
