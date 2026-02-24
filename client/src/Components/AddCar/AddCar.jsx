@@ -524,7 +524,10 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
               )
             );
         } else {
-          setCars( prev => [ car, ...prev ] );
+          if ( !rent )
+            setCars( prev => [ car, ...prev ] );
+          else
+            setRentalCars( prev => [ car, ...prev ] );
         }
 
         handleClose();
