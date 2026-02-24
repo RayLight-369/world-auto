@@ -186,7 +186,9 @@ I am interested in reserving (renting) the following car and would like to provi
             <div className={ styles[ "title-price" ] }>
               <h1>{ car.title }</h1>
               <div className={ styles[ "price-buy" ] }>
-                <h1>{ car.price_per_day } €</h1>
+                <h1>{ car.price_per_day } / jour</h1>
+                <h1>{ car.price_per_week } / semaine</h1>
+                <h1>{ car.price_per_weekend } / fin de semaine</h1>
               </div>
             </div>
             <div className={ styles[ "overview" ] }>
@@ -203,9 +205,9 @@ I am interested in reserving (renting) the following car and would like to provi
           <>
             <div className={ styles[ "title-price" ] }>
               <h1>{ car.title }</h1>
-              <h1>{ car.price_per_day } / jour €</h1>
-              <h1>{ car.price_per_week } / semaine €</h1>
-              <h1>{ car.price_per_weekend } / fin de semaine €</h1>
+              <h1>{ car.price_per_day } / jour</h1>
+              <h1>{ car.price_per_week } / semaine</h1>
+              <h1>{ car.price_per_weekend } / fin de semaine</h1>
             </div>
             <div className={ styles[ "overview" ] }>
               <h1 className={ styles[ 'title' ] }>Aperçu</h1>
