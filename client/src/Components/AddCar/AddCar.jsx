@@ -93,16 +93,16 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
     } ] : [
       {
         element: "Prix / semaine €",
-        class: "price-per-day",
-        inputClass: "price-per-day-input",
+        class: "price-per-week",
+        inputClass: "price-per-week-input",
         setState: setPricePerWeek,
         value: pricePerWeek,
         type: "text"
       },
       {
         element: "Prix / fin de semaine €",
-        class: "price-per-day",
-        inputClass: "price-per-day-input",
+        class: "price-per-weekend",
+        inputClass: "price-per-weekend-input",
         setState: setPricePerWeekend,
         value: pricePerWeekend,
         type: "text"
@@ -180,7 +180,7 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
     //   value: gearbox,
     //   type: "text"
     // }
-  ], [ pricePerDay, pricePerMonth, mileage, energy, guarantee, color, certificate, emission, modelYear, seatingCapacity, rent ] );
+  ], [ pricePerDay, pricePerMonth, mileage, energy, guarantee, color, certificate, emission, modelYear, seatingCapacity, rent, pricePerWeek, pricePerWeekend ] );
 
 
   // const [ priorityInput, setPriorityInput ] = useState( "" );
