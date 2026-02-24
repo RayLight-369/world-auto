@@ -107,6 +107,7 @@ app.get( [ "/admin/cars/:id", "/admin/cars/range/:lastindex" ], async ( req, res
     }
 
     query.where_not = { rent: true };
+    query.columns = [ "id", "title", "overview", "brand", "price_per_day", "price_per_month", "emission", "energy", "due_date", "mileage", "color", "fuel_type", "accessories", "gearbox", "seating_capacity", "certificate", "guarantee", "model_year", "images", "sold" ];
 
     const { data, error, remaining } = await getData( query );
 
@@ -133,7 +134,7 @@ app.get( [ "/admin/rentalcars/:id", "/admin/rentalcars/range/:lastindex" ], asyn
 
     // console.log( "last index: ", lastIndex );
 
-    query.where = { rent: true };
+    query.where = { rent: true, columns: [ "id", "title", "overview", "brand", "price_per_day", "emission", "energy", "due_date", "mileage", "color", "fuel_type", "accessories", "gearbox", "seating_capacity", "certificate", "guarantee", "model_year", "images", "sold", "rent", "price_per_week", "price_per_weekend" ] };
 
     if ( id ) query.where.id = id;
     if ( lastIndex ) {

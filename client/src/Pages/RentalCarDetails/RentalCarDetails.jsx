@@ -87,7 +87,7 @@ const RentalCarDetails = () => {
 
         if ( body?.data?.length ) body.data[ 0 ].brand = brands.find( brand => brand.id == body.data[ 0 ].brand )?.brandName;
 
-        const { title, price_per_day, overview, id, accessories, images, ...rest } = body.data[ 0 ];
+        const { title, price_per_day, price_per_week, price_per_weekend, overview, id, accessories, images, ...rest } = body.data[ 0 ];
 
         setProperties( rest );
 
@@ -203,7 +203,9 @@ I am interested in reserving (renting) the following car and would like to provi
           <>
             <div className={ styles[ "title-price" ] }>
               <h1>{ car.title }</h1>
-              <h1>{ car.price_per_day } €</h1>
+              <h1>{ car.price_per_day } / jour €</h1>
+              <h1>{ car.price_per_week } / semaine €</h1>
+              <h1>{ car.price_per_weekend } / fin de semaine €</h1>
             </div>
             <div className={ styles[ "overview" ] }>
               <h1 className={ styles[ 'title' ] }>Aperçu</h1>

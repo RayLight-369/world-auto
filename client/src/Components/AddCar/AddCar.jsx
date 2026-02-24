@@ -22,6 +22,8 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
   const [ fuelType, setFuelType ] = useState( car?.fuel_type || "" );
   const [ pricePerDay, setPricePerDay ] = useState( car?.price_per_day || 0 );
   const [ pricePerMonth, setPricePerMonth ] = useState( car?.price_per_month || 0 );
+  const [ pricePerWeek, setPricePerWeek ] = useState( car?.price_per_week || 0 );
+  const [ pricePerWeekend, setPricePerWeekend ] = useState( car?.price_per_weekend || 0 );
   const [ mileage, setMilage ] = useState( car?.milage || "" );
   const [ energy, setEnergy ] = useState( car?.energy || "" );
   const [ guarantee, setGuarantee ] = useState( car?.guarantee || "" );
@@ -88,7 +90,24 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
       setState: setPricePerMonth,
       value: pricePerMonth,
       type: "text"
-    } ] : [] ),
+    } ] : [
+      {
+        element: "Prix / semaine €",
+        class: "price-per-day",
+        inputClass: "price-per-day-input",
+        setState: setPricePerWeek,
+        value: pricePerWeek,
+        type: "text"
+      },
+      {
+        element: "Prix / fin de semaine €",
+        class: "price-per-day",
+        inputClass: "price-per-day-input",
+        setState: setPricePerWeekend,
+        value: pricePerWeekend,
+        type: "text"
+      },
+    ] ),
     {
       element: "Kilométrage",
       class: "mileage",
@@ -423,7 +442,29 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
     const due_date = dateParts.join( "-" );
 
     const ReqData = {
-      title: carTitle, overview: carOverview, due_date, brand, fuel_type: fuelType, images, accessories, certificate, color, gearbox, emission, energy, mileage, guarantee, seating_capacity: seatingCapacity, model_year: modelYear, price_per_day: pricePerDay, price_per_month: pricePerMonth, rent
+      title: carTitle,
+      overview: carOverview,
+      due_date,
+      brand,
+      fuel_type: fuelType,
+      images,
+      accessories,
+      certificate,
+      color,
+      gearbox,
+      emission,
+      energy,
+      mileage,
+      guarantee,
+      seating_capacity: seatingCapacity,
+      model_year: modelYear,
+      price_per_day: pricePerDay,
+      price_per_month: pricePerMonth,
+      rent,
+      ...( rent && {
+        price_per_week: pricePerWeek,
+        price_per_weekend: pricePerWeekend
+      } )
     };
 
 
