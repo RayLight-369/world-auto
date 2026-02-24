@@ -49,7 +49,9 @@ div.title-overview {
     div.price-buy {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      /* align-items: center; */
+      gap: 2px;
+      flex-direction: column;
       position: relative;
       /* top: 5px; */
 
