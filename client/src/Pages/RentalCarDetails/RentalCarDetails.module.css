@@ -83,8 +83,22 @@ div.title-overview {
         width: fit-content;
         padding: 2px 5px;
 
-        &::before {
-          content: "Prix: ";
+        &:nth-of-type(1)::before {
+          content: "Prix par jour : ";
+          position: relative;
+          left: 0;
+          color: #111;
+        }
+
+        &:nth-of-type(2)::before {
+          content: "Prix par semaine : ";
+          position: relative;
+          left: 0;
+          color: #111;
+        }
+
+        &:nth-of-type(3)::before {
+          content: "Prix par week-end : ";
           position: relative;
           left: 0;
           color: #111;
@@ -399,7 +413,47 @@ img.img {
         top: 20px;
 
         &::before {
-          content: "Price: ";
+          content: "Prix par jour: ";
+          position: relative;
+          left: 0;
+          width: fit-content;
+          height: auto;
+          color: var(--primary-blue);
+          font-size: 1.2em;
+          font-weight: 0;
+          font-family: Galano;
+          margin-right: 5px;
+        }
+      }
+
+      &:nth-child(3) {
+        color: #333 !important;
+        font-size: .9em !important;
+        position: relative;
+        top: 20px;
+
+        &::before {
+          content: "Prix par semaine: ";
+          position: relative;
+          left: 0;
+          width: fit-content;
+          height: auto;
+          color: var(--primary-blue);
+          font-size: 1.2em;
+          font-weight: 0;
+          font-family: Galano;
+          margin-right: 5px;
+        }
+      }
+
+      &:nth-child(4) {
+        color: #333 !important;
+        font-size: .9em !important;
+        position: relative;
+        top: 20px;
+
+        &::before {
+          content: "Prix par fin de semaine: ";
           position: relative;
           left: 0;
           width: fit-content;
