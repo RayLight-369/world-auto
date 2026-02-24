@@ -276,7 +276,7 @@ const CarRental = () => {
         <FiltersContainer cars={ rentalCars } handleGetMore={ handleGetMore } Cars={ Cars } brands={ brands } setCars={ setCars } filterDistpatch={ filterDistpatch } filtersState={ filtersState } searchInputText={ searchInputText } />
         <div className={ Styles[ "content" ] }>
           <p className={ Styles[ "results" ] }>{ filteredAndSortedCars?.length } voitures correspondent à votre recherche</p>
-          <CardsContainer filteredAndSortedCars={ filteredAndSortedCars } key={ "cars" } carLoading={ carsLoading } />
+          <CardsContainer filteredAndSortedCars={ filteredAndSortedCars } key={ "cars" } carLoading={ carsLoading } type='rental-car' />
           { rentalCarPages.hasMore && (
             <button className={ Styles[ 'get-more' ] } disabled={ adding } onClick={ handleGetMore }>Get More</button>
           ) }
