@@ -19,6 +19,7 @@ import TruckDetails from "./Pages/TruckDetails/TruckDetails";
 import VTCtransport from "./Pages/VTCtransport/VTCtransport";
 import ManageRates from "./Pages/ManageRates/ManageRates";
 import ManageRentalCars from "./Pages/ManageRentalCars/ManageRentalCars";
+import CarRental from "./Pages/CarRental/CarRental";
 
 
 
@@ -41,6 +42,7 @@ const App = () => {
                 <Route path="about" element={ <About /> } />
                 <Route path="contact" element={ <Contact /> } />
                 <Route path="trucks-rental" element={ <TruckRental /> } />
+                <Route path="cars-rental" element={ <CarRental /> } />
                 <Route path="vtc-transport" element={ <VTCtransport /> } />
                 <Route path="/car/:id" element={ <CarDetails /> } />
                 <Route path="/trucks-rental/:id" element={ <TruckDetails /> } />

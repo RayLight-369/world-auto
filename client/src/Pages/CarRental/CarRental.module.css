@@ -1,0 +1,149 @@
+.search-section {
+  align-items: center;
+  background: url(../../../public/Imgs/carizy-bg.jpg);
+  background-position: 50%;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 40px 20px 45px;
+  position: relative;
+}
+
+section#home {
+  position: relative;
+  top: 80px;
+  left: 0;
+}
+
+section.search-section {
+  font-family: Galano;
+}
+
+h1.ad-title {
+  font-size: 2.5rem;
+  color: #fff;
+  font-weight: lighter;
+}
+
+input.search-input {
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  padding: 13px 27px;
+  width: 750px;
+  font-family: Galano;
+}
+
+input.search-input::placeholder {
+  color: #9a9a9a;
+}
+
+section.body {
+  /* display: inline-block; */
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 250px auto;
+  padding: 10px 20px;
+}
+
+button.get-more {
+  width: fit-content;
+  padding: 6px 12px;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  background: var(--primary-blue);
+  color: white;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: 200ms;
+
+  &:hover {
+    transform: translateX(-50%) scale(1.03);
+  }
+}
+
+div.filters-shortcut {
+  width: fit-content;
+  height: fit-content;
+  display: none;
+
+  > p {
+    position: fixed;
+    left: 15px;
+    bottom: 10px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: var(--primary-blue);
+    padding: 20px;
+    border-radius: 50%;
+  }
+
+  > div {
+    position: fixed;
+    bottom: 55px;
+    transition: 150ms;
+    transform: translateX(-300px);
+  }
+
+  &.appear {
+    display: block;
+  }
+
+  &.open {
+    > div {
+      transform: translateX(10px);
+    }
+  }
+}
+
+div.content {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin: 15px;
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  h1.ad-title {
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  input.search-input {
+    width: 85%;
+    min-width: 200px;
+    padding: 8px 20px;
+    font-size: .95em;
+  }
+
+  section.body {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    padding: 10px 14px;
+  }
+
+  div.content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin: 15px;
+    min-height: calc(100vh - 700px) !important;
+  }
+
+  div.list {
+    display: flex !important;
+    gap: 30px;
+    /* grid-template-columns: repeat(3, 1fr); */
+    flex-direction: column !important;
+  }
+}
