@@ -5,16 +5,28 @@ import { formatNumber } from '../../Constants';
 
 export const BreakSpan = memo( () => <span className={ Styles[ 'break' ] }>|</span> );
 
-const Card = ( { ppd, ppm, title, overview, year, manual, distance, fuel, guarantee, id, img, type = "car", sold = false } ) => {
+const Card = ( { ppd, ppm, ppw, ppwe, rent, title, overview, year, manual, distance, fuel, guarantee, id, img, type = "car", sold = false } ) => {
   return (
     <div className={ Styles[ "card" ] }>
       { sold && <p className={ Styles[ "sold" ] }>Vendu</p> }
       <Link to={ `/${ type }/${ id }` }>
         <div className={ Styles[ "thumbnail" ] }>
           <img src={ img } className={ Styles[ type ] } alt="" />
-          { type == "car" ?
+          { type == "car" || type == "rental-car" ?
             <div className={ Styles[ "price-notch" ] }>
-              <p className={ Styles[ "price" ] }>€ { formatNumber( ppd ) }</p>
+              <p className={ !rent ? Styles[ "price" ] : Styles[ "rent-prices-container" ] }>
+                {
+                  !rent ? <>€ { formatNumber( ppd ) }</> :
+                    <>
+                      {/* { ppd && <>{ ppd } / jour<BreakSpan /></> }
+                      { ppw && <>{ ppw } / semaine<BreakSpan /></> }
+                      { ppwe && <>{ ppwe } / weekend<BreakSpan /></> } */}
+                      { ppd && <p className={ Styles[ "rent-prices" ] }>{ ppd } / jour</p> }
+                      { ppw && <p className={ Styles[ "rent-prices" ] }>{ ppw } / semaine</p> }
+                      { ppwe && <p className={ Styles[ "rent-prices" ] }>{ ppwe } / weekend</p> }
+                    </>
+                }
+              </p>
             </div>
             : <></>
           }

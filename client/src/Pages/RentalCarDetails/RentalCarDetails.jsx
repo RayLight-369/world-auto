@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './RentalCarDetails.module.css';
 import { useParams } from "react-router-dom";
-import { API } from '../../Constants';
+import { API, formatNumber } from '../../Constants';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Autoplay, Keyboard, Mousewheel, Scrollbar, Zoom } from "swiper/modules";
 import { useCars } from '../../Contexts/CarsContext';
@@ -40,6 +40,7 @@ const RentalCarDetails = () => {
   const [ properties, setProperties ] = useState( {} );
   const [ isMobile, setIsMobile ] = useState( true );
   const [ msg, setMsg ] = useState( "" );
+
 
 
   const PROPERTIES = useMemo( () => ( {
@@ -186,9 +187,24 @@ I am interested in reserving (renting) the following car and would like to provi
             <div className={ styles[ "title-price" ] }>
               <h1>{ car.title }</h1>
               <div className={ styles[ "price-buy" ] }>
-                <h1>{ car.price_per_day } / jour</h1>
-                <h1>{ car.price_per_week } / semaine</h1>
-                <h1>{ car.price_per_weekend } / fin de semaine</h1>
+                { car.price_per_day && (
+                  <div className={ styles[ "price-item" ] }>
+                    <span className={ styles[ "price-value" ] }>{ ( car.price_per_day ) }</span>
+                    <span className={ styles[ "price-label" ] }>par jour</span>
+                  </div>
+                ) }
+                { car.price_per_week && (
+                  <div className={ styles[ "price-item" ] }>
+                    <span className={ styles[ "price-value" ] }>{ ( car.price_per_week ) }</span>
+                    <span className={ styles[ "price-label" ] }>par semaine</span>
+                  </div>
+                ) }
+                { car.price_per_weekend && (
+                  <div className={ styles[ "price-item" ] }>
+                    <span className={ styles[ "price-value" ] }>{ ( car.price_per_weekend ) }</span>
+                    <span className={ styles[ "price-label" ] }>par week‑end</span>
+                  </div>
+                ) }
               </div>
             </div>
             <div className={ styles[ "overview" ] }>
@@ -205,9 +221,26 @@ I am interested in reserving (renting) the following car and would like to provi
           <>
             <div className={ styles[ "title-price" ] }>
               <h1>{ car.title }</h1>
-              <h1>{ car.price_per_day } / jour</h1>
-              <h1>{ car.price_per_week } / semaine</h1>
-              <h1>{ car.price_per_weekend } / fin de semaine</h1>
+              <div className={ styles[ "price-buy" ] }>
+                { car.price_per_day && (
+                  <div className={ styles[ "price-item" ] }>
+                    <span className={ styles[ "price-value" ] }>{ ( car.price_per_day ) }</span>
+                    <span className={ styles[ "price-label" ] }>par jour</span>
+                  </div>
+                ) }
+                { car.price_per_week && (
+                  <div className={ styles[ "price-item" ] }>
+                    <span className={ styles[ "price-value" ] }>{ ( car.price_per_week ) }</span>
+                    <span className={ styles[ "price-label" ] }>par semaine</span>
+                  </div>
+                ) }
+                { car.price_per_weekend && (
+                  <div className={ styles[ "price-item" ] }>
+                    <span className={ styles[ "price-value" ] }>{ ( car.price_per_weekend ) }</span>
+                    <span className={ styles[ "price-label" ] }>par week‑end</span>
+                  </div>
+                ) }
+              </div>
             </div>
             <div className={ styles[ "overview" ] }>
               <h1 className={ styles[ 'title' ] }>Aperçu</h1>

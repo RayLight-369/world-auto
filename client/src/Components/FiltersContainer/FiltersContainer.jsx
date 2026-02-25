@@ -47,7 +47,7 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
       const { Brands, Price, Fuel_Types, Mileage, Gearbox, Model_Year } = filtersState;
 
 
-      function BrandCheck ( item ) {
+      function BrandCheck( item ) {
         if ( Brands.length > 0 ) {
           if ( Brands.includes( item.brand ) ) {
             return true;
@@ -59,7 +59,7 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
         return true;
       }
 
-      function GearboxCheck ( item ) {
+      function GearboxCheck( item ) {
         if ( Gearbox.length > 0 ) {
           if ( Gearbox.includes( item.gearbox ) ) {
             return true;
@@ -71,7 +71,7 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
         return true;
       }
 
-      function FuelCheck ( item ) {
+      function FuelCheck( item ) {
         if ( Fuel_Types.length > 0 ) {
           if ( Fuel_Types.includes( item.fuel_type ) ) {
             return true;
@@ -83,7 +83,7 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
         return true;
       }
 
-      function PriceCheck ( item ) {
+      function PriceCheck( item ) {
 
         const startCheck = Price.start ? getFormattedNumber( item.price_per_day ) >= Price.start : true;
 
@@ -92,7 +92,7 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
         return startCheck && endCheck;
       }
 
-      function ModelYearCheck ( item ) {
+      function ModelYearCheck( item ) {
 
         const startCheck = Model_Year.start ? item.model_year >= Model_Year.start : true;
 
@@ -101,7 +101,7 @@ const FiltersContainer = ( { cars, Cars, brands, setCars, filtersState, filterDi
         return startCheck && endCheck;
       }
 
-      function MileageCheck ( item ) {
+      function MileageCheck( item ) {
 
         const startCheck = Mileage.start ? +item.mileage >= Mileage.start : true;
 

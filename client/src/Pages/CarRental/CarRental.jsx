@@ -253,7 +253,12 @@ const CarRental = () => {
           hasMore: !!( body.remaining - rentalCars.length - body.data.length )
         } );
 
-        SetCars( prev => ( [ ...prev, ...body.data ] ) );
+        // SetCars( prev => ( [ ...prev, ...body.data ] ) );
+        SetCars( prev => {
+          const existingIds = new Set( prev.map( c => c.id ) );
+          const newCars = body?.data?.filter( c => !existingIds.has( c.id ) );
+          return [ ...prev, ...newCars ];
+        } );
       }
 
     } catch ( e ) {
@@ -262,6 +267,7 @@ const CarRental = () => {
       setAdding( false );
     }
   }, [ rentalCars, rentalCarPages, setRentalCarPages, SetCars ] );
+
 
   useEffect( () => {
     console.log( "update Cars = ", Cars );

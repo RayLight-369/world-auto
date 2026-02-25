@@ -46,65 +46,41 @@ div.title-overview {
 
     }
 
-    div.price-buy {
+    /* new price group styling */
+    .price-buy {
       display: flex;
-      justify-content: space-between;
-      /* align-items: center; */
-      gap: 2px;
-      flex-direction: column;
-      position: relative;
-      /* top: 5px; */
-
-      /* button {
-        border: none;
-        outline: none;
-        padding: 10px 20px;
-        display: block;
-        width: 150px;
-        border-radius: 25px;
-        background: var(--primary-blue);
-        color: white;
-        cursor: pointer;
-        transition: 150ms ease-out;
-        font-size: .8em;
-
-        &:hover {
-          transform: scale(1.08);
-        }
-      } */
-
-      h1 {
-        /* color: var(--primary-blue); */
-        color: var(--primary-blue);
-        font-size: 1.3em;
-        position: relative;
-        border-radius: 6px;
-        border: 1.3px dashed var(--primary-blue);
-        width: fit-content;
-        padding: 2px 5px;
-
-        &:nth-of-type(1)::before {
-          content: "Prix par jour : ";
-          position: relative;
-          left: 0;
-          color: #111;
-        }
-
-        &:nth-of-type(2)::before {
-          content: "Prix par semaine : ";
-          position: relative;
-          left: 0;
-          color: #111;
-        }
-
-        &:nth-of-type(3)::before {
-          content: "Prix par week-end : ";
-          position: relative;
-          left: 0;
-          color: #111;
-        }
-      }
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
     }
+
+    .price-item {
+      background: #fff;
+      border: 1px solid var(--primary-blue);
+      border-radius: 8px;
+      padding: 8px 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 100px;
+    }
+
+    .price-value {
+      font-size: 1.4em;
+      font-weight: bold;
+      color: var(--primary-blue);
+    }
+
+    .price-label {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    /* older dashed price rules removed */
+
   }
 
   div.overview {
@@ -402,69 +378,41 @@ img.img {
       color: #0a0a0a;
       font-size: 1.2em !important;
       width: 100% !important;
-      /* background: #000; */
       overflow: hidden;
       text-overflow: ellipsis;
+    }
 
-      &:nth-child(2) {
-        color: #333 !important;
-        font-size: .9em !important;
-        position: relative;
-        top: 20px;
+    /* mobile adjustments: soften appearance and add breathing room */
+    .price-buy {
+      flex-direction: column;
+      display: flex;
+      gap: 8px;
+    }
 
-        &::before {
-          content: "Prix par jour: ";
-          position: relative;
-          left: 0;
-          width: fit-content;
-          height: auto;
-          color: var(--primary-blue);
-          font-size: 1.2em;
-          font-weight: 0;
-          font-family: Galano;
-          margin-right: 5px;
-        }
-      }
+    .price-item {
+      width: auto;
+      min-width: 120px;
+      flex-direction: column;
+      justify-content: center;
+      background: #f7fbff;
+      color: var(--primary-blue);
+      padding: 8px 12px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--primary-blue);
+      border-radius: 12px;
+    }
 
-      &:nth-child(3) {
-        color: #333 !important;
-        font-size: .9em !important;
-        position: relative;
-        top: 20px;
+    .price-item .price-value {
+      color: var(--primary-blue);
+      font-size: 1.2em;
+      font-weight: 600;
+      margin-right: 6px;
+    }
 
-        &::before {
-          content: "Prix par semaine: ";
-          position: relative;
-          left: 0;
-          width: fit-content;
-          height: auto;
-          color: var(--primary-blue);
-          font-size: 1.2em;
-          font-weight: 0;
-          font-family: Galano;
-          margin-right: 5px;
-        }
-      }
-
-      &:nth-child(4) {
-        color: #333 !important;
-        font-size: .9em !important;
-        position: relative;
-        top: 20px;
-
-        &::before {
-          content: "Prix par fin de semaine: ";
-          position: relative;
-          left: 0;
-          width: fit-content;
-          height: auto;
-          color: var(--primary-blue);
-          font-size: 1.2em;
-          font-weight: 0;
-          font-family: Galano;
-          margin-right: 5px;
-        }
-      }
+    .price-item .price-label {
+      color: #555;
+      font-size: 0.85em;
+      margin-top: 2px;
     }
   }
 
