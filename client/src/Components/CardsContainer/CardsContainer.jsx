@@ -1,7 +1,12 @@
+import { useEffect } from 'react';
 import Card from '../Card/Card';
 import Styles from "./CardsContainer.module.css";
 
 const CardsContainer = ( { filteredAndSortedCars, type = "car", carLoading } ) => {
+  useEffect( () => {
+    console.log( filteredAndSortedCars.map( car => car.id ) );
+  }, [ filteredAndSortedCars ] );
+
   return (
     <div className={ Styles[ "list" ] }>
       { filteredAndSortedCars.length ? filteredAndSortedCars.map( ( car ) => (

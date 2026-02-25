@@ -17,6 +17,7 @@ const CarRental = () => {
   const [ searchInputText, setSearchInputText ] = useState( "" );
   const debouncedInputText = useDebounce( searchInputText, 500 );
 
+
   const [ filtersState, filterDistpatch ] = useReducer( ( state, action ) => {
     switch ( action.type ) {
       case "brand": case "brands": {
@@ -203,7 +204,7 @@ const CarRental = () => {
   // }, [] );
 
   const filteredAndSortedCars = useMemo( () => {
-    if ( !searchInputText ) return Cars;
+    if ( !debouncedInputText ) return Cars;
 
     const searchTerms = debouncedInputText.toLowerCase().split( ' ' );
     return Cars.filter( car => {
@@ -246,6 +247,7 @@ const CarRental = () => {
 
       if ( res.ok ) {
         const body = await res.json();
+        console.log( "body data", body.data );
         setRentalCarPages( {
           lastIndex: rentalCars.length + body.data.length - 1,
           hasMore: !!( body.remaining - rentalCars.length - body.data.length )
@@ -259,9 +261,11 @@ const CarRental = () => {
     } finally {
       setAdding( false );
     }
-  } );
+  }, [ rentalCars, rentalCarPages, setRentalCarPages, SetCars ] );
 
-
+  useEffect( () => {
+    console.log( "update Cars = ", Cars );
+  }, [ Cars ] );
 
   return (
     <motion.section id={ Styles[ "home" ] } variants={ variants } initial="hidden" animate="animate" exit="exit">

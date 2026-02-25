@@ -102,7 +102,7 @@ const CarsProvider = ( { children } ) => {
   }, [] );
 
   return (
-    <CarsContext.Provider value={ { cars, setCars, carsLoading, brands, setBrands, rates, setRates, trucks, setTrucks, truckPages, carPages, setCarPages, setTruckPages, rentalCars, rentalCarPages } }>{ children }</CarsContext.Provider>
+    <CarsContext.Provider value={ { cars, setCars, carsLoading, brands, setBrands, rates, setRates, trucks, setTrucks, truckPages, carPages, setCarPages, setTruckPages, rentalCars, setRentalCars, rentalCarPages, setRentalCarPages } }>{ children }</CarsContext.Provider>
   );
 };
 
