@@ -14,18 +14,7 @@ const Card = ( { ppd, ppm, ppw, ppwe, rent, title, overview, year, manual, dista
           <img src={ img } className={ Styles[ type ] } alt="" />
           { type == "car" || type == "rental-car" ?
             <div className={ Styles[ "price-notch" ] }>
-              <div className={ !rent ? Styles[ "price-wrapper" ] : Styles[ "rent-prices-wrapper" ] }>
-                {
-                  !rent ?
-                    <p className={ Styles[ "price" ] }>€ { formatNumber( ppd ) }</p>
-                    :
-                    <div className={ Styles[ "rent-prices-grid" ] }>
-                      { ppd && <div className={ Styles[ "price-badge" ] }><span className={ Styles[ "price-value" ] }>€{ ppd }</span><span className={ Styles[ "price-period" ] }>jour</span></div> }
-                      { ppw && <div className={ Styles[ "price-badge" ] }><span className={ Styles[ "price-value" ] }>€{ ppw }</span><span className={ Styles[ "price-period" ] }>semaine</span></div> }
-                      { ppwe && <div className={ Styles[ "price-badge" ] }><span className={ Styles[ "price-value" ] }>€{ ppwe }</span><span className={ Styles[ "price-period" ] }>weekend</span></div> }
-                    </div>
-                }
-              </div>
+              <p className={ Styles[ "price" ] }>€ { formatNumber( ppd ) }</p>
             </div>
             : <></>
           }
