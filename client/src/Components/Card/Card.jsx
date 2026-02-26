@@ -14,19 +14,18 @@ const Card = ( { ppd, ppm, ppw, ppwe, rent, title, overview, year, manual, dista
           <img src={ img } className={ Styles[ type ] } alt="" />
           { type == "car" || type == "rental-car" ?
             <div className={ Styles[ "price-notch" ] }>
-              <p className={ !rent ? Styles[ "price" ] : Styles[ "rent-prices-container" ] }>
+              <div className={ !rent ? Styles[ "price-wrapper" ] : Styles[ "rent-prices-wrapper" ] }>
                 {
-                  !rent ? <>€ { formatNumber( ppd ) }</> :
-                    <>
-                      {/* { ppd && <>{ ppd } / jour<BreakSpan /></> }
-                      { ppw && <>{ ppw } / semaine<BreakSpan /></> }
-                      { ppwe && <>{ ppwe } / weekend<BreakSpan /></> } */}
-                      { ppd && <p className={ Styles[ "rent-prices" ] }>{ ppd } / jour</p> }
-                      { ppw && <p className={ Styles[ "rent-prices" ] }>{ ppw } / semaine</p> }
-                      { ppwe && <p className={ Styles[ "rent-prices" ] }>{ ppwe } / weekend</p> }
-                    </>
+                  !rent ?
+                    <p className={ Styles[ "price" ] }>€ { formatNumber( ppd ) }</p>
+                    :
+                    <div className={ Styles[ "rent-prices-grid" ] }>
+                      { ppd && <div className={ Styles[ "price-badge" ] }><span className={ Styles[ "price-value" ] }>€{ ppd }</span><span className={ Styles[ "price-period" ] }>jour</span></div> }
+                      { ppw && <div className={ Styles[ "price-badge" ] }><span className={ Styles[ "price-value" ] }>€{ ppw }</span><span className={ Styles[ "price-period" ] }>semaine</span></div> }
+                      { ppwe && <div className={ Styles[ "price-badge" ] }><span className={ Styles[ "price-value" ] }>€{ ppwe }</span><span className={ Styles[ "price-period" ] }>weekend</span></div> }
+                    </div>
                 }
-              </p>
+              </div>
             </div>
             : <></>
           }
