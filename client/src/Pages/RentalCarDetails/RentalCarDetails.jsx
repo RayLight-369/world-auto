@@ -231,12 +231,6 @@ I am interested in reserving (renting) the following car and would like to provi
                     { car.weekend_mileage && <span className={ styles[ "price-mileage" ] }>({ formatMileage( car.weekend_mileage ) } )</span> }
                   </div>
                 ) }
-                { car.price_per_mileage && (
-                  <div className={ styles[ "price-item" ] }>
-                    <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_mileage ) }</span>
-                    <span className={ styles[ "price-label" ] }>par km</span>
-                  </div>
-                ) }
               </div>
             </div>
             <div className={ styles[ "overview" ] }>
@@ -273,12 +267,6 @@ I am interested in reserving (renting) the following car and would like to provi
                     <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_weekend ) }</span>
                     <span className={ styles[ "price-label" ] }>par week‑end</span>
                     { car.weekend_mileage && <span className={ styles[ "price-mileage" ] }>({ car.weekend_mileage } km)</span> }
-                  </div>
-                ) }
-                { car.price_per_mileage && (
-                  <div className={ styles[ "price-item" ] }>
-                    <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_mileage ) }</span>
-                    <span className={ styles[ "price-label" ] }>par km</span>
                   </div>
                 ) }
               </div>
