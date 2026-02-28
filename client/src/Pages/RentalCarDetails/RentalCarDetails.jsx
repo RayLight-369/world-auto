@@ -56,6 +56,16 @@ const RentalCarDetails = () => {
     return str;
   };
 
+  const formatMileage = ( mileage ) => {
+    if ( !mileage ) return "";
+
+    const mileageStr = mileage.toString().trim();
+
+    return mileageStr.toLowerCase().includes( "km" )
+      ? mileageStr
+      : `${ mileageStr } km`;
+  };
+
   const PROPERTIES = useMemo( () => ( {
     "brand": "Marque",
     "certificate": "Certificat",
@@ -101,7 +111,7 @@ const RentalCarDetails = () => {
 
         if ( body?.data?.length ) body.data[ 0 ].brand = brands.find( brand => brand.id == body.data[ 0 ].brand )?.brandName;
 
-        const { title, price_per_day, price_per_week, price_per_mileage, price_per_weekend, overview, id, accessories, images, rent, sold, ...rest } = body.data[ 0 ];
+        const { title, price_per_day, price_per_week, price_per_mileage, price_per_weekend, day_mileage, week_mileage, weekend_mileage, overview, id, accessories, images, rent, sold, ...rest } = body.data[ 0 ];
 
         setProperties( rest );
 
@@ -204,18 +214,21 @@ I am interested in reserving (renting) the following car and would like to provi
                   <div className={ styles[ "price-item" ] }>
                     <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_day ) }</span>
                     <span className={ styles[ "price-label" ] }>par jour</span>
+                    { car.day_mileage && <span className={ styles[ "price-mileage" ] }>({ formatMileage( car.day_mileage ) })</span> }
                   </div>
                 ) }
                 { car.price_per_week && (
                   <div className={ styles[ "price-item" ] }>
                     <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_week ) }</span>
                     <span className={ styles[ "price-label" ] }>par semaine</span>
+                    { car.week_mileage && <span className={ styles[ "price-mileage" ] }>({ formatMileage( car.week_mileage ) } )</span> }
                   </div>
                 ) }
                 { car.price_per_weekend && (
                   <div className={ styles[ "price-item" ] }>
                     <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_weekend ) }</span>
                     <span className={ styles[ "price-label" ] }>par week‑end</span>
+                    { car.weekend_mileage && <span className={ styles[ "price-mileage" ] }>({ formatMileage( car.weekend_mileage ) } )</span> }
                   </div>
                 ) }
                 { car.price_per_mileage && (
@@ -245,18 +258,21 @@ I am interested in reserving (renting) the following car and would like to provi
                   <div className={ styles[ "price-item" ] }>
                     <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_day ) }</span>
                     <span className={ styles[ "price-label" ] }>par jour</span>
+                    { car.day_mileage && <span className={ styles[ "price-mileage" ] }>({ car.day_mileage } km)</span> }
                   </div>
                 ) }
                 { car.price_per_week && (
                   <div className={ styles[ "price-item" ] }>
                     <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_week ) }</span>
                     <span className={ styles[ "price-label" ] }>par semaine</span>
+                    { car.week_mileage && <span className={ styles[ "price-mileage" ] }>({ car.week_mileage } km)</span> }
                   </div>
                 ) }
                 { car.price_per_weekend && (
                   <div className={ styles[ "price-item" ] }>
                     <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_weekend ) }</span>
                     <span className={ styles[ "price-label" ] }>par week‑end</span>
+                    { car.weekend_mileage && <span className={ styles[ "price-mileage" ] }>({ car.weekend_mileage } km)</span> }
                   </div>
                 ) }
                 { car.price_per_mileage && (

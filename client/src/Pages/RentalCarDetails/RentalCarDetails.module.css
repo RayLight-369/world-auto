@@ -79,6 +79,13 @@ div.title-overview {
       text-align: center;
     }
 
+    .price-mileage {
+      font-size: 0.75em;
+      color: #888;
+      margin-top: 2px;
+      text-align: center;
+    }
+
     /* older dashed price rules removed */
 
   }
@@ -413,6 +420,12 @@ img.img {
       color: #555;
       font-size: 0.85em;
       margin-top: 2px;
+    }
+
+    .price-item .price-mileage {
+      color: #888;
+      font-size: 0.7em;
+      margin-top: 1px;
     }
   }
 

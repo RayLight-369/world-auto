@@ -24,7 +24,9 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
   const [ pricePerMonth, setPricePerMonth ] = useState( car?.price_per_month || 0 );
   const [ pricePerWeek, setPricePerWeek ] = useState( car?.price_per_week || 0 );
   const [ pricePerWeekend, setPricePerWeekend ] = useState( car?.price_per_weekend || 0 );
-  const [ pricePerMileage, setPricePerMileage ] = useState( car?.price_per_mileage || 0 );
+  const [ DayMileage, setDayMileage ] = useState( car?.day_mileage || 0 );
+  const [ weekMileage, setWeekMileage ] = useState( car?.week_mileage || 0 );
+  const [ weekendMileage, setWeekendMileage ] = useState( car?.weekend_mileage || 0 );
   const [ mileage, setMilage ] = useState( car?.mileage || "" );
   const [ energy, setEnergy ] = useState( car?.energy || "" );
   const [ guarantee, setGuarantee ] = useState( car?.guarantee || "" );
@@ -109,11 +111,27 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
         type: "text"
       },
       {
-        element: "Prix / Kilométrage €",
-        class: "price-per-mileage",
-        inputClass: "price-per-mileage-input",
-        setState: setPricePerMileage,
-        value: pricePerMileage,
+        element: "kilométrage / jour",
+        class: "day-mileage",
+        inputClass: "day-mileage-input",
+        setState: setDayMileage,
+        value: DayMileage,
+        type: "text"
+      },
+      {
+        element: "kilométrage / semaine",
+        class: "week-mileage",
+        inputClass: "week-mileage-input",
+        setState: setWeekMileage,
+        value: weekMileage,
+        type: "text"
+      },
+      {
+        element: "kilométrage / fin de semaine",
+        class: "weekend-mileage",
+        inputClass: "weekend-mileage-input",
+        setState: setWeekendMileage,
+        value: weekendMileage,
         type: "text"
       },
     ] ),
@@ -189,7 +207,7 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
     //   value: gearbox,
     //   type: "text"
     // }
-  ], [ pricePerDay, pricePerMonth, mileage, energy, guarantee, color, certificate, emission, modelYear, seatingCapacity, rent, pricePerWeek, pricePerWeekend, pricePerMileage ] );
+  ], [ pricePerDay, pricePerMonth, mileage, energy, guarantee, color, certificate, emission, modelYear, seatingCapacity, rent, pricePerWeek, pricePerWeekend, DayMileage, weekMileage, weekendMileage ] );
 
 
   // const [ priorityInput, setPriorityInput ] = useState( "" );
@@ -473,7 +491,9 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
       ...( rent && {
         price_per_week: pricePerWeek,
         price_per_weekend: pricePerWeekend,
-        price_per_mileage: pricePerMileage
+        day_mileage: DayMileage,
+        week_mileage: weekMileage,
+        weekend_mileage: weekendMileage
       } )
     };
 
