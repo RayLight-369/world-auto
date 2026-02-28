@@ -41,7 +41,20 @@ const RentalCarDetails = () => {
   const [ isMobile, setIsMobile ] = useState( true );
   const [ msg, setMsg ] = useState( "" );
 
-
+  // Format price: remove eur/euro and ensure € symbol
+  const formatPrice = ( price ) => {
+    if ( price == null || price === "" ) return "";
+    let str = String( price ).trim();
+    // Remove 'eur' or 'euro' (case-insensitive)
+    str = str.replace( /\b(eur|euro)\b/gi, "" ).trim();
+    // Remove any existing € symbol
+    str = str.replace( /€/g, "" ).trim();
+    // Add € at the end if not already there
+    if ( !str.endsWith( "€" ) ) {
+      str += " €";
+    }
+    return str;
+  };
 
   const PROPERTIES = useMemo( () => ( {
     "brand": "Marque",
@@ -189,19 +202,19 @@ I am interested in reserving (renting) the following car and would like to provi
               <div className={ styles[ "price-buy" ] }>
                 { car.price_per_day && (
                   <div className={ styles[ "price-item" ] }>
-                    <span className={ styles[ "price-value" ] }>{ ( car.price_per_day ) }</span>
+                    <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_day ) }</span>
                     <span className={ styles[ "price-label" ] }>par jour</span>
                   </div>
                 ) }
                 { car.price_per_week && (
                   <div className={ styles[ "price-item" ] }>
-                    <span className={ styles[ "price-value" ] }>{ ( car.price_per_week ) }</span>
+                    <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_week ) }</span>
                     <span className={ styles[ "price-label" ] }>par semaine</span>
                   </div>
                 ) }
                 { car.price_per_weekend && (
                   <div className={ styles[ "price-item" ] }>
-                    <span className={ styles[ "price-value" ] }>{ ( car.price_per_weekend ) }</span>
+                    <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_weekend ) }</span>
                     <span className={ styles[ "price-label" ] }>par week‑end</span>
                   </div>
                 ) }
@@ -224,19 +237,19 @@ I am interested in reserving (renting) the following car and would like to provi
               <div className={ styles[ "price-buy" ] }>
                 { car.price_per_day && (
                   <div className={ styles[ "price-item" ] }>
-                    <span className={ styles[ "price-value" ] }>{ ( car.price_per_day ) }</span>
+                    <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_day ) }</span>
                     <span className={ styles[ "price-label" ] }>par jour</span>
                   </div>
                 ) }
                 { car.price_per_week && (
                   <div className={ styles[ "price-item" ] }>
-                    <span className={ styles[ "price-value" ] }>{ ( car.price_per_week ) }</span>
+                    <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_week ) }</span>
                     <span className={ styles[ "price-label" ] }>par semaine</span>
                   </div>
                 ) }
                 { car.price_per_weekend && (
                   <div className={ styles[ "price-item" ] }>
-                    <span className={ styles[ "price-value" ] }>{ ( car.price_per_weekend ) }</span>
+                    <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_weekend ) }</span>
                     <span className={ styles[ "price-label" ] }>par week‑end</span>
                   </div>
                 ) }
