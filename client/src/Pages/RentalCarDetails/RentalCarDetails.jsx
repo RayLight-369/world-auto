@@ -176,7 +176,7 @@ I am interested in reserving (renting) the following car and would like to provi
             // slidesPerView={ 1 }
             className={ styles[ 'img-carousal' ] }
           >
-            { car?.images.map( ( i, k ) => (
+            { car?.images?.length && car?.images?.map( ( i, k ) => (
               <SwiperSlide zoom>
                 <img className={ styles[ 'img' ] } src={ i } alt="" key={ k } />
               </SwiperSlide>
@@ -199,7 +199,7 @@ I am interested in reserving (renting) the following car and would like to provi
               // slidesPerView={ 1 }
               className={ styles[ 'img-carousal' ] }
             >
-              { car?.images.map( ( i, k ) => (
+              { car?.images?.length && car?.images?.map( ( i, k ) => (
                 <SwiperSlide zoom>
                   <img className={ styles[ 'img' ] } src={ i } alt="" key={ k } />
                 </SwiperSlide>
