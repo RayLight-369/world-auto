@@ -75,7 +75,7 @@ const ManageRentalCars = () => {
         ) }
         { carToBeDeleted && (
           <Modal handleClose={ () => setCarToBeDeleted( null ) }>
-            <AddCar handleClose={ () => setCarToBeDeleted( null ) } car={ carToBeDeleted } type='del' />
+            <AddCar handleClose={ () => setCarToBeDeleted( null ) } car={ carToBeDeleted } rent={ true } type='del' />
           </Modal>
         ) }
       </AnimatePresence>
