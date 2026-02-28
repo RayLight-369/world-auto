@@ -18,13 +18,13 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
   const [ adding, setAdding ] = useState( false );
   const [ carTitle, setCarTitle ] = useState( car?.title || "" );
   const [ carOverview, setCarOverview ] = useState( car?.overview || "" );
-  const [ brand, setBrand ] = useState( brands?.find( brand => brand.id == car?.brand )?.brandName || undefined );
+  const [ brand, setBrand ] = useState( brands?.find( brand_ => brand_.id == car?.brand )?.brandName || undefined );
   const [ fuelType, setFuelType ] = useState( car?.fuel_type || "" );
   const [ pricePerDay, setPricePerDay ] = useState( car?.price_per_day || 0 );
   const [ pricePerMonth, setPricePerMonth ] = useState( car?.price_per_month || 0 );
   const [ pricePerWeek, setPricePerWeek ] = useState( car?.price_per_week || 0 );
   const [ pricePerWeekend, setPricePerWeekend ] = useState( car?.price_per_weekend || 0 );
-  const [ mileage, setMilage ] = useState( car?.milage || "" );
+  const [ mileage, setMilage ] = useState( car?.mileage || "" );
   const [ energy, setEnergy ] = useState( car?.energy || "" );
   const [ guarantee, setGuarantee ] = useState( car?.guarantee || "" );
   const [ color, setColor ] = useState( car?.color || "" );

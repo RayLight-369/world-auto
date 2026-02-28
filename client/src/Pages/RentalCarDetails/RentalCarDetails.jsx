@@ -88,7 +88,7 @@ const RentalCarDetails = () => {
 
         if ( body?.data?.length ) body.data[ 0 ].brand = brands.find( brand => brand.id == body.data[ 0 ].brand )?.brandName;
 
-        const { title, price_per_day, price_per_week, price_per_weekend, overview, id, accessories, images, ...rest } = body.data[ 0 ];
+        const { title, price_per_day, price_per_week, price_per_weekend, overview, id, accessories, images, rent, sold, ...rest } = body.data[ 0 ];
 
         setProperties( rest );
 
@@ -252,16 +252,24 @@ I am interested in reserving (renting) the following car and would like to provi
         <div className={ styles[ "parent" ] }>
           <h1 className={ styles[ 'title' ] }>Détails</h1>
           <div className={ styles[ "details" ] }>
-            { Object.entries( properties ).map( ( [ key, val ] ) => (
-              <>
-                { val?.toString().trim().length ? (
-                  <div className={ styles[ "property" ] } key={ key } title={ val }>
-                    <p className={ styles[ "key" ] }>{ PROPERTIES[ key ] }</p>
-                    <p className={ styles[ "value" ] }>{ val }</p>
-                  </div>
-                ) : <></> }
-              </>
-            ) ) }
+            { Object.entries( properties ).map( ( [ key, val ] ) => {
+              if ( !val ) return null;
+              if ( key == "price_per_month" && ( val == 0 || val == "0" || !val ) ) return null;
+
+              const stringValue = String( val ).trim();
+              if ( !stringValue.length ) return null;
+
+              return (
+                <div
+                  className={ styles[ "property" ] }
+                  key={ key }
+                  title={ stringValue }
+                >
+                  <p className={ styles[ "key" ] }>{ PROPERTIES[ key ] }</p>
+                  <p className={ styles[ "value" ] }>{ stringValue }</p>
+                </div>
+              );
+            } ) }
           </div>
         </div>
         <div className={ styles[ "parent" ] }>
