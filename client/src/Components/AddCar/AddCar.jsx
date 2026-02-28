@@ -24,6 +24,7 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
   const [ pricePerMonth, setPricePerMonth ] = useState( car?.price_per_month || 0 );
   const [ pricePerWeek, setPricePerWeek ] = useState( car?.price_per_week || 0 );
   const [ pricePerWeekend, setPricePerWeekend ] = useState( car?.price_per_weekend || 0 );
+  const [ pricePerMileage, setPricePerMileage ] = useState( car?.price_per_mileage || 0 );
   const [ mileage, setMilage ] = useState( car?.mileage || "" );
   const [ energy, setEnergy ] = useState( car?.energy || "" );
   const [ guarantee, setGuarantee ] = useState( car?.guarantee || "" );
@@ -107,6 +108,14 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
         value: pricePerWeekend,
         type: "text"
       },
+      {
+        element: "Prix / Kilométrage €",
+        class: "price-per-mileage",
+        inputClass: "price-per-mileage-input",
+        setState: setPricePerMileage,
+        value: pricePerMileage,
+        type: "text"
+      },
     ] ),
     {
       element: "Kilométrage",
@@ -180,7 +189,7 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
     //   value: gearbox,
     //   type: "text"
     // }
-  ], [ pricePerDay, pricePerMonth, mileage, energy, guarantee, color, certificate, emission, modelYear, seatingCapacity, rent, pricePerWeek, pricePerWeekend ] );
+  ], [ pricePerDay, pricePerMonth, mileage, energy, guarantee, color, certificate, emission, modelYear, seatingCapacity, rent, pricePerWeek, pricePerWeekend, pricePerMileage ] );
 
 
   // const [ priorityInput, setPriorityInput ] = useState( "" );
@@ -463,7 +472,8 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
       rent,
       ...( rent && {
         price_per_week: pricePerWeek,
-        price_per_weekend: pricePerWeekend
+        price_per_weekend: pricePerWeekend,
+        price_per_mileage: pricePerMileage
       } )
     };
 

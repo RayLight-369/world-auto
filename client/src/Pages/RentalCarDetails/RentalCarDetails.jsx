@@ -101,7 +101,7 @@ const RentalCarDetails = () => {
 
         if ( body?.data?.length ) body.data[ 0 ].brand = brands.find( brand => brand.id == body.data[ 0 ].brand )?.brandName;
 
-        const { title, price_per_day, price_per_week, price_per_weekend, overview, id, accessories, images, rent, sold, ...rest } = body.data[ 0 ];
+        const { title, price_per_day, price_per_week, price_per_mileage, price_per_weekend, overview, id, accessories, images, rent, sold, ...rest } = body.data[ 0 ];
 
         setProperties( rest );
 
@@ -218,6 +218,12 @@ I am interested in reserving (renting) the following car and would like to provi
                     <span className={ styles[ "price-label" ] }>par week‑end</span>
                   </div>
                 ) }
+                { car.price_per_mileage && (
+                  <div className={ styles[ "price-item" ] }>
+                    <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_mileage ) }</span>
+                    <span className={ styles[ "price-label" ] }>par km</span>
+                  </div>
+                ) }
               </div>
             </div>
             <div className={ styles[ "overview" ] }>
@@ -251,6 +257,12 @@ I am interested in reserving (renting) the following car and would like to provi
                   <div className={ styles[ "price-item" ] }>
                     <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_weekend ) }</span>
                     <span className={ styles[ "price-label" ] }>par week‑end</span>
+                  </div>
+                ) }
+                { car.price_per_mileage && (
+                  <div className={ styles[ "price-item" ] }>
+                    <span className={ styles[ "price-value" ] }>{ formatPrice( car.price_per_mileage ) }</span>
+                    <span className={ styles[ "price-label" ] }>par km</span>
                   </div>
                 ) }
               </div>
