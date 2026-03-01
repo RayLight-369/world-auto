@@ -1,13 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import styles from "./AddCar.module.css";
 import { MotionConfig, motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
 import DropDown from '../DropDown/DropDown';
 import { useCars } from '../../Contexts/CarsContext';
 import { API } from '../../Constants';
-import { BreakSpan } from '../Card/Card';
-import { v4 as uid } from "uuid";
-import { uploadFile, updateData, deleteFile } from "../../Supabase";
+import { updateData } from "../../Supabase";
+import {
+  processFileSelection,
+  syncImagesWithSupabase,
+  extractFileIdFromUrl
+} from '../../utils/imageHandler';
 
 
 const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
@@ -24,7 +26,7 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
   const [ pricePerMonth, setPricePerMonth ] = useState( car?.price_per_month || 0 );
   const [ pricePerWeek, setPricePerWeek ] = useState( car?.price_per_week || 0 );
   const [ pricePerWeekend, setPricePerWeekend ] = useState( car?.price_per_weekend || 0 );
-  const [ DayMileage, setDayMileage ] = useState( car?.day_mileage || 0 );
+  const [ dayMileage, setDayMileage ] = useState( car?.day_mileage || 0 );
   const [ weekMileage, setWeekMileage ] = useState( car?.week_mileage || 0 );
   const [ weekendMileage, setWeekendMileage ] = useState( car?.weekend_mileage || 0 );
   const [ mileage, setMilage ] = useState( car?.mileage || "" );
@@ -45,7 +47,6 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
 
   const [ images, setImages ] = useState( car?.images || [] );
   const [ imagesData, setImagesData ] = useState( {} );
-  const [ imagesDone, setImagesDone ] = useState( false );
 
   const Accessories = useMemo( () => [
     "Climatiseur",
@@ -115,7 +116,7 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
         class: "day-mileage",
         inputClass: "day-mileage-input",
         setState: setDayMileage,
-        value: DayMileage,
+        value: dayMileage,
         type: "text"
       },
       {
@@ -207,7 +208,7 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
     //   value: gearbox,
     //   type: "text"
     // }
-  ], [ pricePerDay, pricePerMonth, mileage, energy, guarantee, color, certificate, emission, modelYear, seatingCapacity, rent, pricePerWeek, pricePerWeekend, DayMileage, weekMileage, weekendMileage ] );
+  ], [ pricePerDay, pricePerMonth, mileage, energy, guarantee, color, certificate, emission, modelYear, seatingCapacity, rent, pricePerWeek, pricePerWeekend, dayMileage, weekMileage, weekendMileage ] );
 
 
   // const [ priorityInput, setPriorityInput ] = useState( "" );
@@ -216,165 +217,79 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
   const currentDate = new Date();
   const dateInput = useMemo( () => `${ currentDate.getFullYear() }-${ currentDate.getMonth() + 1 >= 10 ? currentDate.getMonth() + 1 : "0" + ( currentDate.getMonth() + 1 ) }-${ currentDate.getDate() > 9 ? currentDate.getDate() : "0" + currentDate.getDate() }`, [] );
 
-
   useEffect( () => {
+    if ( type == "edit" || type == "del" ) {
+      setCarID( car.id );
+    }
+  } );
 
-    let IMG_OBJECT =
-      type == "edit"
-        ? [ ...car?.images ]?.reduce( ( p, c ) => {
-          p[ c ] = c;
-          return p;
-        }, {} )
-        : {};
-
-    console.log( "car.imgs from line 165: ", car?.images );
-    setImagesData( IMG_OBJECT );
-
-  }, [] );
-
-  useEffect( () => console.log( "img obj:  ", imagesData ), [ imagesData ] );
-
+  // Initialize images data when component mounts or car changes
   useEffect( () => {
-
-    if ( type == "edit" ) {
-      setImagesData( {
-        ...[ ...car?.images || images ]?.reduce( ( p, c ) => {
-          p[ c ] = c;
-          return p;
-        }, {} ),
-      } );
+    if ( type === "edit" && car?.images ) {
+      // In edit mode, initialize with existing image URLs as values
+      const imagesToMap = car.images.reduce( ( acc, url ) => {
+        acc[ url ] = url;
+        return acc;
+      }, {} );
+      setImagesData( imagesToMap );
+    } else {
+      // In new mode, start with empty
+      setImagesData( {} );
     }
-    console.log( car );
+  }, [ car, type ] );
 
-  }, [ car ] );
 
-  function deleteEntry( obj, indexToDelete ) {
-    const keys = Object.keys( obj );
-
-    if ( indexToDelete < 0 || indexToDelete >= keys.length ) {
-      return obj; // Index out of range, return the original object
-    }
-
-    const updatedObj = { ...obj };
-    const keyToDelete = keys[ indexToDelete ];
-    delete updatedObj[ keyToDelete ];
-
-    return updatedObj;
-  }
-
-  const handleFileChange = ( e ) => {
-    let files = e.target.files;
-
-    for ( let file of files ) {
-      setImagesData( ( prev ) => ( {
-        ...prev,
-        [ URL.createObjectURL( file ) ]: file,
-      } ) );
+  const handleFileChange = async ( e ) => {
+    try {
+      const newImages = await processFileSelection( e );
+      setImagesData( ( prev ) => ( { ...prev, ...newImages } ) );
+    } catch ( error ) {
+      console.error( 'Error processing files:', error );
+      alert( 'Error processing images. Please try again.' );
     }
   };
 
-  const handleDelete = ( e, key ) => {
+
+  const handleDeleteImage = ( e, imageKey ) => {
     e.preventDefault();
     e.stopPropagation();
 
-    let updatedImages = deleteEntry( imagesData, key );
-
-    setImagesData( { ...updatedImages } );
+    setImagesData( ( prev ) => {
+      const updated = { ...prev };
+      delete updated[ imageKey ];
+      return updated;
+    } );
   };
 
 
-  const SetImages = async ( images_, Car ) => {
-
-    let imageArray = [];
-
-    for ( let image in images_ ) {
-
-      let fileId = uid();
-      let extension = images_[ image ].type.replace( "image/", "" ).toLowerCase();
-
-      imageArray.push(
-        `${ process.env.REACT_APP_SUPABASE_URL }/storage/v1/object/public/images/users/${ Car.id }/${ fileId }.${ extension }`
-      );
-
-      await uploadFile(
-        Car.id,
-        fileId + "." + extension,
-        images_[ image ]
-      );
-    };
-
-    let _images = images;
-    _images = [ ...imageArray ];
-
-    setImages( prev => ( [ ...prev, ...imageArray ] ) );
-    setImagesDone( true );
-
-    const ReqData = {
-      images
-    };
-
+  // helper to upload/delete images
+  const syncCarImages = async ( mode = "new", carId = carID ) => {
     try {
+      const finalImages = await syncImagesWithSupabase(
+        imagesData,
+        carId,
+        images,
+        mode
+      );
 
-      // const res = await fetch( API.EDIT_CAR, {
-      //   method: "PUT",
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   body: JSON.stringify( ReqData )
-      // } );
+      // Update database with final images
+      if ( mode !== "delete" ) {
+        await updateData( {
+          table: "Cars",
+          where: { id: carId },
+          object: { images: finalImages }
+        } );
+      }
 
-      console.log( "casasasar: ", car );
-      console.log( "i: ", imageArray );
-      console.log( "r: ", ReqData );
-
-    } catch ( e ) {
-      console.log( e );
+      setImages( finalImages );
+      return finalImages;
+    } catch ( error ) {
+      console.error( `Error syncing images (${ mode }):`, error );
+      throw error;
     }
   };
 
 
-
-  // const getMissingImages = ( imagesArray, obj ) => {
-  //   const objKeysSet = new Set( Object.keys( obj ) );
-  //   return imagesArray.filter( ( image ) => !objKeysSet.has( image ) );
-  // };
-
-  // const SetImages = async ( images_ ) => {
-  //   const imageArray = [];
-  //   const deletedImages = getMissingImages( images, images_ );
-
-  //   for ( let image in images ) {
-  //     if ( typeof images[ image ] !== "string" ) {
-  //       const fileId = uuidv4();
-  //       const extension = images[ image ].type.replace( "image/", "" ).toLowerCase();
-
-  //       imageArray.push(
-  //         `https://lmxqvapkmczkpcfheiun.supabase.co/storage/v1/object/public/images/users/${ postID }/${ fileId }.${ extension }`
-  //       );
-  //       await uploadFile(
-  //         session?.user.id,
-  //         postID,
-  //         `${ fileId }.${ extension }`,
-  //         images[ image ]
-  //       );
-  //     } else {
-  //       imageArray.push( image );
-  //     }
-  //   }
-
-  //   if ( deletedImages.length ) {
-  //     for ( const image of deletedImages ) {
-  //       const url = image.split( "/" );
-  //       const fileID = url[ url.length - 1 ];
-  //       await deleteFile( `users/${ session?.user.id }/${ postID }/${ fileID }` );
-  //     }
-  //   }
-
-  //   let _post = post;
-  //   _post.images = imageArray;
-
-  //   setPost( ( prev ) => ( { ...prev, images: [ ...imageArray ] } ) );
-  // };
 
   const buttonWhileHovering = ( scale = 1.1, duration = .1 ) => ( {
     scale,
@@ -383,93 +298,20 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
     }
   } );
 
-  useEffect( () => {
-    if ( images.length && imagesDone ) {
-      ( async () => {
 
-        const Data = await updateData( {
-          table: "Cars",
-          where: {
-            id: carID
-          },
-          object: {
-            images
-          }
-        } );
-
-        const car = Data.data[ 0 ];
-
-        setCars( prev =>
-          prev.map( prevCar => car.id == prevCar.id ? car : prevCar )
-        );
-
-      } )();
-    }
-  }, [ images, imagesDone ] );
-
-
-  const getMissingImages = ( imagesArray, obj ) => {
-    const objKeysSet = new Set( Object.keys( obj ) );
-    return imagesArray.filter( ( image ) => !objKeysSet.has( image ) );
-  };
-
-  const SetImages_Edit = async ( images_, car, type = "edit" ) => {
-    setImagesDone( false );
-    const imageArray = [];
-    const deletedImages = getMissingImages( car.images, images_ );
-    if ( type == "edit" ) {
-      for ( let image in images_ ) {
-        if ( typeof images_[ image ] !== "string" ) {
-          const fileId = uid();
-          const extension = images_[ image ].type.replace( "image/", "" ).toLowerCase();
-
-          imageArray.push(
-            `${ process.env.REACT_APP_SUPABASE_URL }/storage/v1/object/public/images/users/${ car.id }/${ fileId }.${ extension }`
-          );
-          await uploadFile(
-            car.id,
-            `${ fileId }.${ extension }`,
-            images_[ image ]
-          );
-        } else {
-          imageArray.push( image );
-        }
-      }
-    }
-
-    if ( deletedImages.length ) {
-      for ( const image of deletedImages ) {
-        const url = image.split( "/" );
-        const fileID = url[ url.length - 1 ];
-        await deleteFile( `users/${ car.id }/${ fileID }` );
-      }
-    }
-
-    if ( type != "del" ) {
-      let _car = car;
-      _car.images = imageArray;
-
-      setImages( ( prev ) => ( [ ...imageArray ] ) );
-      setImagesDone( true );
-    }
-
-  };
-
-  // const inputWhileFocused = {
-  //   scale: 1.06,
-  // };
-
-  async function addCar( images_ ) {
-
+  async function addCar() {
     setAdding( true );
 
-    console.log( car );
-
     const dateParts = dateInput.split( "-" );
-
     [ dateParts[ 0 ], dateParts[ 2 ] ] = [ dateParts[ 2 ], dateParts[ 0 ] ];
-
     const due_date = dateParts.join( "-" );
+
+    // Validate required fields
+    if ( !car && ( !carTitle.trim().length || !Object.keys( imagesData ).length ) ) {
+      setAdding( false );
+      alert( 'Please provide a title and at least one image.' );
+      return;
+    }
 
     const ReqData = {
       title: carTitle,
@@ -477,7 +319,6 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
       due_date,
       brand,
       fuel_type: fuelType,
-      images,
       accessories,
       certificate,
       color,
@@ -494,86 +335,86 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
       ...( rent && {
         price_per_week: pricePerWeek,
         price_per_weekend: pricePerWeekend,
-        day_mileage: DayMileage,
+        day_mileage: dayMileage,
         week_mileage: weekMileage,
         weekend_mileage: weekendMileage
       } )
     };
 
-
-    if ( !car && ( !carTitle.trim().length || !Object.keys( imagesData ).length ) && type != "del" ) return setAdding( false );
-
-    if ( type === "edit" || type == "del" ) ReqData.id = car.id;
+    if ( type === "edit" || type === "del" ) {
+      ReqData.id = car.id;
+    }
 
     try {
-
-      const res = await fetch( type == "edit" ? API.EDIT_CAR : type == "new" ? API.NEW_CAR : API.DEL_CAR, {
-        method: type == "edit" ? "PUT" : type == "new" ? 'POST' : "DELETE",
-        body: JSON.stringify( ReqData ),
-        headers: {
-          'Content-Type': 'application/json'
+      const res = await fetch(
+        type === "edit" ? API.EDIT_CAR : type === "new" ? API.NEW_CAR : API.DEL_CAR,
+        {
+          method: type === "edit" ? "PUT" : type === "new" ? "POST" : "DELETE",
+          body: JSON.stringify( ReqData ),
+          headers: { 'Content-Type': 'application/json' }
         }
-      } );
+      );
 
-      if ( res.ok ) {
-        const body = await res.json();
-        const car = body.data[ 0 ];
-
-        console.log( "car: ", car );
-
-        setCarID( car.id );
-
-        if ( type == "new" )
-          await SetImages( images_, car );
-        else if ( type == "edit" )
-          await SetImages_Edit( images_, car );
-        else if ( type == "del" )
-          await SetImages_Edit( {}, car, "del" );
-
-        console.log( body.data );
-
-        if ( type === "edit" ) {
-          if ( !rent )
-            setCars( prevCars =>
-              prevCars.map( prevCar =>
-                prevCar.id === car.id ? car : prevCar
-              )
-            );
-          else
-            setRentalCars( prevCars =>
-              prevCars.map( prevCar =>
-                prevCar.id === car.id ? car : prevCar
-              )
-            );
-        } else if ( type == "del" ) {
-          if ( !rent )
-            setCars( prevCars =>
-              prevCars.filter( prevCar =>
-                prevCar.id != ReqData.id
-              )
-            );
-          else
-            setRentalCars( prevCars =>
-              prevCars.filter( prevCar =>
-                prevCar.id != ReqData.id
-              )
-            );
-        } else {
-          if ( !rent )
-            setCars( prev => [ car, ...prev ] );
-          else
-            setRentalCars( prev => [ car, ...prev ] );
-        }
-
-        handleClose();
+      if ( !res.ok ) {
+        throw new Error( 'Failed to save car' );
       }
 
-    } catch ( e ) {
-      console.log( e );
+      const body = await res.json();
+      const updatedCar = body.data[ 0 ];
+      setCarID( updatedCar.id );
+
+      // Sync images with Supabase using the correct car id
+      let finalImages = [];
+      if ( type === "new" ) {
+        finalImages = await syncCarImages( "new", updatedCar.id );
+      } else if ( type === "edit" ) {
+        finalImages = await syncCarImages( "edit", updatedCar.id );
+      } else if ( type === "del" ) {
+        await syncCarImages( "delete", updatedCar.id );
+        finalImages = [];
+      }
+
+      // Update the context with the car
+      if ( type === "edit" ) {
+        if ( !rent ) {
+          setCars( prevCars =>
+            prevCars.map( prevCar =>
+              prevCar.id === updatedCar.id ? { ...updatedCar, images: finalImages } : prevCar
+            )
+          );
+        } else {
+          setRentalCars( prevCars =>
+            prevCars.map( prevCar =>
+              prevCar.id === updatedCar.id ? { ...updatedCar, images: finalImages } : prevCar
+            )
+          );
+        }
+      } else if ( type === "del" ) {
+        if ( !rent ) {
+          setCars( prevCars =>
+            prevCars.filter( prevCar => prevCar.id !== ReqData.id )
+          );
+        } else {
+          setRentalCars( prevCars =>
+            prevCars.filter( prevCar => prevCar.id !== ReqData.id )
+          );
+        }
+      } else {
+        // New car
+        if ( !rent ) {
+          setCars( prev => [ { ...updatedCar, images: finalImages }, ...prev ] );
+        } else {
+          setRentalCars( prev => [ { ...updatedCar, images: finalImages }, ...prev ] );
+        }
+      }
+
+      handleClose();
+    } catch ( error ) {
+      console.error( 'Error saving car:', error );
+      alert( `Error: ${ error.message }` );
     } finally {
       setAdding( false );
     }
-
   }
 
   async function handleSold() {
@@ -621,13 +462,6 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
       setSelling( false );
     }
   }
-
-  useEffect( () => {
-
-    console.log( "updated img data: ", imagesData );
-    console.log( "updated images: ", images );
-
-  }, [ imagesData, images ] );
 
   return (
     <MotionConfig transition={ { type: "spring", damping: 7 } } >
@@ -705,7 +539,7 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
                   {/* </div> */ }
 
                   <div className={ styles[ "img-container" ] }>
-                    { Object.keys( imagesData ).map( ( img, key ) => (
+                    { Object.keys( imagesData ).map( ( img ) => (
                       <div className={ styles[ "img-box" ] } key={ img }>
                         <img
                           src={ img }
@@ -717,7 +551,7 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
 
                         <button
                           className={ styles[ "delete-img" ] }
-                          onClick={ ( e ) => handleDelete( e, key ) }
+                          onClick={ ( e ) => handleDeleteImage( e, img ) }
                         >
                           ✖
                         </button>
@@ -734,9 +568,7 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
           <motion.button
             whileHover={ buttonWhileHovering( 1.1, .2 ) }
             className={ styles[ "add-button" ] }
-            onClick={ () => {
-              addCar( imagesData );
-            } }
+            onClick={ addCar }
             disabled={ adding }
           >
             { adding ? type == 'new' ? "Ajouter..." : type == "edit" ? "Mise à jour..." : "Suppression..." : type == 'new' ? "Ajouter" : type == "edit" ? "Mise à jour" : "Supprimer" }
