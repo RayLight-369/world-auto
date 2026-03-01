@@ -273,7 +273,7 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
       );
 
       // Update database with final images
-      if ( mode !== "delete" ) {
+      if ( mode !== "delete" && mode !== "del" ) {
         await updateData( {
           table: "Cars",
           where: { id: carId },
