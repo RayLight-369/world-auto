@@ -413,26 +413,27 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
     return imagesArray.filter( ( image ) => !objKeysSet.has( image ) );
   };
 
-  const SetImages_Edit = async ( images_, car ) => {
+  const SetImages_Edit = async ( images_, car, type = "edit" ) => {
     setImagesDone( false );
     const imageArray = [];
     const deletedImages = getMissingImages( car.images, images_ );
+    if ( type == "edit" ) {
+      for ( let image in images_ ) {
+        if ( typeof images_[ image ] !== "string" ) {
+          const fileId = uid();
+          const extension = images_[ image ].type.replace( "image/", "" ).toLowerCase();
 
-    for ( let image in images_ ) {
-      if ( typeof images_[ image ] !== "string" ) {
-        const fileId = uid();
-        const extension = images_[ image ].type.replace( "image/", "" ).toLowerCase();
-
-        imageArray.push(
-          `${ process.env.REACT_APP_SUPABASE_URL }/storage/v1/object/public/images/users/${ car.id }/${ fileId }.${ extension }`
-        );
-        await uploadFile(
-          car.id,
-          `${ fileId }.${ extension }`,
-          images_[ image ]
-        );
-      } else {
-        imageArray.push( image );
+          imageArray.push(
+            `${ process.env.REACT_APP_SUPABASE_URL }/storage/v1/object/public/images/users/${ car.id }/${ fileId }.${ extension }`
+          );
+          await uploadFile(
+            car.id,
+            `${ fileId }.${ extension }`,
+            images_[ image ]
+          );
+        } else {
+          imageArray.push( image );
+        }
       }
     }
 
@@ -444,11 +445,13 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
       }
     }
 
-    let _car = car;
-    _car.images = imageArray;
+    if ( type != "del" ) {
+      let _car = car;
+      _car.images = imageArray;
 
-    setImages( ( prev ) => ( [ ...imageArray ] ) );
-    setImagesDone( true );
+      setImages( ( prev ) => ( [ ...imageArray ] ) );
+      setImagesDone( true );
+    }
 
   };
 
@@ -524,6 +527,8 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
           await SetImages( images_, car );
         else if ( type == "edit" )
           await SetImages_Edit( images_, car );
+        else if ( type == "del" )
+          await SetImages_Edit( {}, car, "del" );
 
         console.log( body.data );
 
