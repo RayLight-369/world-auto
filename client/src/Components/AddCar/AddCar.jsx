@@ -484,9 +484,9 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
                 <DropDown key={ "brand" } setState={ setBrand } selected={ brand } array={ brands?.map( ( brand ) => brand.brandName ) } backWorkArray={ brands?.map( brand => brand.id ) } label='Marque' dropDownOpen={ brandDropdown } toggleDropDown={ toggleBrandDropdown } />
                 <DropDown key={ "gearbox" } setState={ setGearbox } selected={ gearbox } array={ [ "Automatique", "Manuel", "Automatique à variation continue" ] } label='Boîte de vitesses' dropDownOpen={ gearboxDropdown } toggleDropDown={ toggleGearboxDropdown } />
 
-                { data.map( ( value, index ) => (
+                { data.map( ( value ) => (
 
-                  <div className={ styles[ value.class ] } key={ index }>
+                  <div className={ styles[ value.class ] } key={ value }>
                     <label htmlFor={ value.class }>{ value.element }:</label>
                     <input onChange={ ( e ) => {
                       value.setState( e.target.value );
@@ -499,7 +499,7 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
                   <label htmlFor="accessories">Accessoires:</label>
                   <div className={ styles[ "content" ] }>
                     { Accessories.map( ( a, i ) => (
-                      <div className={ styles[ "accessory" ] }>
+                      <div className={ styles[ "accessory" ] } key={ a }>
                         <label htmlFor={ a.split( " " )[ 0 ] }>{ a }</label>
                         <input type="checkbox" name={ a.split( " " )[ 0 ] } id={ a.split( " " )[ 0 ] } checked={ accessories.includes( a ) } onChange={ e => {
                           if ( e.target.checked ) {

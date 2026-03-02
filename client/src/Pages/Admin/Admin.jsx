@@ -66,7 +66,7 @@ const Admin = ( { adminVerified } ) => {
         </div>
         <nav id={ Styles[ 'nav' ] }>
           { AdminLinks.map( ( route => (
-            <NavLink className={ ( { isActive } ) =>
+            <NavLink key={ route.name } className={ ( { isActive } ) =>
               isActive ? `${ Styles.active }` : undefined //route[ "name" ].split( " " )[ 1 ] || 
             } to={ route.path }>{ !isMobile ? route.name : route[ "name" ] }</NavLink>
           ) ) ) }
