@@ -5,7 +5,7 @@ import { formatNumber } from '../../Constants';
 
 export const BreakSpan = memo( () => <span className={ Styles[ 'break' ] }>|</span> );
 
-const Card = ( { ppd, ppm, ppw, ppwe, rent, title, color, emission, overview, year, manual, distance, fuel, guarantee, id, img, type = "car", sold = false } ) => {
+const Card = ( { ppd, ppm, ppw, ppwe, pph, rent, title, color, emission, overview, year, manual, distance, fuel, guarantee, id, img, type = "car", sold = false } ) => {
   return (
     <div className={ `${ Styles[ "card" ] } ${ type === "rental-car" ? Styles.rental : "" }` }>
       { sold && <p className={ Styles[ "sold" ] }>Vendu</p> }
@@ -19,10 +19,10 @@ const Card = ( { ppd, ppm, ppw, ppwe, rent, title, color, emission, overview, ye
           ) }
         </div>
         <div className={ Styles[ "infos" ] }>
-          { type === "rental-car" && (
+          { ( type === "rental-car" || type === "trucks-rental" ) && (
             <div className={ Styles[ "rental-price-block" ] }>
               <span className={ Styles[ "rental-ppd" ] }>
-                €{ formatNumber( ppd ) }<small>/jour</small>
+                { type !== "trucks-rental" ? <>€{ formatNumber( ppd ) }<small>/jour</small></> : <>€{ formatNumber( pph ) }<small>/heure</small></> }
               </span>
               { ( ppw || ppwe ) && (
                 <div className={ Styles[ "rental-secondary" ] }>
