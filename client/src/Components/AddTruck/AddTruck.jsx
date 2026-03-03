@@ -24,13 +24,13 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
   const [ brand, setBrand ] = useState( brands?.find( brand => brand.id == truck?.brand )?.brandName || undefined );
   const [ fuelType, setFuelType ] = useState( truck?.fuel_type || "" );
   // const [ pricePerMonth, setPricePerMonth ] = useState( truck?.price_per_month || 0 );
-  const [ mileage, setMilage ] = useState( truck?.milage || "" );
+  const [ mileage, setMilage ] = useState( truck?.mileage || "" );
   // const [ guarantee, setGuarantee ] = useState( truck?.guarantee || "" );
   const [ color, setColor ] = useState( truck?.color || "" );
   // const [ certificate, setCertificate ] = useState( truck?.certificate || "" );
   // const [ emission, setEmission ] = useState( truck?.emission || "" );
   const [ modelYear, setModelYear ] = useState( truck?.model_year || "" );
-  const [ seatingCapacity, setSeatingCapacity ] = useState( truck?.seating_capacity || "" );
+  const [ seatingCapacity, setSeatingCapacity ] = useState( truck?.seating_capacity || 0 );
 
   const [ energy, setEnergy ] = useState( truck?.energy || "" );
   const [ gearbox, setGearbox ] = useState( truck?.gearbox || "" );
@@ -643,6 +643,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       end_of_commercialization_date: endOfCommercializationDate,
       new_vehicle_price: newVehiclePrice,
       dimensions,
+      seating_capacity: seatingCapacity,
       weight,
       color,
       mileage,
