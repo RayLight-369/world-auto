@@ -10,7 +10,7 @@ import { API } from '../../Constants';
 
 const CarRental = () => {
 
-  const { rentalCars, setRentalCars: SetCars, rentalCarPages, setRentalCarPages, brands, carsLoading } = useCars();
+  const { rentalCars, appendRentalCars, rentalCarPages, setRentalCarPages, brands, carsLoading } = useCars();
   const [ Cars, setCars ] = useState( rentalCars );
   const [ adding, setAdding ] = useState( false );
 
@@ -242,7 +242,6 @@ const CarRental = () => {
   const handleGetMore = useCallback( async () => {
     setAdding( true );
     try {
-
       const res = await fetch( `${ API.GET_RENTAL_CARS }/${ rentalCarPages.lastIndex }` );
 
       if ( res.ok ) {
@@ -253,20 +252,14 @@ const CarRental = () => {
           hasMore: !!( body.remaining - rentalCars.length - body.data.length )
         } );
 
-        // SetCars( prev => ( [ ...prev, ...body.data ] ) );
-        SetCars( prev => {
-          const existingIds = new Set( prev.map( c => c.id ) );
-          const newCars = body?.data?.filter( c => !existingIds.has( c.id ) );
-          return [ ...prev, ...newCars ];
-        } );
+        appendRentalCars(body.data);
       }
-
     } catch ( e ) {
       console.log( e );
     } finally {
       setAdding( false );
     }
-  }, [ rentalCars, rentalCarPages, setRentalCarPages, SetCars ] );
+  }, [ rentalCars, rentalCarPages, setRentalCarPages, appendRentalCars ] );
 
 
   useEffect( () => {

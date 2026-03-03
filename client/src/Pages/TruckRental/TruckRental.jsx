@@ -15,7 +15,7 @@ import { API } from '../../Constants';
 const TruckRental = () => {
 
 
-  const { trucks, brands, carsLoading, setTrucks: SetTrucks, truckPages, setTruckPages } = useCars();
+  const { trucks, brands, carsLoading, appendTrucks, truckPages, setTruckPages } = useCars();
   const [ adding, setAdding ] = useState( false );
   const [ Trucks, setTrucks ] = useState( trucks );
   const [ shortcutFilterOpen, setShortcutFilterOpen ] = useState( false );
@@ -245,7 +245,6 @@ const TruckRental = () => {
   const handleGetMore = async () => {
     setAdding( true );
     try {
-
       const res = await fetch( `${ API.GET_TRUCKS }/${ truckPages.lastIndex }` );
 
       if ( res.ok ) {
@@ -255,9 +254,8 @@ const TruckRental = () => {
           hasMore: !!( body.remaining - trucks.length - body.data.length )
         } );
 
-        SetTrucks( prev => ( [ ...prev, ...body.data ] ) );
+        appendTrucks(body.data);
       }
-
     } catch ( e ) {
       console.log( e );
     } finally {

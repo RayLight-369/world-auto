@@ -14,7 +14,7 @@ import { API } from '../../Constants';
 
 const Home = () => {
 
-  const { cars, setCars: SetCars, carPages, setCarPages, brands, carsLoading } = useCars();
+  const { cars, appendCars, carPages, setCarPages, brands, carsLoading } = useCars();
   const [ Cars, setCars ] = useState( cars );
   const [ adding, setAdding ] = useState( false );
 
@@ -245,7 +245,6 @@ const Home = () => {
   const handleGetMore = useCallback( async () => {
     setAdding( true );
     try {
-
       const res = await fetch( `${ API.GET_CARS }/${ carPages.lastIndex }` );
 
       if ( res.ok ) {
@@ -255,9 +254,8 @@ const Home = () => {
           hasMore: !!( body.remaining - cars.length - body.data.length )
         } );
 
-        SetCars( prev => ( [ ...prev, ...body.data ] ) );
+        appendCars(body.data);
       }
-
     } catch ( e ) {
       console.log( e );
     } finally {

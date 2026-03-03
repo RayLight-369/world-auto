@@ -10,9 +10,18 @@ export const useCars = () => {
 
 const CarsProvider = ( { children } ) => {
 
-  const [ rentalCars, setRentalCars ] = useState( [] );
-  const [ cars, setCars ] = useState( [] );
-  const [ trucks, setTrucks ] = useState( [] );
+  // utility to remove duplicates by "id" property
+  const dedupeById = arr => {
+    const map = new Map();
+    arr.forEach(item => {
+      if (item && item.id != null) map.set(item.id, item);
+    });
+    return Array.from(map.values());
+  };
+
+  const [ rentalCars, _setRentalCars ] = useState( [] );
+  const [ cars, _setCars ] = useState( [] );
+  const [ trucks, _setTrucks ] = useState( [] );
   const [ brands, setBrands ] = useState( [] );
   const [ rates, setRates ] = useState( [] );
   const [ carsLoading, setCarsLoading ] = useState( true );
@@ -30,6 +39,15 @@ const CarsProvider = ( { children } ) => {
     lastIndex: -1,
     hasMore: false
   } );
+
+  // wrappers that keep lists unique
+  const setCars = data => _setCars(dedupeById(data));
+  const setRentalCars = data => _setRentalCars(dedupeById(data));
+  const setTrucks = data => _setTrucks(dedupeById(data));
+
+  const appendCars = newItems => _setCars(prev => dedupeById(prev.concat(newItems)));
+  const appendRentalCars = newItems => _setRentalCars(prev => dedupeById(prev.concat(newItems)));
+  const appendTrucks = newItems => _setTrucks(prev => dedupeById(prev.concat(newItems)));
 
 
   useEffect( () => {
@@ -102,7 +120,28 @@ const CarsProvider = ( { children } ) => {
   }, [] );
 
   return (
-    <CarsContext.Provider value={ { cars, setCars, carsLoading, brands, setBrands, rates, setRates, trucks, setTrucks, truckPages, carPages, setCarPages, setTruckPages, rentalCars, setRentalCars, rentalCarPages, setRentalCarPages } }>{ children }</CarsContext.Provider>
+    <CarsContext.Provider value={ {
+      cars,
+      setCars,
+      appendCars,
+      carsLoading,
+      brands,
+      setBrands,
+      rates,
+      setRates,
+      trucks,
+      setTrucks,
+      appendTrucks,
+      truckPages,
+      carPages,
+      setCarPages,
+      setTruckPages,
+      rentalCars,
+      setRentalCars,
+      appendRentalCars,
+      rentalCarPages,
+      setRentalCarPages
+    } }>{ children }</CarsContext.Provider>
   );
 };
 
