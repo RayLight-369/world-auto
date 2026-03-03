@@ -40,14 +40,38 @@ const CarsProvider = ( { children } ) => {
     hasMore: false
   } );
 
-  // wrappers that keep lists unique
-  const setCars = data => _setCars(dedupeById(data));
-  const setRentalCars = data => _setRentalCars(dedupeById(data));
-  const setTrucks = data => _setTrucks(dedupeById(data));
+  // wrappers that keep lists unique and support functional updates
+  const setCars = updaterOrData => {
+    _setCars(prev => {
+      const data = typeof updaterOrData === 'function' ? updaterOrData(prev) : updaterOrData;
+      return dedupeById(data || []);
+    });
+  };
+  const setRentalCars = updaterOrData => {
+    _setRentalCars(prev => {
+      const data = typeof updaterOrData === 'function' ? updaterOrData(prev) : updaterOrData;
+      return dedupeById(data || []);
+    });
+  };
+  const setTrucks = updaterOrData => {
+    _setTrucks(prev => {
+      const data = typeof updaterOrData === 'function' ? updaterOrData(prev) : updaterOrData;
+      return dedupeById(data || []);
+    });
+  };
 
-  const appendCars = newItems => _setCars(prev => dedupeById(prev.concat(newItems)));
-  const appendRentalCars = newItems => _setRentalCars(prev => dedupeById(prev.concat(newItems)));
-  const appendTrucks = newItems => _setTrucks(prev => dedupeById(prev.concat(newItems)));
+  const appendCars = newItems => {
+    const items = Array.isArray(newItems) ? newItems : [newItems];
+    _setCars(prev => dedupeById(prev.concat(items)));
+  };
+  const appendRentalCars = newItems => {
+    const items = Array.isArray(newItems) ? newItems : [newItems];
+    _setRentalCars(prev => dedupeById(prev.concat(items)));
+  };
+  const appendTrucks = newItems => {
+    const items = Array.isArray(newItems) ? newItems : [newItems];
+    _setTrucks(prev => dedupeById(prev.concat(items)));
+  };
 
 
   useEffect( () => {

@@ -15,7 +15,7 @@ import {
 const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
 
   // const navigate = useNavigate();
-  const { setCars, brands, setRentalCars } = useCars();
+  const { setCars, appendCars, brands, setRentalCars, appendRentalCars } = useCars();
   const [ carID, setCarID ] = useState( car?.id || 0 );
   const [ adding, setAdding ] = useState( false );
   const [ carTitle, setCarTitle ] = useState( car?.title || "" );
@@ -401,10 +401,12 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
         }
       } else {
         // New car
+        const newEntry = { ...updatedCar, images: finalImages };
         if ( !rent ) {
-          setCars( prev => [ { ...updatedCar, images: finalImages }, ...prev ] );
+          // append helper handles deduplication
+          appendCars(newEntry);
         } else {
-          setRentalCars( prev => [ { ...updatedCar, images: finalImages }, ...prev ] );
+          appendRentalCars(newEntry);
         }
       }
 
@@ -486,7 +488,7 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
 
                 { data.map( ( value ) => (
 
-                  <div className={ styles[ value.class ] } key={ value }>
+                  <div className={ styles[ value.class ] } key={ value.class }>
                     <label htmlFor={ value.class }>{ value.element }:</label>
                     <input onChange={ ( e ) => {
                       value.setState( e.target.value );

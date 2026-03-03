@@ -12,7 +12,7 @@ import { uploadFile, updateData, deleteFile } from "../../Supabase";
 const AddTruck = ( { handleClose, type = "new", truck } ) => {
 
   // const navigate = useNavigate();
-  const { setTrucks, brands } = useCars();
+  const { setTrucks, appendTrucks, brands } = useCars();
   const [ truckID, setTruckID ] = useState( truck?.id || 0 );
   const [ adding, setAdding ] = useState( false );
   const [ truckTitle, setTruckTitle ] = useState( truck?.title || "" );
@@ -692,7 +692,8 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
             )
           );
         } else {
-          setTrucks( prev => [ truck, ...prev ] );
+          // new truck: append helper will dedupe
+          appendTrucks(truck);
         }
 
         handleClose();
