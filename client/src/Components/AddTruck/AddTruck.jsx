@@ -77,7 +77,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "longueur",
       inputClass: "longueur-input",
       setState: value => setDimensions( prev => ( { ...prev, "Longueur": value } ) ),
-      value: dimensions?.[ "Longueur" ],
+      value: dimensions?.[ "Longueur" ] || "",
       type: "text"
     },
     {
@@ -85,7 +85,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "largeur",
       inputClass: "largeur-input",
       setState: value => setDimensions( prev => ( { ...prev, "Largeur": value } ) ),
-      value: dimensions?.[ "Largeur" ],
+      value: dimensions?.[ "Largeur" ] || "",
       type: "text"
     },
     {
@@ -93,7 +93,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "hauteur",
       inputClass: "hauteur-input",
       setState: value => setDimensions( prev => ( { ...prev, "Hauteur": value } ) ),
-      value: dimensions?.[ "Hauteur" ],
+      value: dimensions?.[ "Hauteur" ] || "",
       type: "text"
     },
     {
@@ -101,7 +101,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "hauteur-barres-toit",
       inputClass: "hauteur-barres-toit-input",
       setState: value => setDimensions( prev => ( { ...prev, "Hauteur avec barres de toit": value } ) ),
-      value: dimensions?.[ "Hauteur avec barres de toit" ],
+      value: dimensions?.[ "Hauteur avec barres de toit" ] || "",
       type: "text"
     },
     {
@@ -109,7 +109,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "empattement",
       inputClass: "empattement-input",
       setState: value => setDimensions( prev => ( { ...prev, "Empattement": value } ) ),
-      value: dimensions?.[ "Empattement" ],
+      value: dimensions?.[ "Empattement" ] || "",
       type: "text"
     },
     {
@@ -117,7 +117,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "reservoir",
       inputClass: "reservoir-input",
       setState: value => setDimensions( prev => ( { ...prev, "Réservoir": value } ) ),
-      value: dimensions?.[ "Réservoir" ],
+      value: dimensions?.[ "Réservoir" ] || "",
       type: "text"
     },
     {
@@ -125,7 +125,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "porte-faux-avant",
       inputClass: "porte-faux-avant-input",
       setState: value => setDimensions( prev => ( { ...prev, "Porte à faux avant": value } ) ),
-      value: dimensions?.[ "Porte à faux avant" ],
+      value: dimensions?.[ "Porte à faux avant" ] || "",
       type: "text"
     },
     {
@@ -133,7 +133,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "porte-faux-arriere",
       inputClass: "porte-faux-arriere-input",
       setState: value => setDimensions( prev => ( { ...prev, "Porte à faux arrière": value } ) ),
-      value: dimensions?.[ "Porte à faux arrière" ],
+      value: dimensions?.[ "Porte à faux arrière" ] || "",
       type: "text"
     },
     {
@@ -141,7 +141,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "voies-avant",
       inputClass: "voies-avant-input",
       setState: value => setDimensions( prev => ( { ...prev, "Voies avant": value } ) ),
-      value: dimensions?.[ "Voies avant" ],
+      value: dimensions?.[ "Voies avant" ] || "",
       type: "text"
     },
     {
@@ -149,7 +149,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "voies-arriere",
       inputClass: "voies-arriere-input",
       setState: value => setDimensions( prev => ( { ...prev, "Voies arrière": value } ) ),
-      value: dimensions?.[ "Voies arrière" ],
+      value: dimensions?.[ "Voies arrière" ] || "",
       type: "text"
     }
   ], [ dimensions ] );
@@ -160,7 +160,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "poids-vide",
       inputClass: "poids-vide-input",
       setState: value => setWeight( prev => ( { ...prev, "Poids à vide": value } ) ),
-      value: weight?.[ "Poids à vide" ],
+      value: weight?.[ "Poids à vide" ] || "",
       type: "text"
     },
     {
@@ -168,7 +168,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "ptac",
       inputClass: "ptac-input",
       setState: value => setWeight( prev => ( { ...prev, "PTAC (Poids Total Autorisé en Charge)": value } ) ),
-      value: weight?.[ "PTAC (Poids Total Autorisé en Charge)" ],
+      value: weight?.[ "PTAC (Poids Total Autorisé en Charge)" ] || "",
       type: "text"
     },
     {
@@ -176,7 +176,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "ptra",
       inputClass: "ptra-input",
       setState: value => setWeight( prev => ( { ...prev, "PTRA (Poids Total Roulant Autorisé)": value } ) ),
-      value: weight?.[ "PTRA (Poids Total Roulant Autorisé)" ],
+      value: weight?.[ "PTRA (Poids Total Roulant Autorisé)" ] || "",
       type: "text"
     },
     {
@@ -184,7 +184,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "charge-utile",
       inputClass: "charge-utile-input",
       setState: value => setWeight( prev => ( { ...prev, "Charge utile": value } ) ),
-      value: weight?.[ "Charge utile" ],
+      value: weight?.[ "Charge utile" ] || "",
       type: "text"
     },
     {
@@ -192,7 +192,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "poids-tracte-freine",
       inputClass: "poids-tracte-freine-input",
       setState: value => setWeight( prev => ( { ...prev, "Poids tracté freiné": value } ) ),
-      value: weight?.[ "Poids tracté freiné" ],
+      value: weight?.[ "Poids tracté freiné" ] || "",
       type: "text"
     },
     {
@@ -200,7 +200,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "poids-tracte-non-freine",
       inputClass: "poids-tracte-non-freine-input",
       setState: value => setWeight( prev => ( { ...prev, "Poids tracté non freiné": value } ) ),
-      value: weight?.[ "Poids tracté non freiné" ],
+      value: weight?.[ "Poids tracté non freiné" ]  || "",
       type: "text"
     }
   ], [ weight ] );
