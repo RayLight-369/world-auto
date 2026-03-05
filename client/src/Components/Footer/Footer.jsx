@@ -20,7 +20,7 @@ const Footer = () => {
         © 2024 World Auto. All rights reserved.
       </p>
       <p className={ styles.poweredBy }>
-        Powered by <a href="https://itc.aions.co" target="_blank">Aions</a>
+        Powered by <a href="https://sitedevelopr.com" target="_blank">choose_us_pk</a>
       </p>
     </footer>
   );

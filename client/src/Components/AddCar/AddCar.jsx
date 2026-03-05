@@ -404,9 +404,9 @@ const AddCar = ( { handleClose, type = "new", car, rent = false } ) => {
         const newEntry = { ...updatedCar, images: finalImages };
         if ( !rent ) {
           // append helper handles deduplication
-          appendCars(newEntry);
+          appendCars( newEntry );
         } else {
-          appendRentalCars(newEntry);
+          appendRentalCars( newEntry );
         }
       }
 

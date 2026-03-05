@@ -200,7 +200,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
       class: "poids-tracte-non-freine",
       inputClass: "poids-tracte-non-freine-input",
       setState: value => setWeight( prev => ( { ...prev, "Poids tracté non freiné": value } ) ),
-      value: weight?.[ "Poids tracté non freiné" ]  || "",
+      value: weight?.[ "Poids tracté non freiné" ] || "",
       type: "text"
     }
   ], [ weight ] );
@@ -400,7 +400,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
 
   }, [ truck ] );
 
-  function deleteEntry ( obj, indexToDelete ) {
+  function deleteEntry( obj, indexToDelete ) {
     const keys = Object.keys( obj );
 
     if ( indexToDelete < 0 || indexToDelete >= keys.length ) {
@@ -610,7 +610,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
   //   scale: 1.06,
   // };
 
-  async function addTruck ( images_ ) {
+  async function addTruck( images_ ) {
 
     setAdding( true );
 
@@ -694,7 +694,7 @@ const AddTruck = ( { handleClose, type = "new", truck } ) => {
           );
         } else {
           // new truck: append helper will dedupe
-          appendTrucks(truck);
+          appendTrucks( truck );
         }
 
         handleClose();
