@@ -18,7 +18,7 @@ const { insertData, getData, updateData, deleteData } = require( "./Supabase" );
 
 
 app.use( cors( {
-  origin: "https://worldauto.site",
+  origin: [ "https://www.worldauto.site", "https://world-auto.vercel.app" ],
 } ) );
 
 app.use( bodyParser.json() );
