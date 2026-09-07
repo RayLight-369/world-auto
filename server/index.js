@@ -17,7 +17,9 @@ const { insertData, getData, updateData, deleteData } = require( "./Supabase" );
 
 
 
-app.use( cors() );
+app.use( cors( {
+  origin: "https://worldauto.site",
+} ) );
 
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( { extended: true } ) );
